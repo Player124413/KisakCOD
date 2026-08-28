@@ -1,0 +1,147 @@
+# GitHub Actions workflow — KisakCOD Android Port
+# Builds a fully functional APK (debug-signed, installable directly on any device).
+#
+# Trigger: push to master, pull request, or manual workflow_dispatch (from GitHub UI).
+#
+# On success the APK is available as a downloadable artifact (≈ 7 MB compressed).
+# Install it on the device, open the launcher, import game files — done.
+#
+# How to use:
+#   1. Copy this file to .github/workflows/build-android-apk.yaml
+#   2. Push to master — the build starts automatically
+#   3. Download the APK from Actions → workflow run → Artifacts
+
+name: Build Android APK
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+  workflow_dispatch:      # allows manual trigger from GitHub Actions tab
+
+# ---------------------------------------------------------------------------
+# Environment — all Android SDK paths are set here so every step sees them.
+# ---------------------------------------------------------------------------
+env:
+  ANDROID_SDK_ROOT: /opt/android-sdk
+  ANDROID_HOME: /opt/android-sdk
+  ANDROID_NDK_HOME: /opt/android-sdk/ndk/26.3.11579264
+  NDK_VERSION: 26.3.11579264
+  BUILD_TOOLS_VERSION: 34.0.0
+  PLATFORM_VERSION: android-34
+  GRADLE_OPTS: -Dorg.gradle.daemon=false -Dorg.gradle.jvmargs=-Xmx2g
+
+jobs:
+  build-android:
+    name: Build KisakCOD Android APK
+    runs-on: ubuntu-24.04
+
+    steps:
+      # ----------------------------------------------------------------
+      # 1. Checkout repository
+      # ----------------------------------------------------------------
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      # ----------------------------------------------------------------
+      # 2. Set up JDK 17 (Temurin) + Gradle caching
+      # ----------------------------------------------------------------
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: 17
+          distribution: temurin
+          cache: gradle
+
+      # ----------------------------------------------------------------
+      # 3. Install Android SDK + NDK + CMake via sdkmanager
+      # ----------------------------------------------------------------
+      - name: Install Android SDK command-line tools
+        run: |
+          sudo mkdir -p "$ANDROID_SDK_ROOT"
+          cd /tmp
+          echo "Downloading Android command-line tools..."
+          curl -fsSLo cmdline-tools.zip \
+            https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip
+          unzip -q cmdline-tools.zip
+          sudo mkdir -p "$ANDROID_SDK_ROOT/cmdline-tools"
+          sudo mv cmdline-tools "$ANDROID_SDK_ROOT/cmdline-tools/latest"
+          # Add to PATH for this and subsequent steps
+          echo "$ANDROID_SDK_ROOT/cmdline-tools/latest/bin" >> $GITHUB_PATH
+          rm -f cmdline-tools.zip
+
+      - name: Accept licenses and install SDK components
+        run: |
+          yes | $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager --licenses > /dev/null 2>&1 || true
+          $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager \
+            "platforms;$PLATFORM_VERSION" \
+            "build-tools;$BUILD_TOOLS_VERSION" \
+            "ndk;$NDK_VERSION" \
+            "cmake;3.22.1" \
+            "platform-tools" \
+            > /dev/null 2>&1
+
+      # ----------------------------------------------------------------
+      # 4. Create local.properties so Gradle finds the NDK
+      # ----------------------------------------------------------------
+      - name: Create local.properties
+        run: |
+          cat > android/local.properties << EOF
+          sdk.dir=$ANDROID_SDK_ROOT
+          ndk.dir=$ANDROID_SDK_ROOT/ndk/$NDK_VERSION
+          cmake.dir=$ANDROID_SDK_ROOT/cmake/3.22.1
+          EOF
+
+      # ----------------------------------------------------------------
+      # 5. Generate Gradle wrapper (not tracked in git)
+      # ----------------------------------------------------------------
+      - name: Generate Gradle wrapper
+        run: |
+          cd android
+          if ! command -v gradle &> /dev/null; then
+            sudo apt-get update -qq
+            sudo apt-get install -y -qq gradle
+          fi
+          gradle wrapper --gradle-version 8.6
+          chmod +x gradlew
+
+      # ----------------------------------------------------------------
+      # 6. Build the APK (native code via NDK + Kotlin)
+      # ----------------------------------------------------------------
+      - name: Build APK
+        run: |
+          cd android
+          ./gradlew :app:assembleDebug --stacktrace --no-daemon
+
+      # ----------------------------------------------------------------
+      # 7. Run native unit tests (touch logic, DDS decode, sys shims)
+      # ----------------------------------------------------------------
+      - name: Run native unit tests
+        run: |
+          bash android/tests/build_and_run.sh
+
+      # ----------------------------------------------------------------
+      # 8. Upload the APK as a downloadable artifact
+      # ----------------------------------------------------------------
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: KisakCOD-Android-Debug
+          path: android/app/build/outputs/apk/debug/app-debug.apk
+          compression-level: 0   # APK is already compressed
+          retention-days: 90
+          if-no-files-found: error
+
+      # ----------------------------------------------------------------
+      # 9. Upload native test binaries (for debugging CI failures)
+      # ----------------------------------------------------------------
+      - name: Upload test binaries
+        uses: actions/upload-artifact@v4
+        with:
+          name: native-tests
+          path: android/tests/build/
+          compression-level: 9
+          retention-days: 7
