@@ -144,6 +144,7 @@ class GameActivity : Activity(), Choreographer.FrameCallback {
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
         val key = gamepadEngineKey(keyCode)
         if (key != null) {
+            if (event.repeatCount > 0) return true // ignore key-repeat
             JniBridge.nativeGamepadKey(key, true)
             return true
         }

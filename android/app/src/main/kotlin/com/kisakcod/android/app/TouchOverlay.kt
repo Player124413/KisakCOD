@@ -211,14 +211,14 @@ class TouchOverlay(context: Context, private val prefs: UiPrefs) : View(context)
             val y0 = hPx * 0.12f
             for (i in labels.indices) {
                 val action: () -> Unit = when (i) {
-                    0 -> { { exitEdit() } }
-                    1 -> { { toggleVisibility() } }
-                    2 -> { { remapAction() } }
-                    3 -> { { nudgeSize(-1) } }
-                    4 -> { { nudgeSize(1) } }
-                    5 -> { { layout.snapToGrid = !layout.snapToGrid; invalidate() } }
-                    6 -> { { toggleTouchEnabled() } }
-                    else -> { { resetLayout() } }
+                    0 -> { exitEdit() }
+                    1 -> { toggleVisibility() }
+                    2 -> { remapAction() }
+                    3 -> { nudgeSize(-1) }
+                    4 -> { nudgeSize(1) }
+                    5 -> { layout.snapToGrid = !layout.snapToGrid; invalidate() }
+                    6 -> { toggleTouchEnabled() }
+                    else -> { resetLayout() }
                 }
                 items.add(Pair(labels[i], action))
                 rects.add(RectF(x0 + i * bw, y0, x0 + (i + 1) * bw, y0 + hPx))
@@ -329,6 +329,11 @@ class TouchOverlay(context: Context, private val prefs: UiPrefs) : View(context)
     private fun normY(py: Float) = LayoutMath.clamp((py / u).toInt(), 0, 1000)
 
     override fun onTouchEvent(ev: MotionEvent): Boolean {
+        // Haptic feedback on touch-down (view method, works on most devices)
+        if (ev.actionMasked == MotionEvent.ACTION_DOWN ||
+            ev.actionMasked == MotionEvent.ACTION_POINTER_DOWN) {
+            try { performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY) } catch (_: Exception) {}
+        }
         when (ev.actionMasked) {
             MotionEvent.ACTION_DOWN, MotionEvent.ACTION_POINTER_DOWN -> onPointerDown(ev)
             MotionEvent.ACTION_MOVE -> onPointerMove(ev)
