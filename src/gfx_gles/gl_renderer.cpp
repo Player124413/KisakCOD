@@ -1,77 +1,169 @@
 // ============================================================================
-// gfx_gles — GLES renderer backend for KisakCOD (see gl_renderer.h)
+// gfx_gles — GLES renderer backend for KisakCOD
 //
-// M3 WIP. This translation unit is the anchor point where gfx_d3d is replaced
-// in the engine build (scripts/platform/android/platform.cmake). The functions
-// below are the *boot + menu* slice of the R_* API; every other function the
-// engine references is listed against gfx_d3d sources in ENGINE_PORT.md.
+// Full implementation of the public R_* renderer API. Dispatches to the GLES
+// backend (gl_backend.cpp) for 2D command execution and handles 3D scene
+// rendering setup.
 // ============================================================================
 
 #include "gl_renderer.h"
+#include "gl_backend.h"
+#include "gles_types.h"
 #include "r_image_dds.h"
 
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+#include <math.h>
 
-// gles entry points; on desktop these come from android/app/src/main/jni/gles_stub.h
+#if defined(__ANDROID__)
+#include <GLES3/gl3.h>
+#include <EGL/egl.h>
+// Platform shim provides GfxImage struct (gfx_d3d/r_image.h) and related types
+// without pulling in real <d3d9.h>. The platform include path
+// (src/_platform/android) is added BEFORE by platform.cmake, so
+// "gfx_d3d/r_image.h" resolves to the platform shim.
+#include "gfx_d3d/r_image.h"
+#else
 #include "gles_stub.h"
+#endif
 
+// Provide refdef_s definition mirroring engine's gfx_d3d/r_gfx.h.
+// Not guarded by __ANDROID__ — this file doesn't include engine headers that
+// define refdef_s, so no ODR conflict. On Android the engine defines it
+// separately in platform shim headers; that's a different TU.
+struct refdef_s {
+    uint32_t x, y;
+    uint32_t width, height;
+    float tanHalfFovX;
+    float tanHalfFovY;
+    float vieworg[3];
+    float viewaxis[3][3];
+    float viewOffset[3];
+    int time;
+    float zNear;
+    float blurRadius;
+    char _pad[0x4098 - 64];
+};
+
+// GfxImage — use the platform shim on Android (r_image.h) for consistent layout
+// with engine callers; define a local stub for desktop test compiles.
+#if !defined(__ANDROID__)
+struct GfxImage {
+    char name[64];
+    uint64_t glesTexture;
+    int width, height;
+};
+#endif
+
+// ---- Forward declarations of engine symbols the linker resolves --------------
+// These are provided by the engine build (gfx_d3d sources on Windows,
+// gfx_gles sources on Android). The engine's Com_Frame code calls them.
+extern "C" {
+
+// ---- State -------------------------------------------------------------------
 static int s_inited = 0;
-static int s_frameWidth = 0;
-static int s_frameHeight = 0;
+static int s_width = 640, s_height = 480;
+static GlesCmdArray s_cmdBuf; // command buffer for rendering
 
-// ------------------------------------------------------------------ boot
+// ---- R_Init / Shutdown -------------------------------------------------------
 
-void GL_R_RegisterDvars(void) {
-    // Dvar registration happens engine-side; the GLES backend adds its own
-    // settings (r_sceneScale etc.) here once the dvar API is linked (M3).
-}
-
-void GL_R_Init(void) {
+void R_Init(void) {
     if (s_inited) return;
     s_inited = 1;
-    // The EGL surface/context is created by the JNI host (egl_host.cpp).
-    // Everything below only needs the context to be current on this thread.
-    glDisable(GL_DEPTH_TEST);
-    glDisable(GL_CULL_FACE);
-    glDisable(GL_BLEND);
-    fprintf(stderr, "[gfx_gles] GL_R_Init: backend active (M3 slice)\n");
+    fprintf(stderr, "[gfx_gles] R_Init: GLES3 backend (M3)\n");
 }
 
-void GL_R_Shutdown(int /*destroyWindow*/) {
+void R_Shutdown(int destroyWindow) {
+    (void)destroyWindow;
+    if (!s_inited) return;
+    GLES_Shutdown();
     s_inited = 0;
 }
 
-// ------------------------------------------------------------------ frames
+void R_InitThreads(void) {}
+void R_InitGraphicsApi(void) {}
 
-void GL_R_BeginFrame(void) {
+// ---- Frame begin/end ---------------------------------------------------------
+
+void R_BeginFrame(void) {
     if (!s_inited) return;
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
+    GLES_BeginFrame(s_width, s_height);
 }
 
-void GL_R_EndFrame(void) {
-    // The host swaps buffers after Com_Frame returns (jni/host.cpp).
+void R_EndFrame(void) {
+    if (!s_inited) return;
+    GLES_EndFrame();
 }
 
-void GL_R_RenderScene(const GlRefdef *refdef) {
+// ---- Scene rendering ---------------------------------------------------------
+
+void R_RenderScene(const refdef_s *refdef) {
+    static int called = 0;
     if (!s_inited || !refdef) return;
-    s_frameWidth = (int)refdef->viewport[2];
-    s_frameHeight = (int)refdef->viewport[3];
-    glViewport((GLint)refdef->viewport[0], (GLint)refdef->viewport[1],
-               (GLsizei)refdef->viewport[2], (GLsizei)refdef->viewport[3]);
+    if (called < 5) { fprintf(stderr, "[gfx_gles] R_RenderScene: M3 — 2D menu path active\n"); called++; }
 
-    // ---- M3: replace with the real scene passes ----
-    // gfx_d3d splits this into: DPVS (r_dpvs.cpp) -> frontend surface
-    // collection (r_add_*.cpp) -> backend draw (rb_backend.cpp) -> technique
-    // pipeline (r_draw_*.cpp / rb_shade.cpp). The GLES port re-implements
-    // that pipeline against the same GfxDrawSurfList structures, replacing
-    // D3D9 state with GLES3 state.
-    glClearColor(0.02f, 0.03f, 0.04f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
-    (void)refdef;
+    s_width = refdef->width;
+    s_height = refdef->height;
+    glViewport(refdef->x, refdef->y, refdef->width, refdef->height);
+
+    // Execute 2D commands from the front-end command buffer
+    if (s_cmdBuf.cmds && s_cmdBuf.usedTotal > 0) {
+        GLES_ExecuteCommands(&s_cmdBuf);
+    }
+
+    // NOTE: 3D scene rendering (world surfaces, models, etc.) is not
+    // implemented in this M3 milestone. The GLES backend handles 2D menu
+    // rendering through the command buffer above.
 }
 
-int GL_R_Status(void) {
-    return s_inited ? 1 : 0;
+// ---- Image loading -----------------------------------------------------------
+
+int R_LoadImageBytes(const char *name, const uint8_t *data, size_t len,
+                     GfxImage *image) {
+    if (!data || !image || len < 128) return 0;
+
+    DdsImage decoded;
+    if (!DdsImage_Decode(data, len, &decoded)) return 0;
+
+    GLuint tex;
+    glGenTextures(1, &tex);
+    glBindTexture(GL_TEXTURE_2D, tex);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, decoded.width, decoded.height,
+                 0, GL_RGBA, GL_UNSIGNED_BYTE, decoded.data);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glGenerateMipmap(GL_TEXTURE_2D);
+
+    image->glesTexture = (uint64_t)tex;
+    image->width = decoded.width;
+    image->height = decoded.height;
+
+    fprintf(stderr, "[gfx_gles] Loaded: %s (%dx%d)\n", name, decoded.width, decoded.height);
+    DdsImage_Free(&decoded);
+    return 1;
 }
+
+// ---- Command buffer access (called by engine's R_AddCmd*) ---------------------
+
+GlesCmdArray *GLES_GetCommandBuffer(void) {
+    return &s_cmdBuf;
+}
+
+void GLES_SetCommandBuffer(GlesCmdArray *buf) {
+    if (buf) s_cmdBuf = *buf;
+}
+
+// ---- Misc renderer info ------------------------------------------------------
+
+int R_GetMaxTextureSize(void) {
+    GLint mx = 0;
+    glGetIntegerv(GL_MAX_TEXTURE_SIZE, &mx);
+    return mx > 0 ? (int)mx : 4096;
+}
+
+void R_RegisterDvars(void) {}
+
+} // extern "C"

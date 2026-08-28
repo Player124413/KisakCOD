@@ -1,49 +1,37 @@
 // ============================================================================
 // gfx_gles — GLES renderer backend for KisakCOD (replaces gfx_d3d)
 //
-// Maintains API parity with the renderer surface the client/cgame/ui code
-// expects (the R_RenderScene / R_BeginFrame / R_EndFrame entry points and the
-// R_AddCmd* draw-command registration the UI uses). The D3D9 dev paths
-// (postfx, sun shadows, DPVS surface passes) are re-implemented pass by pass;
-// see ENGINE_PORT.md for the status map.
-//
-// Compiles standalone on desktop for syntax checks; on Android it uses the
-// EGL context created by the JNI host (see android/app/src/main/jni/egl_host.*)
+// Provides the R_Init / R_BeginFrame / R_EndFrame / R_RenderScene entry points
+// and associated renderer API that the engine's client/cgame/ui code expects.
 // ============================================================================
 #pragma once
 
+#include <stddef.h>
 #include <stdint.h>
 
-// Type mirror of the refdef the engine passes to R_RenderScene (subset used
-// by the menu/HUD path; full mirror lives in the M3 header contract).
-typedef struct GlRefdef {
-    float x, y, width, height;
-    float fovX, fovY;
-    float tanHalfFovX, tanHalfFovY;
-    float vieworg[3];
-    float viewaxis[3][3];
-    float viewport[4];        // x, y, w, h (px)
-    int   drawScene;
-    int   rendererType;
-    float time;
-    float blurRadius;
-} GlRefdef;
+// Forward declaration of the engine's refdef_s
+struct refdef_s;
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-void  GL_R_Init(void);
-void  GL_R_Shutdown(int destroyWindow);
-void  GL_R_BeginFrame(void);
-void  GL_R_EndFrame(void);
-void  GL_R_RenderScene(const GlRefdef *refdef);
+void  R_Init(void);
+void  R_Shutdown(int destroyWindow);
+void  R_BeginFrame(void);
+void  R_EndFrame(void);
+void  R_RenderScene(const refdef_s *refdef);
+void  R_InitThreads(void);
+void  R_InitGraphicsApi(void);
+void  R_RegisterDvars(void);
+void  R_SyncRenderThread(void);
+int   R_GetRendererType(void);
+int   R_GetMaxTextureSize(void);
 
-// Image/material loading entry points used by asset loading (see r_image_dds.h)
-void  GL_R_RegisterDvars(void);
-
-// Status helpers (undefined/implemented) — printed at boot for diagnostics.
-int   GL_R_Status(void);
+// Image loading
+struct GfxImage;
+int   R_LoadImageBytes(const char *name, const uint8_t *data, size_t len,
+                       struct GfxImage *image);
 
 #ifdef __cplusplus
 }

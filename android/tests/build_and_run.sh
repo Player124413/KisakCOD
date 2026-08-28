@@ -31,9 +31,12 @@ echo "== running dds tests =="
 "$OUT/dds_test"
 
 echo "== syntax-checking gfx_gles =="
-g++ -std=c++17 -Wall -Wextra -fsyntax-only \
-    -I"$JNI" -Isrc/gfx_gles \
-    src/gfx_gles/gl_renderer.cpp src/gfx_gles/r_image_dds.cpp
+for f in src/gfx_gles/gl_renderer.cpp src/gfx_gles/gl_backend.cpp src/gfx_gles/r_image_dds.cpp; do
+    echo "  checking $f"
+    g++ -std=c++17 -Wall -Wextra -fsyntax-only -Wno-ignored-attributes \
+        -I"$JNI" -Isrc/gfx_gles \
+        "$f"
+done
 
 echo "== syntax-checking host + GL sources (desktop shims) =="
 for f in "$JNI/host.cpp" "$JNI/egl_host.cpp" "$JNI/gl_shader.cpp" \
