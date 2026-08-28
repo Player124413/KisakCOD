@@ -432,3 +432,13 @@ KisakCOD/.idea/*
 build-radiant/
 KisakCOD/
 radiant_artifacts/
+
+# ---- KisakCOD Android port ----
+android/.gradle/
+android/build/
+android/app/build/
+android/app/.cxx/
+android/tests/build/
+android/local.properties
+*.apk
+!deps/**/*.apk

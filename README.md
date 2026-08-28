@@ -56,5 +56,12 @@ However, there is a non-zero chance of some type of binary exploitation when pla
 - [ODE Physics](https://www.ode.org/) COD4 uses a modified version of this physics engine.
 
 
+## Android Port
+
+An Android port lives in [`android/`](android/) — launcher with automatic
+game-file import (folder/ZIP/"open with"), touch controls with a full EDIT mode
+(move/resize/hide buttons, master touch on/off), device performance profiles
+and a GLES renderer backend (status & engineering map: [`ENGINE_PORT.md`](ENGINE_PORT.md)).
+
 ## Discord
 [Join the KisakCOD Discord](https://discord.gg/9uqntRWMA3)
