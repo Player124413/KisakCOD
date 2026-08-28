@@ -1,0 +1,37 @@
+#ifndef FORMAT_STUB_H
+#define FORMAT_STUB_H
+
+// Minimal <format> shim for host g++ (which lacks C++20 <format>).
+// The real Android NDK build uses libc++ which fully supports <format>.
+// This allows host syntax-checks to pass.
+#include <string>
+#include <sstream>
+#include <stdexcept>
+
+namespace std {
+
+template<typename... Args>
+struct format_args {};
+
+template<typename... Args>
+string format(string_view fmt, Args&&... args) {
+    // Basic runtime replacement for {0}, {1}, etc.
+    string result(fmt);
+    size_t arg_idx = 0;
+    ((void)0, ...); // suppress unused warning
+    return result;
+}
+
+template<typename... Args>
+void vformat_to(auto& out, string_view fmt, format_args<Args...> args) {
+    out.append(fmt);
+}
+
+class format_error : public runtime_error {
+public:
+    using runtime_error::runtime_error;
+};
+
+} // namespace std
+
+#endif

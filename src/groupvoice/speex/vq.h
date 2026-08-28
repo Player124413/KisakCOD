@@ -40,7 +40,9 @@ int scal_quant32(spx_word32_t in, const spx_word32_t *boundary, int entries);
 
 int vq_index(float *in, const float *codebook, int len, int entries);
 #ifdef _USE_SSE
+#if defined(__SSE__) || (defined(_M_IX86_FP) && _M_IX86_FP >= 1)
 #include <xmmintrin.h>
+#endif
 void vq_nbest(spx_word16_t *in, const __m128 *codebook, int len, int entries, __m128 *E, int N, int *nbest, spx_word32_t *best_dist, char *stack);
 
 void vq_nbest_sign(spx_word16_t *in, const __m128 *codebook, int len, int entries, __m128 *E, int N, int *nbest, spx_word32_t *best_dist, char *stack);

@@ -264,7 +264,9 @@ struct MaterialPixelShaderProgram // sizeof=0xC
     IDirect3DPixelShader9 *ps;
     GfxPixelShaderLoadDef loadDef;
 };
+#if !defined(__LP64__) && !defined(_WIN64)
 static_assert(sizeof(MaterialPixelShaderProgram) == 12);
+#endif
 
 struct MaterialPixelShader // sizeof=0x10
 {                                       // ...
@@ -455,7 +457,9 @@ struct MaterialTechniqueSet // sizeof=0x94
     MaterialTechniqueSet *remappedTechniqueSet;
     MaterialTechnique *techniques[34];
 };
+#if !defined(__LP64__) && !defined(_WIN64)
 static_assert(sizeof(MaterialTechniqueSet) == 148);
+#endif
 
 struct Material // sizeof=0x50
 {                                       // ...
@@ -498,9 +502,13 @@ struct Material // sizeof=0x50
 // surfaceFlags lands at offset 80 (right after stateBitsTable@76), editorUsage@84,
 // editorLocale@88; sizeof rounds to 96 because GfxDrawSurf (in MaterialInfo) forces
 // 8-byte alignment. The pad is harmless — the fields are read/written by name.
+#if !defined(__LP64__) && !defined(_WIN64)
 static_assert(sizeof(Material) == 96);
+#endif
 #else
+#if !defined(__LP64__) && !defined(_WIN64)
 static_assert(sizeof(Material) == 80);
+#endif
 #endif
 
 struct MaterialMemory // sizeof=0x8

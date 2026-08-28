@@ -1,9 +1,11 @@
 // Android port — platform local header (replaces win32/win_local.h)
-// Provides the same types and declarations so engine files compile without
-// Windows headers. Types with the same layout as the Win32 version.
+// Provides engine-specific types and function declarations that the
+// original win32/win_local.h provides.
+//
+// NOTE: Basic Windows types (DWORD, HANDLE, CRITICAL_SECTION, etc.) are
+// provided by win32_compat.h which is included first.
 #pragma once
 
-// Include the comprehensive Win32 API compatibility shim
 #include "win32_compat.h"
 
 #include <cstdint>
@@ -21,76 +23,17 @@
 #include <climits>
 #include <cfloat>
 #include <cinttypes>
-#include <cstdarg>
-#include <csetjmp>
-#include <csignal>
 #include <cwchar>
-#include <wchar.h>
-#include <string.h>
-#include <stdio.h>
-#include <stdarg.h>
-#include <stdlib.h>
-#include <stdint.h>
-#include <ctype.h>
-#include <math.h>
-#include <time.h>
-#include <errno.h>
+#include <mutex>
 
 #include <qcommon/qcommon.h>
 
-// ---- types that the engine expects from the platform layer ----
-
-// Minimal HWND stand-in
-typedef void *HWND;
-typedef void *HINSTANCE__;
-typedef HINSTANCE__ *HINSTANCE;
-typedef void *HDC;
-typedef void *HGLRC;
-typedef void *HCURSOR;
-typedef void *HICON;
-typedef void *HBRUSH;
-typedef void *HMENU;
-typedef unsigned long ULONG_PTR;
-typedef long LONG_PTR;
-typedef LONG_PTR LPARAM;
-typedef unsigned long UINT;
-typedef unsigned long WPARAM;
-typedef long LRESULT;
-typedef int BOOL;
-typedef unsigned char BYTE;
-typedef unsigned short WORD;
-typedef unsigned long DWORD;
-typedef void *LPVOID;
-typedef const void *LPCVOID;
-typedef char *LPSTR;
-typedef const char *LPCSTR;
-typedef wchar_t *LPWSTR;
-typedef const wchar_t *LPCWSTR;
-typedef DWORD *LPDWORD;
-
-#define WINAPI
-#define CALLBACK
-#define TRUE 1
-#define FALSE 0
-#define MAX_PATH 260
-#define INVALID_HANDLE_VALUE ((void*)-1)
-
-// Windows critical section (mutex-based on Android)
-typedef struct { int dummy; } CRITICAL_SECTION;
-typedef CRITICAL_SECTION _RTL_CRITICAL_SECTION;
-
-// Windows structs
+// ---- Windows structs not in win32_compat.h ----
 typedef struct tagPOINT { int x, y; } POINT;
 typedef struct tagRECT { int left, top, right, bottom; } RECT;
 typedef struct tagMSG { HWND hwnd; UINT message; WPARAM wParam; LPARAM lParam; } MSG;
 
-// min/max macros
-#ifndef min
-#define min(a,b) (((a) < (b)) ? (a) : (b))
-#endif
-#ifndef max
-#define max(a,b) (((a) > (b)) ? (a) : (b))
-#endif
+// ---- Android-specific platform types ----
 
 // WinVars_t for Android
 typedef struct {
@@ -103,7 +46,6 @@ typedef struct {
     bool recenterMouse;
     unsigned sysMsgTime;
 } WinVars_t;
-
 extern WinVars_t g_wv;
 
 // SysInfo

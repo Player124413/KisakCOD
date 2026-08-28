@@ -43,7 +43,18 @@ for f in "$JNI/host.cpp" "$JNI/egl_host.cpp" "$JNI/gl_shader.cpp" \
          "$JNI/gl_render_shell.cpp" "$JNI/engine_shell.cpp"; do
     echo "  checking $f"
     g++ -std=c++17 -Wall -Wextra -fsyntax-only -DKISAK_ENGINE_LINKED=0 \
+        -include "$PLAT/force_include.h" \
         -I"$JNI" -I"$PLAT" -Isrc/gfx_gles "$f"
+done
+
+echo "== syntax-checking engine universal/qcommon sources (Android) =="
+INCS="-Isrc/_platform/android -Isrc/_platform/android/gfx_d3d -Isrc/_platform/android/win32"
+INCS="$INCS -Isrc -Isrc/qcommon -Isrc/universal -Isrc/gfx_gles"
+for f in src/universal/timing.cpp src/universal/profile.cpp \
+         src/universal/physicalmemory.cpp src/universal/win_shared.cpp; do
+    echo "  checking $f"
+    g++ -std=c++20 -Wall -Wextra -fsyntax-only -D__ANDROID__ -DKISAK_ANDROID -DKISAK_MP \
+        -include "$PLAT/force_include.h" $INCS "$f" 2>&1 | head -5
 done
 
 echo

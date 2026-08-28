@@ -30,7 +30,9 @@
    SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#if defined(__SSE__) || (defined(_M_IX86_FP) && _M_IX86_FP >= 1)
 #include <xmmintrin.h>
+#endif
 
 void filter_mem2_10(const float *x, const float *_num, const float *_den, float *y, int N, int ord, float *_mem)
 {

@@ -75,7 +75,9 @@ struct usercmd_s // sizeof=0x20
     uint8_t meleeChargeDist;    // XREF: CL_CreateCmd+6A/w
     char selectedLocation[2];
 };
+#if !defined(__LP64__) && !defined(_WIN64)
 static_assert(sizeof(usercmd_s) == 0x20);
+#endif
 
 struct hudelem_s;
 

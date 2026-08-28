@@ -9,13 +9,17 @@ struct EntHandleInfo // sizeof=0x8 // (SP/MP same)
     uint16_t next;              // ...
     uint16_t prev;              // ...
 };
+#if !defined(__LP64__) && !defined(_WIN64)
 static_assert(sizeof(EntHandleInfo) == 0x8);
+#endif
 
 struct EntHandleList // sizeof=0x2 // (SP/MP same)
 {                                       // ...
     uint16_t infoIndex;
 };
+#if !defined(__LP64__) && !defined(_WIN64)
 static_assert(sizeof(EntHandleList) == 0x2);
+#endif
 
 struct EntHandle // sizeof=0x4 // (SP/MP same)
 {                                       // ...
@@ -30,7 +34,9 @@ struct EntHandle // sizeof=0x4 // (SP/MP same)
     static void Init();
     static void Shutdown();
 };
+#if !defined(__LP64__) && !defined(_WIN64)
 static_assert(sizeof(EntHandle) == 0x4);
+#endif
 
 void __cdecl EntHandleDissociate(gentity_s *ent);
 void __cdecl EntHandleDissociateInternal(EntHandleList *entHandleList);

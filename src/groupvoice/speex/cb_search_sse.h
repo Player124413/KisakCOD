@@ -29,7 +29,9 @@
    SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#if defined(__SSE__) || (defined(_M_IX86_FP) && _M_IX86_FP >= 1)
 #include <xmmintrin.h>
+#endif
 
 static inline void _spx_mm_getr_ps (__m128 U, float *__Z, float *__Y, float *__X, float *__W)
 {

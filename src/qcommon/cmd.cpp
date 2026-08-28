@@ -289,7 +289,7 @@ void Cmd_Dumpraw_f(void)
                 auto dir = p.parent_path();
                 std::filesystem::create_directories(rawDir / dir);
 
-                fopen_s(&f, std::format("{}\\{}", rawDir, file.stringTable->name).c_str(), "w");
+                f = fopen(std::format("{}\\{}", rawDir, file.stringTable->name).c_str(), "w");
                 for (int row = 0; row < file.stringTable->columnCount; row++)
                 {
                     for (int col = 0; col < file.stringTable->rowCount; col++)
@@ -341,7 +341,7 @@ void Cmd_Dumpraw_f(void)
                         sndfilepath.remove_filename();
                         std::filesystem::create_directories(sndfilepath);
 
-                        fopen_s(&f, std::format("{}\\{}", rawDir, realname).c_str(), "wb");
+                        f = fopen(std::format("{}\\{}", rawDir, realname).c_str(), "wb");
                         // enjoy this long deref chain
                         WriteWAVHeader(f, file.sound->head->soundFile->u.loadSnd->sound.info.data_len,
                             file.sound->head->soundFile->u.loadSnd->sound.info.rate,
@@ -368,7 +368,7 @@ void Cmd_Dumpraw_f(void)
                 sndfilepath.remove_filename();
                 std::filesystem::create_directories(sndfilepath);
 
-                fopen_s(&f, std::format("{}\\{}", rawDir, realname).c_str(), "wb");
+                f = fopen(std::format("{}\\{}", rawDir, realname).c_str(), "wb");
 
                 WriteWAVHeader(f, file.loadSnd->sound.info.data_len,
                     file.loadSnd->sound.info.rate,
@@ -382,7 +382,7 @@ void Cmd_Dumpraw_f(void)
             }
             else
             {
-                fopen_s(&f, std::format("{}\\{}", rawDir, file.rawfile->name).c_str(), "wb");
+                f = fopen(std::format("{}\\{}", rawDir, file.rawfile->name).c_str(), "wb");
                 fwrite(file.rawfile->buffer, file.rawfile->len, 1, f);
                 fflush(f);
                 fclose(f);

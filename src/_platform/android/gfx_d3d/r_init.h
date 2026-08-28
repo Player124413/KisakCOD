@@ -3,6 +3,9 @@
 
 #include "r_gfx.h"
 
+// Forward declaration needed by r_init.h extern declarations
+struct refdef_s;
+
 struct GfxWindowParms {
     int width;
     int height;

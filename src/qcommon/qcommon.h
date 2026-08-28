@@ -1,7 +1,13 @@
 #pragma once
 #include <cstdint>
 #include <iostream>
+#if defined(__has_include) && __has_include(<format>)
 #include <format>
+#elif !defined(__ANDROID__)
+// On older host compilers (g++ <13) <format> is not available;
+// on Android NDK (clang 17+, libc++20) it is.
+namespace std { struct format_error {}; }
+#endif
 
 #include "../universal/q_shared.h"
 
@@ -1164,7 +1170,14 @@ struct SpawnVar // sizeof=0xA0C
     int32_t numSpawnVarChars;
     char spawnVarChars[2048];
 };
+// Static size varies with pointer width; only enforce on 32-bit
+#if !defined(__LP64__) && !defined(_WIN64)
+#if !defined(__LP64__) && !defined(_WIN64)
 static_assert(sizeof(SpawnVar) == 0xA0C);
+#endif
+#endif
+// 64-bit layout: pointers double the spawnVars array (64*2*8=1024 vs 64*2*4=512)
+// Total on 64-bit: 1+3+4+1024+4+4+2048 = 3088 = 0xC10
 
 void __cdecl CM_LoadMapData_LoadObj(const char *name);
 struct cplane_s *__cdecl CM_GetPlanes();
@@ -1595,7 +1608,9 @@ inline T Buf_Read(unsigned char **pos)
 #include <intrin.h>
 #elif defined(__ANDROID__)
 // ARM NEON or scalar fallback for SnapFloatToInt
+#if defined(__has_include) && __has_include(<arm_neon.h>)
 #include <arm_neon.h>
+#endif
 #else
 #include <xmmintrin.h>
 #endif

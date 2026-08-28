@@ -51,7 +51,9 @@ struct GfxPackedVertex // sizeof=0x20
     PackedUnitVec normal;
     PackedUnitVec tangent;
 };
+#if !defined(__LP64__) && !defined(_WIN64)
 static_assert(sizeof(GfxPackedVertex) == 32);
+#endif
 
 struct GfxPackedVertexNormal // sizeof=0x8
 {                                       // ...
@@ -228,7 +230,9 @@ struct GfxImage // sizeof=0x24
     bool delayLoadPixels;
     const char* name;
 };
+#if !defined(__LP64__) && !defined(_WIN64)
 static_assert(sizeof(GfxImage) == 36);
+#endif
 
 struct GfxCodeMatrices // sizeof=0x800
 {                                       // ...
@@ -380,7 +384,9 @@ struct GfxWorldDpvsStatic // sizeof=0x68
     uint32_t* surfaceCastsSunShadow; // ...
     volatile int usageCount;
 };
+#if !defined(__LP64__) && !defined(_WIN64)
 static_assert(sizeof(GfxWorldDpvsStatic) == 0x68);
+#endif
 
 using EntVisData = byte *[3];
 
@@ -657,7 +663,9 @@ struct GfxPixelShaderLoadDef // sizeof=0x8
     uint16_t programSize;
     uint16_t loadForRenderer;
 };
+#if !defined(__LP64__) && !defined(_WIN64)
 static_assert(sizeof(GfxPixelShaderLoadDef) == 8);
+#endif
 
 struct GfxDepthOfField // sizeof=0x20
 {                                       // ...

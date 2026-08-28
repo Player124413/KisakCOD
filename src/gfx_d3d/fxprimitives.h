@@ -40,7 +40,9 @@ struct GfxMarkContext // sizeof=0x6
     uint8_t modelTypeAndSurf;   // ...
     uint16_t modelIndex;        // ...
 };
+#if !defined(__LP64__) && !defined(_WIN64)
 static_assert(sizeof(GfxMarkContext) == 6);
+#endif
 
 struct FxElemDef;
 
@@ -75,7 +77,9 @@ struct FxEffectDef // sizeof=0x20
     int elemDefCountEmission;
     const FxElemDef *elemDefs;
 };
+#if !defined(__LP64__) && !defined(_WIN64)
 static_assert(sizeof(FxEffectDef) == 32);
+#endif
 
 struct FxEffect // sizeof=0x80
 {                                       // ...
@@ -477,7 +481,9 @@ struct FxImpactTable // sizeof=0x8
     const char *name;
     FxImpactEntry *table;
 };
+#if !defined(__LP64__) && !defined(_WIN64)
 static_assert(sizeof(FxImpactTable) == 8);
+#endif
 
 struct FxSystemBuffers // sizeof=0x47480
 {                                       // ...

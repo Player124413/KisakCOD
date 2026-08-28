@@ -39,6 +39,9 @@ set(WIN32_SRC
 
 # ---- 5) Compiler flags -----------------------------------------------------
 add_compile_definitions(_CRT_SECURE_NO_WARNINGS KISAK_ANDROID)
+# Add the Android forced-include header to silence MSVC-isms.
+# This header is included before everything in every TU.
+add_compile_options(-include "${SRC_DIR}/_platform/android/force_include.h")
 set(CMAKE_CXX_STANDARD 20)
 
 # ---- 6) Diagnostics ---------------------------------------------------------

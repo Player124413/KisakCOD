@@ -26,6 +26,21 @@
 #pragma warning(disable : 4786)		// identifier was truncated
 #endif // _WIN32
 
+// Android port: define MSVC-specific keywords as no-ops
+#if defined(KISAK_ANDROID) && !defined(_WIN32)
+#ifndef __cdecl
+#define __cdecl
+#endif
+#ifndef __stdcall
+#define __stdcall
+#endif
+#ifndef __unaligned
+#define __unaligned
+#endif
+#endif // KISAK_ANDROID
+
+#include <climits>   // INT_MIN, INT_MAX
+#include <cfloat>    // FLT_MIN, FLT_MAX
 #include <universal/assertive.h> // LWSS add
 
 #include <assert.h>
@@ -849,7 +864,7 @@ struct StringTable // sizeof=0x10
 	int rowCount;
 	const char **values;
 };
-static_assert(sizeof(StringTable) == 16);
+static_assert(sizeof(StringTable) == (sizeof(void*) == 8 ? 24 : 16));
 
 const char *__cdecl StringTable_GetColumnValueForRow(const StringTable *table, int row, int column);
 const char *__cdecl StringTable_Lookup(

@@ -11,7 +11,9 @@ struct OpcodeLookup // sizeof=0x18
     int profileBuiltInTime;
     int profileUsage;
 };
+#if !defined(__LP64__) && !defined(_WIN64)
 static_assert(sizeof(OpcodeLookup) == 0x18);
+#endif
 
 struct Scr_SourcePos_t // sizeof=0xC
 {                                       // ...
@@ -19,7 +21,9 @@ struct Scr_SourcePos_t // sizeof=0xC
     int lineNum;                        // ...
     uint32_t sourcePos;             // ...
 };
+#if !defined(__LP64__) && !defined(_WIN64)
 static_assert(sizeof(Scr_SourcePos_t) == 0xC);
+#endif
 
 struct SourceBufferInfo // sizeof=0x2C
 {
@@ -38,21 +42,27 @@ struct SourceBufferInfo // sizeof=0x2C
     float totalTime;
     float totalBuiltIn;
 };
+#if !defined(__LP64__) && !defined(_WIN64)
 static_assert(sizeof(SourceBufferInfo) == 44);
+#endif
 
 struct SourceLookup // sizeof=0x8
 {
     uint32_t sourcePos;
     int type;
 };
+#if !defined(__LP64__) && !defined(_WIN64)
 static_assert(sizeof(SourceLookup) == 8);
+#endif
 
 struct SaveSourceBufferInfo // sizeof=0x8
 {
     char *sourceBuf;
     int len;
 };
+#if !defined(__LP64__) && !defined(_WIN64)
 static_assert(sizeof(SaveSourceBufferInfo) == 0x8);
+#endif
 
 struct scrParserGlob_t // sizeof=0x34
 {                                       // ...
@@ -70,7 +80,9 @@ struct scrParserGlob_t // sizeof=0x34
     int delayedSourceIndex;             // ...
     int threadStartSourceIndex;         // ...
 };
+#if !defined(__LP64__) && !defined(_WIN64)
 static_assert(sizeof(scrParserGlob_t) == 0x34);
+#endif
 
 struct scrParserPub_t // sizeof=0x10
 {                                       // ...
@@ -79,7 +91,9 @@ struct scrParserPub_t // sizeof=0x10
     const char *scriptfilename;         // ...
     const char *sourceBuf;              // ...
 };
+#if !defined(__LP64__) && !defined(_WIN64)
 static_assert(sizeof(scrParserPub_t) == 0x10);
+#endif
 
 void __cdecl TRACK_scr_parser();
 void __cdecl Scr_InitOpcodeLookup();

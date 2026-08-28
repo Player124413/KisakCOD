@@ -39,7 +39,9 @@
 #include "misc.h"
 
 #ifdef _USE_SSE
+#if defined(__SSE__) || (defined(_M_IX86_FP) && _M_IX86_FP >= 1)
 #include <xmmintrin.h>
+#endif
 #elif defined(SHORTCUTS) && (defined(ARM4_ASM) || defined(ARM5E_ASM))
 #include "vq_arm4.h"
 #endif

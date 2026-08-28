@@ -30,7 +30,9 @@
    SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#if defined(__SSE__) || (defined(_M_IX86_FP) && _M_IX86_FP >= 1)
 #include <xmmintrin.h>
+#endif
 
 #define OVERRIDE_INNER_PROD
 static float inner_prod(const float *a, const float *b, int len)

@@ -244,7 +244,9 @@ uint16_t __cdecl SMC_Allocate(uint32_t smcIndex, uint32_t bitCount)
     iassert(block->prev->next == block);
     block->next->prev = block->prev;
     block->prev->next = block->next;
-    static_assert(sizeof(s_cache.leafs[0]) == 256);
+#if !defined(__LP64__) && !defined(_WIN64)
+        static_assert(sizeof(s_cache.leafs[0]) == 256);
+    #endif
     treeIndex = ((char *)block - (char *)s_cache.leafs) / sizeof(s_cache.leafs[0]);
     bcassert(treeIndex, ARRAY_COUNT(s_cache.trees));
     tree = &s_cache.trees[treeIndex];

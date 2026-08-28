@@ -1,3 +1,5 @@
+#pragma once
+
 // Android port — network header (replaces win32/win_net.h)
 // BSD sockets on Android, types matching the engine expectations.
 #pragma once
@@ -7,6 +9,7 @@
 #include <arpa/inet.h>
 #include <netdb.h>
 #include <unistd.h>
+struct msg_t;
 #include <sys/ioctl.h>
 #include <sys/types.h>
 #include <cerrno>
@@ -20,7 +23,9 @@ typedef int SOCKET;
 #define SD_BOTH SHUT_RDWR
 
 // IOCTL
+#if !defined(FIONBIO)
 #define FIONBIO ioctl
+#endif
 #define ioctlsocket ioctl
 #define closesocket close
 

@@ -4,17 +4,19 @@
 #include <Windows.h>
 #include <qcommon/threads.h>
 
+#if !defined(KISAK_ANDROID)
+// Original Windows implementation using x86 __rdtsc
 long double msecPerRawTimerTick;
 double qpc2msec;
 
 double __cdecl SecondsPerTick()
 {
-    _LARGE_INTEGER tscStop; // [esp+20h] [ebp-30h]
-    _LARGE_INTEGER qpcFrequency; // [esp+28h] [ebp-28h] BYREF
-    _LARGE_INTEGER qpcStart; // [esp+30h] [ebp-20h] BYREF
-    _LARGE_INTEGER tscStart; // [esp+38h] [ebp-18h]
-    _LARGE_INTEGER qpcStop; // [esp+40h] [ebp-10h] BYREF
-    double secPerTick; // [esp+48h] [ebp-8h]
+    _LARGE_INTEGER tscStop;
+    _LARGE_INTEGER qpcFrequency;
+    _LARGE_INTEGER qpcStart;
+    _LARGE_INTEGER tscStart;
+    _LARGE_INTEGER qpcStop;
+    double secPerTick;
 
     Win_SetThreadLock(THREAD_LOCK_ALL);
     Sleep(0);
@@ -40,3 +42,24 @@ void __cdecl InitTiming()
 {
 	msecPerRawTimerTick = SecondsPerTick() * 1000.0;
 }
+#else
+// Android port: use monotonic clock directly
+long double msecPerRawTimerTick;
+double qpc2msec;
+
+double __cdecl SecondsPerTick()
+{
+    LARGE_INTEGER qpcFrequency;
+    QueryPerformanceFrequency(&qpcFrequency);
+    qpc2msec = 1000.0 / qpcFrequency.QuadPart;
+    return 1.0 / (double)qpcFrequency.QuadPart;
+}
+
+void __cdecl InitTiming()
+{
+    LARGE_INTEGER freq;
+    QueryPerformanceFrequency(&freq);
+    msecPerRawTimerTick = (1000.0 / freq.QuadPart) * 1000.0;
+    qpc2msec = 1000.0 / freq.QuadPart;
+}
+#endif

@@ -202,7 +202,9 @@ struct GfxWorld // sizeof=0x2DC
     GfxWorldDpvsStatic dpvs;            // ...
     GfxWorldDpvsDynamic dpvsDyn;        // ...
 };
+#if !defined(__LP64__) && !defined(_WIN64)
 static_assert(sizeof(GfxWorld) == 0x2DC);
+#endif
 
 // r_bsp
 void __cdecl R_ReloadWorld();

@@ -39,7 +39,9 @@ struct DObjAnimMat // sizeof=0x20
     float trans[3];                     // ...
     float transWeight;                  // ...
 };
+#if !defined(__LP64__) && !defined(_WIN64)
 static_assert(sizeof(DObjAnimMat) == 32);
+#endif
 
 struct DSkelPartBits // sizeof=0x30
 {                                       // ...

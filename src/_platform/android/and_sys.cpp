@@ -23,6 +23,10 @@
 #error "and_sys.cpp must not be compiled on Windows"
 #endif
 
+// ---- Win32 TLS backing store (declared extern __thread in win32_compat.h) ----
+#define ANDROID_TLS_MAX 64
+__thread void *android_tls_table[ANDROID_TLS_MAX] = {0};
+
 // ---- time -------------------------------------------------------------------
 
 static uint32_t s_timeBase = 0;

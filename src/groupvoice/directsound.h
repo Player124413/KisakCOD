@@ -47,7 +47,9 @@ struct dsound_sample_t // sizeof=0x48
     // padding byte
     // padding byte
 };
+#if !defined(__LP64__) && !defined(_WIN64)
 static_assert(sizeof(dsound_sample_t) == 0x48);
+#endif
 
 struct audioSample_t // sizeof=0x20
 {                                       // ...
@@ -63,7 +65,9 @@ struct audioSample_t // sizeof=0x20
     int32_t channels;                       // ...
     int32_t sampleOffset;                   // ...
 };
+#if !defined(__LP64__) && !defined(_WIN64)
 static_assert(sizeof(audioSample_t) == 0x20);
+#endif
 
 
 // play_dsound

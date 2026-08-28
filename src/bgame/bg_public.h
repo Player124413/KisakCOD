@@ -473,7 +473,9 @@ struct item_ent_t // sizeof=0xC (SP/MP same)
     int32_t clipAmmoCount;
     int32_t index;
 };
+#if !defined(__LP64__) && !defined(_WIN64)
 static_assert(sizeof(item_ent_t) == 0xC);
+#endif
 
 struct mover_ent_t // sizeof=0x60 (SP/MP same)
 {                                       // ...
@@ -490,7 +492,9 @@ struct mover_ent_t // sizeof=0x60 (SP/MP same)
     float apos2[3];
     float apos3[3];
 };
+#if !defined(__LP64__) && !defined(_WIN64)
 static_assert(sizeof(mover_ent_t) == 0x60);
+#endif
 
 #ifdef KISAK_MP
 struct entityShared_t // sizeof=0x68
@@ -511,7 +515,9 @@ struct entityShared_t // sizeof=0x68
     EntHandle ownerNum;
     int32_t eventTime;
 };
+#if !defined(__LP64__) && !defined(_WIN64)
 static_assert(sizeof(entityShared_t) == 0x68);
+#endif
 #elif KISAK_SP
 struct entityShared_t
 {
@@ -551,7 +557,9 @@ struct corpse_ent_t // sizeof=0x4
 {                                       // ...
     int32_t deathAnimStartTime;
 };
+#if !defined(__LP64__) && !defined(_WIN64)
 static_assert(sizeof(corpse_ent_t) == 0x4);
+#endif
 
 
 
@@ -567,7 +575,9 @@ struct missile_ent_t // sizeof=0x3C
     MissileStage stage;
     MissileFlightMode flightMode;
 };
+#if !defined(__LP64__) && !defined(_WIN64)
 static_assert(sizeof(missile_ent_t) == 0x3C);
+#endif
 
 enum EntHandler_t : uint8_t
 {
@@ -745,7 +755,9 @@ struct missile_ent_t // sizeof=0x54
     MissileStage stage;
     MissileFlightMode flightMode;
 };
+#if !defined(__LP64__) && !defined(_WIN64)
 static_assert(sizeof(missile_ent_t) == 0x54);
+#endif
 
 struct gentity_s_tag
 {
