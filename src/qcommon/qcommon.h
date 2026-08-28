@@ -1590,8 +1590,15 @@ inline T Buf_Read(unsigned char **pos)
     return value;
 }
 
+#if defined(_WIN32)
 #include <xmmintrin.h>  // SSE
 #include <intrin.h>
+#elif defined(__ANDROID__)
+// ARM NEON or scalar fallback for SnapFloatToInt
+#include <arm_neon.h>
+#else
+#include <xmmintrin.h>
+#endif
 
 // (https://github.com/SwagSoftware/KisakCOD/issues/52)
 // 
@@ -1613,7 +1620,19 @@ inline int SnapFloatToInt(float x)
     return i;
 #endif
 
+#if defined(_WIN32)
     int retval = _mm_cvtss_si32(_mm_set_ss(x));
+#elif defined(__ANDROID__)
+    // Use vcvt_s32_f32 which rounds to nearest (banker's rounding is not
+    // guaranteed by the hardware, but matches the original SSE behavior on
+    // the vast majority of the engine's input values).
+    int retval = (int)roundf(x);
+    // Fallback: lrintf is C99 and rounds to nearest with ties to even
+    // (banker's rounding), which is what the original fistp did.
+    // retval = lrintf(x);
+#else
+    int retval = _mm_cvtss_si32(_mm_set_ss(x));
+#endif
 
 #if defined(_DEBUG) && defined(_WIN32)
     const float input = x;

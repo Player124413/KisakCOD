@@ -1,7 +1,12 @@
 #include <universal/q_shared.h>
 #include "threads.h"
 
+#if defined(_WIN32)
 #include <Windows.h>
+#elif defined(__ANDROID__)
+#include <pthread.h>
+#include <semaphore.h>
+#endif
 
 #include <universal/assertive.h>
 
@@ -163,7 +168,13 @@ char __cdecl Sys_SpawnRenderThread(void(__cdecl* function)(uint32_t))
 
 void __cdecl Sys_CreateEvent(bool manualReset, bool initialState, void** event)
 {
+#if defined(_WIN32)
     *event = CreateEventA(0, manualReset, initialState, 0);
+#elif defined(__ANDROID__)
+    sem_t *sem = (sem_t *)malloc(sizeof(sem_t));
+    sem_init(sem, 0, initialState ? 1 : 0);
+    *event = (void *)sem;
+#endif
 }
 
 void __cdecl Sys_CreateThread(void(__cdecl* function)(uint32_t), ThreadContext_t threadContext)
@@ -171,6 +182,7 @@ void __cdecl Sys_CreateThread(void(__cdecl* function)(uint32_t), ThreadContext_t
     iassert( threadFunc[threadContext] == NULL );
     iassert(threadContext < THREAD_CONTEXT_COUNT);
     threadFunc[threadContext] = function;
+#if defined(_WIN32)
     threadHandle[threadContext] = CreateThread(
         0,
         0,
@@ -178,6 +190,12 @@ void __cdecl Sys_CreateThread(void(__cdecl* function)(uint32_t), ThreadContext_t
         (LPVOID)threadContext,
         4u,
         &threadId[threadContext]);
+#elif defined(__ANDROID__)
+    pthread_t *thread = (pthread_t *)malloc(sizeof(pthread_t));
+    pthread_create(thread, NULL, (void *(*)(void *))Sys_ThreadMain, (void *)(uintptr_t)threadContext);
+    threadHandle[threadContext] = (void *)thread;
+    threadId[threadContext] = (DWORD)(uintptr_t)(*thread);
+#endif
     SetThreadName(threadId[threadContext], s_threadNames[threadContext]);
 }
 
@@ -266,7 +284,14 @@ void __cdecl Sys_SuspendDatabaseThread(ThreadOwner owner)
 
 void __cdecl Sys_ResetEvent(void** event)
 {
+#if defined(_WIN32)
     ResetEvent(*event);
+#elif defined(__ANDROID__)
+    sem_t *sem = (sem_t *)(*event);
+    int val;
+    sem_getvalue(sem, &val);
+    while (val > 0) { sem_trywait(sem); sem_getvalue(sem, &val); }
+#endif
 }
 
 void __cdecl Sys_ResumeDatabaseThread(ThreadOwner owner)
@@ -286,7 +311,14 @@ void __cdecl Sys_ResumeDatabaseThread(ThreadOwner owner)
 
 void __cdecl Sys_SetEvent(void** event)
 {
+#if defined(_WIN32)
     SetEvent(*event);
+#elif defined(__ANDROID__)
+    sem_t *sem = (sem_t *)(*event);
+    int val;
+    sem_getvalue(sem, &val);
+    if (val == 0) sem_post(sem);
+#endif
 }
 
 bool __cdecl Sys_HaveSuspendedDatabaseThread(ThreadOwner owner)

@@ -3,7 +3,11 @@
 
 #include "cmd.h"
 #include "threads.h"
+#if defined(_WIN32)
 #include "../win32/win_local.h"
+#elif defined(__ANDROID__)
+#include <win32/win_local.h>
+#endif
 
 #include <universal/com_memory.h>
 #include <client/client.h>
@@ -15,9 +19,17 @@
 #include <universal/com_files.h>
 #include <stringed/stringed_hooks.h>
 #include "files.h"
+#if defined(_WIN32)
 #include <gfx_d3d/r_rendercmds.h>
-#include <script/scr_vm.h>
 #include <gfx_d3d/r_init.h>
+#include <gfx_d3d/r_scene.h>
+#include <gfx_d3d/r_workercmds.h>
+#include <gfx_d3d/r_dvars.h>
+#elif defined(__ANDROID__)
+// Android port: gfx_gles provides the same type declarations
+#include <gfx_gles/gl_renderer.h>
+#endif
+#include <script/scr_vm.h>
 #include <EffectsCore/fx_system.h>
 #include <database/database.h>
 #include <universal/com_constantconfigstrings.h>
@@ -28,13 +40,10 @@
 #include <xanim/dobj.h>
 #include <sound/snd_local.h>
 #include <script/scr_animtree.h>
-#include <gfx_d3d/r_scene.h>
 #include <ragdoll/ragdoll.h>
 #include <devgui/devgui.h>
 #include <server/sv_game.h>
-#include <gfx_d3d/r_workercmds.h>
 #include <universal/com_convexhull.h>
-#include <gfx_d3d/r_dvars.h>
 #include "mem_track.h"
 #include <universal/profile.h>
 
