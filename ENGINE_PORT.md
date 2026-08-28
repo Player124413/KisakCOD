@@ -133,3 +133,29 @@
 3. Kotlin-часть без зависимостей (`android.*` только) — сборка офлайн.
 4. Для M2/M3 правьте точечно заголовки движка `#if defined(_WIN32)`,
    помечайте `KISAKTODO-ANDROID` и ведите статус в этом файле.
+## 7. Статус компиляции движка
+
+Проверено компиляцией под Android (g++ -fsyntax-only с флагами __ANDROID__,
+KISAK_ANDROID, KISAK_MP, force_include.h):
+
+| Файл | Статус | Ошибки |
+|---|---|---|
+| universal/timing.cpp | ✅ | 0 |
+| universal/profile.cpp | ✅ | 0 |
+| universal/physicalmemory.cpp | ✅ | 0 |
+| universal/win_shared.cpp | ✅ | 0 |
+| universal/win_common.cpp | 🚧 | ~37 |
+| universal/dvar.cpp | 🚧 | ~63 |
+| qcommon/threads.cpp | 🚧 | ~69 |
+| qcommon/common.cpp | 🚧 | 1 (buildnumber.h) |
+| qcommon/files.cpp | 🚧 | ~45 |
+| qcommon/cmd.cpp | 🚧 | database/zlib |
+
+**Следующие шаги для полной компиляции:**
+  - Создать buildnumber.h
+  - Исправить конфликт PackedUnitVec (struct vs union в com_math.h / r_gfx.h)
+  - Исправить random() (конфликт с libc)
+  - Исправить volatile типы в win_common.cpp
+  - Создать недостающие stubs для database/ и других зависимостей
+  - Для `__int8 redefined` warning: к现有 guard в q_shared.h уже работает
+  - gfx_d3d/ заголовки исключены из компиляции (используется gfx_gles)
