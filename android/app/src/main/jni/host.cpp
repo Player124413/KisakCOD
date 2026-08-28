@@ -6,19 +6,20 @@
 //
 // Two build modes (selected by -DKISAK_ENGINE_LINKED=0/1):
 //   * shell (default in the gradle project): engine_api pointers are stubs,
-//     each nativeStep renders the demo scene (gl_render_shell.cpp) — the APK
-//     runs and the overlay can be tested on a device.
-//   * linked (M2, see ENGINE_PORT.md): engine_api pointers are real engine
-//     symbols; nativeStep runs Com_Frame() and swaps the EGL surface.
+//     each nativeStep calls the GLES backend's R_* API directly— the APK
+//     runs and the overlay can be tested on a device with real renderer code.
+//   * linked (M3, see ENGINE_PORT.md): engine_api pointers are real engine
+//     symbols; nativeStep runs Com_Frame() which internally calls R_*.
 // ============================================================================
 
 #include "jni_shim.h"  // <jni.h> on Android, minimal shim elsewhere
 #include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "gles_stub.h"
 #include "egl_host.h"
-#include "gl_render_shell.h"
+#include "gl_renderer.h"   // R_* API — the real GLES3 backend
 #include "engine_api.h"
 #include "and_touch.h"
 #include "and_sys.h"
@@ -33,55 +34,47 @@ static const bool kShellMode = false;
 static const bool kShellMode = true;
 #endif
 
+// refdef_s — only used in shell mode (engine not linked), so no ODR conflict
+// with the engine's definition when KISAK_ENGINE_LINKED=1. Mirrors the subset
+// of fields that R_RenderScene (gl_renderer.cpp) reads: x, y, width, height.
+struct refdef_s {
+    uint32_t x, y;
+    uint32_t width, height;
+    float tanHalfFovX;
+    float tanHalfFovY;
+    float vieworg[3];
+    float viewaxis[3][3];
+    float viewOffset[3];
+    int time;
+    float zNear;
+    float blurRadius;
+    char _pad[0x4098 - 64]; // mirroring full engine struct size
+};
+
 // ---------------- global state ----------------------------------------------
 
 static EglHost gEgl;
-static ShellRender gShell;
-static ShellInputState s_shell;
 static bool gComStarted = false;
 static char gCmdline[4096] = { 0 };
+static int gWidth = 0, gHeight = 0;
 
-// ---------------- shell-mode hooks (visualize input) ------------------------
-
-static void shellKeyHook(int keynum, bool down) {
-    switch (keynum) {
-        case 'W': if (down) s_shell.moveY = -1.f; else s_shell.moveY = 0.f; break;
-        case 'S': if (down) s_shell.moveY = 1.f; else s_shell.moveY = 0.f; break;
-        case 'A': if (down) s_shell.moveX = -1.f; else s_shell.moveX = 0.f; break;
-        case 'D': if (down) s_shell.moveX = 1.f; else s_shell.moveX = 0.f; break;
-        case 200: s_shell.fire = down; break;   // K_MOUSE1
-        case 201: s_shell.ads = down; break;    // K_MOUSE2
-        case 32: s_shell.jump = down; break;    // K_SPACE
-        case 160: s_shell.sprint = down; break; // K_SHIFT
-        case 'C': s_shell.crouch = down; break;
-        case 'Z': s_shell.prone = down; break;
-        case 'R': s_shell.reload = down; break;
-        case 'V': s_shell.melee = down; break;
-        case 'F': s_shell.use = down; break;
-        case 'G': s_shell.nade = down; break;
-        case 9: s_shell.score = down; break;    // K_TAB
-        case 27: s_shell.pause = down; break;   // K_ESCAPE
-        default: break;
-    }
-}
-
-static void shellMouseHook(int x, int y, int dx, int dy) {
-    (void)x; (void)y;
-    s_shell.cursorX += (float)dx / 1920.0f;
-    s_shell.cursorY += (float)dy / 1080.0f;
-    if (s_shell.cursorX < 0.f) s_shell.cursorX = 0.f;
-    if (s_shell.cursorX > 1.f) s_shell.cursorX = 1.f;
-    if (s_shell.cursorY < 0.f) s_shell.cursorY = 0.f;
-    if (s_shell.cursorY > 1.f) s_shell.cursorY = 1.f;
-}
+// ---------------- shell-mode hooks (visualize input via dummy cmds) ---------
+// In shell mode we don't have the engine's CL_* input pipeline, so buttons
+// are echoed to the shell-only console. The GLES backend's command buffer
+// is populated by the shell's own test commands (gfx_gles_test pattern).
 
 static void initTouchHooks() {
     TouchHooks hooks;
     memset(&hooks, 0, sizeof(hooks));
     if (kShellMode) {
-        hooks.key = shellKeyHook;
-        hooks.mouse = shellMouseHook;
-        hooks.cmd = [](const char *) {};
+        hooks.key = [](int key, bool) {
+            AndroidSys_Log("kisakcod", "[shell] key %d %s",
+                           key, key < 32 ? "ctrl" : "press");
+        };
+        hooks.mouse = [](int, int, int dx, int dy) {
+            AndroidSys_Log("kisakcod", "[shell] mouse %+d %+d", dx, dy);
+        };
+        hooks.cmd = [](const char *t) { AndroidSys_Log("kisakcod", "[shell] cmd: %s", t); };
         hooks.uiCursorMode = []() { return false; };
     } else {
         hooks.key = [](int key, bool down) {
@@ -142,6 +135,7 @@ Java_com_kisakcod_android_app_JniBridge_nativeCreate(JNIEnv *env, jobject,
         KisakEngine_InitShell();
     }
     initTouchHooks();
+    AndroidSys_Log("kisakcod", "nativeCreate done (shell=%d)", kShellMode ? 1 : 0);
 }
 
 JNIEXPORT jboolean JNICALL
@@ -158,8 +152,16 @@ Java_com_kisakcod_android_app_JniBridge_nativeSurfaceCreated(
     bool ok = false;
     int w = 0, h = 0;
 #endif
-    if (ok && kShellMode && !gShell.ready) {
-        gShell.init(w, h);
+    if (ok) {
+        gWidth = w;
+        gHeight = h;
+        if (kShellMode) {
+            // Shell mode: initialize the full GLES backend directly.
+            // This exercises the same R_Init -> R_BeginFrame -> R_RenderScene
+            // -> R_EndFrame path that the engine-linked build uses.
+            R_Init();
+            AndroidSys_Log("kisakcod", "shell GLES backend initialized");
+        }
     }
     AndroidSys_Log("kisakcod", "surface created %dx%d ok=%d", w, h, ok ? 1 : 0);
     return ok ? JNI_TRUE : JNI_FALSE;
@@ -168,12 +170,16 @@ Java_com_kisakcod_android_app_JniBridge_nativeSurfaceCreated(
 JNIEXPORT void JNICALL
 Java_com_kisakcod_android_app_JniBridge_nativeSurfaceChanged(JNIEnv *, jobject,
                                                              jint w, jint h) {
-    gEgl.resize((int)w, (int)h);
-    gShell.resize((int)w, (int)h);
+    gWidth = (int)w;
+    gHeight = (int)h;
+    gEgl.resize(gWidth, gHeight);
 }
 
 JNIEXPORT void JNICALL
 Java_com_kisakcod_android_app_JniBridge_nativeSurfaceDestroyed(JNIEnv *, jobject) {
+    if (kShellMode) {
+        R_Shutdown(0);
+    }
     gEgl.destroySurface();
 }
 
@@ -182,18 +188,31 @@ Java_com_kisakcod_android_app_JniBridge_nativeStep(JNIEnv *, jobject, jlong dtMs
     if (!gEgl.isReady()) return JNI_TRUE;
 
     if (!kShellMode) {
+        // ---- Engine-linked mode ----
         if (!gComStarted) {
             gEngine.com_init(gCmdline);
             gComStarted = true;
         }
+        // The engine calls R_BeginFrame/R_RenderScene/R_EndFrame internally
+        // through Com_Frame -> SCR_UpdateFrame -> R_RenderScene.
         gEngine.com_frame();
     } else {
-        gShell.draw((float)dtMs, s_shell);
+        // ---- Shell mode: exercise the real GLES backend ----
+        // Each frame we drive the full R_* pipeline. The command buffer
+        // is currently empty (no engine front-end), so we get a clear/load
+        // screen only. This validates the R_Init -> BeginFrame -> EndFrame
+        // lifecycle and GL context management.
+        R_BeginFrame();
+        // R_RenderScene needs a valid refdef; provide minimal defaults.
+        refdef_s ref;
+        memset(&ref, 0, sizeof(ref));
+        ref.width = gWidth > 0 ? (uint32_t)gWidth : 640;
+        ref.height = gHeight > 0 ? (uint32_t)gHeight : 480;
+        R_RenderScene(&ref);
+        R_EndFrame();
     }
 
-    gEgl.beginFrame();  // viewport
-    // engine/shell already drew into the current GL context
-    gEgl.endFrame();    // swap
+    gEgl.endFrame(); // swap buffers
     return JNI_TRUE;
 }
 
@@ -213,15 +232,6 @@ Java_com_kisakcod_android_app_JniBridge_nativeStick(JNIEnv *, jobject, jint side
                                                     jfloat x, jfloat y,
                                                     jlong dtMs) {
     AndroidTouch_Stick((int)side, (float)x, (float)y, (uint32_t)dtMs);
-    if (kShellMode) {
-        if (side == 0) {
-            s_shell.moveX = (float)x;
-            s_shell.moveY = (float)y;
-        } else {
-            s_shell.lookX = (float)x;
-            s_shell.lookY = (float)y;
-        }
-    }
 }
 
 JNIEXPORT void JNICALL
@@ -229,7 +239,8 @@ Java_com_kisakcod_android_app_JniBridge_nativeGamepadKey(JNIEnv *, jobject,
                                                          jint key,
                                                          jboolean down) {
     if (kShellMode) {
-        shellKeyHook((int)key, down == JNI_TRUE);
+        AndroidSys_Log("kisakcod", "[shell] gamepad key %d %s",
+                       (int)key, down ? "down" : "up");
         return;
     }
     gEngine.sys_que_event(gEngine.sys_milliseconds(), KISAK_SE_KEY,
@@ -278,7 +289,8 @@ Java_com_kisakcod_android_app_JniBridge_nativeSetBool(JNIEnv *env, jobject,
     if (n) {
         AndroidTouch_SetBool(n, value == JNI_TRUE);
         if (kShellMode && strcmp(n, "touch_enabled") == 0) {
-            s_shell.touchEnabled = (value == JNI_TRUE);
+            AndroidSys_Log("kisakcod", "[shell] touch_enabled = %d",
+                           value == JNI_TRUE ? 1 : 0);
         }
         jstrFree(env, name, n);
     }

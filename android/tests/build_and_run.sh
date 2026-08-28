@@ -43,7 +43,7 @@ for f in "$JNI/host.cpp" "$JNI/egl_host.cpp" "$JNI/gl_shader.cpp" \
          "$JNI/gl_render_shell.cpp" "$JNI/engine_shell.cpp"; do
     echo "  checking $f"
     g++ -std=c++17 -Wall -Wextra -fsyntax-only -DKISAK_ENGINE_LINKED=0 \
-        -I"$JNI" -I"$PLAT" "$f"
+        -I"$JNI" -I"$PLAT" -Isrc/gfx_gles "$f"
 done
 
 echo
