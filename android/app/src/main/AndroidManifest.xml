@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--
+      The engine touches the GPU exclusively through Vulkan (via DXVK).
+      android.hardware.vulkan.hardware is required so the Play Store filters
+      out devices that cannot run it at all.
+    -->
+    <uses-feature
+        android:name="android.hardware.vulkan.hardware"
+        android:required="true" />
+
+    <uses-feature
+        android:name="android.hardware.touchscreen"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <!--
+      Gamepad support. COD4's own gamepad path is disabled in this build
+      (CL_GamepadMove is commented out in src/client/cl_input.cpp), but the
+      host forwards key events, so a pad still works for the console commands.
+    -->
+    <uses-feature
+        android:name="android.hardware.gamepad"
+        android:required="false" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/Theme.KisakCOD"
+        android:isGame="true"
+        android:hardwareAccelerated="true"
+        android:extractNativeLibs="true">
+
+        <activity
+            android:name=".LauncherActivity"
+            android:exported="true"
+            android:screenOrientation="sensorLandscape"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".GameActivity"
+            android:exported="false"
+            android:screenOrientation="sensorLandscape"
+            android:launchMode="singleTask"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|smallestScreenSize|density|uiMode"
+            android:resizeableActivity="false" />
+
+    </application>
+
+</manifest>
