@@ -12,7 +12,6 @@
 #include <qcommon/com_bsp.h>
 #include <qcommon/cmd.h>
 #include <qcommon/files.h>
-#include <io.h>
 
 const dvar_t *fs_remotePCDirectory;
 const dvar_t *fs_remotePCName;
@@ -1610,24 +1609,24 @@ void __cdecl FS_AddIwdFilesForGameDirectory(char *path, char *pszGameFolder)
 #ifdef WIN32
 int __cdecl Sys_DirectoryHasContents(const char *directory)
 {
-    _finddata64i32_t findinfo; // [esp+0h] [ebp-238h] BYREF
-    int findhandle; // [esp+12Ch] [ebp-10Ch]
-    char search[260]; // [esp+130h] [ebp-108h] BYREF
+    WIN32_FIND_DATAA findinfo;
+    HANDLE findhandle;
+    char search[260];
 
     Com_sprintf(search, 0x100u, "%s\\*", directory);
-    findhandle = _findfirst64i32(search, &findinfo);
-    if (findhandle == -1)
+    findhandle = FindFirstFileA(search, &findinfo);
+    if (findhandle == INVALID_HANDLE_VALUE)
         return 0;
     do
     {
-        if ((findinfo.attrib & 0x10) == 0
-            || I_stricmp(findinfo.name, ".") && I_stricmp(findinfo.name, "..") && I_stricmp(findinfo.name, "CVS"))
+        if ((findinfo.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) == 0
+            || I_stricmp(findinfo.cFileName, ".") && I_stricmp(findinfo.cFileName, "..") && I_stricmp(findinfo.cFileName, "CVS"))
         {
-            _findclose(findhandle);
+            FindClose(findhandle);
             return 1;
         }
-    } while (_findnext64i32(findhandle, &findinfo) != -1);
-    _findclose(findhandle);
+    } while (FindNextFileA(findhandle, &findinfo));
+    FindClose(findhandle);
     return 0;
 }
 #endif

@@ -77,18 +77,47 @@
 #define	QDECL	__cdecl
 
 // buildstring will be incorporated into the version string
-#ifdef NDEBUG
-#ifdef _M_IX86
-#define	CPUSTRING	"win-x86"
-#elif defined _M_ALPHA
-#define	CPUSTRING	"win-AXP"
-#endif
+// GCC and Clang do not define _M_IX86 / _M_ALPHA, so without this branch
+// CPUSTRING is simply undefined and every file that prints the version string
+// fails to compile. The value is cosmetic -- it goes into the banner the engine
+// prints and into the console's "Build" line -- but it should still say what
+// was actually built.
+#if defined(KISAK_POSIX)
+  #if defined(__aarch64__)
+    #define KISAK_CPU_ARCH "arm64"
+  #elif defined(__arm__)
+    #define KISAK_CPU_ARCH "arm32"
+  #elif defined(__x86_64__)
+    #define KISAK_CPU_ARCH "x86_64"
+  #elif defined(__i386__)
+    #define KISAK_CPU_ARCH "x86"
+  #else
+    #define KISAK_CPU_ARCH "unknown"
+  #endif
+  #if defined(KISAK_ANDROID)
+    #define KISAK_CPU_OS "android"
+  #else
+    #define KISAK_CPU_OS "linux"
+  #endif
+  #ifdef NDEBUG
+    #define CPUSTRING KISAK_CPU_OS "-" KISAK_CPU_ARCH
+  #else
+    #define CPUSTRING KISAK_CPU_OS "-" KISAK_CPU_ARCH "-debug"
+  #endif
+#elif defined(_M_IX86)
+  #ifdef NDEBUG
+    #define CPUSTRING "win-x86"
+  #else
+    #define CPUSTRING "win-x86-debug"
+  #endif
+#elif defined(_M_ALPHA)
+  #ifdef NDEBUG
+    #define CPUSTRING "win-AXP"
+  #else
+    #define CPUSTRING "win-AXP-debug"
+  #endif
 #else
-#ifdef _M_IX86
-#define	CPUSTRING	"win-x86-debug"
-#elif defined _M_ALPHA
-#define	CPUSTRING	"win-AXP-debug"
-#endif
+  #define CPUSTRING "unknown"
 #endif
 
 // angle indexes

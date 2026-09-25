@@ -3,7 +3,12 @@
 
 #include "cmd.h"
 #include "threads.h"
-#include "../win32/win_local.h"
+// Angle brackets, not a relative path. A relative "../win32/win_local.h"
+// resolves to the Windows original and bypasses the platform override that
+// src/_platform/posix/win32/win_local.h provides, which pulls in DirectInput,
+// winsock and wsipx -- none of which exist on POSIX. This is the only file in
+// the tree that spelled it relatively.
+#include <win32/win_local.h>
 
 #include <universal/com_memory.h>
 #include <client/client.h>
@@ -2383,8 +2388,13 @@ void Com_CheckError()
     Sys_LeaveCriticalSection(CRITSECT_COM_ERROR);
     if (v0)
     {
-        void * value = Sys_GetValue(2);
-        longjmp((int*)value, -1);
+        void *value = Sys_GetValue(2);
+        // Sys_GetValue(2) returns the jmp_buf stashed by the SEH-style
+        // try/catch the decompilation models with setjmp. longjmp's first
+        // parameter is a jmp_buf (struct __jmp_buf_tag *), so the void* has to
+        // be cast to that; casting it to int* as the original did is a
+        // decompiler artefact that no compiler outside MSVC accepts.
+        longjmp((jmp_buf)value, -1);
     }
 }
 

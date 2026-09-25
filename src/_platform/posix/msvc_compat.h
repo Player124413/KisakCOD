@@ -209,6 +209,7 @@ static inline unsigned long InterlockedXor(volatile unsigned long *Destination, 
 //   _strnicmp   -> strncasecmp   (14)
 //   _getcwd     -> getcwd        (2)
 //   _mkdir      -> mkdir         (1)
+//   _snprintf   -> snprintf      (~30)
 // ---------------------------------------------------------------------------
 
 #ifdef __cplusplus
@@ -221,6 +222,7 @@ static inline unsigned long InterlockedXor(volatile unsigned long *Destination, 
 #include <stdlib.h>
 #endif
 
+#include <time.h>      // _time64 / _localtime64 shims below
 #include <strings.h>   // strcasecmp / strncasecmp
 #include <unistd.h>    // getcwd
 #include <sys/stat.h>  // mkdir
@@ -250,12 +252,79 @@ static inline int _mkdir(const char *path) { return mkdir(path, 0777); }
 
 #define _strdup(str) strdup((str))
 
+// _snprintf(buf, size, fmt, ...). MSVC's version does NOT null-terminate when
+// it truncates; POSIX snprintf always does. Mapping onto snprintf is therefore
+// strictly safer -- the only behavioural difference is that a truncated result
+// is terminated rather than left dangling. Used in ~30 files, mostly the dvar
+// domain descriptions and the cinematic/Bink warnings.
+#define _snprintf(buf, size, ...) snprintf((buf), (size), __VA_ARGS__)
+#define _vsnprintf(buf, size, fmt, ap) vsnprintf((buf), (size), (fmt), (ap))
+
 // _itoa(value, buffer, radix). MSVC writes a NUL-terminated string; radix 10 is
 // the only one the engine uses (db_registry.cpp formats zone file sizes).
 static inline char *_itoa(int value, char *buffer, int radix)
 {
     if (radix == 10) { snprintf(buffer, 16, "%d", value); return buffer; }
     return nullptr;
+}
+
+// ---------------------------------------------------------------------------
+// MSVC-only CRT / intrinsic names the engine still spells
+// ---------------------------------------------------------------------------
+
+// PreFetchCacheLine(level, addr) is MSVC's software prefetch hint. GCC's
+// __builtin_prefetch(addr, rw, locality) is the same operation; locality 0 is
+// the non-temporal case, which is the only level the engine asks for
+// (Com_Prefetch passes PF_NON_TEMPORAL_LEVEL_ALL). The MSVC x86 inline-asm
+// version of Com_Prefetch is behind #ifdef _M_X686, which GCC never defines, so
+// this is the live path.
+#ifndef PF_TEMPORAL_LEVEL_1
+#define PF_TEMPORAL_LEVEL_1       1
+#define PF_TEMPORAL_LEVEL_2       2
+#define PF_TEMPORAL_LEVEL_3       3
+#define PF_TEMPORAL_LEVEL_4       4
+#define PF_NON_TEMPORAL_LEVEL_ALL 0
+#endif
+#define PreFetchCacheLine(level, addr) __builtin_prefetch((addr), 0, 0)
+
+// _time64 / _localtime64: MSVC's explicit 64-bit time API. On POSIX time_t is
+// already 64 bits (the NDK and any modern glibc), so these are time() and
+// localtime() under their MSVC spellings. Only Com_OpenLogFile uses them, to
+// timestamp the console log.
+// No typedef: MinGW's winnt.h already declares __time64_t, and redefining it
+// is a hard error. Only the functions are needed.
+//
+// The parameter is int64_t*, not time_t*, because that is what the engine
+// declares (Com_OpenLogFile has `int64_t aclock`) and time_t is 32 bits on a
+// 32-bit glibc host. Taking the wider type keeps this correct on both, and
+// localtime()'s static-buffer semantics match MSVC's _localtime64 exactly.
+static inline int64_t _time64(int64_t *t)
+{
+    time_t now = time(nullptr);
+    if (t) *t = (int64_t)now;
+    return (int64_t)now;
+}
+
+static inline struct tm *_localtime64(const int64_t *t)
+{
+    static struct tm fallback;
+    if (!t) return nullptr;
+    time_t v = (time_t)*t;
+    struct tm *r = localtime(&v);
+    if (!r) return nullptr;
+    fallback = *r;
+    return &fallback;
+}
+
+static inline struct tm *_gmtime64(const int64_t *t)
+{
+    static struct tm fallback;
+    if (!t) return nullptr;
+    time_t v = (time_t)*t;
+    struct tm *r = gmtime(&v);
+    if (!r) return nullptr;
+    fallback = *r;
+    return &fallback;
 }
 
 // ---------------------------------------------------------------------------
