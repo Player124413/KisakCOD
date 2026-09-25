@@ -10,7 +10,8 @@ add_compile_definitions(_CRT_SECURE_NO_WARNINGS _CRT_NONSTDC_NO_DEPRECATE)
 # Set this to match the folder name in scripts/platform
 # This will handle the path overrides if needed
 #   win32   - MSVC + DirectX SDK (the default, unchanged)
-#   android - NDK + Vulkan via DXVK (see docs/ANDROID_PORT.md)
+#   android - NDK + Vulkan via DXVK, 32-bit armeabi-v7a (see docs/ANDROID_PORT.md)
+#   linux   - host toolchain + SDL2, same POSIX layer as Android
 set(KISAK_PLATFORM win32)
 
 # Radiant (the level editor) links D3D and is not portable to Android, so it is
@@ -19,6 +20,20 @@ set(KISAK_PLATFORM win32)
 if (KISAK_PLATFORM STREQUAL "android")
     set(KISAK_NO_RADIANT ON)
 endif()
+
+# Android cannot load an ELF executable: it loads a .so from the APK and calls
+# into it through JNI. When this is ON the three engine targets are built as
+# shared libraries instead, so the same source lists serve both the desktop
+# executables and libkisakcod.so. Nothing else about the build changes.
+option(KISAK_BUILD_SHARED "Build the engine targets as shared libraries (Android)" OFF)
+
+macro(kisak_add_target name)
+    if (KISAK_BUILD_SHARED)
+        add_library(${name} SHARED ${ARGN})
+    else()
+        add_executable(${name} ${ARGN})
+    endif()
+endmacro()
 
 # Set Address Sanitizer
 # NOTE: If you use this you will need to copy to the game's directory

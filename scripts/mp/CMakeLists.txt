@@ -16,7 +16,7 @@ include(${SCRIPTS_DIR}/source_groups.cmake)
 include (${PLATFORM_DIR}/${KISAK_PLATFORM}/platform.cmake)
 
 # Add the new executable
-add_executable(${PROJECT_NAME}
+kisak_add_target(${PROJECT_NAME}
     ${SRCROOT}
     ${DYNENTITY} 
     ${EFFECTSCORE} 
