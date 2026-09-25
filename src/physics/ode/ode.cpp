@@ -27,6 +27,13 @@
 // this source file is mostly concerned with the data structures, not the
 // numerics.
 
+// q_shared.h must come first: it is what pulls in msvc_compat.h and
+// win32_posix.h, which define the MSVC calling conventions (__cdecl) and the
+// __intN types that the ODE headers in deps/ode/ use. Including the ODE
+// headers ahead of it leaves __cdecl undefined, because deps/ode/error.h
+// used to get it transitively from the Windows SDK via <vadefs.h> -- a
+// dependency that only existed by accident.
+#include <universal/q_shared.h>
 #include "objects.h"
 #include <ode/ode.h>
 #include "joint.h"

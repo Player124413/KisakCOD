@@ -8,6 +8,13 @@
 static const char *CONSOLE_DEFAULT_SAVE_NAME = "savegame.svg";
 #endif
 
+// BuildCleanSavePath takes a SaveType. That enum lives in server/server.h, and
+// this header did not include it -- which MSVC tolerated by silently treating
+// the undeclared `enum SaveType` as an int, and which is a hard error
+// everywhere else. Including the definition is the fix; the include is placed
+// here rather than in the .cpp so every consumer sees the real enum.
+#include <server/server.h>
+
 void __cdecl Memcard_InitializeSystem(void);
 void __cdecl SaveDevice_Init(void);
 void __cdecl SV_DisplaySaveErrorUI(void);

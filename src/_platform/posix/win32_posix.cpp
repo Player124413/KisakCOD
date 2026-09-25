@@ -1257,6 +1257,20 @@ extern "C" void WINAPI OutputDebugStringA(LPCSTR msg)
     fflush(stderr);
 }
 
+// ShellExecuteA is only used by r_init.cpp to open the DirectX help page and
+// by Sys_OpenURL. There is no shell to hand a URL to on Android -- the host has
+// to start an Intent -- so this logs the request and reports success, which
+// keeps the caller's error path (Com_Error(ERR_DROP, ...)) from firing.
+extern "C" HINSTANCE WINAPI ShellExecuteA(
+    HWND owner, LPCSTR operation, LPCSTR file, LPCSTR params, LPCSTR dir, int showCmd)
+{
+    (void)owner; (void)operation; (void)params; (void)dir; (void)showCmd;
+    if (file)
+        fprintf(stderr, "[ShellExecute] %s\n", file);
+    fflush(stderr);
+    return (HINSTANCE)42;   // >32 means success in the Win32 convention
+}
+
 extern "C" int WINAPI MessageBoxA(HWND owner, LPCSTR text, LPCSTR caption, UINT type)
 {
     (void)owner; (void)type;
@@ -1279,6 +1293,19 @@ extern "C" SHORT WINAPI GetKeyState(int vkey) { (void)vkey; return 0; }
 extern "C" SHORT WINAPI GetAsyncKeyState(int vkey) { (void)vkey; return 0; }
 extern "C" BOOL WINAPI GetKeyboardState(PBYTE state) { if (state) memset(state, 0, 256); return TRUE; }
 extern "C" BOOL WINAPI SetKeyboardState(LPBYTE state) { (void)state; return TRUE; }
+
+extern "C" HWND WINAPI GetForegroundWindow(void) { return nullptr; }
+extern "C" HWND WINAPI GetActiveWindow(void) { return nullptr; }
+extern "C" BOOL WINAPI SetForegroundWindow(HWND wnd) { (void)wnd; return TRUE; }
+extern "C" HWND WINAPI SetActiveWindow(HWND wnd) { (void)wnd; return nullptr; }
+extern "C" BOOL WINAPI ShowWindow(HWND wnd, int cmd) { (void)wnd; (void)cmd; return TRUE; }
+extern "C" BOOL WINAPI IsWindow(HWND wnd) { (void)wnd; return FALSE; }
+extern "C" BOOL WINAPI DestroyWindow(HWND wnd) { (void)wnd; return TRUE; }
+extern "C" BOOL WINAPI MoveWindow(HWND wnd, int x, int y, int w, int h, BOOL repaint)
+{
+    (void)wnd; (void)x; (void)y; (void)w; (void)h; (void)repaint;
+    return TRUE;
+}
 
 extern "C" BOOL WINAPI GetCursorPos(LPPOINT p) { if (p) { p->x = 0; p->y = 0; } return TRUE; }
 extern "C" BOOL WINAPI SetCursorPos(int x, int y) { (void)x; (void)y; return TRUE; }

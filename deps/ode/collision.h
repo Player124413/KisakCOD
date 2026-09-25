@@ -23,6 +23,7 @@
 #ifndef _ODE_COLLISION_H_
 #define _ODE_COLLISION_H_
 
+#include <stdint.h>   // int32_t / uint16_t; MSVC __intN spellings are not portable
 #include <ode/common.h>
 #include <ode/collision_space.h>
 #include <ode/contact.h>
@@ -182,7 +183,7 @@ typedef struct dGeomClass {
   // dGeomDtorFn *dtor; REM
 } dGeomClass;
 
-enum PhysicsGeomType : __int32
+enum PhysicsGeomType : int32_t
 {                                       // ...
     PHYS_GEOM_NONE = 0x0,
     PHYS_GEOM_BOX = 0x1,
@@ -208,7 +209,7 @@ struct GeomStateBox // sizeof=0xC
 };
 union GeomStateBrush_u // sizeof=0x4
 {                                       // ...
-    unsigned __int16 brushModel;
+    uint16_t brushModel;
     const cbrush_t *brush;
 };
 struct GeomStateBrush // sizeof=0x1C

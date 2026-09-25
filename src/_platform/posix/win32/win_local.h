@@ -107,6 +107,14 @@ void Conbuf_AppendTextInMainThread(const char *msg);
 // LWSS: Accurate to cod4
 typedef struct
 {
+    // hWnd and hInstance stay as opaque handles even though there is no window
+    // on this platform. 21 engine call sites pass them to window APIs
+    // (SetForegroundWindow, GetActiveWindow, ...) that are all stubbed in
+    // win32_posix.cpp; removing the members would mean editing all 21, and a
+    // null handle is the honest representation of "there is no window".
+    HWND            hWnd;
+    HINSTANCE       hInstance;
+
     qboolean        activeApp;
     qboolean        isMinimized;
     qboolean        recenterMouse;
@@ -119,6 +127,13 @@ typedef struct
 } WinVars_t;
 
 extern WinVars_t g_wv;
+
+// The splash screen's window. Kept as an opaque handle even though there is no
+// window on this platform: r_init.cpp tests it for null in Sys_HideSplashWindow
+// and Sys_DestroySplashWindow, and those two paths still run -- the host shows
+// and hides its own splash through the JNI bridge, and the engine's calls are
+// what trigger it.
+extern HWND g_splashWnd;
 
 struct __attribute__((aligned(8))) SysInfo // sizeof=0x260
 {

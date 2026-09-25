@@ -47,6 +47,13 @@
 char sys_cmdline[1024];
 char sys_exitCmdLine[1024];
 
+// r_init.cpp's splash helpers test this for null. There is no splash window on
+// this platform, but the symbol has to exist and the engine's show/hide calls
+// still have to do something -- the host listens for them through the JNI
+// bridge and drives its own splash view. Defined non-null so the engine takes
+// the "splash exists" path and actually calls in.
+HWND g_splashWnd = (HWND)1;
+
 sysEvent_t eventQue[0x100];
 
 int eventHead;
@@ -62,6 +69,9 @@ cmd_function_s Sys_Net_Restart_f_VAR;
 cmd_function_s Sys_Listen_f_VAR;
 #endif
 
+// Zero-initialised: hWnd and hInstance are null because there is no window, and
+// activeApp/isMinimized start false so the host has to assert them explicitly
+// rather than inheriting a stale value.
 WinVars_t g_wv;
 
 // ---------------------------------------------------------------------------

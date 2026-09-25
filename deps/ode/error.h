@@ -27,7 +27,13 @@
 
 #include <ode/config.h>
 
-#include <vadefs.h>
+// va_list comes from stdarg.h, not from the Windows SDK's vadefs.h. The original
+// spelled it <vadefs.h>, which happens to exist on Windows (it defines va_list
+// among other things) but drags in _mingw.h -- and therefore the whole Win32
+// header set -- before anything has had a chance to define the calling
+// conventions. On a POSIX build that produced "expected initializer before
+// __debugbreak" from _mingw.h, because __cdecl was still undefined.
+#include <stdarg.h>
 
 #ifdef __cplusplus
 extern "C" {

@@ -198,6 +198,23 @@ extern "C" {
 // mechanism (pthread_setname_np) instead.
 void WINAPI kisak_RaiseException(DWORD, DWORD, DWORD, const ULONG_PTR *);
 
+// ShellExecuteA is normally declared in <shellapi.h>, which WIN32_LEAN_AND_MEAN
+// excludes. r_init.cpp calls it directly to open the DirectX help page, so the
+// declaration is provided here and the implementation (a log-and-succeed stub)
+// lives in win32_posix.cpp.
+HINSTANCE WINAPI ShellExecuteA(
+    HWND owner, LPCSTR operation, LPCSTR file, LPCSTR params, LPCSTR dir, int showCmd);
+
+// Window-management stubs. The engine raises its own window when the script
+// debugger hits a breakpoint and passes g_wv.hWnd around; on Android the host's
+// activity is already foreground, so there is no other window to raise and
+// these report success without doing anything.
+// The window-management entry points below are all DECLARED by MinGW's
+// winuser.h (WINUSERAPI ...) and DEFINED nowhere, because they live in
+// user32.dll. So only the definitions are supplied -- declaring them here as
+// well would collide with winuser.h's, and SetActiveWindow in particular
+// returns HWND (the previously active window), not BOOL.
+
 // Set by the host before the renderer starts. GetSystemMetrics() reads them
 // (r_init.cpp uses SM_CXSCREEN/SM_CYSCREEN as its display-size fallback).
 void kisak_SetDisplayMetrics(int width, int height);

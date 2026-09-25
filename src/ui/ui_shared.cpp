@@ -6730,7 +6730,12 @@ void __cdecl Menu_PaintAll_AppendToVisibleList(char *stringBegin, uint32_t strin
     //    //(std::reverse_iterator<char *>)stringBegin,
     //    &_Val)->current - 1;
     auto it = std::find<std::reverse_iterator<char *>, char>(_Last, _First, _Val); // KISAKTODO: i'd be surprised if this works.
-    lastNewline = it._Get_current() - 1;
+    // _Get_current() is MSVC's private name for the iterator's underlying
+    // pointer; libc++ and libstdc++ both expose it as base(). Dereferencing
+    // base() of a reverse_iterator yields the element *before* the one the
+    // iterator points at, which is exactly what the original arithmetic
+    // (`current - 1`) was reaching for.
+    lastNewline = it.base() - 1;
 
     if (stringEnd - lastNewline <= 80)
         terminus = ", ";

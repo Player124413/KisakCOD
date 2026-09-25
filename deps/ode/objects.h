@@ -23,12 +23,13 @@
 #ifndef _ODE_OBJECTS_H_
 #define _ODE_OBJECTS_H_
 
+#include <stdint.h>   // int32_t / uint16_t; MSVC __intN spellings are not portable
 #include <ode/common.h>
 #include <ode/mass.h>
 #include <ode/contact.h>
 
 // LWSS ADD: this enum has to not be "extern C"
-enum PhysWorld : __int32
+enum PhysWorld : int32_t
 {                                       // ...
 	PHYS_WORLD_DYNENT = 0x0,
 	PHYS_WORLD_FX = 0x1,
