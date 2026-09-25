@@ -118,6 +118,26 @@
 #endif
 
 // ---------------------------------------------------------------------------
+// fcntl / COM collisions
+//
+// glibc's <fcntl.h> (under _GNU_SOURCE) defines the open-file-description lock
+// flags LOCK_READ and LOCK_WRITE, and MinGW's objidlbase.h defines an enum with
+// LOCK_WRITE in it. Including both is a hard error -- "expected identifier
+// before numeric constant" -- and it is not obvious where it comes from because
+// objidlbase.h is reached only through d3d9.h -> objbase.h -> combaseapi.h.
+//
+// The engine never uses the OFD lock flags (zero references in src/), and it
+// never uses IStream, so the MinGW side wins by default and the glibc macros are
+// undefined here. This must happen before <windows.h>.
+// ---------------------------------------------------------------------------
+#ifdef LOCK_WRITE
+#undef LOCK_WRITE
+#endif
+#ifdef LOCK_READ
+#undef LOCK_READ
+#endif
+
+// ---------------------------------------------------------------------------
 // The Win32 declarations themselves
 // ---------------------------------------------------------------------------
 #include <windows.h>

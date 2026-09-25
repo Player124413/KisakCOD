@@ -26,6 +26,24 @@
 #pragma warning(disable : 4786)		// identifier was truncated
 #endif // _WIN32
 
+// ---------------------------------------------------------------------------
+// POSIX/Android build
+//
+// q_shared.h is included first by every module in the tree, so this is the
+// one place that can guarantee the MSVC-isms the decompiled sources spell
+// (__int8..__int64, __cdecl, __forceinline, __declspec, the Interlocked*
+// family, __rdtsc) are defined before anything else sees them. Doing it here
+// rather than per-file is what keeps the port to a handful of files instead
+// of 291.
+//
+// msvc_compat.h also pulls in the Win32 declarations from
+// deps/mingw-headers, which is where the real D3D9/D3DX9 interfaces live.
+// DXVK no longer ships d3d9.h/d3dx9.h, so MinGW is the only source.
+// ---------------------------------------------------------------------------
+#ifdef KISAK_POSIX
+#include <win32_posix.h>
+#endif
+
 #include <universal/assertive.h> // LWSS add
 
 #include <assert.h>

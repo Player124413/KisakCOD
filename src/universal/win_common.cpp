@@ -7,26 +7,22 @@
 #include <qcommon/qcommon.h>
 #include <qcommon/threads.h>
 
-#include <direct.h>
-#include <io.h>
 #include "com_memory.h"
 #include "profile.h"
 
-#if defined(_WIN32)
+// Win32 critical sections on every target: MSVC has them natively, and the
+// POSIX/Android build gets them from win32_posix.cpp, which implements them as
+// recursive pthread mutexes. The recursive behaviour matters -- the engine
+// re-enters (Sys_EnterCriticalSection is taken on paths that already hold it),
+// which is exactly what MSVC's critical sections allow and what a plain
+// std::mutex would deadlock on.
 _RTL_CRITICAL_SECTION s_criticalSections[CRITSECT_COUNT];
-#else
-#include <mutex>
-std::mutex s_criticalSections[CRITSECT_COUNT];
-uint32_t s_criticalSectionsCount[CRITSECT_COUNT] = { 0 };
-#endif
 
 void Sys_InitializeCriticalSections()
 {
-#if defined(_WIN32)
 	for (int critSect = 0; critSect < CRITSECT_COUNT; critSect++) {
 		InitializeCriticalSection(&s_criticalSections[critSect]);
 	}
-#endif
 }
 
 void Sys_EnterCriticalSection(int critSect)
@@ -34,25 +30,13 @@ void Sys_EnterCriticalSection(int critSect)
     PROF_SCOPED("Sys_EnterCriticalSection");
 
 	iassert(critSect >= 0 && critSect < CRITSECT_COUNT);
-#if defined(_WIN32)
 	EnterCriticalSection(&s_criticalSections[critSect]);
-#else
-    s_criticalSections[critSect].lock();
-    // This is a ghetto hack to see if this is re-entrant
-    iassert(s_criticalSectionsCount[critSect] == 0);
-    s_criticalSectionsCount[critSect]++;
-#endif
 }
 
 void Sys_LeaveCriticalSection(int critSect)
 {
 	iassert(critSect >= 0 && critSect < CRITSECT_COUNT);
-#if defined(_WIN32)
 	LeaveCriticalSection(&s_criticalSections[critSect]);
-#else
-    s_criticalSectionsCount[critSect]--;
-    s_criticalSections[critSect].unlock();
-#endif
 }
 
 void Sys_LockWrite(FastCriticalSection* critSect)
@@ -154,15 +138,15 @@ uint32_t Win_InitThreads()
 
 void __cdecl Sys_Mkdir(const char *path)
 {
-    _mkdir(path);
+    CreateDirectoryA(path, 0);
 }
 
 BOOL __cdecl Sys_RemoveDirTree(const char *path)
 {
     bool v2; // [esp+8h] [ebp-250h]
-    int handle; // [esp+1Ch] [ebp-23Ch]
-    char childPath[256]; // [esp+20h] [ebp-238h] BYREF
-    _finddata64i32_t find; // [esp+120h] [ebp-138h] BYREF
+    HANDLE handle;
+    char childPath[256];
+    WIN32_FIND_DATAA find;
     bool hasError; // [esp+252h] [ebp-6h]
     bool hasTrailingSeparater; // [esp+253h] [ebp-5h]
     int length; // [esp+254h] [ebp-4h]
@@ -174,26 +158,26 @@ BOOL __cdecl Sys_RemoveDirTree(const char *path)
         Com_sprintf(childPath, 0x100u, "%s*", path);
     else
         Com_sprintf(childPath, 0x100u, "%s\\*", path);
-    handle = _findfirst64i32(childPath, &find);
-    if (handle == -1)
-        return _rmdir(path) != -1;
+    handle = FindFirstFileA(childPath, &find);
+    if (handle == INVALID_HANDLE_VALUE)
+        return RemoveDirectoryA(path);
     hasError = 0;
     do
     {
-        if (find.name[0] != 46 || find.name[1] && (find.name[1] != 46 || find.name[2]))
+        if (find.cFileName[0] != 46 || find.cFileName[1] && (find.cFileName[1] != 46 || find.cFileName[2]))
         {
             if (hasTrailingSeparater)
-                Com_sprintf(childPath, 0x100u, "%s%s", path, find.name);
+                Com_sprintf(childPath, 0x100u, "%s%s", path, find.cFileName);
             else
-                Com_sprintf(childPath, 0x100u, "%s\\%s", path, find.name);
-            if ((find.attrib & 0x10) != 0)
+                Com_sprintf(childPath, 0x100u, "%s\\%s", path, find.cFileName);
+            if ((find.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) != 0)
                 hasError = !Sys_RemoveDirTree(childPath);
             else
                 hasError = remove(childPath) == -1;
         }
-    } while (!hasError && _findnext64i32(handle, &find) != -1);
-    _findclose(handle);
-    return !hasError && _rmdir(path) != -1;
+    } while (!hasError && FindNextFileA(handle, &find));
+    FindClose(handle);
+    return !hasError && RemoveDirectoryA(path);
 }
 
 void __cdecl Sys_ListFilteredFiles(
@@ -204,10 +188,10 @@ void __cdecl Sys_ListFilteredFiles(
     char **list,
     int *numfiles)
 {
-    char filename[256]; // [esp+10h] [ebp-338h] BYREF
-    _finddata64i32_t findinfo; // [esp+110h] [ebp-238h] BYREF
-    int findhandle; // [esp+23Ch] [ebp-10Ch]
-    char search[260]; // [esp+240h] [ebp-108h] BYREF
+    char filename[256];
+    WIN32_FIND_DATAA findinfo;
+    HANDLE findhandle;
+    char search[260];
 
     if (*numfiles < 0x1FFF)
     {
@@ -215,25 +199,25 @@ void __cdecl Sys_ListFilteredFiles(
             Com_sprintf(search, 0x100u, "%s\\%s\\*", basedir, subdirs);
         else
             Com_sprintf(search, 0x100u, "%s\\*", basedir);
-        findhandle = _findfirst64i32(search, &findinfo);
-        if (findhandle != -1)
+        findhandle = FindFirstFileA(search, &findinfo);
+        if (findhandle != INVALID_HANDLE_VALUE)
         {
             do
             {
-                if ((findinfo.attrib & 0x10) == 0
-                    || I_stricmp(findinfo.name, ".") && I_stricmp(findinfo.name, "..") && I_stricmp(findinfo.name, "CVS"))
+                if ((findinfo.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) == 0
+                    || I_stricmp(findinfo.cFileName, ".") && I_stricmp(findinfo.cFileName, "..") && I_stricmp(findinfo.cFileName, "CVS"))
                 {
                     if (*numfiles >= 0x1FFF)
                         break;
                     if (subdirs)
-                        Com_sprintf(filename, 0x100u, "%s\\%s", subdirs, findinfo.name);
+                        Com_sprintf(filename, 0x100u, "%s\\%s", subdirs, findinfo.cFileName);
                     else
-                        Com_sprintf(filename, 0x100u, "%s", findinfo.name);
+                        Com_sprintf(filename, 0x100u, "%s", findinfo.cFileName);
                     if (Com_FilterPath(filter, filename, 0))
                         list[(*numfiles)++] = Hunk_CopyString(user, filename);
                 }
-            } while (_findnext64i32(findhandle, &findinfo) != -1);
-            _findclose(findhandle);
+            } while (FindNextFileA(findhandle, &findinfo));
+            FindClose(findhandle);
         }
     }
 }
@@ -271,10 +255,10 @@ char **__cdecl Sys_ListFiles(
 {
     char *v6; // eax
     char **v7; // [esp+4h] [ebp-264h]
-    _finddata64i32_t findinfo; // [esp+18h] [ebp-250h] BYREF
+    WIN32_FIND_DATAA findinfo;
     int flag; // [esp+140h] [ebp-128h]
     char **listCopy; // [esp+144h] [ebp-124h]
-    int findhandle; // [esp+148h] [ebp-120h]
+    HANDLE findhandle; // [esp+148h] [ebp-120h]
     char *(*list)[8192]; // [esp+14Ch] [ebp-11Ch]
     int nfiles; // [esp+150h] [ebp-118h] BYREF
     HunkUser *user; // [esp+154h] [ebp-114h]
@@ -327,8 +311,8 @@ char **__cdecl Sys_ListFiles(
         else
             Com_sprintf(search, 0x100u, "%s\\*", directory);
         nfiles = 0;
-        findhandle = _findfirst64i32(search, &findinfo);
-        if (findhandle == -1)
+        findhandle = FindFirstFileA(search, &findinfo);
+        if (findhandle == INVALID_HANDLE_VALUE)
         {
             *numfiles = 0;
             //LargeLocal::~LargeLocal(&list_large_local);
@@ -339,19 +323,19 @@ char **__cdecl Sys_ListFiles(
             user = Hunk_UserCreate(0x20000, "Sys_ListFiles", 0, 0, 3);
             do
             {
-                if ((!wantsubs && flag != (findinfo.attrib & 0x10) || wantsubs && (findinfo.attrib & 0x10) != 0)
-                    && ((findinfo.attrib & 0x10) == 0
-                        || I_stricmp(findinfo.name, ".") && I_stricmp(findinfo.name, "..") && I_stricmp(findinfo.name, "CVS"))
-                    && (!*extension || HasFileExtension(findinfo.name, extension)))
+                if ((!wantsubs && flag != (findinfo.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) || wantsubs && (findinfo.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) != 0)
+                    && ((findinfo.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) == 0
+                        || I_stricmp(findinfo.cFileName, ".") && I_stricmp(findinfo.cFileName, "..") && I_stricmp(findinfo.cFileName, "CVS"))
+                    && (!*extension || HasFileExtension(findinfo.cFileName, extension)))
                 {
-                    v6 = Hunk_CopyString(user, findinfo.name);
+                    v6 = Hunk_CopyString(user, findinfo.cFileName);
                     (*list)[nfiles++] = v6;
                     if (nfiles == 0x1FFF)
                         break;
                 }
-            } while (_findnext64i32(findhandle, &findinfo) != -1);
+            } while (FindNextFileA(findhandle, &findinfo));
             (*list)[nfiles] = 0;
-            _findclose(findhandle);
+            FindClose(findhandle);
             *numfiles = nfiles;
             if (nfiles)
             {
@@ -378,7 +362,7 @@ char **__cdecl Sys_ListFiles(
 char cwd[256];
 char *__cdecl Sys_Cwd()
 {
-    _getcwd(cwd, 255);
+    GetCurrentDirectoryA(255, cwd);
     cwd[255] = 0;
     return cwd;
 }

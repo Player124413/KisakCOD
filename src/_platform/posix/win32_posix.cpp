@@ -113,6 +113,19 @@ extern "C" BOOL WINAPI DuplicateHandle(
 }
 
 extern "C" HANDLE WINAPI GetCurrentProcess(void) { return (HANDLE)(intptr_t)-1; }
+
+// There is no debugger attachment on Android and attaching gdb is a deliberate
+// act, so reporting "not present" keeps Sys_DefaultInstallPath on the
+// GetModuleFileNameA path, which is what a release build wants.
+extern "C" BOOL WINAPI IsDebuggerPresent(void) { return FALSE; }
+
+// win_common.cpp passes 0 to mean "this executable". The engine never loads a
+// second module by handle, so the executable's own path is the right answer.
+extern "C" HMODULE WINAPI GetModuleHandleA(LPCSTR name)
+{
+    if (name) return nullptr;
+    return (HMODULE)1;
+}
 extern "C" HANDLE WINAPI GetCurrentThread(void) { return (HANDLE)(intptr_t)-2; }
 
 extern "C" DWORD WINAPI GetCurrentThreadId(void)
@@ -294,8 +307,15 @@ extern "C" DWORD_PTR WINAPI SetThreadAffinityMask(HANDLE h, DWORD_PTR mask)
 extern "C" BOOL WINAPI GetProcessAffinityMask(HANDLE h, PDWORD_PTR procMask, PDWORD_PTR sysMask)
 {
     (void)h;
-    if (procMask) *procMask = 0;
-    if (sysMask) *sysMask = 0;
+    // Win_InitThreads() derives s_cpuCount and the per-worker affinity masks
+    // from this, and returning 0 would collapse the engine onto a single
+    // worker thread. Report the real online-CPU mask.
+    long n = sysconf(_SC_NPROCESSORS_ONLN);
+    if (n < 1) n = 1;
+    if (n > 32) n = 32;
+    DWORD_PTR mask = (n == 32) ? 0xFFFFFFFFu : ((DWORD_PTR)1 << n) - 1;
+    if (procMask) *procMask = mask;
+    if (sysMask) *sysMask = mask;
     return TRUE;
 }
 
