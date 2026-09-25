@@ -405,7 +405,7 @@ static_assert(sizeof(patchVisuals_s) == 8, "patchVisuals_s");
 struct patch_t
 {
     patchMesh_t     *def;          // 0x00  the patch DEF (symbiont patchMesh_t)
-    __int16          version;      // 0x04  instance version (Patch_AllocInstance: def->version-1; rebuild trigger)
+    int16_t          version;      // 0x04  instance version (Patch_AllocInstance: def->version-1; rebuild trigger)
     unsigned char    selected;     // 0x06  per-instance selected flag (BYTE2 of dword@+4 in IDB)
     unsigned char    pad_07;       // 0x07
     int              vertCount;    // 0x08  a1[2]  tessellated vert count (width*height)
@@ -437,7 +437,7 @@ struct selbrush_t
     int         faceCount;   // 0x18  cached visible-face count (node copy of def->faceCount)
     faceVis_s  *faces;       // 0x1C  cached per-instance visibility faces (faceVis_s[faceCount])
     patch_t    *patch;       // 0x20  patch instance (PMESH_55 of def->patch); ->def, ->selected
-    __int16     version;     // 0x24
+    int16_t     version;     // 0x24
     bool        cullFlag;    // 0x26
     bool        unk_bool;    // 0x27
     int         xx5;         // 0x28  skip-flag tested by CSG_MakeHollow
@@ -489,10 +489,10 @@ struct brush_t
     face_t      *faces;  // 0x44
     char        *parent_layer_string; // 0x48
     union {                    // 0x4C
-        __int16      unk01;
+        int16_t      unk01;
         unsigned char modelFailed; // 0x4C low byte (assert strings; == Brush_ModelFailedByte)
     };
-    __int16      version;      // 0x4E
+    int16_t      version;      // 0x4E
     patchMesh_t *patch;        // 0x50
     int          numberId;     // 0x54  (IDB "total_size_0x58"; GtkRadiant id region — unverified)
 };
@@ -752,7 +752,7 @@ struct patchMesh_t
         entity_brush_s *pSymbiot;   //       (port's historical name/type)
         brush_t        *symbiot;    //       (the binary's name — assert strings; refCount@+0x1C)
     };
-    __int16            version;     // 0x5040
+    int16_t            version;     // 0x5040
     bool               xx22b;       // 0x5042
     bool               bDirty;      // 0x5043
     int                xx21;        // 0x5044
@@ -979,7 +979,7 @@ struct qeglobals_t
     double    g_time;                  // 0x71CB8
     int       g_filtersUpdated;        // 0x71CC0
     int       g_layerCount_maybe;      // 0x71CC4
-    __int16   w_cyclePreviewMode;      // 0x71CC8
+    int16_t   w_cyclePreviewMode;      // 0x71CC8
     char      pad_cyclePreviewMode[2]; // 0x71CCA
     filter_entry_s *d_filterGlobals_geometryFilters; // 0x71CCC
     filter_entry_s *d_filterGlobals_entityFilters;   // 0x71CD0

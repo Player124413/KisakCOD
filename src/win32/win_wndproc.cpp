@@ -230,7 +230,7 @@ static unsigned char MapKey(int key, uint32_t wParam)
 
 	if (!result)
 	{
-		result = (unsigned __int8)MapVirtualKeyA(wParam, 2u);
+		result = (uint8_t)MapVirtualKeyA(wParam, 2u);
 		if (result > 0x7F)
 		{
 			for (i = 0; extendedVirtualKeyConvert[i][0]; ++i)
@@ -443,7 +443,7 @@ LRESULT WINAPI MainWndProc(
 		}
 		else
 		{
-			xPos = (__int16)lParam;
+			xPos = (int16_t)lParam;
 			yPos = (int)HIWORD(lParam);
 			r.left = 0;
 			r.top = 0;
@@ -460,7 +460,7 @@ LRESULT WINAPI MainWndProc(
 		}
 		return DefWindowProcA(hWnd, uMsg, wParam, lParam);
 	case WM_ACTIVATE:
-		VID_AppActivate((unsigned __int16)wParam, HIWORD(wParam));
+		VID_AppActivate((uint16_t)wParam, HIWORD(wParam));
 		return DefWindowProcA(hWnd, uMsg, wParam, lParam);
 	case WM_SETFOCUS:
 		if (!r_autopriority->current.enabled)

@@ -44,7 +44,7 @@ bool Actor_TeamMoveCheckWaitTimer(actor_s *self, ai_teammove_t *result)
     }
 }
 
-bool __cdecl Actor_TeamMoveNeedToCheckWait(unsigned __int8 moveMode, path_t *pPath)
+bool __cdecl Actor_TeamMoveNeedToCheckWait(uint8_t moveMode, path_t *pPath)
 {
     int v2; // r11
     bool result; // r3
@@ -506,7 +506,7 @@ ai_teammove_t __cdecl Actor_TeamMoveNoDodge(team_move_context_t *context, ai_tea
         if (v8 || Vec2DistanceSq(level.gentities[wDodgeEntity].r.currentOrigin, context->vOrgSelf) >= 3600.0)
         {
         LABEL_14:
-            if ((unsigned __int16)p_Path->wDodgeCount >= 0x8000u)
+            if ((uint16_t)p_Path->wDodgeCount >= 0x8000u)
                 p_Path->wDodgeCount = 0;
             if (p_Path->wDodgeEntity != ENTITYNUM_NONE)
             {
@@ -592,7 +592,7 @@ void __cdecl Actor_TeamMoveInitializeContext(
 
 int __cdecl Actor_TeamMoveTrimPath(path_t *pPath, const team_move_context_t *context)
 {
-    __int16 wDodgeCount; // r9
+    int16_t wDodgeCount; // r9
     int wPathLen; // r10
     int lookaheadNextNode; // r31
     const float *vOrigPoint; // r30
@@ -692,7 +692,7 @@ int __cdecl Actor_TeamMoveCheckPileup(actor_s *self, actor_s *pOtherActor)
     {
         return 0;
     }
-    if ((unsigned __int16)self->Path.wDodgeCount >= 0x8000u)
+    if ((uint16_t)self->Path.wDodgeCount >= 0x8000u)
         self->Path.wDodgeCount = 0;
     result = 1;
     self->pPileUpActor = pOtherActor->pPileUpActor;
@@ -784,8 +784,8 @@ ai_teammove_t __cdecl Actor_GetTeamMoveStatus(actor_s *self, bool bUseInterval, 
         if (i->inuse)
         {
             v89[0].other = i;
-            if ((unsigned __int8)Actor_TeamMoveShouldTryDodgeSentient(&context, v89)
-                && (unsigned __int8)Actor_TeamMoveTryDodge(&context, v89))
+            if ((uint8_t)Actor_TeamMoveShouldTryDodgeSentient(&context, v89)
+                && (uint8_t)Actor_TeamMoveTryDodge(&context, v89))
             {
                 context.fDodgePosDeltaLengthSqrd = v89[0].fPosDeltaLengthSqrd;
                 context.pDodgeOther = v89[0].other;
@@ -802,7 +802,7 @@ ai_teammove_t __cdecl Actor_GetTeamMoveStatus(actor_s *self, bool bUseInterval, 
     if (self->Path.wDodgeEntity != context.pDodgeOther->ent->s.number)
     {
         self->iTeamMoveDodgeTime = 0;
-        if ((unsigned __int16)self->Path.wDodgeCount >= 0x8000u)
+        if ((uint16_t)self->Path.wDodgeCount >= 0x8000u)
             self->Path.wDodgeCount = 0;
         self->Path.wDodgeEntity = pDodgeOther->ent->s.number;
     }
@@ -892,7 +892,7 @@ ai_teammove_t __cdecl Actor_GetTeamMoveStatus(actor_s *self, bool bUseInterval, 
         vOrgDodgeEnd[0] -= (v20 * 2.0f);
         vOrgDodgeEnd[1] -= (v21 * 2.0f);
 
-        if ((unsigned __int8)Path_AttemptDodge(
+        if ((uint8_t)Path_AttemptDodge(
             &self->Path,
             context.vOrgSelf,
             vOrgDodgeStart,
@@ -967,7 +967,7 @@ ai_teammove_t __cdecl Actor_GetTeamMoveStatus(actor_s *self, bool bUseInterval, 
             goto LABEL_100;
         }
 
-        if ((unsigned __int16)self->Path.wDodgeCount < 0x8000u)
+        if ((uint16_t)self->Path.wDodgeCount < 0x8000u)
         {
             if (self->Path.wDodgeCount || context.bFailedLookahead)
                 Actor_ClearPath(self);
@@ -1012,7 +1012,7 @@ ai_teammove_t __cdecl Actor_GetTeamMoveStatus(actor_s *self, bool bUseInterval, 
             return AI_TEAMMOVE_WAIT;
         eResult = AI_TEAMMOVE_WAIT;
     checkwait:
-        if ((unsigned __int8)Actor_TeamMoveCheckPileup(self, pOtherActor))
+        if ((uint8_t)Actor_TeamMoveCheckPileup(self, pOtherActor))
             return AI_TEAMMOVE_WAIT;
     }
     if (ai_showDodge->current.enabled)
@@ -1091,7 +1091,7 @@ void __cdecl Actor_MoveAlongPathWithTeam(actor_s *self, bool bRun, bool bUseInte
             Actor_CoverApproachNotify(self);
         self->arrivalInfo.arrivalNotifyRequested = 0;
     }
-    if (!IsMoving && (unsigned __int8)Actor_IsMoving(self))
+    if (!IsMoving && (uint8_t)Actor_IsMoving(self))
     {
         Actor_ClearMoveHistory(self);
         self->ent->flags &= ~(FL_DODGE_LEFT | FL_DODGE_RIGHT);

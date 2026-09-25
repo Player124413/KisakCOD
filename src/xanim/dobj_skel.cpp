@@ -6,10 +6,10 @@
 
 void __cdecl DObjCalcSkel(const DObj_s *obj, int *partBits)
 {
-    const unsigned __int8 *pos; // [esp+54h] [ebp-64h]
+    const uint8_t *pos; // [esp+54h] [ebp-64h]
     int j; // [esp+58h] [ebp-60h]
-    const unsigned __int8 *modelParents; // [esp+5Ch] [ebp-5Ch]
-    const unsigned __int8 *duplicateParts; // [esp+60h] [ebp-58h]
+    const uint8_t *modelParents; // [esp+5Ch] [ebp-5Ch]
+    const uint8_t *duplicateParts; // [esp+60h] [ebp-58h]
     uint32_t boneIndex; // [esp+64h] [ebp-54h]
     uint32_t boneIndexa; // [esp+64h] [ebp-54h]
     int controlPartBits[4]; // [esp+68h] [ebp-50h] BYREF
@@ -45,13 +45,13 @@ void __cdecl DObjCalcSkel(const DObj_s *obj, int *partBits)
     DObjCalcAnim(obj, partBits);
     iassert(obj->duplicateParts);
     savedDuplicatePartBits = (const int *)SL_ConvertToString(obj->duplicateParts);
-    duplicateParts = (const unsigned __int8 *)(savedDuplicatePartBits + 4);
+    duplicateParts = (const uint8_t *)(savedDuplicatePartBits + 4);
     GetControlAndDuplicatePartBits(obj, partBits, ignorePartBits, savedDuplicatePartBits, calcPartBits, controlPartBits);
     numModels = obj->numModels;
     boneIndex = 0;
     pos = duplicateParts;
     models = obj->models;
-    modelParents = (const unsigned __int8 *)&models[numModels];
+    modelParents = (const uint8_t *)&models[numModels];
     for (j = 0; j < numModels; ++j)
     {
         model = models[j];
@@ -126,11 +126,11 @@ void __cdecl GetControlAndDuplicatePartBits(
     }
 }
 
-const unsigned __int8 *__cdecl CalcSkelDuplicateBones(
+const uint8_t *__cdecl CalcSkelDuplicateBones(
     const XModel *model,
     DSkel *skel,
     int minBoneIndex,
-    const unsigned __int8 *pos)
+    const uint8_t *pos)
 {
     int boneIndex; // [esp+8h] [ebp-10h]
     DObjAnimMat *mat; // [esp+Ch] [ebp-Ch]
@@ -321,7 +321,7 @@ void __cdecl CalcSkelNonRootBones(
     int bits; // [esp+108h] [ebp-24h]
     DObjAnimMat *mat; // [esp+10Ch] [ebp-20h]
     int boneOffset; // [esp+110h] [ebp-1Ch]
-    const unsigned __int8 *parentList; // [esp+114h] [ebp-18h]
+    const uint8_t *parentList; // [esp+114h] [ebp-18h]
     int parentOffset; // [esp+118h] [ebp-14h]
     int boneIndexHigh; // [esp+11Ch] [ebp-10h]
     int boneIndexLow; // [esp+120h] [ebp-Ch]
@@ -401,10 +401,10 @@ void __cdecl CalcSkelNonRootBones(
 
 void __cdecl DObjCalcBaseSkel(const DObj_s *obj, DObjAnimMat *mat, int *partBits)
 {
-    const unsigned __int8 *pos; // [esp+8h] [ebp-94h]
+    const uint8_t *pos; // [esp+8h] [ebp-94h]
     int j; // [esp+Ch] [ebp-90h]
-    const unsigned __int8 *modelParents; // [esp+10h] [ebp-8Ch]
-    const unsigned __int8 *duplicateParts; // [esp+14h] [ebp-88h]
+    const uint8_t *modelParents; // [esp+10h] [ebp-8Ch]
+    const uint8_t *duplicateParts; // [esp+14h] [ebp-88h]
     uint32_t boneIndex; // [esp+18h] [ebp-84h]
     int controlPartBits[4]; // [esp+1Ch] [ebp-80h] BYREF
     int numModels; // [esp+2Ch] [ebp-70h]
@@ -434,7 +434,7 @@ void __cdecl DObjCalcBaseSkel(const DObj_s *obj, DObjAnimMat *mat, int *partBits
     if (!obj->duplicateParts)
         MyAssertHandler(".\\xanim\\dobj_skel.cpp", 546, 0, "%s", "obj->duplicateParts");
     savedDuplicatePartBits = (const int *)SL_ConvertToString(obj->duplicateParts);
-    duplicateParts = (const unsigned __int8 *)(savedDuplicatePartBits + 4);
+    duplicateParts = (const uint8_t *)(savedDuplicatePartBits + 4);
     DObjGetBaseControlAndDuplicatePartBits(
         obj,
         partBits,
@@ -446,7 +446,7 @@ void __cdecl DObjCalcBaseSkel(const DObj_s *obj, DObjAnimMat *mat, int *partBits
     boneIndex = 0;
     pos = duplicateParts;
     models = obj->models;
-    modelParents = (const unsigned __int8 *)&models[numModels];
+    modelParents = (const uint8_t *)&models[numModels];
     for (j = 0; j < numModels; ++j)
     {
         model = models[j];
@@ -466,7 +466,7 @@ void __cdecl DObjCalcBaseAnim(const DObj_s *obj, DObjAnimMat *mat, int *partBits
     int j; // [esp+18h] [ebp-14h]
     int boneIndex; // [esp+1Ch] [ebp-10h]
     XModel *model; // [esp+20h] [ebp-Ch]
-    __int16 *quats; // [esp+24h] [ebp-8h]
+    int16_t *quats; // [esp+24h] [ebp-8h]
     int i; // [esp+28h] [ebp-4h]
     int ia; // [esp+28h] [ebp-4h]
 

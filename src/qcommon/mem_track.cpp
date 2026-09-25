@@ -162,6 +162,8 @@ void __cdecl TRACK_memtrack()
 #endif
 }
 
+static void __cdecl track_addbasicinfo(meminfo_t* info, int type, int size);
+
 static void __cdecl track_addbasicinfo(meminfo_t* info, int type, int size)
 {
     int v3; // [esp+8h] [ebp-8h]

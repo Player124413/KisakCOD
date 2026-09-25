@@ -3,7 +3,7 @@
 
 #define GFX_MAX_EMISSIVE_SPOT_LIGHTS 1
 
-enum LightHasShadowMap : __int32
+enum LightHasShadowMap : int32_t
 {                                       // ...
     LIGHT_HAS_SHADOWMAP = 0x0,
     LIGHT_HAS_NO_SHADOWMAP = 0x1,

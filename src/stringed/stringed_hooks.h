@@ -2,7 +2,7 @@
 
 #include <string>
 
-enum msgLocErrType_t : __int32
+enum msgLocErrType_t : int32_t
 {                                       // ...
     LOCMSG_SAFE = 0x0,
     LOCMSG_NOERR = 0x1,
@@ -27,7 +27,7 @@ int __cdecl SEH_GetLocalizedTokenReference(
     const char *reference,
     const char *messageType,
     msgLocErrType_t errType);
-bool __cdecl Taiwanese_ValidBig5Code(__int16 uiCode);
+bool __cdecl Taiwanese_ValidBig5Code(int16_t uiCode);
 bool __cdecl Japanese_ValidShiftJISCode(uint32_t _iHi, uint32_t _iLo);
 bool __cdecl Chinese_ValidGBCode(uint8_t _iHi, uint8_t _iLo);
 uint32_t __cdecl SEH_DecodeLetter(

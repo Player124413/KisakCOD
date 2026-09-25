@@ -1095,8 +1095,8 @@ void __cdecl Actor_CommonAccuracyGraphEventCallback(
     int v7; // r28
     int v8; // r30
     char *v9; // r11
-    unsigned __int8 *v10; // r10
-    unsigned __int8 *v12; // r10
+    uint8_t *v10; // r10
+    uint8_t *v12; // r10
     int v13; // r9
     char v14[32]; // [sp+50h] [-2050h] BYREF
     //_QWORD v15[1030]; // [sp+70h] [-2030h] BYREF
@@ -1127,13 +1127,13 @@ void __cdecl Actor_CommonAccuracyGraphEventCallback(
                 );
                     
                 v9 = v14;
-                v10 = (unsigned __int8 *)v15;
+                v10 = (uint8_t *)v15;
                 while (*v10++)
                     ;
                 v12 = v10 - 1;
                 do
                 {
-                    v13 = (unsigned __int8)*v9++;
+                    v13 = (uint8_t)*v9++;
                     *v12++ = v13;
                 } while (v13);
                 ++v7;

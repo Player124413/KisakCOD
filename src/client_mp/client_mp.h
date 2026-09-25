@@ -19,7 +19,7 @@ struct GfxConfiguration;
 static_assert(((MAX_PARSE_ENTITIES) & (MAX_PARSE_ENTITIES - 1)) == 0, "MAX_PARSE_ENTITIES must be power of 2");
 static_assert(((MAX_PARSE_CLIENTS) & (MAX_PARSE_CLIENTS - 1)) == 0, "MAX_PARSE_CLIENTS must be power of 2");
 
-enum svc_ops_e : __int32
+enum svc_ops_e : int32_t
 {
     svc_nop = 0x0,
     svc_gamestate = 0x1,
@@ -60,7 +60,7 @@ struct clSnapshot_t // sizeof=0x2F94
     int32_t serverCommandNum;               // XREF: CL_ParseSnapshot+41/w
 };
 
-enum StanceState : __int32
+enum StanceState : int32_t
 {                                       // XREF: ?CL_SetStance@@YAXHW4StanceState@@@Z/r
     CL_STANCE_STAND = 0x0,
     CL_STANCE_CROUCH = 0x1,
@@ -83,7 +83,7 @@ struct outPacket_t // sizeof=0xC
     int32_t p_serverTime;
     int32_t p_realtime;
 };
-enum sessionState_t : __int32
+enum sessionState_t : int32_t
 {                                       // ...
     SESS_STATE_PLAYING = 0x0,
     SESS_STATE_DEAD = 0x1,
@@ -91,7 +91,7 @@ enum sessionState_t : __int32
     SESS_STATE_INTERMISSION = 0x3,
 };
 
-enum clientConnected_t : __int32
+enum clientConnected_t : int32_t
 {                                       // ...
     CON_DISCONNECTED = 0x0,
     CON_CONNECTING = 0x1,
@@ -365,9 +365,9 @@ struct serverInfo_t // sizeof=0x94
     uint8_t punkbuster;         // ...
     uint8_t requestCount;       // ...
     // padding byte
-    __int16 minPing;                    // ...
-    __int16 maxPing;                    // ...
-    __int16 ping;                       // ...
+    int16_t minPing;                    // ...
+    int16_t maxPing;                    // ...
+    int16_t ping;                       // ...
     char hostName[32];                  // ...
     char mapName[32];                   // ...
     char game[24];                      // ...
@@ -455,7 +455,7 @@ struct clientStatic_t // sizeof=0x2DD070
     float debugRenderPos[3];            // ...
 };
 
-enum connstate_t : __int32
+enum connstate_t : int32_t
 {                                       // ...
     CA_DISCONNECTED = 0x0,
     CA_CINEMATIC = 0x1,
@@ -1008,7 +1008,7 @@ int32_t __cdecl CL_DObjCreateSkelForBones(const DObj_s *obj, int32_t *partBits, 
 
 
 // cl_rank
-enum rankTableColumns_t : __int32
+enum rankTableColumns_t : int32_t
 {                                       // ...
     MP_RANKTABLE_RANKID = 0x0,
     MP_RANKTABLE_RANK = 0x1,
@@ -1184,8 +1184,8 @@ void __cdecl CL_InitUI();
 
 // cl_main_pc_mp
 int32_t __cdecl CL_ServerStatus(char *serverAddress, char *serverStatusString, int32_t maxLen);
-void __cdecl CL_SetServerInfoByAddress(netadr_t from, char *info, __int16 ping);
-void __cdecl CL_SetServerInfo(serverInfo_t *server, char *info, __int16 ping);
+void __cdecl CL_SetServerInfoByAddress(netadr_t from, char *info, int16_t ping);
+void __cdecl CL_SetServerInfo(serverInfo_t *server, char *info, int16_t ping);
 void __cdecl CL_ServerInfoPacket(netadr_t from, msg_t *msg, int32_t time);
 void __cdecl CL_Connect_f();
 //bool __cdecl CL_CDKeyValidate(const char *key, const char *checksum);

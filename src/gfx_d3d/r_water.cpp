@@ -50,7 +50,7 @@ void __cdecl R_UploadWaterTextureInternal(water_t **data)
 
 void __cdecl WaterFrequenciesAtTime(complex_s *H, const water_t *water, float t)
 {
-    __int64 v3; // [esp+0h] [ebp-44h]
+    int64_t v3; // [esp+0h] [ebp-44h]
     float sinReal; // [esp+28h] [ebp-1Ch]
     int vecKCount; // [esp+2Ch] [ebp-18h]
     int vecKIndex; // [esp+30h] [ebp-14h]
@@ -71,7 +71,7 @@ void __cdecl WaterFrequenciesAtTime(complex_s *H, const water_t *water, float t)
     {
         if (*(uint32_t *)wTerm)
         {
-            v3 = (__int64)(*wTerm * ta);
+            v3 = (int64_t)(*wTerm * ta);
             sinReal = waterGlobStatic.sinTable[((v3 & 0x3FF) + 255) & 0x3FF];
             sinImag = waterGlobStatic.sinTable[v3 & 0x3FF];
             iassert(!IS_NAN(H0->real));

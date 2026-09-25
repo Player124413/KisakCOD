@@ -10,7 +10,7 @@
 
 #define MAX_VEHICLES 64
 
-enum loading_t : __int32
+enum loading_t : int32_t
 {
 	LOADING_DONE = 0x0,
 	LOADING_LEVEL = 0x1,
@@ -19,8 +19,8 @@ enum loading_t : __int32
 
 struct trigger_info_t
 {
-	unsigned __int16 entnum;
-	unsigned __int16 otherEntnum;
+	uint16_t entnum;
+	uint16_t otherEntnum;
 	int useCount;
 	int otherUseCount;
 };
@@ -66,7 +66,7 @@ struct level_locals_t
 	int bDrawCompassFriendlies;
 	int bPlayerIgnoreRadiusDamage;
 	int bPlayerIgnoreRadiusDamageLatched;
-	unsigned __int8 triggerIndex;
+	uint8_t triggerIndex;
 	int currentEntityThink;
 	int currentIndex;
 	bool checkAnimChange;
@@ -76,18 +76,18 @@ struct level_locals_t
 	int mpviewer;
 	cached_tag_mat_t cachedTagMat;
 	cached_tag_mat_t cachedEntTargetTagMat;
-	unsigned __int16 soundAliasFirst;
-	unsigned __int16 soundAliasLast;
+	uint16_t soundAliasFirst;
+	uint16_t soundAliasLast;
 	trigger_info_t pendingTriggerList[256];
 	trigger_info_t currentTriggerList[256];
 	int pendingTriggerListSize;
 	int currentTriggerListSize;
-	unsigned __int8 entTriggerIndex[MAX_GENTITIES];
-	unsigned __int8 specialIndex[MAX_GENTITIES];
+	uint8_t entTriggerIndex[MAX_GENTITIES];
+	uint8_t specialIndex[MAX_GENTITIES];
 	actor_prone_info_s cgData_actorProneInfo[48];
-	unsigned __int8 cgData_actorOnCompass[32];
-	unsigned __int8 cgData_actorTeam[32];
-	unsigned __int16 modelMap[512];
+	uint8_t cgData_actorOnCompass[32];
+	uint8_t cgData_actorTeam[32];
+	uint16_t modelMap[512];
 	float priorityNodeBias;
 	//void *openScriptIOFileHandles[1];
 	int openScriptIOFileHandles[1];

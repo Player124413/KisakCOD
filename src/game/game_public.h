@@ -17,7 +17,7 @@
 
 static const char *hintStrings[] = { "", "HINT_NOICON", "HINT_ACTIVATE", "HINT_HEALTH" }; // idb
 
-enum DAMAGE_FLAGS : __int32 // (SP/MP same)
+enum DAMAGE_FLAGS : int32_t // (SP/MP same)
 {
     DAMAGE_NOFLAG = 0,
     DAMAGE_RADIUS = (1 << 0),
@@ -26,7 +26,7 @@ enum DAMAGE_FLAGS : __int32 // (SP/MP same)
     DAMAGE_PENETRATION = (1 << 3),
 };
 
-enum VehicleTypes : __int32 // (SP/MP same)
+enum VehicleTypes : int32_t // (SP/MP same)
 {
     VEH_WHEELS_4 = 0x0,
     VEH_TANK = 0x1,
@@ -37,7 +37,7 @@ enum VehicleTypes : __int32 // (SP/MP same)
     NUM_VEHICLE_TYPES = 0x6,
 };
 
-enum VehicleSound : __int32
+enum VehicleSound : int32_t
 {
     VEH_LOW_IDLE_SND = 0x0,
     VEH_HIGH_IDLE_SND = 0x1,
@@ -68,7 +68,7 @@ enum fieldtype_t : int32_t
     F_MODEL = 0x9,                 // ...
 };
 #elif KISAK_SP
-enum fieldtype_t : __int32
+enum fieldtype_t : int32_t
 {
     F_INT = 0x0,
     F_SHORT = 0x1,
@@ -738,7 +738,7 @@ gentity_s *VEH_GetCollMap(const char *modelname);
 void VEH_SetupCollmap(gentity_s *ent);
 void G_UpdateVehicleTags(gentity_s *ent);
 void G_SpawnVehicle(gentity_s *ent, const char *typeName, int load);
-const char *G_GetVehicleInfoName(__int16 index);
+const char *G_GetVehicleInfoName(int16_t index);
 int G_GetVehicleInfoIndex(const char *name);
 bool G_IsVehicleUsable(gentity_s *ent, gentity_s *player);
 void G_PrecacheDefaultVehicle();
@@ -752,7 +752,7 @@ void G_RestartScrVehicleInfo();
 void G_ParseScrVehicleInfo();
 void G_FreeVehicle(gentity_s *ent);
 
-vehicle_info_t *VEH_GetVehicleInfo(__int16 index);
+vehicle_info_t *VEH_GetVehicleInfo(int16_t index);
 
 void(*ScriptVehicle_GetMethod(const char **pName))(scr_entref_t);
 void G_SaveVehicleInfo(struct SaveGame *save);

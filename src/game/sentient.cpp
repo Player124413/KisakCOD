@@ -486,7 +486,7 @@ void __cdecl Sentient_ClaimNode(sentient_s *self, pathnode_t *node)
     if (!self->ent)
         MyAssertHandler("c:\\trees\\cod3\\cod3src\\src\\game\\sentient.cpp", 674, 0, "%s", "self->ent");
     actor = self->ent->actor;
-    if (actor && (unsigned __int8)Actor_KeepClaimedNode(actor))
+    if (actor && (uint8_t)Actor_KeepClaimedNode(actor))
         MyAssertHandler(
             "c:\\trees\\cod3\\cod3src\\src\\game\\sentient.cpp",
             675,
@@ -701,7 +701,7 @@ int __cdecl Sentient_NearestNodeDirty(sentient_s *self, bool originChanged)
 {
     int result; // r3
     pathnode_t *pNearestNode; // r11
-    unsigned __int8 v5; // r11
+    uint8_t v5; // r11
     bool v6; // zf
 
     if (originChanged)

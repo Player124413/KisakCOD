@@ -3,7 +3,7 @@
 #include <qcommon/qcommon.h>
 #include <universal/profile.h>
 
-void __cdecl Short2LerpAsVec2(const __int16 *from, const __int16 *to, float frac, float *out)
+void __cdecl Short2LerpAsVec2(const int16_t *from, const int16_t *to, float frac, float *out)
 {
     out[0] = frac * (to[0] - from[0]) + from[0];
     out[1] = frac * (to[1] - from[1]) + from[1];
@@ -189,7 +189,7 @@ void __cdecl XAnimClearRotTransArray(const DObj_s *obj, DObjAnimMat *rotTransArr
 template <typename T>
 void __cdecl XAnimCalcParts(
     const XAnimParts *parts,
-    const unsigned __int8 *animToModel,
+    const uint8_t *animToModel,
     float time,
     float weightScale,
     DObjAnimMat *rotTransArray,
@@ -214,38 +214,38 @@ void __cdecl XAnimCalcParts(
     char v48; // [esp+17Fh] [ebp-121h]
     int v50; // [esp+184h] [ebp-11Ch] BYREF
     uint16_t *v51; // [esp+188h] [ebp-118h]
-    //__int64 v52; // [esp+18Ch] [ebp-114h]
+    //int64_t v52; // [esp+18Ch] [ebp-114h]
     float lerpFrac2; // [esp+19Ch] [ebp-104h] BYREF
-    //__int64 v56; // [esp+1A0h] [ebp-100h]
+    //int64_t v56; // [esp+1A0h] [ebp-100h]
     int v59; // [esp+1B0h] [ebp-F0h] BYREF
-    unsigned __int8 *v60; // [esp+1B4h] [ebp-ECh]
-    //__int64 v61; // [esp+1B8h] [ebp-E8h]
+    uint8_t *v60; // [esp+1B4h] [ebp-ECh]
+    //int64_t v61; // [esp+1B8h] [ebp-E8h]
     float lerpFrac; // [esp+1C8h] [ebp-D8h] BYREF
-    //__int64 v65; // [esp+1CCh] [ebp-D4h]
+    //int64_t v65; // [esp+1CCh] [ebp-D4h]
     float v72; // [esp+1ECh] [ebp-B4h]
     float v73; // [esp+1F0h] [ebp-B0h]
     float v74; // [esp+1F4h] [ebp-ACh]
     float v75; // [esp+1F8h] [ebp-A8h]
     float4 frameVec; // [esp+1FCh] [ebp-A4h]
     int v77; // [esp+20Ch] [ebp-94h] BYREF
-    __int16 *v78; // [esp+210h] [ebp-90h]
+    int16_t *v78; // [esp+210h] [ebp-90h]
     float dir1[4]; // [esp+214h] [ebp-8Ch] BYREF
     float v80; // [esp+224h] [ebp-7Ch] BYREF
     float dir0[4]; // [esp+228h] [ebp-78h] BYREF
     int keyFrameIndex; // [esp+238h] [ebp-68h] BYREF
-    const __int16 *frame; // [esp+23Ch] [ebp-64h]
+    const int16_t *frame; // [esp+23Ch] [ebp-64h]
     float4 toVec; // [esp+240h] [ebp-60h] BYREF
     float keyFrameLerpFrac; // [esp+250h] [ebp-50h] BYREF
     float4 fromVec; // [esp+254h] [ebp-4Ch] BYREF
-    __int16 *dataShort; // [esp+268h] [ebp-38h]
+    int16_t *dataShort; // [esp+268h] [ebp-38h]
     XAnimTime animTime; // [esp+26Ch] [ebp-34h] BYREF
     uint32_t animPartIndex; // [esp+278h] [ebp-28h]
-    unsigned __int8 *dataByte; // [esp+27Ch] [ebp-24h]
+    uint8_t *dataByte; // [esp+27Ch] [ebp-24h]
     int *randomDataInt; // [esp+280h] [ebp-20h]
     uint32_t size; // [esp+284h] [ebp-1Ch]
     int *dataInt; // [esp+288h] [ebp-18h]
-    __int16 *randomDataShort; // [esp+28Ch] [ebp-14h]
-    unsigned __int8 *randomDataByte; // [esp+290h] [ebp-10h]
+    int16_t *randomDataShort; // [esp+28Ch] [ebp-14h]
+    uint8_t *randomDataByte; // [esp+290h] [ebp-10h]
     uint32_t tableSize; // [esp+294h] [ebp-Ch]
     T *indices; // [esp+298h] [ebp-8h]
     int modelPartIndex; // [esp+29Ch] [ebp-4h]
@@ -773,7 +773,7 @@ void __cdecl XAnimCalcLeaf(XAnimInfo *info, float weightScale, DObjAnimMat *rotT
 
 void __cdecl XAnimCalcNonLoopEnd(
     const XAnimParts *parts,
-    const unsigned __int8 *animToModel,
+    const uint8_t *animToModel,
     float weightScale,
     DObjAnimMat *rotTransArray,
     const bitarray<128> *ignorePartBits)
@@ -796,7 +796,7 @@ void __cdecl XAnimCalcNonLoopEnd(
     float v25; // [esp+ECh] [ebp-130h]
     float v26; // [esp+F0h] [ebp-12Ch]
     float v27; // [esp+F4h] [ebp-128h]
-    __int16 *v28; // [esp+F8h] [ebp-124h]
+    int16_t *v28; // [esp+F8h] [ebp-124h]
     float v29; // [esp+FCh] [ebp-120h]
     float v30; // [esp+100h] [ebp-11Ch]
     float v31; // [esp+104h] [ebp-118h]
@@ -821,19 +821,19 @@ void __cdecl XAnimCalcNonLoopEnd(
     float4 posVec; // [esp+170h] [ebp-ACh]
     float4 lerp; // [esp+180h] [ebp-9Ch]
     float4 minsVec; // [esp+190h] [ebp-8Ch]
-    __int16 *v70; // [esp+1D0h] [ebp-4Ch]
+    int16_t *v70; // [esp+1D0h] [ebp-4Ch]
     float4 frameVec; // [esp+1D4h] [ebp-48h]
-    const __int16 *rotLastFrame; // [esp+1E8h] [ebp-34h]
+    const int16_t *rotLastFrame; // [esp+1E8h] [ebp-34h]
     int useSmallIndices; // [esp+1ECh] [ebp-30h]
-    __int16 *dataShort; // [esp+1F0h] [ebp-2Ch]
+    int16_t *dataShort; // [esp+1F0h] [ebp-2Ch]
     DObjAnimMat *totalRotTrans; // [esp+1F4h] [ebp-28h]
     uint32_t animPartIndex; // [esp+1F8h] [ebp-24h]
-    unsigned __int8 *dataByte; // [esp+1FCh] [ebp-20h]
+    uint8_t *dataByte; // [esp+1FCh] [ebp-20h]
     int *randomDataInt; // [esp+200h] [ebp-1Ch]
     uint32_t size; // [esp+204h] [ebp-18h]
     int *dataInt; // [esp+208h] [ebp-14h]
-    __int16 *randomDataShort; // [esp+20Ch] [ebp-10h]
-    unsigned __int8 *randomDataByte; // [esp+210h] [ebp-Ch]
+    int16_t *randomDataShort; // [esp+20Ch] [ebp-10h]
+    uint8_t *randomDataByte; // [esp+210h] [ebp-Ch]
     uint32_t tableSize; // [esp+214h] [ebp-8h]
     int modelPartIndex; // [esp+218h] [ebp-4h]
 
@@ -1316,7 +1316,7 @@ void __cdecl XAnimApplyAdditives(
 void __cdecl XAnim_CalcRotDeltaEntire(const XAnimDeltaPart *animDelta, float *rotDelta)
 {
     XAnimDeltaPartQuat *rotFrameDeltas; // [esp+8h] [ebp-8h]
-    const __int16 *rotDeltaLastFrame; // [esp+Ch] [ebp-4h]
+    const int16_t *rotDeltaLastFrame; // [esp+Ch] [ebp-4h]
 
     if (animDelta->quat)
     {
@@ -1324,7 +1324,7 @@ void __cdecl XAnim_CalcRotDeltaEntire(const XAnimDeltaPart *animDelta, float *ro
         if (rotFrameDeltas->size)
             rotDeltaLastFrame = rotFrameDeltas->u.frames.frames[rotFrameDeltas->size];
         else
-            rotDeltaLastFrame = (const __int16 *)&rotFrameDeltas->u;
+            rotDeltaLastFrame = (const int16_t *)&rotFrameDeltas->u;
         *rotDelta = (float)*rotDeltaLastFrame;
         rotDelta[1] = (float)rotDeltaLastFrame[1];
     }
@@ -1339,7 +1339,7 @@ void __cdecl XAnim_CalcPosDeltaEntire(const XAnimDeltaPart *animDelta, float4 *p
 {
     XAnimPartTrans *trans; // ecx
     unsigned short *v3; // [esp+20h] [ebp-44h]
-    unsigned __int8 *v4; // [esp+24h] [ebp-40h]
+    uint8_t *v4; // [esp+24h] [ebp-40h]
     float sizeVec[2]; // [esp+30h] [ebp-34h]
     float lerp[4]; // [esp+3Ch] [ebp-28h]
     float minsVec[2]; // [esp+50h] [ebp-14h]
@@ -1495,8 +1495,8 @@ void XAnim_CalcPosDeltaDuring(
     float v7; // [esp+74h] [ebp-8Ch]
     uint16_t *v8; // [esp+7Ch] [ebp-84h]
     uint16_t *v9; // [esp+80h] [ebp-80h]
-    unsigned __int8 *v10; // [esp+84h] [ebp-7Ch]
-    unsigned __int8 *v11; // [esp+88h] [ebp-78h]
+    uint8_t *v10; // [esp+84h] [ebp-7Ch]
+    uint8_t *v11; // [esp+88h] [ebp-78h]
     XAnimPartTransData *p_u; // [esp+8Ch] [ebp-74h]
     int keyFrameIndex; // [esp+90h] [ebp-70h] BYREF
     float4 sizeVec; // [esp+94h] [ebp-6Ch]
@@ -1646,7 +1646,7 @@ void __cdecl XAnim_SetTime(float time, int frameCount, XAnimTime *animTime)
 
 void DObjCalcAnim(const DObj_s *obj, int *partBits)
 {
-    __int16 *quats; // [esp+68h] [ebp-60CCh]
+    int16_t *quats; // [esp+68h] [ebp-60CCh]
     int mm; // [esp+90h] [ebp-60A4h]
     int numNonRootBones; // [esp+90h] [ebp-60A4h]
     XModel *model; // [esp+94h] [ebp-60A0h]

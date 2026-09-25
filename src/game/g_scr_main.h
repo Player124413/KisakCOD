@@ -80,7 +80,7 @@ struct cached_tag_mat_t
 {
     int time;
     int entnum;
-    unsigned __int16 name;
+    uint16_t name;
     float tagMat[4][3];
 };
 
@@ -162,7 +162,7 @@ void GScr_GetDifficulty();
 void Scr_GetEntByNum();
 int __cdecl Scr_GetTeamFlag(const char *pszTeamName, const char *pszCaller);
 int __cdecl Scr_GetTeamFlags(unsigned int i, const char *pszCaller);
-int __cdecl Scr_GetSpecies(unsigned __int16 speciesString);
+int __cdecl Scr_GetSpecies(uint16_t speciesString);
 actor_s *Scr_GetAIArray();
 actor_s *Scr_GetAISpeciesArray();
 void Scr_GetSpawnerArray();

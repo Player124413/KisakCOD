@@ -30,15 +30,15 @@ struct badplace_t
 {
     int endtime;
     int pingTime;
-    unsigned __int16 name;
-    unsigned __int8 type;
-    unsigned __int8 teamflags;
+    uint16_t name;
+    uint8_t type;
+    uint8_t teamflags;
     badplace_parms_t parms;
 };
 
 struct actor_s;
-enum actor_think_result_t : __int32;
-enum ai_state_t : __int32;
+enum actor_think_result_t : int32_t;
+enum ai_state_t : int32_t;
 
 void __cdecl TRACK_actor_badplace();
 void __cdecl Path_UpdateBadPlaceCount(badplace_t *place, int delta);

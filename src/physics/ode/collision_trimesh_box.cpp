@@ -1130,20 +1130,20 @@ void __cdecl cldClipping(collData_t *tbData, const dVector3 *v0, const dVector3 
                 if (fTempDepth > 0.0)
                     fTempDepth = 0.0;
                 Vec3Add(avTempArray1[k], tbData->vHullBoxPos, sum);
-                if (tbData->ctContacts >= (unsigned __int16)tbData->iFlags)
+                if (tbData->ctContacts >= (uint16_t)tbData->iFlags)
                     break;
                 iStride = tbData->iStride;
                 ctContacts = tbData->ctContacts;
                 ContactGeoms = tbData->ContactGeoms;
                 iFlags = tbData->iFlags;
-                if (ctContacts >= (unsigned __int16)iFlags)
+                if (ctContacts >= (uint16_t)iFlags)
                     MyAssertHandler(
                         "c:\\trees\\cod3\\src\\physics\\ode\\src\\collision_trimesh_internal.h",
                         47,
                         0,
                         "Index doesn't index Flags & 0x0ffff\n\t%i not in [0, %i)",
                         ctContacts,
-                        (unsigned __int16)iFlags);
+                        (uint16_t)iFlags);
                 Contact = (dContactGeom *)((char *)ContactGeoms + iStride * ctContacts);
                 Contact->depth = -fTempDepth;
                 Contact->normal[0] = tbData->vBestNormal[0];
@@ -1238,14 +1238,14 @@ void __cdecl cldClipping(collData_t *tbData, const dVector3 *v0, const dVector3 
         v26 = tbData->ctContacts;
         v27 = tbData->ContactGeoms;
         v28 = tbData->iFlags;
-        if (v26 >= (unsigned __int16)v28)
+        if (v26 >= (uint16_t)v28)
             MyAssertHandler(
                 "c:\\trees\\cod3\\src\\physics\\ode\\src\\collision_trimesh_internal.h",
                 47,
                 0,
                 "Index doesn't index Flags & 0x0ffff\n\t%i not in [0, %i)",
                 v26,
-                (unsigned __int16)v28);
+                (uint16_t)v28);
         Contact = (dContactGeom *)((char *)v27 + v25 * v26);
         Contact->depth = tbData->fBestDepth;
         Contact->normal[0] = tbData->vBestNormal[0];
@@ -1420,20 +1420,20 @@ void __cdecl cldClipping(collData_t *tbData, const dVector3 *v0, const dVector3 
         if (v30 > 0.0)
             v30 = 0.0;
         Vec3Add(&v38[4 * n], (const float *)v0, v31);
-        if (tbData->ctContacts >= (unsigned __int16)tbData->iFlags)
+        if (tbData->ctContacts >= (uint16_t)tbData->iFlags)
             break;
         v15 = tbData->iStride;
         v16 = tbData->ctContacts;
         v17 = tbData->ContactGeoms;
         v18 = tbData->iFlags;
-        if (v16 >= (unsigned __int16)v18)
+        if (v16 >= (uint16_t)v18)
             MyAssertHandler(
                 "c:\\trees\\cod3\\src\\physics\\ode\\src\\collision_trimesh_internal.h",
                 47,
                 0,
                 "Index doesn't index Flags & 0x0ffff\n\t%i not in [0, %i)",
                 v16,
-                (unsigned __int16)v18);
+                (uint16_t)v18);
         Contact = (dContactGeom *)((char *)v17 + v15 * v16);
         Contact->depth = -v30;
         Contact->normal[0] = -tbData->triangleNormal[0];
@@ -1483,7 +1483,7 @@ static void _cldTestOneTriangle(collData_t *tbData, const dVector3 &v0, const dV
 
 
 int __cdecl dCollideBoxTriangleList(
-    const unsigned __int16 *indices,
+    const uint16_t *indices,
     const float (*verts)[3],
     int triCount,
     const float *boxR,
@@ -1501,7 +1501,7 @@ int __cdecl dCollideBoxTriangleList(
     float dv[3][4]; // [esp+DCh] [ebp-40h] BYREF
     int i; // [esp+10Ch] [ebp-10h]
     const float (*mRotBox)[12]; // [esp+110h] [ebp-Ch]
-    const unsigned __int16 *pIndices; // [esp+114h] [ebp-8h]
+    const uint16_t *pIndices; // [esp+114h] [ebp-8h]
     const float (*vPosBox)[4]; // [esp+118h] [ebp-4h]
 
     mRotBox = (const float(*)[12])boxR;

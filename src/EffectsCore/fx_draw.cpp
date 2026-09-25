@@ -259,14 +259,14 @@ void __cdecl FX_DrawElem_BillboardSprite(FxDrawState *draw)
 void __cdecl FX_GenSpriteVerts(FxDrawState *draw, const float *tangent, const float *binormal, const float *normal)
 {
     float scale1; // [esp+8h] [ebp-274h]
-    __int16 v5; // [esp+14h] [ebp-268h]
-    __int16 v6; // [esp+18h] [ebp-264h]
-    __int16 v7; // [esp+1Ch] [ebp-260h]
-    __int16 v8; // [esp+20h] [ebp-25Ch]
-    __int16 v9; // [esp+24h] [ebp-258h]
-    __int16 v10; // [esp+28h] [ebp-254h]
-    __int16 v11; // [esp+2Ch] [ebp-250h]
-    __int16 v12; // [esp+30h] [ebp-24Ch]
+    int16_t v5; // [esp+14h] [ebp-268h]
+    int16_t v6; // [esp+18h] [ebp-264h]
+    int16_t v7; // [esp+1Ch] [ebp-260h]
+    int16_t v8; // [esp+20h] [ebp-25Ch]
+    int16_t v9; // [esp+24h] [ebp-258h]
+    int16_t v10; // [esp+28h] [ebp-254h]
+    int16_t v11; // [esp+2Ch] [ebp-250h]
+    int16_t v12; // [esp+30h] [ebp-24Ch]
     float v13; // [esp+7Ch] [ebp-200h]
     int32_t v14; // [esp+80h] [ebp-1FCh]
     float v15; // [esp+90h] [ebp-1ECh]
@@ -1462,8 +1462,8 @@ void __cdecl Fx_GenTrail_PopulateSegmentDrawState(
 void __cdecl FX_GenTrail_VertsForSegment(const FxTrailSegmentDrawState *segmentDrawState, GfxPackedVertex *remoteVerts)
 {
     float scale1; // [esp+8h] [ebp-10Ch]
-    __int16 v3; // [esp+38h] [ebp-DCh]
-    __int16 v4; // [esp+3Ch] [ebp-D8h]
+    int16_t v3; // [esp+38h] [ebp-DCh]
+    int16_t v4; // [esp+3Ch] [ebp-D8h]
     float scale0; // [esp+40h] [ebp-D4h]
     float v6; // [esp+44h] [ebp-D0h]
     PackedUnitVec v7; // [esp+48h] [ebp-CCh]
@@ -1665,7 +1665,7 @@ void __cdecl FX_EvaluateDistanceFade(FxDrawState *draw)
             v1 = fadeOutFrac;
         else
             v1 = fadeInFrac;
-        draw->preVisState.distanceFade = (__int64)(v1 * 255.0 + 0.5);
+        draw->preVisState.distanceFade = (int64_t)(v1 * 255.0 + 0.5);
     }
 }
 

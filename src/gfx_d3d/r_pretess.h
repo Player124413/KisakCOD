@@ -4,7 +4,7 @@
 
 #define MAX_DRAWSURFS 0x8000
 
-enum DrawSurfType : __int32;
+enum DrawSurfType : int32_t;
 
 struct GfxBspPreTessDrawSurf // sizeof=0x4
 {                                       // ...

@@ -246,7 +246,7 @@ void CL_ConfigstringModified()
     v8 = v6;
     do
     {
-        v9 = *(unsigned __int8 *)v8 - *(unsigned __int8 *)v7;
+        v9 = *(uint8_t *)v8 - *(uint8_t *)v7;
         if (!*v8)
             break;
         ++v8;
@@ -333,7 +333,7 @@ int __cdecl CL_PreprocessServerCommand(const char *s)
         v5 = "disconnect";
         do
         {
-            v6 = (unsigned __int8)*v4 - *(unsigned __int8 *)v5;
+            v6 = (uint8_t)*v4 - *(uint8_t *)v5;
             if (!*v4)
                 break;
             ++v4;
@@ -347,7 +347,7 @@ int __cdecl CL_PreprocessServerCommand(const char *s)
         v8 = "bcs0";
         do
         {
-            v9 = (unsigned __int8)*v7 - *(unsigned __int8 *)v8;
+            v9 = (uint8_t)*v7 - *(uint8_t *)v8;
             if (!*v7)
                 break;
             ++v7;
@@ -368,7 +368,7 @@ int __cdecl CL_PreprocessServerCommand(const char *s)
         v11 = "bcs1";
         do
         {
-            v12 = (unsigned __int8)*v10 - *(unsigned __int8 *)v11;
+            v12 = (uint8_t)*v10 - *(uint8_t *)v11;
             if (!*v10)
                 break;
             ++v10;
@@ -380,7 +380,7 @@ int __cdecl CL_PreprocessServerCommand(const char *s)
         v14 = "bcs2";
         do
         {
-            v15 = (unsigned __int8)*v13 - *(unsigned __int8 *)v14;
+            v15 = (uint8_t)*v13 - *(uint8_t *)v14;
             if (!*v13)
                 break;
             ++v13;
@@ -392,7 +392,7 @@ int __cdecl CL_PreprocessServerCommand(const char *s)
             v44 = v3;
             do
             {
-                v45 = (unsigned __int8)*v44 - *(unsigned __int8 *)v43;
+                v45 = (uint8_t)*v44 - *(uint8_t *)v43;
                 if (!*v44)
                     break;
                 ++v44;
@@ -415,7 +415,7 @@ int __cdecl CL_PreprocessServerCommand(const char *s)
             ;
         v20 = v16;
         v21 = v17 - bigConfigString - 1;
-        while (*(unsigned __int8 *)v20++)
+        while (*(uint8_t *)v20++)
             ;
         if ((unsigned int)(v20 - v16 + v21) >= 0x2000)
             Com_Error(ERR_DROP, "bcs exceeded BIG_INFO_STRING");
@@ -426,7 +426,7 @@ int __cdecl CL_PreprocessServerCommand(const char *s)
         v26 = v24 - 1;
         do
         {
-            v27 = *(unsigned __int8 *)v23++;
+            v27 = *(uint8_t *)v23++;
             *v26++ = v27;
         } while (v27);
         Cmd_EndTokenizedString();
@@ -441,7 +441,7 @@ int __cdecl CL_PreprocessServerCommand(const char *s)
         ;
     v35 = v31;
     v36 = v32 - bigConfigString - 1;
-    while (*(unsigned __int8 *)v35++)
+    while (*(uint8_t *)v35++)
         ;
     if ((unsigned int)(v35 - v31 - 1 + v36) >= 0x2000)
         Com_Error(ERR_DROP, "bcs exceeded BIG_INFO_STRING");
@@ -452,7 +452,7 @@ int __cdecl CL_PreprocessServerCommand(const char *s)
     v41 = v39 - 1;
     do
     {
-        v42 = *(unsigned __int8 *)v38++;
+        v42 = *(uint8_t *)v38++;
         *v41++ = v42;
     } while (v42);
     Cmd_EndTokenizedString();
@@ -849,11 +849,11 @@ void __cdecl CL_StartLoading(const char *mapname)
 void __cdecl CL_InitCGame(int localClientNum, int savegame)
 {
     int startTime; // r22
-    unsigned __int16 v5; // r11
+    uint16_t v5; // r11
     const char *info; // r31
     const char *v7; // r31
     int v8; // r3
-    __int64 v9; // r11
+    int64_t v9; // r11
 
     startTime = Sys_Milliseconds();
     SND_ErrorCleanup();
@@ -1144,9 +1144,9 @@ void __cdecl CL_ArchiveClientState(MemoryFile *memFile, int segmentIndex)
     R_ArchiveFogState(memFile);
 }
 
-void __cdecl CL_LookupColor(unsigned __int8 c, float *color)
+void __cdecl CL_LookupColor(uint8_t c, float *color)
 {
-    unsigned __int8 v3; // r3
+    uint8_t v3; // r3
     float *v4; // r11
     double v5; // fp0
 

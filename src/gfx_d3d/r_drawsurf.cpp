@@ -243,7 +243,7 @@ void __cdecl R_AddMarkMeshDrawSurf(
             {
                 drawSurf->packed = material->info.drawSurf.packed;
 
-                //drawSurf->packed = (unsigned __int64)material->info.drawSurf;
+                //drawSurf->packed = (uint64_t)material->info.drawSurf;
 
                 drawSurf->fields.objectId = markMeshIndex;
                 //packed_high = HIDWORD(drawSurf->packed);
@@ -251,7 +251,7 @@ void __cdecl R_AddMarkMeshDrawSurf(
                 //HIDWORD(drawSurf->packed) = packed_high;
 
                 drawSurf->fields.customIndex = context->lmapIndex;
-                //v5 = (unsigned __int64)(context->lmapIndex & 0x1F) << 24; // customIndex
+                //v5 = (uint64_t)(context->lmapIndex & 0x1F) << 24; // customIndex
                 //v6 = HIDWORD(v5) | HIDWORD(drawSurf->packed);
                 //LODWORD(drawSurf->packed) = v5 | drawSurf->packed & 0xE0FFFFFF;
                 //HIDWORD(drawSurf->packed) = v6;
@@ -264,7 +264,7 @@ void __cdecl R_AddMarkMeshDrawSurf(
                 drawSurf->fields.surfType = SF_MARK_MESH;
 
                 drawSurf->fields.reflectionProbeIndex = context->reflectionProbeIndex;
-                //v7 = (unsigned __int64)context->reflectionProbeIndex << 16; // reflectionProbeIndex
+                //v7 = (uint64_t)context->reflectionProbeIndex << 16; // reflectionProbeIndex
                 //v8 = HIDWORD(v7) | HIDWORD(drawSurf->packed);
                 //LODWORD(drawSurf->packed) = v7 | drawSurf->packed & 0xFF00FFFF;
                 //HIDWORD(drawSurf->packed) = v8;
@@ -296,10 +296,10 @@ struct GfxSortDrawSurfsInterface // sizeof=0x0
 
 void __cdecl ShortSort /*ShortSortArray<GfxReverseSortDrawSurfsInterface, GfxDrawSurf>*/(GfxDrawSurf *lo, GfxDrawSurf *hi)
 {
-    unsigned __int64 packed; // [esp+0h] [ebp-24h]
+    uint64_t packed; // [esp+0h] [ebp-24h]
     GfxDrawSurf *maxx; // [esp+8h] [ebp-1Ch] // (max is a fkin macro!)
-    unsigned __int64 maxKey; // [esp+Ch] [ebp-18h]
-    unsigned __int64 walkKey; // [esp+14h] [ebp-10h]
+    uint64_t maxKey; // [esp+Ch] [ebp-18h]
+    uint64_t walkKey; // [esp+14h] [ebp-10h]
     GfxDrawSurf *walk; // [esp+20h] [ebp-4h]
 
     while (hi > lo)
@@ -337,7 +337,7 @@ void __cdecl SortMyShit /*qsortArray<GfxReverseSortDrawSurfsInterface, GfxDrawSu
     uint32_t fields; // [esp+Ch] [ebp-178h]
     uint32_t v9; // [esp+10h] [ebp-174h]
     GfxDrawSurf v10; // [esp+14h] [ebp-170h]
-    unsigned __int64 pivotKey; // [esp+64h] [ebp-120h]
+    uint64_t pivotKey; // [esp+64h] [ebp-120h]
     GfxDrawSurf *loWalk; // [esp+74h] [ebp-110h]
     int sortCount; // [esp+78h] [ebp-10Ch]
     GfxDrawSurf *hiEnd; // [esp+7Ch] [ebp-108h]

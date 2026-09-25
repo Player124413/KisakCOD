@@ -602,7 +602,7 @@ void __cdecl UI_UpdateTime(int realtime)
 {
     int v1; // r9
     signed int v2; // r10
-    __int64 v3; // r10
+    int64_t v3; // r10
 
     v1 = realtime - uiInfo.uiDC.realTime;
     uiInfo.uiDC.frameTime = realtime - uiInfo.uiDC.realTime;
@@ -1221,7 +1221,7 @@ void __cdecl UI_MapLoadInfo(const char *filename)
                     Com_EndParseSession();
                     Com_Error(ERR_DROP, "key '%s' is %i > %i characters long", key, tokenLen - 1, 255);
                 }
-                memcpy((unsigned __int8 *)key, (unsigned __int8 *)token, tokenLen);
+                memcpy((uint8_t *)key, (uint8_t *)token, tokenLen);
                 value = (const char *)Com_ParseOnLine(&parse);
                 if (!*value)
                 {
@@ -1247,7 +1247,7 @@ cmd_function_s UI_CloseMenu_f_VAR;
 
 void __cdecl UI_Init()
 {
-    __int64 v0; // r10 OVERLAPPED
+    int64_t v0; // r10 OVERLAPPED
     int v1; // r8
     double v2; // fp0
     MenuList *v4; // r3
@@ -1430,7 +1430,7 @@ char *__cdecl UI_SafeTranslateString(const char *reference)
         v6 = (char*)v1;
         do
         {
-            v7 = *(unsigned __int8 *)v6;
+            v7 = *(uint8_t *)v6;
             (v6++)[errorString - v1] = v7;
         } while (v7);
     }
@@ -1490,8 +1490,8 @@ void __cdecl UI_ReplaceConversions(
     char *v14; // r30
     int v15; // r31
     int v16; // r31
-    unsigned __int8 *v17; // r11
-    unsigned __int8 *v19; // r10
+    uint8_t *v17; // r11
+    uint8_t *v19; // r10
     int v20; // r11
     int v21; // r10
     char v22; // r9
@@ -1511,7 +1511,7 @@ void __cdecl UI_ReplaceConversions(
                 "(arguments->argCount <= 9)",
                 arguments->argCount);
         v8 = sourceString;
-        while (*(unsigned __int8 *)v8++)
+        while (*(uint8_t *)v8++)
             ;
         v10 = v8 - sourceString - 1;
         v11 = v10;
@@ -1556,7 +1556,7 @@ void __cdecl UI_ReplaceConversions(
                 v16 = 4 * (v15 + 1);
                 if (!*(int *)((char *)&arguments->argCount + v16))
                     MyAssertHandler("c:\\trees\\cod3\\cod3src\\src\\ui\\ui_main.cpp", 2731, 0, "%s", "arguments->args[argIndex]");
-                v17 = *(unsigned __int8 **)((char *)&arguments->argCount + v16);
+                v17 = *(uint8_t **)((char *)&arguments->argCount + v16);
                 while (*v17++)
                     ;
                 v19 = &v17[-*(int *)((char *)&arguments->argCount + v16)];
@@ -2459,14 +2459,14 @@ void __cdecl UI_RunMenuScript(int localClientNum, const char **args, const char 
 
     if (!I_stricmp(out, "openMenuOnDvar") || !I_stricmp(out, "openMenuOnDvarNot"))
     {
-        if ((unsigned __int8)UI_GetOpenOrCloseMenuOnDvarArgs(args, out, dvarName, testValue, menuName))
+        if ((uint8_t)UI_GetOpenOrCloseMenuOnDvarArgs(args, out, dvarName, testValue, menuName))
             UI_OpenMenuOnDvar(out, menuName, dvarName, testValue);
         return;
     }
 
     if (!I_stricmp(out, "closeMenuOnDvar") || !I_stricmp(out, "closeMenuOnDvarNot"))
     {
-        if ((unsigned __int8)UI_GetOpenOrCloseMenuOnDvarArgs(args, out, dvarName, testValue, menuName))
+        if ((uint8_t)UI_GetOpenOrCloseMenuOnDvarArgs(args, out, dvarName, testValue, menuName))
             UI_CloseMenuOnDvar(out, menuName, dvarName, testValue);
         return;
     }
@@ -2633,7 +2633,7 @@ char *__cdecl UI_ReplaceConversionString(const char *sourceString, const char *r
 
 char *__cdecl UI_ReplaceConversionInt(const char *sourceString, int replaceInt)
 {
-    __int64 v2; // r10
+    int64_t v2; // r10
     ConversionArguments v5; // [sp+50h] [-460h] BYREF
     char v6[32]; // [sp+80h] [-430h] BYREF
     char v7[1024]; // [sp+A0h] [-410h] BYREF
@@ -2658,7 +2658,7 @@ char *__cdecl UI_ReplaceConversionInts(
     int a4,
     int a5,
     int a6,
-    __int64 a7)
+    int64_t a7)
 {
     const char **args; // r30
     int v9; // r28

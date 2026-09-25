@@ -58,7 +58,7 @@ void __cdecl _yy_memcpy(char *to, char *from, unsigned int count)
 }
 
 #pragma region YY_GLOBALS
-const __int16 yydefact[262] =
+const int16_t yydefact[262] =
 {
   0,
   133,
@@ -323,7 +323,7 @@ const __int16 yydefact[262] =
   0,
   0
 }; // idb
-const __int16 yypact[262] =
+const int16_t yypact[262] =
 {
   -15,
   -32768,
@@ -588,7 +588,7 @@ const __int16 yypact[262] =
   221,
   -32768
 }; // idb
-const __int16 yytable[1348] =
+const int16_t yytable[1348] =
 {
   48,
   130,
@@ -2287,7 +2287,7 @@ const char yytranslate[345] =
   'Y',
   'Z'
 }; // idb
-const __int16 yyr1[134] =
+const int16_t yyr1[134] =
 {
   0,
   91,
@@ -2424,7 +2424,7 @@ const __int16 yyr1[134] =
   118,
   118
 }; // idb
-const __int16 yyr2[134] =
+const int16_t yyr2[134] =
 {
   0,
   3,
@@ -2561,7 +2561,7 @@ const __int16 yyr2[134] =
   3,
   0
 }; // idb
-const __int16 yycheck[1348] =
+const int16_t yycheck[1348] =
 {
   2,
   4,
@@ -3912,7 +3912,7 @@ const __int16 yycheck[1348] =
   29,
   30
 }; // idb
-const __int16 yy_accept[258] =
+const int16_t yy_accept[258] =
 {
   0,
   0,
@@ -4494,7 +4494,7 @@ const int yy_meta[59] =
   1,
   1
 }; // idb
-const __int16 yy_base[266] =
+const int16_t yy_base[266] =
 {
   0,
   431,
@@ -4763,7 +4763,7 @@ const __int16 yy_base[266] =
   198,
   367
 }; // idb
-const __int16 yy_def[266] =
+const int16_t yy_def[266] =
 {
   0,
   258,
@@ -5032,7 +5032,7 @@ const __int16 yy_def[266] =
   257,
   257
 }; // idb
-const __int16 yy_nxt[494] =
+const int16_t yy_nxt[494] =
 {
   0,
   8,
@@ -5529,7 +5529,7 @@ const __int16 yy_nxt[494] =
   257,
   257
 }; // idb
-const __int16 yy_chk[494] =
+const int16_t yy_chk[494] =
 {
   0,
   3,
@@ -6052,7 +6052,7 @@ unsigned int g_out_pos;
 int yy_did_buffer_switch_on_eof;
 
 sval_u g_dummyVal;
-unsigned __int8 g_parse_user;
+uint8_t g_parse_user;
 char ch_buf[16386];
 
 void *RETURN_ARG1(void *crap)
@@ -6105,16 +6105,16 @@ int __cdecl yyparse()
     sval_u v36; // [esp+4B8h] [ebp-81Ch]
     int v37; // [esp+4BCh] [ebp-818h]
     stype_t *yyvs1; // [esp+4C0h] [ebp-814h]
-    __int16 *yyss1; // [esp+4C4h] [ebp-810h]
+    int16_t *yyss1; // [esp+4C4h] [ebp-810h]
     int yyerrstatus; // [esp+4C8h] [ebp-80Ch]
     int yyfree_stacks; // [esp+4CCh] [ebp-808h]
     int yyn; // [esp+4D0h] [ebp-804h]
     int yystate; // [esp+4D4h] [ebp-800h]
-    __int16 *yyssp; // [esp+4D8h] [ebp-7FCh] BYREF
-    __int16 yyssa[200]; // [esp+4DCh] [ebp-7F8h] BYREF
+    int16_t *yyssp; // [esp+4D8h] [ebp-7FCh] BYREF
+    int16_t yyssa[200]; // [esp+4DCh] [ebp-7F8h] BYREF
     stype_t *yyvs; // [esp+674h] [ebp-660h]
     int yychar1; // [esp+678h] [ebp-65Ch]
-    __int16 *yyss; // [esp+67Ch] [ebp-658h]
+    int16_t *yyss; // [esp+67Ch] [ebp-658h]
     stype_t yyval; // [esp+680h] [ebp-654h]
     int yylen; // [esp+688h] [ebp-64Ch]
     stype_t yyvsa[200]; // [esp+68Ch] [ebp-648h] BYREF
@@ -7064,7 +7064,7 @@ int __cdecl yylex()
     int next_buffer; // [esp+0h] [ebp-24h]
     int yy_next_state; // [esp+8h] [ebp-1Ch]
     int yy_amount_of_matched_text; // [esp+Ch] [ebp-18h]
-    unsigned __int8 yy_c; // [esp+13h] [ebp-11h]
+    uint8_t yy_c; // [esp+13h] [ebp-11h]
     char *yy_bp; // [esp+14h] [ebp-10h]
     int yy_current_state; // [esp+18h] [ebp-Ch]
     int yy_act; // [esp+1Ch] [ebp-8h]
@@ -7834,7 +7834,7 @@ int __cdecl yy_get_next_buffer()
 int __cdecl yy_get_previous_state()
 {
     int v1; // [esp+0h] [ebp-10h]
-    unsigned __int8 yy_c; // [esp+7h] [ebp-9h]
+    uint8_t yy_c; // [esp+7h] [ebp-9h]
     int yy_current_state; // [esp+8h] [ebp-8h]
     char *yy_cp; // [esp+Ch] [ebp-4h]
 
@@ -7864,7 +7864,7 @@ int __cdecl yy_get_previous_state()
 
 int __cdecl yy_try_NUL_trans(int yy_current_state)
 {
-    unsigned __int8 yy_c; // [esp+7h] [ebp-5h]
+    uint8_t yy_c; // [esp+7h] [ebp-5h]
     int yy_current_statea; // [esp+14h] [ebp+8h]
 
     yy_c = 1;
@@ -7973,7 +7973,7 @@ int __cdecl yyerror()
     return 0;
 }
 
-void __cdecl ScriptParse(sval_u *parseData, unsigned __int8 user)
+void __cdecl ScriptParse(sval_u *parseData, uint8_t user)
 {
     yy_buffer_state buffer_state; // [esp+0h] [ebp-28h] BYREF
 

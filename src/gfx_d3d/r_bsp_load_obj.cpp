@@ -1949,7 +1949,7 @@ void __cdecl R_LoadNodesAndLeafs(uint32_t bspVersion)
         iassert(0); // lwss test add
         for (leafIndex = 0; leafIndex < leafCount; ++leafIndex)
         {
-            out->cellIndex = *((__int16 *)inLeaf_v14 + 12);
+            out->cellIndex = *((int16_t *)inLeaf_v14 + 12);
             //iassert( out->cellIndex == inLeaf_v14->cellNum );
             inLeaf_v14 += 36;
             ++out;
@@ -3685,8 +3685,8 @@ uint32_t __cdecl R_MaxModelsInDistRange(
         v9 = 100;
     for (dartIndex = 0; dartIndex < v9; ++dartIndex)
     {
-        yawDeviate = random();
-        radiusDeviate = random();
+        yawDeviate = Com_Random();
+        radiusDeviate = Com_Random();
         PointInCircleFromUniformDeviates(radiusDeviate, yawDeviate, testPos);
         testPos[0] = testPos[0] * size + mid;
         testPos[1] = testPos[1] * size_4 + mid_4;

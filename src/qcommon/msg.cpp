@@ -223,7 +223,7 @@ void __cdecl TRACK_msg()
     track_static_alloc_internal((void *)playerStateFields, 1716, "playerStateFields", 9);
 }
 
-void __cdecl MSG_Init(msg_t *buf, unsigned __int8 *data, int length)
+void __cdecl MSG_Init(msg_t *buf, uint8_t *data, int length)
 {
     memset(buf, 0, sizeof(msg_t));
 
@@ -246,7 +246,7 @@ void __cdecl MSG_Truncate(msg_t *msg)
 void __cdecl MSG_WriteBit0(msg_t *msg)
 {
     int cursize; // r11
-    unsigned __int8 *data; // r9
+    uint8_t *data; // r9
 
     cursize = msg->cursize;
     if (cursize < msg->maxsize)
@@ -270,7 +270,7 @@ void __cdecl MSG_WriteBit1(msg_t *msg)
 {
     int cursize; // r11
     int v3; // r9
-    unsigned __int8 *data; // r8
+    uint8_t *data; // r8
 
     iassert( !msg->readOnly );
     cursize = msg->cursize;
@@ -297,7 +297,7 @@ void __cdecl MSG_WriteBits(msg_t *msg, int value, unsigned int bits)
     unsigned int v3; // r30
     int v6; // r9
     int cursize; // r11
-    unsigned __int8 *data; // r10
+    uint8_t *data; // r10
 
     v3 = bits;
     iassert( (unsigned)bits <= 32 );
@@ -388,7 +388,7 @@ int __cdecl MSG_ReadBit(msg_t *msg)
     return (Byte >> v2) & 1;
 }
 
-void __cdecl MSG_WriteByte(msg_t *msg, unsigned __int8 c)
+void __cdecl MSG_WriteByte(msg_t *msg, uint8_t c)
 {
     int cursize; // r11
 
@@ -424,7 +424,7 @@ void __cdecl MSG_WriteData(msg_t *buf, unsigned char *data, int length)
     }
 }
 
-void __cdecl MSG_WriteShort(msg_t *msg, __int16 c)
+void __cdecl MSG_WriteShort(msg_t *msg, int16_t c)
 {
     int cursize; // r11
 
@@ -471,7 +471,7 @@ void __cdecl MSG_WriteString(msg_t *sb, char *s)
 
     iassert( s );
     v4 = s;
-    while (*(unsigned __int8 *)v4++)
+    while (*(uint8_t *)v4++)
         ;
     MSG_WriteData(sb, (unsigned char*)s, v4 - s);
 }
@@ -508,7 +508,7 @@ void __cdecl MSG_WriteAngle16(msg_t *sb, double f)
     }
 }
 
-void __cdecl MSG_WriteInt64(msg_t *msg, unsigned __int64 c)
+void __cdecl MSG_WriteInt64(msg_t *msg, uint64_t c)
 {
     int newsize; // [esp+4h] [ebp-4h]
 
@@ -549,7 +549,7 @@ int __cdecl MSG_ReadShort(msg_t *msg)
 {
     int readcount; // r10
     int v3; // r9
-    __int16 v4; // r10
+    int16_t v4; // r10
     int result; // r3
 
     readcount = msg->readcount;
@@ -669,7 +669,7 @@ void __cdecl MSG_ReadData(msg_t *msg, _BYTE *data, int len)
     int i; // r10
     int readcount; // r11
     int v5; // r7
-    unsigned __int8 v6; // r11
+    uint8_t v6; // r11
 
     for (i = 0; i < len; ++i)
     {
@@ -693,9 +693,9 @@ int __cdecl MSG_ReadInt64(msg_t *msg)
 {
     int readcount; // r4
     int v3; // r30
-    unsigned __int64 v4; // r4
-    unsigned __int64 v5; // r4
-    __int64 v7; // [sp+50h] [-20h] BYREF
+    uint64_t v4; // r4
+    uint64_t v5; // r4
+    int64_t v7; // [sp+50h] [-20h] BYREF
 
     readcount = msg->readcount;
     v3 = readcount + 8;
@@ -706,7 +706,7 @@ int __cdecl MSG_ReadInt64(msg_t *msg)
     }
     else
     {
-        MSG_GetBytes(msg, readcount, (unsigned __int8 *)&v7, 8);
+        MSG_GetBytes(msg, readcount, (uint8_t *)&v7, 8);
         HIDWORD(v4) = v7;
         v5 = LittleLong64(v4);
         msg->readcount = v3;
@@ -1143,10 +1143,10 @@ void __cdecl MSG_ReadDeltaUsercmd(msg_t *msg, const usercmd_s *from, usercmd_s *
     char v17; // r3
     int buttons; // r28
     int v19; // r11
-    unsigned __int8 weapon; // r28
-    unsigned __int8 v21; // r3
-    unsigned __int8 offHandIndex; // r28
-    unsigned __int8 v23; // r3
+    uint8_t weapon; // r28
+    uint8_t v21; // r3
+    uint8_t offHandIndex; // r28
+    uint8_t v23; // r3
     double gunPitch; // fp31
     double v25; // fp0
     double gunYaw; // fp31
@@ -1158,7 +1158,7 @@ void __cdecl MSG_ReadDeltaUsercmd(msg_t *msg, const usercmd_s *from, usercmd_s *
     double gunZOfs; // fp31
     double v33; // fp0
     double meleeChargeYaw; // fp31
-    unsigned __int8 meleeChargeDist; // r30
+    uint8_t meleeChargeDist; // r30
 
     if (from->buttons >= BUTTON_LOC_SELECTING)
         MyAssertHandler(
@@ -1295,12 +1295,12 @@ void __cdecl MSG_ReadDeltaUsercmd(msg_t *msg, const usercmd_s *from, usercmd_s *
             "to->buttons < (1 << BUTTON_BIT_COUNT)");
 }
 
-void __cdecl MSG_WriteDeltaField(msg_t *msg, unsigned __int8 *to, const netField_t *field)
+void __cdecl MSG_WriteDeltaField(msg_t *msg, uint8_t *to, const netField_t *field)
 {
     msg_t *v5; // r31
     int offset; // r29
     double v7; // fp31
-    __int64 v8; // r10
+    int64_t v8; // r10
     int v9; // r28
     unsigned int bits; // r5
     int v11; // [sp+50h] [-40h]
@@ -1344,11 +1344,11 @@ LABEL_12:
     MSG_WriteBits(v5, *(unsigned int *)&to[offset], bits);
 }
 
-void __cdecl MSG_ReadDeltaField(msg_t *msg, unsigned __int8 *to, const netField_t *field, int print)
+void __cdecl MSG_ReadDeltaField(msg_t *msg, uint8_t *to, const netField_t *field, int print)
 {
     int offset; // r30
     int Bits; // r6
-    __int64 v10; // r11
+    int64_t v10; // r11
 
     offset = field->offset;
     if (!MSG_ReadBits(msg, 1u))
@@ -1440,7 +1440,7 @@ void __cdecl MSG_WriteDeltaHudElems(msg_t *msg, hudelem_s *to, int count)
             v15 = v10 + 1;
             do
             {
-                MSG_WriteDeltaField(msg, (unsigned __int8 *)&to[v8], v14);
+                MSG_WriteDeltaField(msg, (uint8_t *)&to[v8], v14);
                 --v15;
                 ++v14;
             } while (v15);
@@ -1462,7 +1462,7 @@ void __cdecl MSG_ReadDeltaHudElems(msg_t *msg, hudelem_s *to, unsigned int count
     int v13; // r31
     msg_t *v14; // r3
     bool v15; // zf
-    __int64 v16; // r11
+    int64_t v16; // r11
     unsigned int v17; // r4
     unsigned int v18; // r11
     int *p_offset; // r10
@@ -1572,7 +1572,7 @@ void __cdecl MSG_WriteDeltaPlayerstate(msg_t *msg, playerState_s *to)
     int v9; // r23
     const int *p_bits; // r26
     int v11; // r27
-    __int64 v12; // r11
+    int64_t v12; // r11
     double v13; // fp0
     int v14; // r29
     int v15; // r6
@@ -2086,7 +2086,7 @@ void __cdecl MSG_ReadDeltaPlayerstate(msg_t *msg, playerState_s *to)
     int v11; // r28
     unsigned int v12; // r11
     int Bits; // r6
-    __int64 v14; // r11
+    int64_t v14; // r11
     int v15; // r29
     bool v16; // r27
     int v17; // r10
@@ -2097,7 +2097,7 @@ void __cdecl MSG_ReadDeltaPlayerstate(msg_t *msg, playerState_s *to)
     int v22; // r11
     int v23; // r11
     int v24; // r10
-    __int16 v25; // r11
+    int16_t v25; // r11
     int v26; // r8
     int v27; // r9
     int *v28; // r7
@@ -2116,7 +2116,7 @@ void __cdecl MSG_ReadDeltaPlayerstate(msg_t *msg, playerState_s *to)
     int i; // r30
     int v42; // r11
     int v43; // r10
-    __int16 v44; // r11
+    int16_t v44; // r11
     int v45; // r7
     int j; // r8
     int v47; // r11
@@ -2134,7 +2134,7 @@ void __cdecl MSG_ReadDeltaPlayerstate(msg_t *msg, playerState_s *to)
     int k; // r30
     int v60; // r11
     int v61; // r10
-    __int16 v62; // r11
+    int16_t v62; // r11
     int v63; // r7
     int m; // r8
     int v65; // r11
@@ -2149,20 +2149,20 @@ void __cdecl MSG_ReadDeltaPlayerstate(msg_t *msg, playerState_s *to)
     int v74; // r11
     int v75; // r10
     int v76; // r11
-    unsigned __int8 *v77; // r10
+    uint8_t *v77; // r10
     int v78; // r9
     int v79; // r11
     int v80; // r7
-    unsigned __int8 v81; // r11
+    uint8_t v81; // r11
     int v82; // r11
     int v83; // r7
-    unsigned __int8 v84; // r11
+    uint8_t v84; // r11
     int v85; // r11
     int v86; // r7
-    unsigned __int8 v87; // r11
+    uint8_t v87; // r11
     int v88; // r11
     int v89; // r7
-    unsigned __int8 v90; // r11
+    uint8_t v90; // r11
     int v91; // r10
     int v92; // r11
     int v93; // r11
@@ -2286,7 +2286,7 @@ void __cdecl MSG_ReadDeltaPlayerstate(msg_t *msg, playerState_s *to)
                     //LOWORD(v31) = *(_WORD *)&msg->data[v29];
                     v31 = (v31 & 0xFFFF0000) | (*(_WORD *)&msg->data[v29]);
                     msg->readcount = v30;
-                    v31 = (__int16)v31;
+                    v31 = (int16_t)v31;
                 }
                 *(v28 - 1) = v31;
             }
@@ -2304,7 +2304,7 @@ void __cdecl MSG_ReadDeltaPlayerstate(msg_t *msg, playerState_s *to)
                     //LOWORD(v34) = *(_WORD *)&msg->data[v32];
                     v34 = (v34 & 0xFFFF0000) | (*(_WORD *)&msg->data[v32]);
                     msg->readcount = v33;
-                    v34 = (__int16)v34;
+                    v34 = (int16_t)v34;
                 }
                 *v28 = v34;
             }
@@ -2322,7 +2322,7 @@ void __cdecl MSG_ReadDeltaPlayerstate(msg_t *msg, playerState_s *to)
                     //LOWORD(v37) = *(_WORD *)&msg->data[v35];
                     v37 = (v37 & 0xFFFF0000) | (*(_WORD *)&msg->data[v35]);
                     msg->readcount = v36;
-                    v37 = (__int16)v37;
+                    v37 = (int16_t)v37;
                 }
                 v28[1] = v37;
             }
@@ -2340,7 +2340,7 @@ void __cdecl MSG_ReadDeltaPlayerstate(msg_t *msg, playerState_s *to)
                     //LOWORD(v40) = *(_WORD *)&msg->data[v38];
                     v40 = (v40 & 0xFFFF0000) | (*(_WORD *)&msg->data[v38]);
                     msg->readcount = v39;
-                    v40 = (__int16)v40;
+                    v40 = (int16_t)v40;
                 }
                 v28[2] = v40;
             }
@@ -2385,7 +2385,7 @@ void __cdecl MSG_ReadDeltaPlayerstate(msg_t *msg, playerState_s *to)
                             //LOWORD(v49) = *(_WORD *)&msg->data[v47];
                             v49 = (v49 & 0xFFFF0000) | (*(_WORD *)&msg->data[v47]);
                             msg->readcount = v48;
-                            v49 = (__int16)v49;
+                            v49 = (int16_t)v49;
                         }
                         *((unsigned int *)to + i + j - 1) = v49;
                     }
@@ -2403,7 +2403,7 @@ void __cdecl MSG_ReadDeltaPlayerstate(msg_t *msg, playerState_s *to)
                             //LOWORD(v52) = *(_WORD *)&msg->data[v50];
                             v52 = (v52 & 0xFFFF0000) | (*(_WORD *)&msg->data[v50]);
                             msg->readcount = v51;
-                            v52 = (__int16)v52;
+                            v52 = (int16_t)v52;
                         }
                         *(&to->commandTime + i + j) = v52;
                     }
@@ -2421,7 +2421,7 @@ void __cdecl MSG_ReadDeltaPlayerstate(msg_t *msg, playerState_s *to)
                             //LOWORD(v55) = *(_WORD *)&msg->data[v53];
                             v55 = (v55 & 0xFFFF0000) | (*(_WORD *)&msg->data[v53]);
                             msg->readcount = v54;
-                            v55 = (__int16)v55;
+                            v55 = (int16_t)v55;
                         }
                         *(&to->pm_type + i + j) = (pmtype_t)v55;
                     }
@@ -2439,7 +2439,7 @@ void __cdecl MSG_ReadDeltaPlayerstate(msg_t *msg, playerState_s *to)
                             //LOWORD(v58) = *(_WORD *)&msg->data[v56];
                             v58 = (v58 & 0xFFFF0000) | (*(_WORD *)&msg->data[v56]);
                             msg->readcount = v57;
-                            v58 = (__int16)v58;
+                            v58 = (int16_t)v58;
                         }
                         *(&to->bobCycle + i + j) = v58;
                     }
@@ -2482,7 +2482,7 @@ void __cdecl MSG_ReadDeltaPlayerstate(msg_t *msg, playerState_s *to)
                         //LOWORD(v67) = *(_WORD *)&msg->data[v65];
                         v67 = (v67 & 0xFFFF0000) | (*(_WORD *)&msg->data[v65]);
                         msg->readcount = v66;
-                        v67 = (__int16)v67;
+                        v67 = (int16_t)v67;
                     }
                     *((unsigned int *)to + k + m - 1) = v67;
                 }
@@ -2500,7 +2500,7 @@ void __cdecl MSG_ReadDeltaPlayerstate(msg_t *msg, playerState_s *to)
                         //LOWORD(v70) = *(_WORD *)&msg->data[v68];
                         v70 = (v70 & 0xFFFF0000) | (*(_WORD *)&msg->data[v68]);
                         msg->readcount = v69;
-                        v70 = (__int16)v70;
+                        v70 = (int16_t)v70;
                     }
                     *(&to->commandTime + k + m) = v70;
                 }
@@ -2518,7 +2518,7 @@ void __cdecl MSG_ReadDeltaPlayerstate(msg_t *msg, playerState_s *to)
                         //LOWORD(v73) = *(_WORD *)&msg->data[v71];
                         v73 = (v73 & 0xFFFF0000) | (*(_WORD *)&msg->data[v71]);
                         msg->readcount = v72;
-                        v73 = (__int16)v73;
+                        v73 = (int16_t)v73;
                     }
                     *(&to->pm_type + k + m) = (pmtype_t)v73;
                 }
@@ -2536,7 +2536,7 @@ void __cdecl MSG_ReadDeltaPlayerstate(msg_t *msg, playerState_s *to)
                         //LOWORD(v76) = *(_WORD *)&msg->data[v74];
                         v76 = (v76 & 0xFFFF0000) | (*(_WORD *)&msg->data[v74]);
                         msg->readcount = v75;
-                        v76 = (__int16)v76;
+                        v76 = (int16_t)v76;
                     }
                     *(&to->bobCycle + k + m) = v76;
                 }
@@ -2623,11 +2623,11 @@ int __cdecl MSG_GetByte(msg_t *msg, int where)
     return msg->splitData[where - msg->cursize];
 }
 
-void __cdecl MSG_GetBytes(msg_t *msg, int where, unsigned __int8 *dest, int len)
+void __cdecl MSG_GetBytes(msg_t *msg, int where, uint8_t *dest, int len)
 {
     int i; // r30
-    unsigned __int8 *data; // r11
-    unsigned __int8 v10; // r11
+    uint8_t *data; // r11
+    uint8_t v10; // r11
 
     for (i = 0; i < len; ++i)
     {

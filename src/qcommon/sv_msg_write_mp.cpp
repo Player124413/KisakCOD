@@ -1674,7 +1674,7 @@ void __cdecl MSG_WriteDeltaField(
                 SV_PacketDataIsZeroFloat(snapInfo->clientNum, msg);
                 MSG_WriteBit0(msg);
             }
-            if ((uint32_t)(__int64)(*(float *)toF + 2048.0) >= 0x1000)
+            if ((uint32_t)(int64_t)(*(float *)toF + 2048.0) >= 0x1000)
                 MyAssertHandler(
                     ".\\qcommon\\sv_msg_write_mp.cpp",
                     1068,

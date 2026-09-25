@@ -2767,7 +2767,7 @@ void Scr_ScriptList::Shutdown()
 void Scr_ScriptList::LoadScriptPos()
 {
     Scr_StringNode_s *node; // [esp+1Ch] [ebp-7Ch]
-    // __int64 pos; // [esp+20h] [ebp-78h] BYREF
+    // int64_t pos; // [esp+20h] [ebp-78h] BYREF
     float pos[2];
     char filename[88]; // [esp+28h] [ebp-70h] BYREF
     Scr_StringNode_s *head; // [esp+84h] [ebp-14h]

@@ -66,7 +66,7 @@ typedef DWORD FOURCC;
 #define SND_LENGTHNOTIFY_COUNT       4
 #define SND_MAX_PHYSICS              32
 
-enum : __int32
+enum : int32_t
 {
     SND_TRACK_MUSIC = 0x0,
     SND_TRACK_AMBIENT_PRIMARY_0 = 0x1,
@@ -76,7 +76,7 @@ enum : __int32
     SND_TRACK_COUNT = 0x5,
 };
 
-enum SND_ENVEFFECTPRIO : __int32
+enum SND_ENVEFFECTPRIO : int32_t
 {
     SND_ENVEFFECTPRIO_NONE = 0x0,
     SND_ENVEFFECTPRIO_LEVEL = 0x1,
@@ -84,7 +84,7 @@ enum SND_ENVEFFECTPRIO : __int32
     SND_ENVEFFECTPRIO_COUNT = 0x3,
 };
 
-enum SND_CHANNELVOLPRIO : __int32
+enum SND_CHANNELVOLPRIO : int32_t
 {
     SND_CHANNELVOLPRIO_NONE      = 0,
 #ifdef KISAK_SP
@@ -96,7 +96,7 @@ enum SND_CHANNELVOLPRIO : __int32
     SND_CHANNELVOLPRIO_COUNT
 };
 
-enum SND_EQTYPE : __int32
+enum SND_EQTYPE : int32_t
 {                                       // ...
     SND_EQTYPE_FIRST = 0x0,
     SND_EQTYPE_LOWPASS = 0x0,
@@ -108,14 +108,14 @@ enum SND_EQTYPE : __int32
     SND_EQTYPE_COUNT = 0x5,
     SND_EQTYPE_INVALID = 0x5,
 };
-enum snd_overlay_type_t : __int32
+enum snd_overlay_type_t : int32_t
 {                                       // ...
     SND_OVERLAY_NONE = 0x0,
     SND_OVERLAY_3D = 0x1,
     SND_OVERLAY_STREAM = 0x2,
     SND_OVERLAY_2D = 0x3,
 };
-enum snd_stopsounds_arg_t : __int32
+enum snd_stopsounds_arg_t : int32_t
 {                                       // ...
     SND_STOP_ALL = 0x0,
     SND_KEEP_REVERB = 0x1,
@@ -125,20 +125,20 @@ enum snd_stopsounds_arg_t : __int32
     SND_STOP_STREAMED = 0x8,
     SND_KEEP_CHANNEL_VOLUMES = 0x10,
 };
-enum snd_alias_system_t : __int32
+enum snd_alias_system_t : int32_t
 {                                       // ...
     SASYS_UI = 0x0,
     SASYS_CGAME = 0x1,
     SASYS_GAME = 0x2,
     SASYS_COUNT = 0x3,
 };
-enum SndLengthId : __int32
+enum SndLengthId : int32_t
 {                                       // ...
     SndLengthNotify_Script = 0x0,
     SndLengthNotify_Subtitle = 0x1,
     SndLengthNotifyCount = 0x2,
 };
-enum SndFileLoadingState : __int32
+enum SndFileLoadingState : int32_t
 {                                       // ...
     SFLS_UNLOADED = 0x0,
     SFLS_LOADING = 0x1,

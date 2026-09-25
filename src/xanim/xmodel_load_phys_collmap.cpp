@@ -1297,7 +1297,7 @@ PhysGeomList *__cdecl XModel_LoadPhysicsCollMap(const char *name, void *(__cdecl
 {
     char filename[1024]; // [esp+0h] [ebp-418h] BYREF
     const char *buf; // [esp+404h] [ebp-14h] BYREF
-    unsigned __int8 *file; // [esp+408h] [ebp-10h] BYREF
+    uint8_t *file; // [esp+408h] [ebp-10h] BYREF
     int fileSize; // [esp+40Ch] [ebp-Ch]
     uint32_t geomCount; // [esp+410h] [ebp-8h]
     PhysGeomList *geomList; // [esp+414h] [ebp-4h]

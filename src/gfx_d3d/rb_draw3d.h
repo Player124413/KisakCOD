@@ -2,7 +2,7 @@
 #include <d3d9.h>
 #include "rb_backend.h"
 
-enum $F8BAC180992631E19A574A0F352E600A : __int32
+enum $F8BAC180992631E19A574A0F352E600A : int32_t
 {
     GFX_SM_OVERLAY_OFF = 0x0,
     GFX_SM_OVERLAY_SUN = 0x1,

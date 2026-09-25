@@ -75,7 +75,7 @@ static void __cdecl CG_InterpolatePlayerStateViewAngles(int localClientNum, play
     float vehAngles[3]; // [esp+D0h] [ebp-30h] BYREF
     float yawFrac; // [esp+DCh] [ebp-24h]
     int vehicleType; // [esp+E0h] [ebp-20h]
-    unsigned __int16 vehType; // [esp+E4h] [ebp-1Ch]
+    uint16_t vehType; // [esp+E4h] [ebp-1Ch]
     const char *vehicleTypeStr[2]; // [esp+E8h] [ebp-18h]
     cg_s *cgameGlob; // [esp+F0h] [ebp-10h]
     const snapshot_s *prevSnap; // [esp+F4h] [ebp-Ch]
@@ -185,7 +185,7 @@ void __cdecl CG_InterpolatePlayerState(int localClientNum, int grabAngles, int g
     double f; // fp31
     int i; // r10
     int v12; // r11
-    __int64 v13; // r10
+    int64_t v13; // r10
     float *linkAngles; // r28
     float *origin; // r30
     int v16; // r24
@@ -401,23 +401,23 @@ void __cdecl CG_PredictPlayerState_Internal(int localClientNum) // KISAKTODO: us
     double v10; // fp29
     double v11; // fp28
     double len; // fp1
-    __int64 v13; // r10
+    int64_t v13; // r10
     double f; // fp31
     double v15; // r5
     double v16; // fp0
     double v17; // fp13
     double v18; // fp12
-    __int64 v20; // r8
+    int64_t v20; // r8
     _BYTE v21[12]; // r11 OVERLAPPED
     double v22; // fp0
     double v23; // fp13
     double v24; // fp0
-    __int64 v27; // r11
+    int64_t v27; // r11
     double v28; // fp0
-    __int64 v29; // fp13
-    __int64 v30; // r11
+    int64_t v29; // fp13
+    int64_t v30; // r11
     LargeLocal v31(45784); // [sp+58h] [-118h] BYREF
-    __int64 v32; // [sp+60h] [-110h]
+    int64_t v32; // [sp+60h] [-110h]
     float adjusted[3];
     float deltaAngles[3];
     //float v33; // [sp+68h] [-108h] BYREF

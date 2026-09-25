@@ -10,7 +10,7 @@ struct GfxShaderConstantState_s // sizeof=0x8
 union GfxShaderConstantState // sizeof=0x8
 {                                       // ...
     GfxShaderConstantState_s fields;
-    unsigned __int64 packed;
+    uint64_t packed;
 };
 
 int __cdecl R_ReserveIndexData(GfxCmdBufPrimState *state, int triCount);
@@ -19,7 +19,7 @@ void __cdecl R_ChangeObjectPlacement(GfxCmdBufSourceState *source, const GfxScal
 int __cdecl R_SetIndexData(GfxCmdBufPrimState *state, uint8_t *indices, int triCount);
 void __cdecl R_SetupPassPerPrimArgs(GfxCmdBufContext context);
 void __cdecl R_SetVertexShaderConstantFromCode(GfxCmdBufContext context, const MaterialShaderArgument *routingData);
-void __cdecl R_HW_SetVertexShaderConstant(__int64 device, __int64 data);
+void __cdecl R_HW_SetVertexShaderConstant(int64_t device, int64_t data);
 float *__cdecl R_GetCodeConstant(GfxCmdBufContext context, uint32_t constant);
 char __cdecl R_IsVertexShaderConstantUpToDate(GfxCmdBufContext context, const MaterialShaderArgument *routingData);
 char __cdecl R_IsShaderMatrixUpToDate(

@@ -2,7 +2,7 @@
 #include "r_gfx.h"
 #include "r_model_lighting.h"
 
-enum GfxSortedHistoryAdd : __int32
+enum GfxSortedHistoryAdd : int32_t
 {                                       // ...
     SH_ADD_NEVER = 0x0,
     SH_ADD_IF_NEW = 0x1,

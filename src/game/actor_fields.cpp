@@ -145,17 +145,17 @@ const actor_fields_s entfields[8] =
 actor_fields_s aifield_list = { 0 };
 actor_fields_s aifield_delete = { 0 };
 
-unsigned __int8 *__cdecl BaseForFields(unsigned __int8 *actor, const actor_fields_s *fields)
+uint8_t *__cdecl BaseForFields(uint8_t *actor, const actor_fields_s *fields)
 {
     if (fields != aifields)
     {
         if (fields == sentientfields)
         {
-            return (unsigned __int8 *)((actor_s *)actor)->sentient;
+            return (uint8_t *)((actor_s *)actor)->sentient;
         }
         else if (fields == entfields)
         {
-            return (unsigned __int8 *)((actor_s *)actor)->ent;
+            return (uint8_t *)((actor_s *)actor)->ent;
         }
         else
         {
@@ -201,7 +201,7 @@ void __cdecl ActorScr_SetSpecies(actor_s *pSelf, const actor_fields_s *pField)
         if (type == *g_AISpeciesNames[i])
         {
             pSelf->species = (AISpecies)i;
-            pSelf->ent->s.lerp.u.actor.species = (unsigned __int8)i;
+            pSelf->ent->s.lerp.u.actor.species = (uint8_t)i;
             G_DObjUpdate(pSelf->ent);
             return;
         }
@@ -651,10 +651,10 @@ void __cdecl Cmd_AI_Delete(actor_s *actor)
     G_FreeEntityDelay(actor->ent);
 }
 
-void __cdecl Cmd_AI_DisplayValue(actor_s *pSelf, unsigned __int8 *pBase, const actor_fields_s *pField)
+void __cdecl Cmd_AI_DisplayValue(actor_s *pSelf, uint8_t *pBase, const actor_fields_s *pField)
 {
     int number; // r28
-    __int64 v7; // r11
+    int64_t v7; // r11
     fieldtype_t type; // r4
     double v9; // r7
     int ofs; // r11
@@ -706,7 +706,7 @@ void __cdecl Cmd_AI_DisplayValue(actor_s *pSelf, unsigned __int8 *pBase, const a
             Com_Printf(CON_CHANNEL_DONT_FILTER, "ent %i: %s = %i\n", pSelf->ent->s.number, pField->name, *(unsigned int *)&pBase[pField->ofs]);
             return;
         case F_SHORT:
-            Com_Printf(CON_CHANNEL_DONT_FILTER, "ent %i: %s = %i\n", pSelf->ent->s.number, pField->name, *(__int16 *)&pBase[pField->ofs]);
+            Com_Printf(CON_CHANNEL_DONT_FILTER, "ent %i: %s = %i\n", pSelf->ent->s.number, pField->name, *(int16_t *)&pBase[pField->ofs]);
             return;
         case F_BYTE:
             Com_Printf(CON_CHANNEL_DONT_FILTER, "ent %i: %s = %i\n", pSelf->ent->s.number, pField->name, pBase[pField->ofs]);
@@ -722,7 +722,7 @@ void __cdecl Cmd_AI_DisplayValue(actor_s *pSelf, unsigned __int8 *pBase, const a
         case F_STRING:
             ofs = pField->ofs;
             if (*(_WORD *)&pBase[ofs])
-                v11 = SL_ConvertToString(*(unsigned __int16 *)&pBase[ofs]);
+                v11 = SL_ConvertToString(*(uint16_t *)&pBase[ofs]);
             else
                 v11 = "<undefined>";
             Com_Printf(CON_CHANNEL_DONT_FILTER, "ent %i: %s = %s\n", number, pField->name, v11);
@@ -862,7 +862,7 @@ void __cdecl Cmd_AI_DisplayValue(actor_s *pSelf, unsigned __int8 *pBase, const a
     }
 }
 
-void __cdecl Cmd_AI_SetValue(actor_s *pSelf, int argc, unsigned __int8 *pBase, const actor_fields_s *pField)
+void __cdecl Cmd_AI_SetValue(actor_s *pSelf, int argc, uint8_t *pBase, const actor_fields_s *pField)
 {
     void(__cdecl * setter)(actor_s *, const actor_fields_s *); // r11
     long double v9; // fp2
@@ -979,8 +979,8 @@ void __cdecl Cmd_AI_SetValue(actor_s *pSelf, int argc, unsigned __int8 *pBase, c
 
 void __cdecl Cmd_AI_Dispatch(int argc, actor_s *pSelf, const actor_fields_s *fields, const actor_fields_s *pField)
 {
-    unsigned __int8 *v8; // r3
-    unsigned __int8 *v9; // r3
+    uint8_t *v8; // r3
+    uint8_t *v9; // r3
 
     if (argc < 3)
         MyAssertHandler("c:\\trees\\cod3\\cod3src\\src\\game\\actor_fields.cpp", 1035, 0, "%s", "argc >= 3");
@@ -1006,14 +1006,14 @@ void __cdecl Cmd_AI_Dispatch(int argc, actor_s *pSelf, const actor_fields_s *fie
     {
         if (!fields)
             MyAssertHandler("c:\\trees\\cod3\\cod3src\\src\\game\\actor_fields.cpp", 1056, 0, "%s", "fields != NULL");
-        v8 = BaseForFields((unsigned __int8 *)pSelf, fields);
+        v8 = BaseForFields((uint8_t *)pSelf, fields);
         Cmd_AI_DisplayValue(pSelf, v8, pField);
     }
     else
     {
         if (!fields)
             MyAssertHandler("c:\\trees\\cod3\\cod3src\\src\\game\\actor_fields.cpp", 1061, 0, "%s", "fields != NULL");
-        v9 = BaseForFields((unsigned __int8 *)pSelf, fields);
+        v9 = BaseForFields((uint8_t *)pSelf, fields);
         Cmd_AI_SetValue(pSelf, argc, v9, pField);
     }
 }
@@ -1085,7 +1085,7 @@ void __cdecl Cmd_AI_Name(
     int bInvertSelection)
 {
     int offset; // [esp+4h] [ebp-Ch]
-    unsigned __int16 name; // [esp+8h] [ebp-8h] BYREF
+    uint16_t name; // [esp+8h] [ebp-8h] BYREF
     actor_s *actor; // [esp+Ch] [ebp-4h]
 
     if (I_strnicmp(szName, "actor_", 6))
@@ -1096,7 +1096,7 @@ void __cdecl Cmd_AI_Name(
     name = SL_GetString(szName, 0);
     for (actor = Actor_FirstActor(-1); actor; actor = Actor_NextActor(actor, -1))
     {
-        if ((*(unsigned __int16 *)((char *)actor->ent + offset) == name) == (bInvertSelection == 0))
+        if ((*(uint16_t *)((char *)actor->ent + offset) == name) == (bInvertSelection == 0))
             Cmd_AI_Dispatch(argc, actor, fields, pField);
     }
     Scr_SetString(&name, 0);
@@ -1214,7 +1214,7 @@ void __cdecl GScr_AddFieldsForActor()
         iassert(!((f - aifields) & ENTFIELD_MASK));
         iassert((f - aifields) == (unsigned short)(f - aifields));
 
-        Scr_AddClassField(CLASS_NUM_ENTITY, (char*)f->name, (unsigned __int16)(f - aifields) | ENTFIELD_ACTOR);
+        Scr_AddClassField(CLASS_NUM_ENTITY, (char*)f->name, (uint16_t)(f - aifields) | ENTFIELD_ACTOR);
     }
 }
 
@@ -1231,7 +1231,7 @@ void __cdecl Scr_SetActorField(actor_s *actor, unsigned int offset)
     if (setter)
         (setter)(actor, f);
     else
-        Scr_SetGenericField((unsigned __int8 *)actor, f->type, f->ofs);
+        Scr_SetGenericField((uint8_t *)actor, f->type, f->ofs);
 }
 
 void __cdecl Scr_GetActorField(actor_s *actor, unsigned int offset)
@@ -1247,6 +1247,6 @@ void __cdecl Scr_GetActorField(actor_s *actor, unsigned int offset)
     if (getter)
         (getter)(actor, f);
     else
-        Scr_GetGenericField((unsigned __int8 *)actor, f->type, f->ofs);
+        Scr_GetGenericField((uint8_t *)actor, f->type, f->ofs);
 }
 

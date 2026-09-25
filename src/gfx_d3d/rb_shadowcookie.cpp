@@ -140,7 +140,7 @@ void RB_ShadowCookieOverlay()
     uint32_t v1; // [esp+2Ch] [ebp-68h] BYREF
     float v2; // [esp+30h] [ebp-64h]
     float v3; // [esp+34h] [ebp-60h]
-    __int64 color; // [esp+38h] [ebp-5Ch]
+    int64_t color; // [esp+38h] [ebp-5Ch]
     float w; // [esp+40h] [ebp-54h]
     float x; // [esp+44h] [ebp-50h]
     GfxMatrix v7; // [esp+48h] [ebp-4Ch] BYREF

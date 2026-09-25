@@ -133,7 +133,7 @@ void __cdecl Actor_AddSuppressionLine(
         // i.e. self->suppressionMeter = min(meter + 0.15, 1.0)  -- clamp to [<=1].
         float newMeter = self->suppressionMeter + 0.15f;
         self->suppressionMeter = (newMeter <= 1.0f) ? newMeter : 1.0f;
-        if (!(unsigned __int8)Actor_NearCoverNode(self))
+        if (!(uint8_t)Actor_NearCoverNode(self))
             goto LABEL_29;
         goto LABEL_18;
     }
@@ -148,7 +148,7 @@ void __cdecl Actor_AddSuppressionLine(
                 0,
                 "%s",
                 "pSuppressor->ent->actor");
-        if (!(unsigned __int8)Actor_IsMoving(pSuppressor->ent->actor))
+        if (!(uint8_t)Actor_IsMoving(pSuppressor->ent->actor))
         {
             v8 = (float)(*vStart - self->ent->r.currentOrigin[0]);
             v9 = (float)(vStart[2] - self->ent->r.currentOrigin[2]);

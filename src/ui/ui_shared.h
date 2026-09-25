@@ -13,14 +13,14 @@
 
 struct Scr_WatchElement_s;
 
-enum Scr_ConsoleOpenMode : __int32
+enum Scr_ConsoleOpenMode : int32_t
 {
     SCR_CONSOLE_INPUT_ONLY = 0x0,
     SCR_CONSOLE_INPUT_OUTPUT = 0x1,
 };
 
 #ifdef KISAK_MP
-enum operationEnum : __int32
+enum operationEnum : int32_t
 {                                       // ...
     OP_NOOP = 0x0,
     OP_RIGHTPAREN = 0x1,
@@ -111,7 +111,7 @@ enum operationEnum : __int32
 // compiled into the Radiant target, but operationEnum is declared transitively
 // via ui_shared.h, so it must exist — keep it identical to SP.
 #elif defined(KISAK_SP) || defined(KISAK_RADIANT)
-enum operationEnum : __int32
+enum operationEnum : int32_t
 {
     OP_NOOP = 0x0,
     OP_RIGHTPAREN = 0x1,
@@ -200,7 +200,7 @@ enum operationEnum : __int32
 
 
 #ifdef KISAK_MP
-enum uiMenuCommand_t : __int32
+enum uiMenuCommand_t : int32_t
 {                                       // ...
     UIMENU_NONE = 0x0,
     UIMENU_MAIN = 0x1,
@@ -216,7 +216,7 @@ enum uiMenuCommand_t : __int32
     UIMENU_ENDOFGAME = 0xB,
 };
 #elif KISAK_SP
-enum uiMenuCommand_t : __int32
+enum uiMenuCommand_t : int32_t
 {
     UIMENU_NONE = 0x0,
     UIMENU_MAIN = 0x1,
@@ -232,28 +232,28 @@ enum uiMenuCommand_t : __int32
     UIMENU_CONTROLLERREMOVED = 0xB,
 };
 #elif defined(KISAK_RADIANT)
-enum uiMenuCommand_t : __int32 { UIMENU_NONE = 0x0, UIMENU_MAIN = 0x1, UIMENU_INGAME = 0x2 };
+enum uiMenuCommand_t : int32_t { UIMENU_NONE = 0x0, UIMENU_MAIN = 0x1, UIMENU_INGAME = 0x2 };
 #endif
 
-enum parseSkip_t : __int32
+enum parseSkip_t : int32_t
 {                                       // ...
     SKIP_NO = 0x0,
     SKIP_YES = 0x1,
     SKIP_ALL_ELIFS = 0x2,
 };
-enum UILocalVarType : __int32
+enum UILocalVarType : int32_t
 {                                       // ...
     UILOCALVAR_INT = 0x0,
     UILOCALVAR_FLOAT = 0x1,
     UILOCALVAR_STRING = 0x2,
 };
-enum EvalValueType : __int32
+enum EvalValueType : int32_t
 {                                       // ...
     EVAL_VALUE_DOUBLE = 0x0,
     EVAL_VALUE_INT = 0x1,
     EVAL_VALUE_STRING = 0x2,
 };
-enum EvalOperatorType : __int32
+enum EvalOperatorType : int32_t
 {                                       // ...
     EVAL_OP_LPAREN = 0x0,
     EVAL_OP_RPAREN = 0x1,
@@ -421,7 +421,7 @@ union operandInternalDataUnion // sizeof=0x4
     float floatVal;
     const char *string;
 };
-enum expDataType : __int32
+enum expDataType : int32_t
 {                                       // ...
     VAL_INT = 0x0,
     VAL_FLOAT = 0x1,
@@ -667,7 +667,7 @@ struct operator_s // sizeof=0x14
     operator_s *prev;
     operator_s *next;
 };
-struct __declspec(align(8)) token_s // sizeof=0x430
+struct __attribute__((aligned(8))) token_s // sizeof=0x430
 {                                       // ...
     char string[1024];                  // ...
     int type;                           // ...
@@ -688,7 +688,7 @@ struct __declspec(align(8)) token_s // sizeof=0x430
     // padding byte
     // padding byte
 };
-struct __declspec(align(8)) value_s // sizeof=0x20
+struct __attribute__((aligned(8))) value_s // sizeof=0x20
 {                                       // ...
     int intvalue;
     // padding byte
@@ -704,7 +704,7 @@ struct __declspec(align(8)) value_s // sizeof=0x20
     // padding byte
     // padding byte
 };
-struct __declspec(align(8)) script_s // sizeof=0x4B0
+struct __attribute__((aligned(8))) script_s // sizeof=0x4B0
 {
     char filename[64];
     char *buffer;
@@ -1403,6 +1403,8 @@ void __cdecl bitwiseOr(Operand *leftSide, Operand *rightSide, Operand *result);
 template<typename T, int useless, int HASH_SEED>
 struct KeywordHashEntry
 {
+bool IsValidSeed(int count, int seed);
+
     bool KeywordHash_IsValidSeed(int count, int seed)
     {
 

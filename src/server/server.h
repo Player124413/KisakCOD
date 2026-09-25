@@ -10,7 +10,7 @@
 
 #include <bgame/bg_local.h>
 
-enum clientConnected_t : __int32
+enum clientConnected_t : int32_t
 {
     CON_DISCONNECTED = 0x0,
     CON_CONNECTING = 0x1,
@@ -90,7 +90,7 @@ struct client_t
 
 struct server_demo_save_t
 {
-    unsigned __int8 *buf;
+    uint8_t *buf;
     int bufLen;
 };
 
@@ -100,9 +100,9 @@ struct server_demo_history_t
     int time;
     char name[64];
     server_demo_save_t save;
-    unsigned __int8 *cmBuf;
+    uint8_t *cmBuf;
     int cmBufLen;
-    unsigned __int8 *freeEntBuf;
+    uint8_t *freeEntBuf;
     int freeEntBufLen;
     int randomSeed;
     int nextFramePos;
@@ -129,14 +129,14 @@ struct FileMarkSkip
     int fileOffset;
 };
 
-enum SaveType : __int32
+enum SaveType : int32_t
 {
     SAVE_TYPE_INTERNAL = 0x0,
     SAVE_TYPE_AUTOSAVE = 0x1,
     SAVE_TYPE_CONSOLE = 0x2,
 };
 
-struct __declspec(align(4)) PendingSave
+struct __attribute__((aligned(4))) PendingSave
 {
     char filename[64];
     char description[256];
@@ -147,7 +147,7 @@ struct __declspec(align(4)) PendingSave
     bool suppressPlayerNotify;
 };
 
-enum ServerFrameExtent : __int32
+enum ServerFrameExtent : int32_t
 {
     SV_FRAME_DO_ALL = 0x0,
     SV_FRAME_DO_SMOOTHING = 0x1,
@@ -211,9 +211,9 @@ struct SaveGame;
 
 void __cdecl TRACK_sv_demo();
 unsigned int __cdecl SV_GetHistoryIndex(server_demo_history_t *history);
-int __cdecl SV_GetBufferIndex(unsigned __int8 *ptr);
-void __cdecl SV_HistoryFree(unsigned __int8 *ptr, int size);
-int __cdecl SV_HistoryAlloc(server_demo_history_t *history, unsigned __int8 **pData, int size);
+int __cdecl SV_GetBufferIndex(uint8_t *ptr);
+void __cdecl SV_HistoryFree(uint8_t *ptr, int size);
+int __cdecl SV_HistoryAlloc(server_demo_history_t *history, uint8_t **pData, int size);
 int __cdecl SV_MsgAlloc(unsigned int maxsize);
 void SV_CheckDemoSize();
 bool __cdecl SV_DemoWrite(const void *buffer, unsigned int len, _iobuf *file);
@@ -249,7 +249,7 @@ void __cdecl SV_RecordButtonPressed(int buttonPressed);
 void __cdecl SV_GetFreeDemoName(const char *baseName, int demoCount, char *testDemoName);
 void __cdecl SV_SaveDemoImmediate(SaveImmediate *save);
 void __cdecl SV_WriteDemo(SaveGame *save);
-void __cdecl SV_SaveDemo(const char *demoName, const char *description, unsigned __int32 saveType);
+void __cdecl SV_SaveDemo(const char *demoName, const char *description, uint32_t saveType);
 void __cdecl SV_AutoSaveDemo(const char *baseName, const char *description, int demoCount, bool force);
 bool __cdecl SV_GetLatestAutoReplayName(char *filename, int filenameSize);
 void SV_EnableAutoDemo();
@@ -278,7 +278,7 @@ void __cdecl SV_DemoMark_f();
 bool __cdecl SV_DemoRead(void *buffer, unsigned int len, _iobuf *file);
 int __cdecl SV_DemoAllocRead(
     server_demo_history_t *history,
-    unsigned __int8 **buffer,
+    uint8_t **buffer,
     unsigned int len,
     _iobuf *file);
 bool __cdecl SV_ReadHistory(_iobuf *fileHistory, server_demo_history_t *history);
@@ -312,7 +312,7 @@ int __cdecl SV_DemoButtonPressed();
 
 
 // sv_main
-enum serverState_t : __int32
+enum serverState_t : int32_t
 {
     SS_DEAD = 0x0,
     SS_LOADING = 0x1,
@@ -320,8 +320,8 @@ enum serverState_t : __int32
 };
 struct svEntity_s
 {
-    unsigned __int16 worldSector;
-    unsigned __int16 nextEntityInWorldSector;
+    uint16_t worldSector;
+    uint16_t nextEntityInWorldSector;
     int linkcontents;
     float linkmin[2];
     float linkmax[2];
@@ -370,8 +370,8 @@ struct server_t
     int partialFrametime;
     int nextFrameTime;
     cmodel_t *models[512];
-    unsigned __int16 emptyConfigString;
-    unsigned __int16 configstrings[MAX_CONFIGSTRINGS];
+    uint16_t emptyConfigString;
+    uint16_t configstrings[MAX_CONFIGSTRINGS];
     svEntity_s svEntities[MAX_GENTITIES];
     gentity_s *gentities;
     int gentitySize;
@@ -406,7 +406,7 @@ struct serverStatic_t
     int playerScore;
 };
 
-struct __declspec(align(4)) PendingSaveList
+struct __attribute__((aligned(4))) PendingSaveList
 {
     PendingSave pendingSaves[3];
     volatile int count;

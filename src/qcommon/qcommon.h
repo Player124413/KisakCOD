@@ -19,7 +19,7 @@ typedef enum
     SE_CONSOLE = 0x3,
 } sysEventType_t;
 
-enum SphereEdgeTraceResult : __int32
+enum SphereEdgeTraceResult : int32_t
 {                                       // ...
     SPHERE_HITS_EDGE = 0x0,
     SPHERE_MISSES_EDGE = 0x1,
@@ -62,7 +62,7 @@ enum hitLocation_t : int32_t // (MP/SP same)
     HITLOC_NUM = 0x13,
 };
 
-enum DemoType : __int32
+enum DemoType : int32_t
 {                                       // ...
     DEMO_TYPE_NONE = 0x0,
     DEMO_TYPE_CLIENT = 0x1,
@@ -160,7 +160,7 @@ extern const dvar_t *com_authPort;
 #endif
 
 
-enum errorParm_t : __int32
+enum errorParm_t : int32_t
 {                                       // ...
     ERR_FATAL = 0x0,
     ERR_DROP = 0x1,
@@ -172,7 +172,7 @@ enum errorParm_t : __int32
     ERR_MAPLOADERRORSUMMARY = 0x7,
 };
 
-enum $6ABDC6367E3229B6421BFD1B2626A094 : __int32 // (SP/MP same)
+enum $6ABDC6367E3229B6421BFD1B2626A094 : int32_t // (SP/MP same)
 {
     CON_CHANNEL_DONT_FILTER = 0x0,
     CON_CHANNEL_ERROR = 0x1,
@@ -337,7 +337,7 @@ DVAR
 ==============================================================
 */
 
-enum DvarSetSource : __int32
+enum DvarSetSource : int32_t
 {                                       // ...
     DVAR_SOURCE_INTERNAL = 0x0,
     DVAR_SOURCE_EXTERNAL = 0x1,
@@ -832,7 +832,7 @@ struct cLeaf_t;
 struct cmodel_t;
 
 // KISAKTODO: move this the fuck outta here
-enum DynEntityDrawType : __int32
+enum DynEntityDrawType : int32_t
 {                                       // ...
     DYNENT_DRAW_MODEL = 0x0,
     DYNENT_DRAW_BRUSH = 0x1,
@@ -918,7 +918,7 @@ void __cdecl CM_TransformedBoxTrace(
     const float *end,
     const float *mins,
     const float *maxs,
-    __int64 model,
+    int64_t model,
     const float *origin,
     const float *angles);
 void __cdecl CM_TransformedBoxTraceExternal(
@@ -927,7 +927,7 @@ void __cdecl CM_TransformedBoxTraceExternal(
     const float *end,
     const float *mins,
     const float *maxs,
-    __int64 model,
+    int64_t model,
     const float *origin,
     const float *angles);
 int __cdecl CM_BoxSightTrace(
@@ -1216,7 +1216,7 @@ void CMod_LoadCollisionAabbTrees();
 struct ShowCollisionBrushPt // sizeof=0x14
 {                                       // ...
     float xyz[3];
-    __int16 sideIndex[3];
+    int16_t sideIndex[3];
     // padding byte
     // padding byte
 };
@@ -1243,7 +1243,7 @@ struct cLeaf_t // sizeof=0x2C
     float mins[3];                      // ...
     float maxs[3];                      // ...
     int leafBrushNode;                  // ...
-    __int16 cluster;
+    int16_t cluster;
     // padding byte
     // padding byte
 };
@@ -1327,7 +1327,7 @@ int __cdecl CM_ForEachBrushPlaneIntersection(
 int __cdecl CM_AddSimpleBrushPoint(
     const cbrush_t *brush,
     const float (*axialPlanes)[4],
-    const __int16 *sideIndices,
+    const int16_t *sideIndices,
     const float *xyz,
     int ptCount,
     ShowCollisionBrushPt *brushPts);
@@ -1386,7 +1386,7 @@ Profiler
 
 ==============================================================
 */
-enum MapProfileTrackedValue : __int32
+enum MapProfileTrackedValue : int32_t
 {                                       // ...
     MAP_PROFILE_FILE_OPEN = 0x0,
     MAP_PROFILE_FILE_SEEK = 0x1,
@@ -1395,17 +1395,17 @@ enum MapProfileTrackedValue : __int32
 };
 struct MapProfileElement // sizeof=0x18
 {                                       // ...
-    unsigned __int64 ticksStart;
-    unsigned __int64 ticksTotal;
-    unsigned __int64 ticksSelf;
+    uint64_t ticksStart;
+    uint64_t ticksTotal;
+    uint64_t ticksSelf;
 };
 struct MapProfileEntry // sizeof=0x70
 {                                       // ...
     const char *label;
     int accessCount;
-    unsigned __int64 ticksStart;
-    unsigned __int64 ticksTotal;
-    unsigned __int64 ticksSelf;
+    uint64_t ticksStart;
+    uint64_t ticksTotal;
+    uint64_t ticksSelf;
     int indent;
     MapProfileEntry *parent;
     MapProfileElement elements[3];
@@ -1414,8 +1414,8 @@ struct MapProfileHotSpot // sizeof=0x18
 {                                       // ...
     const char *label;                  // ...
     int accessCount;                    // ...
-    __int64 ticksSelf;                  // ...
-    __int64 ticksFile;                  // ...
+    int64_t ticksSelf;                  // ...
+    int64_t ticksFile;                  // ...
 };
 struct mapLoadProfile_t // sizeof=0xA880
 {                                       // ...
@@ -1430,9 +1430,9 @@ struct mapLoadProfile_t // sizeof=0xA880
     // padding byte
     // padding byte
     // padding byte
-    unsigned __int64 ticksStart;        // ...
-    unsigned __int64 ticksFinish;       // ...
-    unsigned __int64 ticksProfiled;     // ...
+    uint64_t ticksStart;        // ...
+    uint64_t ticksFinish;       // ...
+    uint64_t ticksProfiled;     // ...
     int elementAccessCount[3];          // ...
     // padding byte
     // padding byte
@@ -1447,9 +1447,9 @@ struct Material;
 void __cdecl TRACK_com_profilemapload();
 bool __cdecl ProfLoad_IsActive();
 void __cdecl ProfLoad_BeginTrackedValue(MapProfileTrackedValue type);
-void __cdecl ProfLoad_BeginTrackedValueTicks(MapProfileElement *value, unsigned __int64 ticks);
+void __cdecl ProfLoad_BeginTrackedValueTicks(MapProfileElement *value, uint64_t ticks);
 void __cdecl ProfLoad_EndTrackedValue(MapProfileTrackedValue type);
-void __cdecl ProfLoad_EndTrackedValueTicks(MapProfileElement *value, unsigned __int64 ticks);
+void __cdecl ProfLoad_EndTrackedValueTicks(MapProfileElement *value, uint64_t ticks);
 void __cdecl ProfLoad_Init();
 void __cdecl ProfLoad_Activate();
 void __cdecl ProfLoad_Deactivate();

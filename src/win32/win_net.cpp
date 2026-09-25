@@ -391,7 +391,7 @@ static char socksBuf[4096];
 Sys_SendPacket
 ==================
 */
-char __cdecl Sys_SendPacket(int length, unsigned __int8 *data, netadr_t to)
+char __cdecl Sys_SendPacket(int length, uint8_t *data, netadr_t to)
 {
 	const char *v4; // eax
 	int err; // [esp+0h] [ebp-20h]
@@ -438,7 +438,7 @@ char __cdecl Sys_SendPacket(int length, unsigned __int8 *data, netadr_t to)
 			return 0;
 		}
 		
-		memcpy((unsigned __int8 *)&socksBuf[10], data, length);
+		memcpy((uint8_t *)&socksBuf[10], data, length);
 		ret = sendto(net_socket, socksBuf, length + 10, 0, &socksRelayAddr, 16);
 	}
 	else
@@ -609,7 +609,7 @@ void __cdecl NET_OpenSocks(u_short port)
 	uint32_t v7; // [esp+0h] [ebp-8Ch]
 	uint32_t v8; // [esp+10h] [ebp-7Ch]
 	sockaddr address; // [esp+2Ch] [ebp-60h] BYREF
-	unsigned __int8 buf[64]; // [esp+3Ch] [ebp-50h] BYREF
+	uint8_t buf[64]; // [esp+3Ch] [ebp-50h] BYREF
 	int len; // [esp+80h] [ebp-Ch]
 	hostent *h; // [esp+84h] [ebp-8h]
 	int rfc1929; // [esp+88h] [ebp-4h]
@@ -796,7 +796,7 @@ int NET_GetLocalAddress()
 			localIP[numIP][1] = p[1];
 			localIP[numIP][2] = p[2];
 			localIP[numIP][3] = p[3];
-			Com_Printf(CON_CHANNEL_SYSTEM, "IP: %i.%i.%i.%i\n", HIBYTE(v1), BYTE2(v1), BYTE1(v1), (unsigned __int8)v1);
+			Com_Printf(CON_CHANNEL_SYSTEM, "IP: %i.%i.%i.%i\n", HIBYTE(v1), BYTE2(v1), BYTE1(v1), (uint8_t)v1);
 		}
 	}
 	return result;

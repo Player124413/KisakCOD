@@ -904,13 +904,13 @@ void MapLoad_ParsePrefab( const char *classname, int a2 )
         brush_t *brush = (brush_t *)e->brushes.prev;     // [esi+0x0C]
         e->eclass      = v4;                             // [esi+0x60] = v4
         e->modelClass  = nullptr;                        // [esi+0x64] = 0
-        *(unsigned __int8 *)&brush->unk01 = 0;           // mov byte ptr [eax+4Ch],0 (LOBYTE = modelFailed)
+        *(uint8_t *)&brush->unk01 = 0;           // mov byte ptr [eax+4Ch],0 (LOBYTE = modelFailed)
         Eclass_01( modelName, (int)(intptr_t)e );        // 0x483157
     }
 
     // 0x48315C (loc_48315C): bump the def version and rebuild the bbox brush around
     // the new eclass mins/maxs offset by the entity origin.
-    ++*(unsigned __int16 *)&e->version_prob_wrong;       // add word ptr [esi+78h],1
+    ++*(uint16_t *)&e->version_prob_wrong;       // add word ptr [esi+78h],1
 
     float bmins[3];                                      // var_214 (v10) — disasm "mins" arg
     float bmaxs[3];                                      // var_220 (v9)  — disasm "maxs" arg
@@ -929,7 +929,7 @@ void MapLoad_ParsePrefab( const char *classname, int a2 )
         SetupVertexSelection();                          // 0x4831df
 
     MarkMapModified();                                   // 0x4831e4
-    ++*(unsigned __int16 *)&brush->version;              // add word ptr [esi+4Eh],1
+    ++*(uint16_t *)&brush->version;              // add word ptr [esi+4Eh],1
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -1066,7 +1066,7 @@ void Checkkey_Model( entity_s_def *e, const char *key )
         if ( !_stricmp( key, "angles" ) || !_stricmp( key, "modelscale" ) )
         {
             Entity_RebuildBounds( (entity_s *)e );
-            ++*(unsigned __int16 *)&e->version_prob_wrong;   // IDA add word ptr [esi+78h],1 (def ver @0x78,16-bit) -- NOT version@0x4C
+            ++*(uint16_t *)&e->version_prob_wrong;   // IDA add word ptr [esi+78h],1 (def ver @0x78,16-bit) -- NOT version@0x4C
         }
     }
     if ( !_stricmp( key, "model" ) )
@@ -1079,8 +1079,8 @@ void Checkkey_Model( entity_s_def *e, const char *key )
         // (the binary, when the list is empty, writes a harmless 0 to the sentinel-as-brush).
         brush_t *b = (brush_t *)e->brushes.prev;
         if ( b != (brush_t *)&e->def )
-            *(unsigned __int8 *)&b->unk01 = 0;   // IDA mov byte ptr [eax+4Ch],0 -- LOBYTE only (modelFailed)
-        ++*(unsigned __int16 *)&e->version_prob_wrong;   // IDA add word ptr [esi+78h],1 -- NOT version@0x4C
+            *(uint8_t *)&b->unk01 = 0;   // IDA mov byte ptr [eax+4Ch],0 -- LOBYTE only (modelFailed)
+        ++*(uint16_t *)&e->version_prob_wrong;   // IDA add word ptr [esi+78h],1 -- NOT version@0x4C
     }
 }
 
@@ -1347,8 +1347,8 @@ void EntityAssignModel( entity_s_def *a1 )
             // write is a harmless 0 — see Checkkey_Model above).
             brush_t *b = (brush_t *)a1->brushes.prev;
             if ( b != (brush_t *)&a1->def )
-                *(unsigned __int8 *)&b->unk01 = 0;   // IDA 0x4854b7 mov byte ptr [eax+4Ch],bl -- LOBYTE only (high byte 0x4D = live cull flag)
-            ++*(unsigned __int16 *)&a1->version_prob_wrong;   // IDA 0x4854af add word ptr [edi+78h],1 -- def ver @0x78 16-bit, NOT version@0x4C
+                *(uint8_t *)&b->unk01 = 0;   // IDA 0x4854b7 mov byte ptr [eax+4Ch],bl -- LOBYTE only (high byte 0x4D = live cull flag)
+            ++*(uint16_t *)&a1->version_prob_wrong;   // IDA 0x4854af add word ptr [edi+78h],1 -- def ver @0x78 16-bit, NOT version@0x4C
             a1->modelClass = nullptr;
         }
     }
@@ -1396,13 +1396,13 @@ eclass_t *Entity_SetDefaultModelKey( brush_t *a1, eclass_t *a2 )
     if ( !*ec->default_model_name )                   return (eclass_t *)ec->default_model_name;  // first char
 
     SetKeyValue( v2, "model", a2->default_model_name );           // value = a2 (new eclass) default model
-    ++*(unsigned __int16 *)&v2->version_prob_wrong;              // IDA 0x48554d add word ptr [eax+78h],1
+    ++*(uint16_t *)&v2->version_prob_wrong;              // IDA 0x48554d add word ptr [eax+78h],1
     v2->modelClass = nullptr;                                     // IDA 0x485555 mov dword ptr [eax+64h],0
     // IDA 0x48555c-0x485562: ecx = entity(+8); edx = *(ecx+0x0C) (= brushes.oprev = first brush DEF);
     // mov byte ptr [edx+0x4C],0 -- LOBYTE of brush_t.unk01 (88-byte def @0x4C).  No sentinel guard
     // in the binary here (unlike EntityAssignModel), so port it unconditionally.
     brush_t *firstBrushDef = (brush_t *)v2->brushes.prev;        // entity+0x0C = brushes.oprev (a brush_t_def*)
-    *(unsigned __int8 *)&firstBrushDef->unk01 = 0;
+    *(uint8_t *)&firstBrushDef->unk01 = 0;
     return (eclass_t *)v2;   // IDA returns eax = entity(+8); value unused by the sole caller
 }
 
@@ -1427,7 +1427,7 @@ entity_s *Prefab_Init( prefab_s *a1, entity_s_def *entDef, selbrush_t *a3 )
         iassert( entInst->prefab == NULL );      // entity.cpp:1428
     }
 
-    *(unsigned __int16 *)&v4->version = (unsigned __int16)entDef->version_prob_wrong - 1;   // IDA 0x4856bd mov ax,[ebx+78h]/sub ax,1/mov [esi+4Ch],ax -- DEF ver @0x78 -> instance ver @0x4C low word
+    *(uint16_t *)&v4->version = (uint16_t)entDef->version_prob_wrong - 1;   // IDA 0x4856bd mov ax,[ebx+78h]/sub ax,1/mov [esi+4Ch],ax -- DEF ver @0x78 -> instance ver @0x4C low word
     v4->mapLayer = nullptr;
 
     // Insert into the prefab entity list (via a1 sentinel)
@@ -1525,7 +1525,7 @@ void SetupModelInst( float *ident_mtx, entity_s *e )
     // against the DEF's version_prob_wrong (0x78), both 16-bit.  (Prior port compared
     // def->version @0x4C -- the wrong field; after Checkkey_Model's 0x78 bump it would never
     // match, so the model instance would never be rebuilt.)
-    if ( (unsigned __int16)e->version == (unsigned __int16)def->version_prob_wrong )
+    if ( (uint16_t)e->version == (uint16_t)def->version_prob_wrong )
         return;
 
     Entity_FreePrefab( e );
@@ -1551,7 +1551,7 @@ void SetupModelInst( float *ident_mtx, entity_s *e )
     brush_t *brushDef = ownerNext->def;
     iassert( e->brushes.ownerNext->def && e->brushes.ownerNext->def->refCount >= 2 );
     Brush_Build( brushDef, v7, v6 );
-    e->version = (unsigned __int16)def->version_prob_wrong;   // IDA mov [edi+4Ch],dx ([ecx+78h])
+    e->version = (uint16_t)def->version_prob_wrong;   // IDA mov [edi+4Ch],dx ([ecx+78h])
 }
 
 // ─────────────────────────────────────────────────────────────────────────────

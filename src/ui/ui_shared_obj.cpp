@@ -501,7 +501,7 @@ int __cdecl PS_ReadString(script_s *script, token_s *token, int quote)
     return 1;
 }
 
-void __cdecl NumberValue(char *string, __int16 subtype, uint32_t *intvalue, long double *floatvalue)
+void __cdecl NumberValue(char *string, int16_t subtype, uint32_t *intvalue, long double *floatvalue)
 {
     uint32_t dotfound; // [esp+40h] [ebp-4h]
     char *stringa; // [esp+4Ch] [ebp+8h]
@@ -533,7 +533,7 @@ void __cdecl NumberValue(char *string, __int16 subtype, uint32_t *intvalue, long
             }
             ++string;
         }
-        *intvalue = (__int64)*floatvalue;
+        *intvalue = (int64_t)*floatvalue;
     }
     else if ((subtype & 8) != 0)
     {
@@ -1089,7 +1089,7 @@ int __cdecl PC_ExpandBuiltinDefine(
     char v6; // [esp+47h] [ebp-21h]
     token_s *v7; // [esp+4Ch] [ebp-1Ch]
     script_s *scriptstack; // [esp+50h] [ebp-18h]
-    __int64 t; // [esp+58h] [ebp-10h] BYREF
+    int64_t t; // [esp+58h] [ebp-10h] BYREF
     char *curtime; // [esp+60h] [ebp-8h]
     token_s *token; // [esp+64h] [ebp-4h]
 
@@ -2935,7 +2935,7 @@ int __cdecl PC_DollarDirective_evalfloat(source_s *source)
     snprintf(token.string, ARRAYSIZE(token.string), "%1.2f", v2);
     token.type = 3;
     token.subtype = 10248;
-    token.intvalue = (__int64)value;
+    token.intvalue = (int64_t)value;
     token.floatvalue = value;
     PC_UnreadSourceToken(source, &token);
     if (value < 0.0)
@@ -4970,7 +4970,7 @@ int __cdecl MenuParse_itemDef(menuDef_t *menu, int handle)
 int __cdecl MenuParse_execKey(menuDef_t *menu, int handle)
 {
     const char *action; // [esp+0h] [ebp-10h] BYREF
-    __int16 keyindex; // [esp+4h] [ebp-Ch]
+    int16_t keyindex; // [esp+4h] [ebp-Ch]
     char keyname; // [esp+Bh] [ebp-5h] BYREF
     ItemKeyHandler *handler; // [esp+Ch] [ebp-4h]
 
@@ -5756,7 +5756,7 @@ int __cdecl ItemParse_focusDvar(itemDef_s *item, int handle)
 int __cdecl ItemParse_execKey(itemDef_s *item, int handle)
 {
     const char *action; // [esp+0h] [ebp-10h] BYREF
-    __int16 keyindex; // [esp+4h] [ebp-Ch]
+    int16_t keyindex; // [esp+4h] [ebp-Ch]
     char keyname; // [esp+Bh] [ebp-5h] BYREF
     ItemKeyHandler *handler; // [esp+Ch] [ebp-4h]
 

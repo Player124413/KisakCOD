@@ -767,7 +767,7 @@ int __cdecl Actor_BecomeCorpse(gentity_s *self)
     float *currentOrigin; // r4
     trType_t trType; // r29
     corpseInfo_t *v15; // r31
-    unsigned __int16 death; // r4
+    uint16_t death; // r4
     XAnimTree_s *v17; // r11
     float *v18; // r6
     int v19; // r5

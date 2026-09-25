@@ -100,7 +100,7 @@ void __cdecl SV_DumpServerCommands(client_t *client)
             CON_CHANNEL_SERVER,
             "cmd %5d: %s\n",
             i,
-            &client->reliableCommands.buf[client->reliableCommands.commands[(unsigned __int8)i]]);
+            &client->reliableCommands.buf[client->reliableCommands.commands[(uint8_t)i]]);
 }
 
 void __cdecl AppendCommandsForInternalSave(const char *filename)
@@ -283,7 +283,7 @@ void __cdecl SV_SetLastSaveName(const char *filename)
 {
     if (!filename)
         MyAssertHandler("c:\\trees\\cod3\\cod3src\\src\\server\\sv_main.cpp", 374, 0, "%s", "filename");
-    if (!(unsigned __int8)SV_IsInternalSave(filename))
+    if (!(uint8_t)SV_IsInternalSave(filename))
         Dvar_SetString(sv_lastSaveGame, filename);
 }
 
@@ -305,12 +305,12 @@ void __cdecl SV_AddServerCommand(client_t *client, const char *cmd)
             "client->reliableCommands.header.sequence - client->reliableCommands.header.sent < MAX_RELIABLE_COMMANDS");
 
     ++client->reliableCommands.header.sequence;
-    v4 = (unsigned __int8)client->reliableCommands.header.sequence;
+    v4 = (uint8_t)client->reliableCommands.header.sequence;
 
     SV_AddReliableCommand(client, v4, cmd);
 }
 
-unsigned __int8 tempServerCommandBuf[131072];
+uint8_t tempServerCommandBuf[131072];
 void SV_SendServerCommand(client_t *cl, const char *fmt, ...)
 {
     client_t *clients;
@@ -347,7 +347,7 @@ void __cdecl SV_SaveServerCommands(SaveGame *save)
         MyAssertHandler("c:\\trees\\cod3\\cod3src\\src\\server\\sv_main.cpp", 455, 0, "%s", "save");
     SaveMemory_SaveWrite(&clients->reliableCommands, 12, save);
     for (i = clients->reliableCommands.header.sent + 1; i <= clients->reliableCommands.header.sequence; ++i)
-        SaveMemory_SaveWrite(&clients->reliableCommands.commands[(unsigned __int8)i], 4, save);
+        SaveMemory_SaveWrite(&clients->reliableCommands.commands[(uint8_t)i], 4, save);
     SaveMemory_SaveWrite(clients->reliableCommands.buf, clients->reliableCommands.header.rover, save);
 }
 
@@ -361,7 +361,7 @@ void __cdecl SV_LoadServerCommands(SaveGame *save)
         MyAssertHandler("c:\\trees\\cod3\\cod3src\\src\\server\\sv_main.cpp", 471, 0, "%s", "save");
     SaveMemory_LoadRead(&clients->reliableCommands, 12, save);
     for (i = clients->reliableCommands.header.sent + 1; i <= clients->reliableCommands.header.sequence; ++i)
-        SaveMemory_LoadRead(&clients->reliableCommands.commands[(unsigned __int8)i], 4, save);
+        SaveMemory_LoadRead(&clients->reliableCommands.commands[(uint8_t)i], 4, save);
     SaveMemory_LoadRead(clients->reliableCommands.buf, clients->reliableCommands.header.rover, save);
     CG_SetServerCommandSequence(clients->reliableCommands.header.sent);
 }
@@ -1046,7 +1046,7 @@ int __cdecl SV_GetPartialFrametime()
 
 int __cdecl SV_ForwardFrame()
 {
-    __int64 v1; // r10
+    int64_t v1; // r10
     int integer; // r27
     int forwardMsec; // r3
     int levelTime; // r11
@@ -1185,7 +1185,7 @@ int __cdecl SV_Frame(int msec)
         CL_SetFrametime(0, 0);
         return v1;
     }
-    if ((unsigned __int8)SV_ForwardFrame())
+    if ((uint8_t)SV_ForwardFrame())
         return v1;
     if (!cl_paused->current.integer)
     {

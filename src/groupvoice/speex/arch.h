@@ -44,7 +44,7 @@
 typedef spx_int16_t spx_word16_t;
 typedef spx_int32_t   spx_word32_t;
 #ifdef _MSC_VER
-typedef __int64      spx_word64_t;
+typedef int64_t      spx_word64_t;
 #else
 typedef long long    spx_word64_t;
 #endif

@@ -350,10 +350,10 @@ double __cdecl DynEntCl_UpdateBModelWorldBounds(const DynEntityDef *dynEntDef, c
     float rotatedBounds_24; // [esp+170h] [ebp-54h]
     float rotatedBounds_24a; // [esp+170h] [ebp-54h]
     float rotatedBounds_24b; // [esp+170h] [ebp-54h]
-    __int64 bounds; // [esp+178h] [ebp-4Ch]
-    __int64 bounds_8; // [esp+180h] [ebp-44h]
-    __int64 bounds_16; // [esp+188h] [ebp-3Ch]
-    __int64 bounds_24; // [esp+190h] [ebp-34h]
+    int64_t bounds; // [esp+178h] [ebp-4Ch]
+    int64_t bounds_8; // [esp+180h] [ebp-44h]
+    int64_t bounds_16; // [esp+188h] [ebp-3Ch]
+    int64_t bounds_24; // [esp+190h] [ebp-34h]
     float axis[3][3]; // [esp+19Ch] [ebp-28h] BYREF
     GfxBrushModel *bmodel; // [esp+1C0h] [ebp-4h]
 

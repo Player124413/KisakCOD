@@ -41,7 +41,7 @@ static const uint32_t kbitmask[33] =
     0x0FFFFFFFF,
 };
 
-enum PacketEntityType : __int32
+enum PacketEntityType : int32_t
 {                                       // ...
     ANALYZE_DATATYPE_ENTITYTYPE_GENERALENTITY = 0x0,
     ANALYZE_DATATYPE_ENTITYTYPE_PLAYERENTITY = 0x1,

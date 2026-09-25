@@ -440,7 +440,7 @@ void __cdecl Scr_Target_Remove()
     if (!Scr_GetNumParam())
         Scr_Error("Too few arguments\n");
     Entity = Scr_GetEntity(0);
-    if (!(unsigned __int8)Targ_Remove(Entity))
+    if (!(uint8_t)Targ_Remove(Entity))
     {
         v2 = va("Entity %i is not a target", Entity->s.number);
         Scr_Error(v2);
@@ -566,7 +566,7 @@ void __cdecl Scr_Target_IsInCircle()
     //float v3; // [sp+54h] [-1Ch]
 
     Float = Scr_GetFloat(3);
-    if (!(unsigned __int8)ScrGetTargetScreenPos(screenPos)
+    if (!(uint8_t)ScrGetTargetScreenPos(screenPos)
         || (v1 = 1, (float)((float)(screenPos[0] * screenPos[0]) + (float)(screenPos[1] * screenPos[1])) >= (double)(float)((float)Float * (float)Float)))
     {
         v1 = 0;
@@ -583,7 +583,7 @@ void __cdecl Scr_Target_IsInRect()
 
     Float = Scr_GetFloat(3);
     v1 = Scr_GetFloat(4);
-    if (!(unsigned __int8)ScrGetTargetScreenPos(v3) || I_fabs(v3[0]) >= Float || (v2 = 1, I_fabs(v3[1]) >= v1))
+    if (!(uint8_t)ScrGetTargetScreenPos(v3) || I_fabs(v3[0]) >= Float || (v2 = 1, I_fabs(v3[1]) >= v1))
         v2 = 0;
     Scr_AddBool(v2);
 }

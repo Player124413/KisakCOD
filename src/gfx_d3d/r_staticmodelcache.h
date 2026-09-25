@@ -25,7 +25,7 @@ struct static_model_tree_list_t // sizeof=0x8
 };
 struct static_model_node_t // sizeof=0x4
 {                                       // ...
-    __int16 usedVerts;
+    int16_t usedVerts;
     bool inuse;
     uint8_t reserved;
 };

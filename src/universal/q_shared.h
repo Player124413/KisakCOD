@@ -80,7 +80,7 @@
 
 #define ID_INLINE __inline 
 
-int __cdecl ShortSwap(__int16 l);
+int __cdecl ShortSwap(int16_t l);
 int __cdecl LongSwap(int l);
 
 static ID_INLINE short BigShort(short l) { return ShortSwap(l); }
@@ -448,20 +448,20 @@ inline float I_fmax(float a, float b) { return a > b ? a : b; }
 #if defined(__GNUC__)
 typedef          long long ll;
 typedef unsigned long long ull;
-#define __int64 long long
-#define __int32 int
-#define __int16 short
-#define __int8  char
+#define int64_t long long
+#define int32_t int
+#define int16_t short
+#define int8_t  char
 #define MAKELL(num) num ## LL
 #define FMT_64 "ll"
 #elif defined(_MSC_VER)
-typedef          __int64 ll;
-typedef unsigned __int64 ull;
+typedef          int64_t ll;
+typedef uint64_t ull;
 #define MAKELL(num) num ## i64
 #define FMT_64 "I64"
 #elif defined (__BORLANDC__)
-typedef          __int64 ll;
-typedef unsigned __int64 ull;
+typedef          int64_t ll;
+typedef uint64_t ull;
 #define MAKELL(num) num ## i64
 #define FMT_64 "L"
 #else
@@ -479,8 +479,8 @@ typedef unsigned char   uint8;
 typedef          short  int16;
 typedef   signed short  sint16;
 typedef unsigned short  uint16;
-typedef __int32				int32;
-typedef unsigned __int32 uint32;
+typedef int32_t				int32;
+typedef uint32_t uint32;
 typedef signed long			sint32;
 typedef ll              int64;
 typedef ll              sint64;
@@ -768,7 +768,7 @@ using dvar_t = dvar_s;
 
 //=============================================
 
-enum csParseFieldType_t : __int32
+enum csParseFieldType_t : int32_t
 {
     CSPFT_STRING = 0x0,
     CSPFT_STRING_MAX_STRING_CHARS = 0x1,
@@ -785,7 +785,7 @@ enum csParseFieldType_t : __int32
     CSPFT_NUM_BASE_FIELD_TYPES = 0xC,
 };
 
-enum weapFieldType_t : __int32
+enum weapFieldType_t : int32_t
 {
     WFT_WEAPONTYPE = 0xC,
     WFT_WEAPONCLASS = 0xD,
@@ -865,12 +865,12 @@ void __cdecl Com_AssembleFilepath(char *folder, char *name, char *extension, cha
 const char *__cdecl Com_GetExtensionSubString(const char *filename);
 void __cdecl Com_StripExtension(char *in, char *out);
 void __cdecl Com_DefaultExtension(char *path, uint32_t maxSize, const char *extension);
-__int16 __cdecl BigShort(__int16 l);
-int __cdecl ShortSwap(__int16 l);
-__int16 __cdecl ShortNoSwap(__int16 l);
+int16_t __cdecl BigShort(int16_t l);
+int __cdecl ShortSwap(int16_t l);
+int16_t __cdecl ShortNoSwap(int16_t l);
 int __cdecl LongSwap(int l);
-unsigned __int64 __cdecl Long64Swap(unsigned __int64 l);
-unsigned __int64 __cdecl Long64NoSwap(unsigned __int64 ll);
+uint64_t __cdecl Long64Swap(uint64_t l);
+uint64_t __cdecl Long64NoSwap(uint64_t ll);
 double __cdecl FloatReadSwap(int n);
 double __cdecl FloatReadNoSwap(int n);
 FloatWriteSwap_union __cdecl FloatWriteSwap(float f);
@@ -935,7 +935,7 @@ struct TraceThreadInfo
 	struct cmodel_t *box_model;
 };
 
-enum TraceHitType : __int32
+enum TraceHitType : int32_t
 {                                       // ...
 	TRACE_HITTYPE_NONE = 0x0,
 	TRACE_HITTYPE_ENTITY = 0x1,
@@ -1015,7 +1015,7 @@ inline void __cdecl Com_BitSetAssert(uint32_t *array, int bitNum, int size)
 	array[bitNum / 32] |= 1 << (bitNum & 31);
 }
 
-enum trType_t : __int32
+enum trType_t : int32_t
 {                                       // XREF: trajectory_t/r
 	TR_STATIONARY = 0x0,
 	TR_INTERPOLATE = 0x1,
@@ -1158,4 +1158,4 @@ static_assert(MASK_WEAPONCLIP == 0x00002080, "MASK_WEAPONCLIP must match the IW3
 static_assert(MASK_PLAYER_VISIBILITY == 0x02803001, "MASK_PLAYER_VISIBILITY must match the IW3 player visibility mask");
 static_assert(CONTENTS_ANY_TRIGGER == 0x405C0008, "CONTENTS_ANY_TRIGGER must include every IW3 trigger type");
 
-extern unsigned __int64(__cdecl *LittleLong64)(unsigned __int64);
+extern uint64_t(__cdecl *LittleLong64)(uint64_t);

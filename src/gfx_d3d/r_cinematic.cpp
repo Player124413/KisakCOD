@@ -81,8 +81,8 @@ void __cdecl R_Cinematic_InitBinkVolumes()
     int v1; // [esp+28h] [ebp-28h]
     int volumes[8]; // [esp+30h] [ebp-20h] BYREF
 
-    if ((int)(__int64)(cinematicGlob.playbackVolume * 32768.0) < 0x8000)
-        v1 = (__int64)(cinematicGlob.playbackVolume * 32768.0);
+    if ((int)(int64_t)(cinematicGlob.playbackVolume * 32768.0) < 0x8000)
+        v1 = (int64_t)(cinematicGlob.playbackVolume * 32768.0);
     else
         v1 = 0x8000;
     if (v1 > 0)
@@ -409,10 +409,10 @@ void R_Cinematic_SeizeIO()
 void __cdecl R_Cinematic_UpdateTimeInMsec(const BINKREALTIME *binkRealtime)
 {
     const char *v1; // eax
-    unsigned __int64 frameNum; // [esp+8h] [ebp-20h]
-    unsigned __int64 frameRateDiv; // [esp+10h] [ebp-18h]
-    unsigned __int64 timeInMsec; // [esp+18h] [ebp-10h]
-    unsigned __int64 frameRate; // [esp+20h] [ebp-8h]
+    uint64_t frameNum; // [esp+8h] [ebp-20h]
+    uint64_t frameRateDiv; // [esp+10h] [ebp-18h]
+    uint64_t timeInMsec; // [esp+18h] [ebp-10h]
+    uint64_t frameRate; // [esp+20h] [ebp-8h]
 
     frameNum = binkRealtime->FrameNum;
     if ((uint32_t)frameNum < 0x80000000)

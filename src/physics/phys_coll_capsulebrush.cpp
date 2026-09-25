@@ -919,7 +919,7 @@ bool __cdecl Phys_TestCapsulePlane(const float *plane, const Capsule *capsule)
 }
 
 void __cdecl Phys_CollideCapsuleWithTriangleList(
-    const unsigned __int16 *a_indices,
+    const uint16_t *a_indices,
     const float (*verts)[3],
     uint32_t triCount,
     const objInfo *info,
@@ -934,7 +934,7 @@ void __cdecl Phys_CollideCapsuleWithTriangleList(
     float triPlane[4]; // [esp+E8h] [ebp-68h] BYREF
     Capsule capsule; // [esp+F8h] [ebp-58h] BYREF
     float radius; // [esp+13Ch] [ebp-14h]
-    const unsigned __int16 *indices; // [esp+140h] [ebp-10h]
+    const uint16_t *indices; // [esp+140h] [ebp-10h]
     uint32_t triIndex; // [esp+144h] [ebp-Ch]
     Poly triPoly; // [esp+148h] [ebp-8h]
 

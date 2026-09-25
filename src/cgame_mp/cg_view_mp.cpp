@@ -968,10 +968,10 @@ void __cdecl CG_CalcTurretViewValues(int32_t localClientNum)
                 Com_Error(ERR_DROP, "Turret has no bone: tag_player");
             if (cgameGlob->predictedPlayerState.viewlocked == PLAYERVIEWLOCK_WEAPONJITTER && !cgameGlob->renderingThirdPerson)
             {
-                v2 = crandom();
+                v2 = Com_Crandom();
                 cgameGlob->refdefViewAngles[0] = BG_GetWeaponDef(cent->nextState.weapon)->vertViewJitter * v2
                     + cgameGlob->refdefViewAngles[0];
-                v1 = crandom();
+                v1 = Com_Crandom();
                 cgameGlob->refdefViewAngles[1] = BG_GetWeaponDef(cent->nextState.weapon)->horizViewJitter * v1
                     + cgameGlob->refdefViewAngles[1];
             }

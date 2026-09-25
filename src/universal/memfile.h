@@ -16,7 +16,7 @@ struct MemoryFile // (SP/MP Same)
     void(* archiveProc)(MemoryFile*, int, byte *);
 };
 
-enum MemFileMode : __int32
+enum MemFileMode : int32_t
 {                                       // ...
     MEM_FILE_MODE_DEFAULT = 0x0,
     MEM_FILE_MODE_INFLATE = 0x1,

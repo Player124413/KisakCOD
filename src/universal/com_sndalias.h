@@ -36,7 +36,7 @@ static const char *g_pszSndAliasKeyNames[29] =
   "envelop percentage"
 }; // idb
 
-enum snd_alias_type_t : __int32
+enum snd_alias_type_t : int32_t
 {                                       // ...
     SAT_UNKNOWN = 0x0,
     SAT_LOADED = 0x1,
@@ -44,7 +44,7 @@ enum snd_alias_type_t : __int32
     SAT_COUNT = 0x3,
 };
 
-enum snd_alias_members_t : __int32
+enum snd_alias_members_t : int32_t
 {                                       // ...
     SA_INVALID = 0x0,
     SA_NAME = 0x1,
@@ -77,7 +77,7 @@ enum snd_alias_members_t : __int32
     SA_ENVELOPPERCENTAGE = 0x1C,
     SA_NUMFIELDS = 0x1D,
 };
-enum SA_SPKRMAPIDENTIFIERS : __int32
+enum SA_SPKRMAPIDENTIFIERS : int32_t
 {                                       // ...
     SA_MONOSOURCE = 0x0,
     SA_LEFTSOURCE = 0x1,

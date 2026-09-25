@@ -59,7 +59,7 @@ enum scr_builtin_type_t
 	BUILTIN_DEVELOPER_ONLY = 0x1,
 };
 
-enum : __int32
+enum : int32_t
 {
 	CALL_NONE = 0x0,
 	CALL_BUILTIN = 0x1,

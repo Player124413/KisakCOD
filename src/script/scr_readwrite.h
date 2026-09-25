@@ -7,10 +7,10 @@
 #include "scr_variable.h"
 #include <server/server.h> // SaveImmediate
 
-void __cdecl WriteByte(unsigned __int8 b, MemoryFile *memFile);
-void __cdecl WriteShort(unsigned __int16 i, MemoryFile *memFile);
-void __cdecl WriteString(unsigned __int16 str, MemoryFile *memFile);
-void __cdecl SafeWriteString(unsigned __int16 str, MemoryFile *memFile);
+void __cdecl WriteByte(uint8_t b, MemoryFile *memFile);
+void __cdecl WriteShort(uint16_t i, MemoryFile *memFile);
+void __cdecl WriteString(uint16_t str, MemoryFile *memFile);
+void __cdecl SafeWriteString(uint16_t str, MemoryFile *memFile);
 int __cdecl Scr_ReadString(MemoryFile *memFile);
 int __cdecl Scr_ReadOptionalString(MemoryFile *memFile);
 void __cdecl WriteInt(int i, MemoryFile *memFile);
@@ -27,8 +27,8 @@ VariableStackBuffer *__cdecl Scr_ReadStack(MemoryFile *memFile);
 void __cdecl Scr_DoLoadEntryInternal(VariableValue *value, MemoryFile *memFile);
 int __cdecl Scr_DoLoadEntry(VariableValue *value, bool isArray, MemoryFile *memFile);
 void __cdecl AddSaveObjectInternal(unsigned int parentId);
-unsigned int __cdecl Scr_ConvertThreadFromLoad(unsigned __int16 handle);
-void __cdecl Scr_DoLoadObjectInfo(unsigned __int16 parentId, MemoryFile *memFile);
+unsigned int __cdecl Scr_ConvertThreadFromLoad(uint16_t handle);
+void __cdecl Scr_DoLoadObjectInfo(uint16_t parentId, MemoryFile *memFile);
 void __cdecl Scr_ReadGameEntry(MemoryFile *memFile);
 void __cdecl Scr_SaveShutdown(bool savegame);
 void __cdecl Scr_LoadPre(int sys, MemoryFile *memFile);
@@ -46,7 +46,7 @@ void __cdecl DoSaveEntry(VariableValue *value, VariableValue *name, bool isArray
 void __cdecl AddSaveObjectChildren(unsigned int parentId);
 void __cdecl AddSaveObject(unsigned int parentId);
 void __cdecl DoSaveObjectInfo(unsigned int parentId, MemoryFile *memFile);
-int __cdecl Scr_ConvertThreadToSave(unsigned __int16 handle);
+int __cdecl Scr_ConvertThreadToSave(uint16_t handle);
 void __cdecl WriteGameEntry(MemoryFile *memFile);
 void __cdecl Scr_SavePost(MemoryFile *memFile);
 void __cdecl AddSaveStack(const VariableStackBuffer *stackBuf);

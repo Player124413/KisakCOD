@@ -51,8 +51,8 @@ void __cdecl Sys_GetPhysicalCpuCount(SysInfo* sysInfo)
     DWORD v8; // eax
     _DWORD v14[5]; // [esp+0h] [ebp-E8h] BYREF
     int v15; // [esp+14h] [ebp-D4h]
-    unsigned __int8 v16; // [esp+1Ah] [ebp-CEh]
-    unsigned __int8 v17; // [esp+1Bh] [ebp-CDh]
+    uint8_t v16; // [esp+1Ah] [ebp-CEh]
+    uint8_t v17; // [esp+1Bh] [ebp-CDh]
     char* cpuVendor; // [esp+1Ch] [ebp-CCh]
     const char* v19; // [esp+20h] [ebp-C8h]
     int v20; // [esp+28h] [ebp-C0h]
@@ -169,12 +169,12 @@ LABEL_8:
 long double __cdecl Sys_BenchmarkGHz()
 {
     uint32_t i; // ecx
-    unsigned __int64 v1; // kr00_8
+    uint64_t v1; // kr00_8
     int holdrand; // [esp+10h] [ebp-68h]
     float k; // [esp+2Ch] [ebp-4Ch]
     uint64 start; // [esp+30h] [ebp-48h]
     int priority; // [esp+44h] [ebp-34h]
-    unsigned __int64 minTime; // [esp+48h] [ebp-30h]
+    uint64_t minTime; // [esp+48h] [ebp-30h]
     uint32_t attempt; // [esp+54h] [ebp-24h]
     float x; // [esp+68h] [ebp-10h]
     float xa; // [esp+68h] [ebp-10h]
@@ -267,14 +267,14 @@ void __cdecl Sys_DetectCpuVendorAndName(char* vendor, char* name)
     uint32_t _EBX; // ebx
     _DWORD v29[5]; // [esp+0h] [ebp-90h] BYREF
     int v30; // [esp+14h] [ebp-7Ch]
-    unsigned __int8 v31; // [esp+1Ah] [ebp-76h]
-    unsigned __int8 v32; // [esp+1Bh] [ebp-75h]
+    uint8_t v31; // [esp+1Ah] [ebp-76h]
+    uint8_t v32; // [esp+1Bh] [ebp-75h]
     char* v33; // [esp+1Ch] [ebp-74h]
     const char* v34; // [esp+20h] [ebp-70h]
     int v35; // [esp+24h] [ebp-6Ch]
     int v36; // [esp+28h] [ebp-68h]
-    unsigned __int8 v37; // [esp+2Eh] [ebp-62h]
-    unsigned __int8 v38; // [esp+2Fh] [ebp-61h]
+    uint8_t v37; // [esp+2Eh] [ebp-62h]
+    uint8_t v38; // [esp+2Fh] [ebp-61h]
     char* v39; // [esp+30h] [ebp-60h]
     const char* v40; // [esp+34h] [ebp-5Ch]
     Sys_DetectCpuVendorAndName::__l2::<unnamed_type_cpuid_desc> cpuid_desc; // [esp+38h] [ebp-58h] BYREF

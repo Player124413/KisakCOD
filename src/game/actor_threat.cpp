@@ -576,7 +576,7 @@ int __cdecl Actor_ThreatCoveringFire(actor_s *self, sentient_s *enemy)
         MyAssertHandler("c:\\trees\\cod3\\cod3src\\src\\game\\actor_threat.cpp", 633, 0, "%s", "self");
     if (!enemy)
         MyAssertHandler("c:\\trees\\cod3\\cod3src\\src\\game\\actor_threat.cpp", 634, 0, "%s", "enemy");
-    if (!self->provideCoveringFire || (unsigned __int8)Actor_IsMoving(self))
+    if (!self->provideCoveringFire || (uint8_t)Actor_IsMoving(self))
         return 0;
     actor = enemy->ent->actor;
     if (actor && !actor->ignoreSuppression && !Actor_InPain(enemy->ent->actor) && !Actor_IsDying(actor))
@@ -595,7 +595,7 @@ int __cdecl Actor_ThreatCoveringFire(actor_s *self, sentient_s *enemy)
                 return 0;
             }
         }
-        if (!Actor_IsSuppressed(actor) && (unsigned __int8)Actor_IsMoving(actor))
+        if (!Actor_IsSuppressed(actor) && (uint8_t)Actor_IsMoving(actor))
             return 0;
     }
     if (!g_skipDebugString)
@@ -879,12 +879,12 @@ void __cdecl Actor_UpdateThreat(actor_s *self)
     bool v16; // r10
     char v18; // r11
     bool v19; // zf
-    unsigned __int8 v20; // r11
-    unsigned __int8 v21; // r27
+    uint8_t v20; // r11
+    uint8_t v21; // r27
     int v22; // r30
     int updated; // r3
     int v24; // r28
-    __int64 v25; // r10
+    int64_t v25; // r10
     sentient_s *v26; // r11
     double entityTargetThreat; // fp1
     const char *v29; // r5

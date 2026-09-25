@@ -1,7 +1,7 @@
 #pragma once
 #include "r_rendercmds.h"
 
-enum $A1218AF7D1C12B1D50BD9B9B70D78FD4 : __int32
+enum $A1218AF7D1C12B1D50BD9B9B70D78FD4 : int32_t
 {
     SCENE_VIEW_CAMERA = 0x0,
     SCENE_VIEW_SUNSHADOW_0 = 0x1,

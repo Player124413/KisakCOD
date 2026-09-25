@@ -41,7 +41,7 @@ void __cdecl DebugDrawNodeSelectionOverlay()
     const char *v3; // r30
     const pathnode_t *v4; // r31
     double v5; // fp0
-    __int64 v6; // r11
+    int64_t v6; // r11
     double v7; // fp31
     double v8; // fp30
     double v9; // fp29
@@ -365,7 +365,7 @@ bool __cdecl Actor_Cover_CheckWithEnemy(actor_s *self, const pathnode_t *node, b
             v11 = &self->sentientInfo[v10];
             if (self->sentientInfo[v10].lastKnownPosTime > 0
                 && (checkEnemyRange || Actor_CanSeeEnemy(self))
-                && !(unsigned __int8)Actor_Cover_NodeRangeValid(v8->ent->r.currentOrigin, node, nodeRange))
+                && !(uint8_t)Actor_Cover_NodeRangeValid(v8->ent->r.currentOrigin, node, nodeRange))
             {
                 vLastKnownPos = v11->vLastKnownPos;
                 goto LABEL_24;
@@ -379,7 +379,7 @@ bool __cdecl Actor_Cover_CheckWithEnemy(actor_s *self, const pathnode_t *node, b
     {
         vLastKnownPos = self->pGrenade.ent()->r.currentOrigin;
     LABEL_24:
-        v13 = (unsigned __int8)Actor_Cover_NodeRangeValid(vLastKnownPos, node, nodeRange) == 0;
+        v13 = (uint8_t)Actor_Cover_NodeRangeValid(vLastKnownPos, node, nodeRange) == 0;
         result = 0;
         if (v13)
             return result;
@@ -704,7 +704,7 @@ int __cdecl Actor_Cover_IsValidReacquire(actor_s *self, const pathnode_t *node)
     sentient_s *TargetSentient; // r3
     const pathnode_t *v6; // r4
     int v7; // r3
-    unsigned __int8 v8; // r11
+    uint8_t v8; // r11
 
     result = Path_CanClaimNode(node, self->sentient);
     if (result)
@@ -759,7 +759,7 @@ int __cdecl Actor_Cover_IsValidCover(actor_s *self, const pathnode_t *node)
     if (TargetSentient)
     {
         Sentient_NearestNode(TargetSentient);
-        if (!(unsigned __int8)Actor_Cover_IsValidCoverDir(self, node))
+        if (!(uint8_t)Actor_Cover_IsValidCoverDir(self, node))
         {
             DebugDrawNodePicking("dir", self, node, (float *)colorRed);
             return 0;
@@ -1037,9 +1037,9 @@ int __cdecl Actor_Cover_UseCoverNode(actor_s *self, pathnode_t *node)
     if (self->keepClaimedNode)
         MyAssertHandler("c:\\trees\\cod3\\cod3src\\src\\game\\actor_cover.cpp", 1125, 0, "%s", "!self->keepClaimedNode");
     v4 = self->eState[self->stateLevel];
-    if (v4 != AIS_EXPOSED && v4 != AIS_TURRET || !(unsigned __int8)Actor_Cover_IsValidCover(self, node))
+    if (v4 != AIS_EXPOSED && v4 != AIS_TURRET || !(uint8_t)Actor_Cover_IsValidCover(self, node))
         return 0;
-    if (!self->ent->tagInfo && !(unsigned __int8)Actor_FindPathToClaimNode(self, node))
+    if (!self->ent->tagInfo && !(uint8_t)Actor_FindPathToClaimNode(self, node))
     {
         Actor_TeamMoveBlocked(self);
         return 0;

@@ -1057,8 +1057,8 @@ int32_t __cdecl StuckInClient(gentity_s *self)
     }
     vDelta[0] = hit->r.currentOrigin[0] - self->r.currentOrigin[0];
     vDelta[1] = hit->r.currentOrigin[1] - self->r.currentOrigin[1];
-    vDelta[0] = crandom() + vDelta[0];
-    vDelta[1] = crandom() + vDelta[1];
+    vDelta[0] = Com_Crandom() + vDelta[0];
+    vDelta[1] = Com_Crandom() + vDelta[1];
     Vec2Normalize(vDelta);
     if (Vec2Length(hit->client->ps.velocity) <= 0.0)
         integer = 0.0;

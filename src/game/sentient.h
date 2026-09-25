@@ -39,8 +39,8 @@ struct sentient_s
     pathnode_t *pActualChainPos;
     int iActualChainPosTime;
     pathnode_t *pNearestNode;
-    unsigned __int8 bNearestNodeValid;
-    unsigned __int8 bNearestNodeBad;
+    uint8_t bNearestNodeValid;
+    uint8_t bNearestNodeBad;
     bool inuse;
     int banNodeTime;
 };

@@ -464,7 +464,7 @@ bool __cdecl CG_CheckPlayerMovement(usercmd_s oldCmd, usercmd_s newCmd)
     return newCmd.forwardmove || newCmd.rightmove;
 }
 
-int32_t __cdecl CG_CheckPlayerStanceChange(int32_t localClientNum, __int16 newButtons, __int16 changedButtons)
+int32_t __cdecl CG_CheckPlayerStanceChange(int32_t localClientNum, int16_t newButtons, int16_t changedButtons)
 {
     if ((changedButtons & (BUTTON_PRONE | BUTTON_CROUCH | BUTTON_TEMP_STANCE)) != 0)
     {
@@ -511,7 +511,7 @@ bool __cdecl CG_CheckPlayerFireNonTurret(int32_t localClientNum, char buttons)
     return (cgameGlob->predictedPlayerState.eFlags & 0x300) == 0;
 }
 
-int32_t __cdecl CG_CheckPlayerOffHandUsage(int32_t localClientNum, __int16 buttons)
+int32_t __cdecl CG_CheckPlayerOffHandUsage(int32_t localClientNum, int16_t buttons)
 {
     if ((buttons & (BUTTON_FRAG | BUTTON_SMOKE)) == 0)
         return 0;

@@ -773,7 +773,7 @@ gentity_s *__cdecl Player_UpdateLookAtEntityTrace(
     const float *end,
     int entNum,
     int contentMask,
-    unsigned __int8 *priorityMap,
+    uint8_t *priorityMap,
     float *forward)
 {
     unsigned int EntityHitId; // r29
@@ -1012,7 +1012,7 @@ void __cdecl Player_UpdateLookAtEntity(gentity_s *ent)
     gclient_s *client; // r21
     unsigned int weapon; // r3
     WeaponDef *weapDef; // r3
-    unsigned __int8 *prioMap; // r27
+    uint8_t *prioMap; // r27
     int number; // r6
     gentity_s *traceEnt; // r31
     gclient_s *v12; // r11
@@ -1078,7 +1078,7 @@ void __cdecl Player_UpdateLookAtEntity(gentity_s *ent)
     traceEnd[1] = (float)(forward[1] * (float)15000.0) + start[1];
     traceEnd[2] = (float)(forward[2] * (float)15000.0) + start[2];
     traceEnt = Player_UpdateLookAtEntityTrace(&traceresult, start, traceEnd, number, 578873345, prioMap, forward);
-    if ((unsigned __int8)Player_CheckAlmostStationary(ent, forward))
+    if ((uint8_t)Player_CheckAlmostStationary(ent, forward))
     {
         // PPC: _FP12 = trace_distance - LOS_range; fsel f1, f12, f0, f13
         // fsel(trace - LOS, LOS, trace) = (trace >= LOS) ? LOS : trace = min(trace, LOS)

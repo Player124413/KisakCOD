@@ -7,7 +7,7 @@
 
 #define CONTXTCMD_TYPE_HUDICON_FLIP 2
 
-enum MaterialVertexDeclType : __int32
+enum MaterialVertexDeclType : int32_t
 {                                       // ...
     VERTDECL_GENERIC = 0x0,
     VERTDECL_PACKED = 0x1,
@@ -29,7 +29,7 @@ enum MaterialVertexDeclType : __int32
 };
 
 #ifdef KISAK_MP
- enum ThreadContext_t : __int32 // Not a real struct, used for forced usage of this enum 
+ enum ThreadContext_t : int32_t // Not a real struct, used for forced usage of this enum 
  {                                       // ...
      THREAD_CONTEXT_MAIN         = 0x0,
      THREAD_CONTEXT_BACKEND      = 0x1,
@@ -43,7 +43,7 @@ enum MaterialVertexDeclType : __int32
      THREAD_CONTEXT_COUNT        = 0x7,
  };
 #elif KISAK_SP
-enum ThreadContext_t : __int32
+enum ThreadContext_t : int32_t
 {
     THREAD_CONTEXT_MAIN = 0x0,
     THREAD_CONTEXT_BACKEND = 0x1,
@@ -62,7 +62,7 @@ enum ThreadContext_t : __int32
     THREAD_CONTEXT_COUNT = 12,
 };
 #elif defined(KISAK_RADIANT)
-enum ThreadContext_t : __int32 {
+enum ThreadContext_t : int32_t {
     THREAD_CONTEXT_MAIN     = 0x0,
     THREAD_CONTEXT_BACKEND  = 0x1,
     THREAD_CONTEXT_DATABASE = 0x2,
@@ -88,7 +88,7 @@ struct GfxCmdSetCustomConstant // sizeof=0x18
 struct GfxCmdDrawLines // sizeof=0x28
 {
     GfxCmdHeader header;
-    __int16 lineCount;
+    int16_t lineCount;
     uint8_t width;
     uint8_t dimensions;
     GfxPointVertex verts[2];
@@ -199,7 +199,7 @@ struct GfxCmdStretchRaw // sizeof=0x28
     int dirty;
 };
 
-struct __declspec(align(16)) GfxCmdBufSourceState // sizeof=0xF00
+struct __attribute__((aligned(16))) GfxCmdBufSourceState // sizeof=0xF00
 {                                       // ...
     GfxCodeMatrices matrices;
     GfxCmdBufInput input;               // ...
@@ -264,8 +264,8 @@ struct GfxCmdBufState // sizeof=0xA10
     GfxDepthRangeType depthRangeType;
     float depthRangeNear;
     float depthRangeFar;
-    unsigned __int64 vertexShaderConstState[32]; // ...
-    unsigned __int64 pixelShaderConstState[256]; // ...
+    uint64_t vertexShaderConstState[32]; // ...
+    uint64_t pixelShaderConstState[256]; // ...
     uint8_t alphaRef;           // ...
     // padding byte
     // padding byte
@@ -294,7 +294,7 @@ struct GfxCmdBufContext // sizeof=0x8
 struct GfxCmdDrawPoints // sizeof=0x18
 {
     GfxCmdHeader header;
-    __int16 pointCount;
+    int16_t pointCount;
     uint8_t size;
     uint8_t dimensions;
     GfxPointVertex verts[1];
@@ -311,8 +311,8 @@ struct GfxCmdDrawTriangles // sizeof=0x10
     GfxCmdHeader header;
     const Material *material;
     MaterialTechniqueType techType;
-    __int16 indexCount;
-    __int16 vertexCount;
+    int16_t indexCount;
+    int16_t vertexCount;
 };
 
 struct GfxPrimStats // sizeof=0x18
@@ -362,7 +362,7 @@ struct r_backEndGlobals_t // sizeof=0x280
     GfxFrameStats frameStatsMax;        // ...
 };
 
-struct __declspec(align(8)) materialCommands_t // sizeof=0x22A960
+struct __attribute__((aligned(8))) materialCommands_t // sizeof=0x22A960
 {                                       // ...
     GfxVertex verts[5450];              // ...
     uint16_t indices[1048576];  // ...
@@ -477,9 +477,9 @@ void __cdecl RB_DrawTrianglesCmd(GfxRenderCommandExecState *execState);
 void __cdecl RB_DrawTriangles_Internal(
     const Material *material,
     MaterialTechniqueType techType,
-    __int16 indexCount,
+    int16_t indexCount,
     const uint16_t *indices,
-    __int16 vertexCount,
+    int16_t vertexCount,
     const float (*xyzw)[4],
     const float (*normal)[3],
     const GfxColor *color,
@@ -503,7 +503,7 @@ void __cdecl DrawText2D(
     float cosAngle,
     GfxColor color,
     int maxLength,
-    __int16 renderFlags,
+    int16_t renderFlags,
     int cursorPos,
     char cursorLetter,
     float padding,

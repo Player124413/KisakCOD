@@ -420,7 +420,7 @@ char __cdecl R_EmitLightGridBlock_Version15(
     uint32_t endBlock)
 {
     signed int v7; // [esp+0h] [ebp-20h]
-    __int16 zBase; // [esp+8h] [ebp-18h]
+    int16_t zBase; // [esp+8h] [ebp-18h]
     uint32_t zOffset; // [esp+Ch] [ebp-14h]
     uint32_t height; // [esp+10h] [ebp-10h]
     uint32_t pointIndex; // [esp+14h] [ebp-Ch]

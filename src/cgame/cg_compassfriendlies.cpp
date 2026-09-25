@@ -305,7 +305,7 @@ void __cdecl CG_CompassDrawActors(
     Material *compassping_friendlyfiring; // r30
     double v25; // fp0
     double firingFade; // fp0
-    __int64 v27; // r11
+    int64_t v27; // r11
     const char *text; // r3
     int v29; // r8
     int v30; // r7
@@ -317,12 +317,12 @@ void __cdecl CG_CompassDrawActors(
     int *p_beginFadeTime; // r31
     int v37; // r11
     double value; // fp0
-    __int64 v39; // r10
+    int64_t v39; // r10
     int v44; // r11
     double picX; // fp1
     double pixY; // fp2
     double v47; // fp0
-    __int64 v48; // r11
+    int64_t v48; // r11
     float v49; // [sp+8h] [-1B8h]
     float v50; // [sp+10h] [-1B0h]
     double lastYaw; // [sp+18h] [-1A8h]
@@ -342,9 +342,9 @@ void __cdecl CG_CompassDrawActors(
     float xy[2]; // [sp+80h] [-140h] BYREF
     //float y; // [sp+84h] [-13Ch]
     float compassNorth[2]; // [sp+88h] [-138h] BYREF
-    unsigned __int64 v68; // [sp+90h] [-130h]
-    unsigned __int64 v69; // [sp+98h] [-128h]
-    unsigned __int64 v70; // [sp+A0h] [-120h]
+    uint64_t v68; // [sp+90h] [-130h]
+    uint64_t v69; // [sp+98h] [-128h]
+    uint64_t v70; // [sp+A0h] [-120h]
     float v71; // [sp+A8h] [-118h]
     float v72; // [sp+B0h] [-110h]
     float v73; // [sp+B4h] [-10Ch]
@@ -506,7 +506,7 @@ void __cdecl CG_CompassDrawVehicles(
     const rectDef_s *rect,
     Material *material,
     float *color,
-    unsigned __int8 vehicleCompassType)
+    uint8_t vehicleCompassType)
 {
     double v13; // fp26
     double v14; // fp28

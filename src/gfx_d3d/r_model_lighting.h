@@ -3,7 +3,7 @@
 #include "r_rendercmds.h"
 #include "rb_backend.h"
 
-enum GfxModelLightExtrapolation : __int32
+enum GfxModelLightExtrapolation : int32_t
 {                                       // ...
     GFX_MODELLIGHT_EXTRAPOLATE = 0x0,
     GFX_MODELLIGHT_SHOW_MISSING = 0x1,

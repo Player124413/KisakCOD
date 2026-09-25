@@ -1161,7 +1161,7 @@ const FxEffectDef *__cdecl FX_Load(const char *name)
 
 int __cdecl FX_HashName(const char *name)
 {
-    __int16 hash; // [esp+4h] [ebp-Ch]
+    int16_t hash; // [esp+4h] [ebp-Ch]
     char letter; // [esp+Bh] [ebp-5h]
     int scale; // [esp+Ch] [ebp-4h]
 

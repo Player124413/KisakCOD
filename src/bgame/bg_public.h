@@ -13,7 +13,7 @@
 
 
 #ifdef KISAK_MP
-enum perksEnum : __int32
+enum perksEnum : int32_t
 {
     PERK_JAMRADAR = 0x0,
     PERK_ACCURACY = 0x1,
@@ -39,7 +39,7 @@ enum perksEnum : __int32
     PERK_UNKNOWN = 0x14,
 };
 
-enum entity_event_t : __int32
+enum entity_event_t : int32_t
 {
     EV_NONE = 0x0,
     EV_FOLIAGE_SOUND = 0x1,
@@ -130,7 +130,7 @@ enum entity_event_t : __int32
     EV_MAX_EVENTS = 0x87,
 };
 #elif KISAK_SP
-enum entity_event_t : __int32
+enum entity_event_t : int32_t
 {
     EV_NONE = 0x0,
     EV_FOLIAGE_SOUND = 0x1,
@@ -410,7 +410,7 @@ static const char *eventnames[135] =
 };
 
 #ifdef KISAK_SP
-struct __declspec(align(4)) pmove_t
+struct __attribute__((aligned(4))) pmove_t
 {
     playerState_s *ps;
     usercmd_s cmd;
@@ -518,7 +518,7 @@ struct mover_ent_t // sizeof=0x60 (SP/MP same)
 };
 static_assert(sizeof(mover_ent_t) == 0x60);
 
-enum $A1BE347394FC01D8E43F73A65E725CFC : __int32
+enum $A1BE347394FC01D8E43F73A65E725CFC : int32_t
 {
     TURRET_REQUIRES_AI     = (1 << 0),
     TURRET_AUTO            = (1 << 1),
@@ -574,20 +574,20 @@ struct entityShared_t
 };
 #endif
 
-enum MissileStage : __int32
+enum MissileStage : int32_t
 {                                       // ...
     MISSILESTAGE_SOFTLAUNCH = 0x0,
     MISSILESTAGE_ASCENT = 0x1,
     MISSILESTAGE_DESCENT = 0x2,
 };
 
-enum MissileFlightMode : __int32
+enum MissileFlightMode : int32_t
 {                                       // ...
     MISSILEFLIGHTMODE_TOP = 0x0,
     MISSILEFLIGHTMODE_DIRECT = 0x1,
 };
 
-enum team_t;
+enum team_t : int32_t;
 #ifdef KISAK_MP
 struct corpse_ent_t // sizeof=0x4
 {                                       // ...
@@ -640,7 +640,7 @@ enum EntHandler_t : uint8_t
     ENT_HANDLER_COUNT = 0x18,
 };
 
-enum gentityFlags_t : __int32 // LWSS: not a real enum name, used to force usage
+enum gentityFlags_t : int32_t // LWSS: not a real enum name, used to force usage
 {
     FL_GODMODE              = 0x1,
     FL_DEMI_GODMODE         = 0x2,
@@ -1059,7 +1059,7 @@ extern const dvar_t *jump_spreadAdd;
 extern uint32_t bg_lastParsedWeaponIndex;
 extern struct WeaponDef *bg_weaponDefs[128];
 
-enum scriptAnimConditions_t : __int32
+enum scriptAnimConditions_t : int32_t
 {
     ANIM_COND_PLAYERANIMTYPE = 0x0,
     ANIM_COND_WEAPONCLASS = 0x1,
@@ -1074,7 +1074,7 @@ enum scriptAnimConditions_t : __int32
     NUM_ANIM_CONDITIONS = 0xA,
 };
 
-enum scriptAnimPerkStates_t : __int32
+enum scriptAnimPerkStates_t : int32_t
 {
     ANIM_PERK_UNUSED = 0x0,
     ANIM_PERK_LASTSTAND = 0x1,
@@ -1082,7 +1082,7 @@ enum scriptAnimPerkStates_t : __int32
     NUM_ANIM_PERKSTATES = 0x3,
 };
 
-enum scriptAnimWeaponPositions_t : __int32
+enum scriptAnimWeaponPositions_t : int32_t
 {
     ANIM_WP_HIP = 0x0,
     ANIM_WP_ADS = 0x1,

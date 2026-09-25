@@ -5,7 +5,7 @@
 #error This file is for SinglePlayer only 
 #endif
 
-enum ThreatDebugStringCategory : __int32
+enum ThreatDebugStringCategory : int32_t
 {
     TDS_TOTAL_THREAT = 0x0,
     TDS_FLASHED = 0x1,
@@ -22,7 +22,7 @@ enum ThreatDebugStringCategory : __int32
 
 struct threat_bias_t
 {
-    unsigned __int16 groupName[16];
+    uint16_t groupName[16];
     int threatTable[16][16];
     int threatGroupCount;
 };

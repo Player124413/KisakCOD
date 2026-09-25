@@ -2091,7 +2091,7 @@ void __cdecl Phys_CollideOrientedBrushWithBrush_Wrapper(const cbrush_t *oriented
 
 void __cdecl Phys_CollideOrientedBrushWithTriangleList(
     const cbrush_t *orientedBrush,
-    const unsigned __int16 *indices,
+    const uint16_t *indices,
     const float (*verts)[3],
     int triCount,
     const objInfo *input,
@@ -2107,7 +2107,7 @@ void __cdecl Phys_CollideOrientedBrushWithTriangleList(
     BrushTrimeshData data; // [esp+F8h] [ebp-24h] BYREF
     float radius; // [esp+110h] [ebp-Ch]
     int i; // [esp+114h] [ebp-8h]
-    const unsigned __int16 *pIndices; // [esp+118h] [ebp-4h]
+    const uint16_t *pIndices; // [esp+118h] [ebp-4h]
 
     data.input = input;
     data.results = results;
@@ -2553,7 +2553,7 @@ double __cdecl Phys_TestTriangleAgainstBrushPlane(const float *brushPlane, const
 }
 
 void __cdecl Phys_CollideOrientedBrushModelWithTriangleList(
-    const unsigned __int16 *indices,
+    const uint16_t *indices,
     const float (*verts)[3],
     int triCount,
     const objInfo *info,
@@ -2595,7 +2595,7 @@ void __cdecl Phys_CollideOrientedBrushWithTriangleList_Wrapper(const cbrush_t *o
         MyAssertHandler(".\\physics\\phys_coll_boxbrush.cpp", 1855, 0, "%s", "userData");
     Phys_CollideOrientedBrushWithTriangleList(
         orientedBrush,
-        *(const unsigned __int16 **)userData,
+        *(const uint16_t **)userData,
         *((const float (**)[3])userData + 1),
         *((uint32_t *)userData + 2),
         *((const objInfo **)userData + 3),
@@ -2604,7 +2604,7 @@ void __cdecl Phys_CollideOrientedBrushWithTriangleList_Wrapper(const cbrush_t *o
 }
 
 void __cdecl Phys_CollideBoxWithTriangleList(
-    const unsigned __int16 *indices,
+    const uint16_t *indices,
     const float (*verts)[3],
     uint32_t triCount,
     const objInfo *info,

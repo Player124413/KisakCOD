@@ -147,7 +147,7 @@ typedef struct
 extern WinVars_t	g_wv;
 #endif
 
-struct __declspec(align(8)) SysInfo // sizeof=0x260
+struct __attribute__((aligned(8))) SysInfo // sizeof=0x260
 {                                       // ...
 	long double cpuGHz;                 // ...
 	long double configureGHz;           // ...
@@ -181,7 +181,7 @@ extern HWND g_splashWnd;
 
 #if defined(KISAK_RADIANT)
 // Radiant tools build: use SP-compatible critical section layout
-enum CriticalSection : __int32
+enum CriticalSection : int32_t
 {
 	CRITSECT_CONSOLE = 0x0,
 	CRITSECT_DEBUG_SOCKET = 0x1,
@@ -249,7 +249,7 @@ enum CriticalSection : int
 	CRITSECT_COUNT = 0x16,
 };
 #elif KISAK_SP
-enum CriticalSection : __int32
+enum CriticalSection : int32_t
 {
 	CRITSECT_CONSOLE = 0x0,
 	CRITSECT_DEBUG_SOCKET = 0x1,
@@ -364,7 +364,7 @@ void __cdecl Voice_Shutdown();
 double __cdecl Voice_GetVoiceLevel();
 void __cdecl Voice_Playback();
 int __cdecl Voice_GetLocalVoiceData();
-void __cdecl Voice_IncomingVoiceData(unsigned __int8 talker, unsigned __int8 *data, int packetDataSize);
+void __cdecl Voice_IncomingVoiceData(uint8_t talker, uint8_t *data, int packetDataSize);
 bool __cdecl Voice_IsClientTalking(uint32_t clientNum);
 char __cdecl Voice_StartRecording();
 char __cdecl Voice_StopRecording();

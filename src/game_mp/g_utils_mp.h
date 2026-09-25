@@ -4,7 +4,7 @@
 
 #define MAX_MODELS 512
 
-enum entity_event_t : __int32;
+enum entity_event_t : int32_t;
 
 void __cdecl G_SafeDObjFree(uint32_t handle, int unusedLocalClientNum);
 void __cdecl TRACK_g_utils();

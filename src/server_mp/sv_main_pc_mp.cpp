@@ -13,7 +13,7 @@ netadr_t adr;
 
 const netadr_t *__cdecl SV_MasterAddress()
 {
-    __int16 v1; // ax
+    int16_t v1; // ax
 
     if (adr.type == NA_BOT)
     {

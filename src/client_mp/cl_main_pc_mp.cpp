@@ -79,7 +79,7 @@ int __cdecl CL_ServerStatus(char *serverAddress, char *serverStatusString, int m
     }
 }
 
-void __cdecl CL_SetServerInfoByAddress(netadr_t from, char *info, __int16 ping)
+void __cdecl CL_SetServerInfoByAddress(netadr_t from, char *info, int16_t ping)
 {
     int cmp; // [esp+0h] [ebp-14h]
     int low; // [esp+4h] [ebp-10h]
@@ -127,7 +127,7 @@ void __cdecl CL_SetServerInfoByAddress(netadr_t from, char *info, __int16 ping)
     }
 }
 
-void __cdecl CL_SetServerInfo(serverInfo_t *server, char *info, __int16 ping)
+void __cdecl CL_SetServerInfo(serverInfo_t *server, char *info, int16_t ping)
 {
     const char *v3; // eax
     const char *v4; // eax
@@ -297,7 +297,7 @@ void __cdecl CL_ServerInfoPacket(netadr_t from, msg_t *msg, int time)
 void __cdecl CL_Connect_f()
 {
     const char *v0; // eax
-    __int16 v1; // ax
+    int16_t v1; // ax
     clientConnection_t *clc; // [esp+1Ch] [ebp-8h]
     char *server; // [esp+20h] [ebp-4h]
 

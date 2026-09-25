@@ -29,13 +29,13 @@ struct ScreenPlacement;
 
 static const float up[3] = { 0.0f, 0.0f, 1.0f };
 
-enum $73E480FCE7B67BAA29FC24DF5A08B1FF : __int32
+enum $73E480FCE7B67BAA29FC24DF5A08B1FF : int32_t
 {
     WEAP_ANIM_VIEWMODEL_START = 0x0,
     WEAP_ANIM_VIEWMODEL_END = 0x1F,
 };
 
-enum $53B7CF4E68BA96864516EAE91DEE3467 : __int32
+enum $53B7CF4E68BA96864516EAE91DEE3467 : int32_t
 {
     IMPACTEFFECT_HEADSHOT = 0x1,
     IMPACTEFFECT_FATAL = 0x2,
@@ -459,7 +459,7 @@ void __cdecl CG_BulletHitEvent(
     int32_t event,
     uint8_t eventParam,
     int32_t damage,
-    __int16 hitContents);
+    int16_t hitContents);
 int32_t __cdecl CalcMuzzlePoint(int32_t localClientNum, int32_t entityNum, float *muzzle, uint32_t flashTag);
 void __cdecl CG_BulletHitEvent_Internal(
     int32_t localClientNum,
@@ -473,7 +473,7 @@ void __cdecl CG_BulletHitEvent_Internal(
     int32_t event,
     uint8_t eventParam,
     int32_t damage,
-    __int16 hitContents);
+    int16_t hitContents);
 void __cdecl BulletTrajectoryEffects(
     int32_t localClientNum,
     int32_t sourceEntityNum,
@@ -518,7 +518,7 @@ void CG_ArchiveWeaponInfo(struct MemoryFile *memFile);
 
 
 // cg_localents
-enum leType_t : __int32
+enum leType_t : int32_t
 {                                       // ...
     LE_MOVING_TRACER = 0x0,
 };
@@ -640,13 +640,13 @@ void __cdecl CG_TraceCapsule(
 
 
 // cg_visionsets
-enum visionSetMode_t : __int32
+enum visionSetMode_t : int32_t
 {                                       // ...
     VISIONSETMODE_NAKED = 0x0,
     VISIONSETMODE_NIGHT = 0x1,
     VISIONSETMODECOUNT = 0x2,
 };
-enum visionSetLerpStyle_t : __int32
+enum visionSetLerpStyle_t : int32_t
 {                                       // ...
     VISIONSETLERP_UNDEFINED = 0x0,
     VISIONSETLERP_NONE = 0x1,
@@ -784,7 +784,7 @@ void __cdecl CG_DamageFeedback(int32_t localClientNum, int32_t yawByte, int32_t 
 
 
 // cg_laser
-enum LaserOwnerEnum : __int32
+enum LaserOwnerEnum : int32_t
 {                                       // ...
     LASER_OWNER_NON_PLAYER = 0x0,
     LASER_OWNER_PLAYER = 0x1,
@@ -805,7 +805,7 @@ void __cdecl CG_Laser_Add_Core(
 
 
 // cg_event
-enum EquipmentSound_t : __int32
+enum EquipmentSound_t : int32_t
 {                                       // ...
     EQS_WALKING = 0x0,
     EQS_RUNNING = 0x1,
@@ -815,7 +815,7 @@ enum EquipmentSound_t : __int32
     EQS_QSPRINTING = 0x5,
 };
 
-enum InvalidCmdHintType : __int32
+enum InvalidCmdHintType : int32_t
 {                                       // ...
     INVALID_CMD_NONE = 0x0,
     INVALID_CMD_NO_AMMO_BULLETS = 0x1,
@@ -986,7 +986,7 @@ void __cdecl CG_DrawFxMarkProfile(int32_t localClientNum);
 
 
 // cg_compass
-enum CompassType : __int32
+enum CompassType : int32_t
 {                                       // ...
     COMPASS_TYPE_PARTIAL = 0x0,
     COMPASS_TYPE_FULL = 0x1,

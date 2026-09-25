@@ -3,7 +3,7 @@
 #include <Windows.h> // literally just for some of the extern types at the bottom
 #include <gfx_d3d/rb_backend.h> // THREAD_CONTEXT_COUNT
 
-enum ThreadOwner : __int32
+enum ThreadOwner : int32_t
 {                                       // ...
     THREAD_OWNER_NONE = 0x0,
     THREAD_OWNER_DATABASE = 0x1,
@@ -109,7 +109,7 @@ void Sys_SetSaveHistoryDoneEvent();
 #endif
 
 
-enum WinThreadLock : __int32
+enum WinThreadLock : int32_t
 {                                       // ...
     THREAD_LOCK_NONE = 0x0,
     THREAD_LOCK_MINIMAL = 0x1,

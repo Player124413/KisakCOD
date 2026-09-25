@@ -8,7 +8,7 @@
 #include <client/client.h>
 #include <server/server.h>
 
-enum saveFieldtype_t : __int32
+enum saveFieldtype_t : int32_t
 {
     SF_NONE = 0x0,
     SF_STRING = 0x1,
@@ -30,14 +30,14 @@ enum saveFieldtype_t : __int32
     SF_MODELINT = 0x11,
 };
 
-enum SaveHandleType : __int32
+enum SaveHandleType : int32_t
 {
     SAVE_GAME_HANDLE = 0x0,
     SAVE_DEMO_HANDLE = 0x1,
     SAVE_LAST_COMMITTED = 0x2,
 };
 
-enum SaveErrorType : __int32
+enum SaveErrorType : int32_t
 {
     SAVE_ERROR_MISSING_DEVICE = 0x0,
     SAVE_ERROR_CORRUPT_SAVE = 0x1,
@@ -57,7 +57,7 @@ struct badplace_t;
 
 // g_save
 void __cdecl TRACK_g_save();
-void __cdecl Scr_FreeFields(const saveField_t *fields, unsigned __int8 *base);
+void __cdecl Scr_FreeFields(const saveField_t *fields, uint8_t *base);
 void __cdecl Scr_FreeEntityFields(gentity_s *ent);
 void __cdecl Scr_FreeActorFields(actor_s *pActor);
 void __cdecl Scr_FreeSentientFields(sentient_s *sentient);
@@ -73,18 +73,18 @@ void __cdecl WriteWeaponIndex(unsigned int weapon, SaveGame *save);
 int __cdecl ReadWeaponIndex(SaveGame *save);
 void __cdecl WriteItemIndex(int iIndex, SaveGame *save);
 int __cdecl ReadItemIndex(SaveGame *save);
-void __cdecl WriteVehicleIndex(__int16 index, SaveGame *save);
+void __cdecl WriteVehicleIndex(int16_t index, SaveGame *save);
 int __cdecl ReadVehicleIndex(SaveGame *save);
-void __cdecl WriteField1(const saveField_t *field, const unsigned __int8 *base, unsigned __int8 *original);
-void __cdecl WriteField2(const saveField_t *field, unsigned __int8 *base, SaveGame *save);
-void __cdecl ReadField(const saveField_t *field, unsigned __int8 *base, SaveGame *save);
+void __cdecl WriteField1(const saveField_t *field, const uint8_t *base, uint8_t *original);
+void __cdecl WriteField2(const saveField_t *field, uint8_t *base, SaveGame *save);
+void __cdecl ReadField(const saveField_t *field, uint8_t *base, SaveGame *save);
 void __cdecl G_WriteStruct(
     const saveField_t *fields,
-    unsigned __int8 *original,
-    const unsigned __int8 *source,
+    uint8_t *original,
+    const uint8_t *source,
     int sourcesize,
     SaveGame *save);
-void __cdecl G_ReadStruct(const saveField_t *fields, unsigned __int8 *dest, int tempsize, SaveGame *save);
+void __cdecl G_ReadStruct(const saveField_t *fields, uint8_t *dest, int tempsize, SaveGame *save);
 void __cdecl WriteClient(gclient_s *cl, SaveGame *save);
 void __cdecl ReadClient(gclient_s *client, SaveGame *save);
 void __cdecl WriteEntity(gentity_s *ent, SaveGame *save);

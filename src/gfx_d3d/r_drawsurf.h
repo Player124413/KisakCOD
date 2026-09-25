@@ -10,7 +10,7 @@
 
 #define MTL_SORT_OBJECT_ID_BITS 16 //0x10000 // 65536
 
-enum $7289DBEFE9BA94617DD3EA143BDD93C8 : __int32
+enum $7289DBEFE9BA94617DD3EA143BDD93C8 : int32_t
 {
     MTL_PREPASS_STANDARD = 0x0,
     MTL_PREPASS_ALPHA = 0x1,
@@ -19,7 +19,7 @@ enum $7289DBEFE9BA94617DD3EA143BDD93C8 : __int32
     MTL_PREPASS_TYPECOUNT = 0x4,
 };
 
-enum DrawSurfType : __int32 // LWSS: (not a real enum name)
+enum DrawSurfType : int32_t // LWSS: (not a real enum name)
 {
     DRAW_SURF_CAMERA_LIT_BEGIN = 0x0,
     DRAW_SURF_BSP_CAMERA_LIT = 0x0,

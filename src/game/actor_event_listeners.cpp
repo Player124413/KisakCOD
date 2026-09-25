@@ -15,7 +15,7 @@
 
 AIEventListener g_AIEVlisteners[32];
 
-unsigned __int16 *g_AIEV_scrConst_table[23] =
+uint16_t *g_AIEV_scrConst_table[23] =
 {
   NULL,
   NULL,
@@ -71,7 +71,7 @@ int __cdecl Actor_EventListener_GetCount()
     return g_listenerCount;
 }
 
-int __cdecl Actor_FindEventFromString(unsigned __int16 eventString)
+int __cdecl Actor_FindEventFromString(uint16_t eventString)
 {
     for (int i = 0; i < ARRAY_COUNT(g_AIEV_scrConst_table); ++i)
     {
@@ -83,7 +83,7 @@ int __cdecl Actor_FindEventFromString(unsigned __int16 eventString)
     return 0;
 }
 
-void __cdecl Actor_EventListener_Add(int entIndex, unsigned __int16 eventString)
+void __cdecl Actor_EventListener_Add(int entIndex, uint16_t eventString)
 {
     int EventFromString; // r29
     int v4; // r11
@@ -162,7 +162,7 @@ void __cdecl RemoveSwapWithLast(unsigned int listenerIndex)
     g_AIEVlisteners[v6].events = 0;
 }
 
-void __cdecl Actor_EventListener_Remove(int entIndex, unsigned __int16 eventString)
+void __cdecl Actor_EventListener_Remove(int entIndex, uint16_t eventString)
 {
     int EventFromString; // r4
     unsigned int v4; // r31

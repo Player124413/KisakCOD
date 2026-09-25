@@ -237,7 +237,7 @@ void __cdecl G_DuplicateEntityFields(gentity_s *dest, const gentity_s *source)
             *(float *)((char *)dest + f->ofs) = *(float *)((char *)source + f->ofs);
             break;
         case F_STRING:
-            Scr_SetString((unsigned __int16 *)((char *)dest + f->ofs), *(unsigned __int16 *)((char *)source + f->ofs));
+            Scr_SetString((uint16_t *)((char *)dest + f->ofs), *(uint16_t *)((char *)source + f->ofs));
             break;
         case F_VECTOR:
             destVec = (float *)((char *)dest + f->ofs);
@@ -259,7 +259,7 @@ void __cdecl G_DuplicateScriptFields(gentity_s *dest, const gentity_s *source)
     Scr_CopyEntityNum(source->s.number, dest->s.number, CLASS_NUM_ENTITY);
 }
 
-const gitem_s *__cdecl G_GetItemForClassname(const char *classname, unsigned __int8 model)
+const gitem_s *__cdecl G_GetItemForClassname(const char *classname, uint8_t model)
 {
     unsigned int WeaponIndexForName; // r3
     int v5; // r31
@@ -361,7 +361,7 @@ void __cdecl GScr_AddFieldsForEntity()
         iassert(((f - fields_1) & ENTFIELD_MASK) == ENTFIELD_ENTITY);
         iassert((f - fields_1) == (unsigned short)(f - fields_1));
 
-        Scr_AddClassField(CLASS_NUM_ENTITY, (char*)f->name, (unsigned __int16)(f - fields_1));
+        Scr_AddClassField(CLASS_NUM_ENTITY, (char*)f->name, (uint16_t)(f - fields_1));
     }
 
     GScr_AddFieldsForActor();
@@ -560,7 +560,7 @@ void __cdecl Scr_AddExecEntThread(gentity_s *ent, int handle, unsigned int param
     Scr_AddExecEntThreadNum(ent->s.number, CLASS_NUM_ENTITY, handle, paramcount);
 }
 
-void __cdecl Scr_Notify(gentity_s *ent, unsigned __int16 stringValue, unsigned int paramcount)
+void __cdecl Scr_Notify(gentity_s *ent, uint16_t stringValue, unsigned int paramcount)
 {
     const char *v6; // r3
     const char *v7; // r3
@@ -613,7 +613,7 @@ void __cdecl Scr_GetGenericEnt(unsigned int offset, unsigned int name)
     {
         do
         {
-            if (entItr->r.inuse && *(_WORD *)((char*)entItr + f->ofs) && *(unsigned __int16 *)((char*)entItr + f->ofs) == name)
+            if (entItr->r.inuse && *(_WORD *)((char*)entItr + f->ofs) && *(uint16_t *)((char*)entItr + f->ofs) == name)
             {
                 if (v5)
                 {
@@ -673,7 +673,7 @@ void __cdecl Scr_GetGenericEntArray(unsigned int offset, unsigned int name)
     v6 = g_entities;
     for (i = level.num_entities; v5 < i; ++v6)
     {
-        if (v6->r.inuse && *(_WORD *)((char *)v6 + v4->ofs) && *(unsigned __int16 *)((char *)v6 + v4->ofs) == name)
+        if (v6->r.inuse && *(_WORD *)((char *)v6 + v4->ofs) && *(uint16_t *)((char *)v6 + v4->ofs) == name)
         {
             Scr_AddEntity(v6);
             Scr_AddArray();
@@ -829,7 +829,7 @@ void __cdecl SP_worldspawn()
 void __cdecl G_LoadStructs()
 {
     int initstructs; // r3
-    unsigned __int16 v1; // r3
+    uint16_t v1; // r3
     const char *v2; // r10
     const char *v3; // r11
     int v4; // r8
@@ -850,7 +850,7 @@ void __cdecl G_LoadStructs()
         v3 = "script_struct";
         do
         {
-            v4 = *(unsigned __int8 *)v3 - *(unsigned __int8 *)v2;
+            v4 = *(uint8_t *)v3 - *(uint8_t *)v2;
             if (!*v3)
                 break;
             ++v3;
@@ -871,7 +871,7 @@ void __cdecl G_SetEntityScriptVariable(const char *key, const char *value, genti
         Scr_SetDynamicEntityField(ent->s.number, 0, v4);
 }
 
-typedef unsigned __int16 modelNameIndex_t;
+typedef uint16_t modelNameIndex_t;
 void __cdecl G_ParseEntityField(const char *key, const char *value, gentity_s *ent, int ignoreModel)
 {
     const ent_field_t *f; // r31
@@ -1036,7 +1036,7 @@ void G_CallSpawn()
     }
 }
 
-void __cdecl Scr_SetGenericField(unsigned __int8 *b, fieldtype_t type, int ofs)
+void __cdecl Scr_SetGenericField(uint8_t *b, fieldtype_t type, int ofs)
 {
     unsigned int ConstStringIncludeNull; // r3
     gentity_s *Int; // r3
@@ -1068,7 +1068,7 @@ void __cdecl Scr_SetGenericField(unsigned __int8 *b, fieldtype_t type, int ofs)
         return;
     case F_STRING:
         ConstStringIncludeNull = Scr_GetConstStringIncludeNull(0);
-        Scr_SetString((unsigned __int16 *)&b[ofs], ConstStringIncludeNull);
+        Scr_SetString((uint16_t *)&b[ofs], ConstStringIncludeNull);
         return;
     case F_VECTOR:
         Scr_GetVector(0, vec);
@@ -1125,7 +1125,7 @@ void __cdecl Scr_SetGenericField(unsigned __int8 *b, fieldtype_t type, int ofs)
     }
 }
 
-void __cdecl Scr_GetGenericField(unsigned __int8 *b, fieldtype_t type, int ofs)
+void __cdecl Scr_GetGenericField(uint8_t *b, fieldtype_t type, int ofs)
 {
     unsigned int v4; // r3
     gentity_s *v5; // r3
@@ -1142,7 +1142,7 @@ void __cdecl Scr_GetGenericField(unsigned __int8 *b, fieldtype_t type, int ofs)
         Scr_AddInt(*(unsigned int *)&b[ofs]);
         break;
     case F_SHORT:
-        Scr_AddInt(*(__int16 *)&b[ofs]);
+        Scr_AddInt(*(int16_t *)&b[ofs]);
         break;
     case F_BYTE:
         Scr_AddInt(b[ofs]);
@@ -1151,7 +1151,7 @@ void __cdecl Scr_GetGenericField(unsigned __int8 *b, fieldtype_t type, int ofs)
         Scr_AddFloat(*(float *)&b[ofs]);
         break;
     case F_STRING:
-        v4 = *(unsigned __int16 *)&b[ofs];
+        v4 = *(uint16_t *)&b[ofs];
         if (*(_WORD *)&b[ofs])
             goto LABEL_21;
         break;
@@ -1195,7 +1195,7 @@ void __cdecl Scr_GetGenericField(unsigned __int8 *b, fieldtype_t type, int ofs)
         Scr_AddVector(v12);
         break;
     case F_MODEL:
-        v4 = G_ModelName(*(unsigned __int16 *)&b[ofs]);
+        v4 = G_ModelName(*(uint16_t *)&b[ofs]);
     LABEL_21:
         Scr_AddConstString(v4);
         break;

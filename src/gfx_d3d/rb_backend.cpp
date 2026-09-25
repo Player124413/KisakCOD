@@ -1427,9 +1427,9 @@ void __cdecl RB_DrawTrianglesCmd(GfxRenderCommandExecState *execState)
 void __cdecl RB_DrawTriangles_Internal(
     const Material *material,
     MaterialTechniqueType techType,
-    __int16 indexCount,
+    int16_t indexCount,
     const uint16_t *indices,
-    __int16 vertexCount,
+    int16_t vertexCount,
     const float (*xyzw)[4],
     const float (*normal)[3],
     const GfxColor *color,
@@ -1599,7 +1599,7 @@ void __cdecl DrawText2D(
     float cosAngle,
     GfxColor color,
     int maxLength,
-    __int16 renderFlags,
+    int16_t renderFlags,
     int cursorPos,
     char cursorLetter,
     float padding,
@@ -2767,7 +2767,7 @@ void __cdecl RB_Draw3D()
 
 int RB_AdaptiveGpuSyncFinal()
 {
-    unsigned __int64 v0; // rax
+    uint64_t v0; // rax
     int waitedTime; // [esp+18h] [ebp-8h]
     int startTime; // [esp+1Ch] [ebp-4h]
 
@@ -2900,7 +2900,7 @@ void __cdecl RB_CallExecuteRenderCommands()
                 R_AcquireGpuFenceLock();
                 RB_AdaptiveGpuSyncFinal();
                 if (dx.gpuSync == 2)
-                    dx.gpuSyncDelay = (unsigned __int64)(30.0 / msecPerRawTimerTick);
+                    dx.gpuSyncDelay = (uint64_t)(30.0 / msecPerRawTimerTick);
                 R_InsertGpuFence();
                 R_ReleaseGpuFenceLock();
             }

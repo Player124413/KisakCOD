@@ -3580,13 +3580,13 @@ void __cdecl BG_WeaponFireRecoil(const playerState_s *ps, float *vGunSpeed, floa
 
     if (fPosLerp == 1.0)
     {
-        fPitchKick = random() * (weapDef->fAdsViewKickPitchMax - weapDef->fAdsViewKickPitchMin) + weapDef->fAdsViewKickPitchMin;
-        fYawKick = random() * (weapDef->fAdsViewKickYawMax - weapDef->fAdsViewKickYawMin) + weapDef->fAdsViewKickYawMin;
+        fPitchKick = Com_Random() * (weapDef->fAdsViewKickPitchMax - weapDef->fAdsViewKickPitchMin) + weapDef->fAdsViewKickPitchMin;
+        fYawKick = Com_Random() * (weapDef->fAdsViewKickYawMax - weapDef->fAdsViewKickYawMin) + weapDef->fAdsViewKickYawMin;
     }
     else
     {
-        fPitchKick = random() * (weapDef->fHipViewKickPitchMax - weapDef->fHipViewKickPitchMin) + weapDef->fHipViewKickPitchMin;
-        fYawKick = random() * (weapDef->fHipViewKickYawMax - weapDef->fHipViewKickYawMin) + weapDef->fHipViewKickYawMin;
+        fPitchKick = Com_Random() * (weapDef->fHipViewKickPitchMax - weapDef->fHipViewKickPitchMin) + weapDef->fHipViewKickPitchMin;
+        fYawKick = Com_Random() * (weapDef->fHipViewKickYawMax - weapDef->fHipViewKickYawMin) + weapDef->fHipViewKickYawMin;
     }
 
     fPitchKick *= fReducePercent;
@@ -3598,13 +3598,13 @@ void __cdecl BG_WeaponFireRecoil(const playerState_s *ps, float *vGunSpeed, floa
 
     if (fPosLerp <= 0.0)
     {
-        fPitchKick = random() * (weapDef->fHipGunKickPitchMax - weapDef->fHipGunKickPitchMin) + weapDef->fHipGunKickPitchMin;
-        fYawKick = random() * (weapDef->fHipGunKickYawMax - weapDef->fHipGunKickYawMin) + weapDef->fHipGunKickYawMin;
+        fPitchKick = Com_Random() * (weapDef->fHipGunKickPitchMax - weapDef->fHipGunKickPitchMin) + weapDef->fHipGunKickPitchMin;
+        fYawKick = Com_Random() * (weapDef->fHipGunKickYawMax - weapDef->fHipGunKickYawMin) + weapDef->fHipGunKickYawMin;
     }
     else
     {
-        fPitchKick = random() * (weapDef->fAdsGunKickPitchMax - weapDef->fAdsGunKickPitchMin) + weapDef->fAdsGunKickPitchMin;
-        fYawKick = random() * (weapDef->fAdsGunKickYawMax - weapDef->fAdsGunKickYawMin) + weapDef->fAdsGunKickYawMin;
+        fPitchKick = Com_Random() * (weapDef->fAdsGunKickPitchMax - weapDef->fAdsGunKickPitchMin) + weapDef->fAdsGunKickPitchMin;
+        fYawKick = Com_Random() * (weapDef->fAdsGunKickYawMax - weapDef->fAdsGunKickYawMin) + weapDef->fAdsGunKickYawMin;
     }
 
     fPitchKick *= fReducePercent;

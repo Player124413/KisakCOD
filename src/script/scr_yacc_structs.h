@@ -394,7 +394,7 @@ static alignas(2) const short yypact[] =
   -32768,
 };
 
-const __int16 yypgoto[] = 
+const int16_t yypgoto[] = 
 {
   -32768,
   33,

@@ -18,7 +18,7 @@ struct vn_field_t
 
 int s_newDebugLine = 1;
 
-__int16 s_numNodes = 0;
+int16_t s_numNodes = 0;
 
 float s_start[3] = { 0.0, 0.0, 0.0 };
 float s_end[3] = { 0.0, 0.0, 0.0 };
@@ -170,7 +170,7 @@ void __cdecl VP_ParseField(const char *key, const char *value, vehicle_node_t *n
             *(unsigned int *)((char *)&node->name + f->ofs) = atol(value);
             break;
         case F_SHORT:
-            *(unsigned __int16 *)((char *)&node->name + f->ofs) = atol(value);
+            *(uint16_t *)((char *)&node->name + f->ofs) = atol(value);
             break;
         case F_BYTE:
             *((_BYTE *)&node->name + f->ofs) = atol(value);
@@ -179,8 +179,8 @@ void __cdecl VP_ParseField(const char *key, const char *value, vehicle_node_t *n
             *(float *)((char *)&node->name + f->ofs) = atof(value);
             break;
         case F_STRING:
-            Scr_SetString((unsigned __int16 *)((char *)&node->name + f->ofs), 0);
-            *(unsigned __int16 *)((char *)&node->name + f->ofs) = G_NewString(value);
+            Scr_SetString((uint16_t *)((char *)&node->name + f->ofs), 0);
+            *(uint16_t *)((char *)&node->name + f->ofs) = G_NewString(value);
             break;
         case F_VECTOR:
             x = 0.0f;
@@ -251,7 +251,7 @@ void __cdecl VP_CopyNode(const vehicle_node_t *src, vehicle_node_t *dst)
 }
 
 
-int __cdecl VP_GetNodeIndex(unsigned __int16 name, float *origin)
+int __cdecl VP_GetNodeIndex(uint16_t name, float *origin)
 {
     int v2; // r7
     int result; // r3
@@ -273,7 +273,7 @@ int __cdecl VP_GetNodeIndex(unsigned __int16 name, float *origin)
         {
             break;
         }
-        result = (__int16)(v4 + 1);
+        result = (int16_t)(v4 + 1);
         v4 = result;
         if (result >= s_numNodes)
             return -1;
@@ -446,7 +446,7 @@ float VP_CalcNodeLookAhead(int16_t nodeIdx)
 }
 
 
-void __cdecl VP_CalcNodeAngles(__int16 nodeIdx, float *angles)
+void __cdecl VP_CalcNodeAngles(int16_t nodeIdx, float *angles)
 {
     vehicle_node_t *v2; // r11
     double v4; // fp0
@@ -461,10 +461,10 @@ void __cdecl VP_CalcNodeAngles(__int16 nodeIdx, float *angles)
     double v13; // fp10
     double v14; // fp30
     double v15; // fp29
-    __int16 v16; // r9
+    int16_t v16; // r9
     vehicle_node_t *v17; // r10
     int v18; // r10
-    __int16 v19; // r9
+    int16_t v19; // r9
     int nextIdx; // r10
     double v21; // fp31
 
@@ -604,7 +604,7 @@ float __cdecl VP_GetLookAhead(const vehicle_pathpos_t *vpp)
 float __cdecl VP_GetSlide(const vehicle_pathpos_t *vpp)
 {
     vehicle_node_t *v1; // r11
-    __int16 nextIdx; // r9
+    int16_t nextIdx; // r9
     int rotated; // r11
     double frac; // fp1
     vehicle_node_t *v5; // r10
@@ -715,7 +715,7 @@ LABEL_13:
 
 void __cdecl VP_GetLookAheadXYZ(const vehicle_pathpos_t *vpp, float *lookXYZ)
 {
-    __int16 v2; // r10
+    int16_t v2; // r10
     vehicle_node_t *v3; // r11
     double v4; // fp13
     int nextIdx; // r9
@@ -752,19 +752,19 @@ LABEL_8:
     lookXYZ[2] = (float)(v3->dir[2] * (float)v4) + v3->origin[2];
 }
 
-int __cdecl VP_UpdatePathPos(vehicle_pathpos_t *vpp, const float *dir, __int16 nodeTest)
+int __cdecl VP_UpdatePathPos(vehicle_pathpos_t *vpp, const float *dir, int16_t nodeTest)
 {
-    __int16 nodeIdx; // r8
+    int16_t nodeIdx; // r8
     double frac; // fp6
     int test; // r29
-    __int16 v6; // r6
+    int16_t v6; // r6
     vehicle_node_t *v7; // r11
     int v8; // r30
-    __int16 nextIdx; // r5
+    int16_t nextIdx; // r5
     float *origin; // r10
     double v11; // fp11
     double v12; // fp0
-    __int16 v13; // r11
+    int16_t v13; // r11
     vehicle_node_t *v14; // r10
     double speed; // fp0
     int v16; // r11
@@ -837,7 +837,7 @@ void __cdecl VP_BeginSwitchNode(const vehicle_pathpos_t *vpp)
 {
     int name; // r8
     const vehicle_node_t *switchNode; // r3
-    __int16 v3; // r10
+    int16_t v3; // r10
     int v4; // r11
 
     name = vpp->switchNode[0].name;
@@ -848,7 +848,7 @@ void __cdecl VP_BeginSwitchNode(const vehicle_pathpos_t *vpp)
         while (s_nodes[v4].name != name)
         {
             v3 = v4 + 1;
-            v4 = (__int16)(v4 + 1);
+            v4 = (int16_t)(v4 + 1);
             if (v4 >= s_numNodes)
                 goto LABEL_6;
         }
@@ -864,7 +864,7 @@ void __cdecl VP_BeginSwitchNode(const vehicle_pathpos_t *vpp)
 
 void __cdecl VP_EndSwitchNode(const vehicle_pathpos_t *vpp)
 {
-    __int16 v1; // r10
+    int16_t v1; // r10
     int v2; // r11
 
     if (vpp->switchNode[0].name && (v1 = 0, s_numNodes > 0))
@@ -873,7 +873,7 @@ void __cdecl VP_EndSwitchNode(const vehicle_pathpos_t *vpp)
         while (s_nodes[v2].name != vpp->switchNode[0].name)
         {
             v1 = v2 + 1;
-            v2 = (__int16)(v2 + 1);
+            v2 = (int16_t)(v2 + 1);
             if (v2 >= s_numNodes)
                 goto LABEL_6;
         }
@@ -908,7 +908,7 @@ void __cdecl G_FreeVehiclePaths()
             Scr_SetString(&v1->target, 0);
             Scr_SetString(&v1->script_linkname, 0);
             Scr_SetString(&v1->script_noteworthy, 0);
-            v0 = (__int16)(v0 + 1);
+            v0 = (int16_t)(v0 + 1);
         } while (v0 < s_numNodes);
     }
     s_numNodes = 0;
@@ -924,7 +924,7 @@ void __cdecl G_FreeVehiclePathsScriptInfo()
         do
         {
             Scr_FreeEntityNum(s_nodes[v0].index, CLASS_NUM_VEHICLENODE);
-            v0 = (__int16)(v0 + 1);
+            v0 = (int16_t)(v0 + 1);
         } while (v0 < s_numNodes);
     }
 }
@@ -1074,7 +1074,7 @@ void __cdecl G_VehFreePathPos(vehicle_pathpos_t *vpp)
     Scr_SetString(&vpp->switchNode[1].script_noteworthy, 0);
 }
 
-void __cdecl G_VehSetUpPathPos(vehicle_pathpos_t *vpp, __int16 nodeIdx)
+void __cdecl G_VehSetUpPathPos(vehicle_pathpos_t *vpp, int16_t nodeIdx)
 {
     vehicle_node_t *v2; // r9
     double v3; // fp13
@@ -1368,14 +1368,14 @@ void __cdecl GScr_AddFieldsForVehicleNode()
         v1 = 0;
         do
         {
-            if (v1 / 12 != (unsigned __int16)(v1 / 12))
+            if (v1 / 12 != (uint16_t)(v1 / 12))
                 MyAssertHandler(
                     "c:\\trees\\cod3\\cod3src\\src\\universal\\g_vehicle_path.cpp",
                     1436,
                     0,
                     "%s",
                     "(f - vn_fields) == (unsigned short)( f - vn_fields )");
-            Scr_AddClassField(3u, (char*)v0->name, (unsigned __int16)(v1 / 12));
+            Scr_AddClassField(3u, (char*)v0->name, (uint16_t)(v1 / 12));
             ++v0;
             v1 += 12;
         } while (v0->name);
@@ -1400,7 +1400,7 @@ void __cdecl GScr_GetVehicleNodeField(unsigned int entnum, unsigned int offset)
             "entnum doesn't index s_numNodes\n\t%i not in [0, %i)",
             entnum,
             s_numNodes);
-    Scr_GetGenericField((unsigned __int8 *)&s_nodes[entnum], vn_fields[offset].type, vn_fields[offset].ofs);
+    Scr_GetGenericField((uint8_t *)&s_nodes[entnum], vn_fields[offset].type, vn_fields[offset].ofs);
 }
 
 void __cdecl GScr_GetVehicleNode()
@@ -1411,7 +1411,7 @@ void __cdecl GScr_GetVehicleNode()
     int v3; // r31
     vn_field_t *v4; // r28
     vehicle_node_t *v5; // r9
-    __int16 v6; // r10
+    int16_t v6; // r10
     int v7; // r30
     int ofs; // r8
     vehicle_node_t *v9; // r31
@@ -1442,8 +1442,8 @@ void __cdecl GScr_GetVehicleNode()
             {
                 ofs = v4->ofs;
                 v9 = &s_nodes[v7];
-                if (*(unsigned __int16 *)((char *)&v9->name + ofs)
-                    && *(unsigned __int16 *)((char *)&v9->name + ofs) == ConstString)
+                if (*(uint16_t *)((char *)&v9->name + ofs)
+                    && *(uint16_t *)((char *)&v9->name + ofs) == ConstString)
                 {
                     if (v5)
                     {
@@ -1452,7 +1452,7 @@ void __cdecl GScr_GetVehicleNode()
                     }
                     v5 = &s_nodes[v7];
                 }
-                v7 = (__int16)(v7 + 1);
+                v7 = (int16_t)(v7 + 1);
             } while (v7 < v6);
             if (v5)
                 Scr_AddEntityNum(v5->index, CLASS_NUM_VEHICLENODE);
@@ -1468,7 +1468,7 @@ void __cdecl GScr_GetVehicleNodeArray()
     int v3; // r31
     vn_field_t *v4; // r29
     int v5; // r30
-    __int16 v6; // r10
+    int16_t v6; // r10
     vehicle_node_t *v7; // r31
 
     ConstString = Scr_GetConstString(0);
@@ -1496,9 +1496,9 @@ void __cdecl GScr_GetVehicleNodeArray()
             v7 = s_nodes;
             do
             {
-                if (*(unsigned __int16 *)((char *)&v7->name + v4->ofs))
+                if (*(uint16_t *)((char *)&v7->name + v4->ofs))
                 {
-                    if (*(unsigned __int16 *)((char *)&v7->name + v4->ofs) == ConstString)
+                    if (*(uint16_t *)((char *)&v7->name + v4->ofs) == ConstString)
                     {
                         Scr_AddEntityNum(v7->index, CLASS_NUM_VEHICLENODE);
                         Scr_AddArray();
@@ -1524,7 +1524,7 @@ void __cdecl GScr_GetAllVehicleNodes()
         {
             Scr_AddEntityNum(s_nodes[v0].index, CLASS_NUM_VEHICLENODE);
             Scr_AddArray();
-            v0 = (__int16)(v0 + 1);
+            v0 = (int16_t)(v0 + 1);
         } while (v0 < s_numNodes);
     }
 }
@@ -1533,7 +1533,7 @@ void __cdecl VP_DrawPath(const vehicle_pathpos_t *vpp)
 {
     int v2; // r29
     int v3; // r30
-    __int16 nodeIdx; // r31
+    int16_t nodeIdx; // r31
     int updated; // r3
     const float *v6; // r6
     int v7; // r29
@@ -1604,10 +1604,10 @@ LABEL_11:
 
 void __cdecl G_DrawVehiclePaths()
 {
-    __int16 v0; // r29
+    int16_t v0; // r29
     int v1; // r31
     const char *v2; // r11
-    unsigned __int8 *integer; // r10
+    uint8_t *integer; // r10
     int v4; // r8
     vehicle_pathpos_t v5; // [sp+50h] [-100h] BYREF
 
@@ -1622,10 +1622,10 @@ void __cdecl G_DrawVehiclePaths()
                 while (1)
                 {
                     v2 = SL_ConvertToString(s_nodes[v1].name);
-                    integer = (unsigned __int8 *)g_vehicleDrawPath->current.integer;
+                    integer = (uint8_t *)g_vehicleDrawPath->current.integer;
                     do
                     {
-                        v4 = *(unsigned __int8 *)v2 - *integer;
+                        v4 = *(uint8_t *)v2 - *integer;
                         if (!*v2)
                             break;
                         ++v2;
@@ -1634,7 +1634,7 @@ void __cdecl G_DrawVehiclePaths()
                     if (!v4)
                         break;
                     v0 = v1 + 1;
-                    v1 = (__int16)(v1 + 1);
+                    v1 = (int16_t)(v1 + 1);
                     if (v1 >= s_numNodes)
                         return;
                 }

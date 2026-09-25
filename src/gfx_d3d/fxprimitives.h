@@ -47,15 +47,15 @@ struct FxElemDef;
 /////////////////////////////////////////////////////////////////////////////////
 struct FxBoltAndSortOrder // sizeof=0x4
 {
-    unsigned __int32 dobjHandle : 12;
+    uint32_t dobjHandle : 12;
 #ifdef KISAK_SP
-    unsigned __int32 temporalBits : 2;
-    unsigned __int32 boneIndex : 10;
+    uint32_t temporalBits : 2;
+    uint32_t boneIndex : 10;
 #else
-    unsigned __int32 temporalBits : 1;
-    unsigned __int32 boneIndex : 11;
+    uint32_t temporalBits : 1;
+    uint32_t boneIndex : 11;
 #endif
-    unsigned __int32 sortOrder : 8;
+    uint32_t sortOrder : 8;
 };
 
 struct FxSpatialFrame // sizeof=0x1C
@@ -166,7 +166,7 @@ struct FxTrailElem // sizeof=0x20
     float spawnDist;
     int msecBegin;
     uint16_t nextTrailElemHandle;
-    __int16 baseVelZ;
+    int16_t baseVelZ;
     char basis[2][3];
     uint8_t sequence;
     uint8_t unused;
@@ -214,7 +214,7 @@ struct FxSystem // sizeof=0xA60
     volatile long activeSpotLightElemCount;
     uint16_t activeSpotLightEffectHandle;
     uint16_t activeSpotLightElemHandle;
-    __int16 activeSpotLightBoltDobj;
+    int16_t activeSpotLightBoltDobj;
     // padding byte
     // padding byte
     volatile long iteratorCount;
@@ -343,7 +343,7 @@ struct FxElemAtlas // sizeof=0x8
     uint8_t loopCount;
     uint8_t colIndexBits;
     uint8_t rowIndexBits;
-    __int16 entryCount;
+    int16_t entryCount;
 };
 struct FxElemVec3Range // sizeof=0x18
 {                                       // ...
@@ -358,7 +358,7 @@ struct FxElemVisualState // sizeof=0x18
     float size[2];                      // ...
     float scale;
 };
-const struct FxElemVisStateSample // sizeof=0x30
+struct FxElemVisStateSample // sizeof=0x30
 {
     FxElemVisualState base;
     FxElemVisualState amplitude;
@@ -378,7 +378,7 @@ struct FxElemVelStateInFrame // sizeof=0x30
     FxElemVec3Range velocity;
     FxElemVec3Range totalDelta;
 };
-const struct FxElemVelStateSample // sizeof=0x60
+struct FxElemVelStateSample // sizeof=0x60
 {
     FxElemVelStateInFrame local;
     FxElemVelStateInFrame world;
@@ -426,7 +426,7 @@ struct FxTrailDef // sizeof=0x1C
     int indCount;
     uint16_t *inds;
 };
-const struct FxElemDef // sizeof=0xFC
+struct FxElemDef // sizeof=0xFC
 {
     int flags;
     FxSpawnDef spawn;

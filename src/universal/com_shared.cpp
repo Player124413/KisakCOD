@@ -157,7 +157,7 @@ int __cdecl Com_HashKey(const char *string, int maxlen)
 
 int __cdecl Com_RealTime(qtime_s *qtime)
 {
-    __int64 t; // [esp+0h] [ebp-10h] BYREF
+    int64_t t; // [esp+0h] [ebp-10h] BYREF
     tm *tms; // [esp+Ch] [ebp-4h]
 
     t = _time64(0);

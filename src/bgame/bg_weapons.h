@@ -3,7 +3,7 @@
 
 #define WP_NONE 0
 
-enum weapAnimFiles_t : __int32
+enum weapAnimFiles_t : int32_t
 {
     WEAP_ANIM_ROOT = 0x0,
     WEAP_ANIM_IDLE = 0x1,
@@ -41,7 +41,7 @@ enum weapAnimFiles_t : __int32
     NUM_WEAP_ANIMS = 0x21,
 };
 
-enum weapAnimNumber_t : __int32
+enum weapAnimNumber_t : int32_t
 {
     WEAP_IDLE = 0x0,
     WEAP_FORCE_IDLE = 0x1,
@@ -76,12 +76,12 @@ enum weapAnimNumber_t : __int32
     MAX_WP_ANIMATIONS = 0x1E,
 };
 
-enum playerWeaponFlags_t : __int32
+enum playerWeaponFlags_t : int32_t
 {
     PWF_USING_OFFHAND = 0x2,
 };
 
-enum weapType_t : __int32
+enum weapType_t : int32_t
 {                                       // ...
     WEAPTYPE_BULLET = 0x0,
     WEAPTYPE_GRENADE = 0x1,
@@ -90,7 +90,7 @@ enum weapType_t : __int32
     WEAPTYPE_NUM = 0x4,
 };
 
-enum weapClass_t : __int32
+enum weapClass_t : int32_t
 {                                       // ...
     WEAPCLASS_RIFLE = 0x0,
     WEAPCLASS_MG = 0x1,
@@ -104,7 +104,7 @@ enum weapClass_t : __int32
     WEAPCLASS_ITEM = 0x9,
     WEAPCLASS_NUM = 0xA,
 };
-enum PenetrateType : __int32
+enum PenetrateType : int32_t
 {                                       // ...
     PENETRATE_TYPE_NONE = 0x0,
     PENETRATE_TYPE_SMALL = 0x1,
@@ -112,7 +112,7 @@ enum PenetrateType : __int32
     PENETRATE_TYPE_LARGE = 0x3,
     PENETRATE_TYPE_COUNT = 0x4,
 };
-enum ImpactType : __int32
+enum ImpactType : int32_t
 {                                       // ...
     IMPACT_TYPE_NONE = 0x0,
     IMPACT_TYPE_BULLET_SMALL = 0x1,
@@ -126,7 +126,7 @@ enum ImpactType : __int32
     IMPACT_TYPE_COUNT = 0x9,
 };
 
-enum weapInventoryType_t : __int32
+enum weapInventoryType_t : int32_t
 {                                       // ...
     WEAPINVENTORY_PRIMARY = 0x0,
     WEAPINVENTORY_OFFHAND = 0x1,
@@ -135,7 +135,7 @@ enum weapInventoryType_t : __int32
     WEAPINVENTORYCOUNT = 0x4,
 };
 
-enum weapFireType_t : __int32
+enum weapFireType_t : int32_t
 {                                       // ...
     WEAPON_FIRETYPE_FULLAUTO = 0x0,
     WEAPON_FIRETYPE_SINGLESHOT = 0x1,
@@ -145,28 +145,28 @@ enum weapFireType_t : __int32
     WEAPON_FIRETYPECOUNT = 0x5,
 };
 
-enum weapStance_t : __int32
+enum weapStance_t : int32_t
 {                                       // ...
     WEAPSTANCE_STAND = 0x0,
     WEAPSTANCE_DUCK = 0x1,
     WEAPSTANCE_PRONE = 0x2,
     WEAPSTANCE_NUM = 0x3,
 };
-enum activeReticleType_t : __int32
+enum activeReticleType_t : int32_t
 {                                       // ...
     VEH_ACTIVE_RETICLE_NONE = 0x0,
     VEH_ACTIVE_RETICLE_PIP_ON_A_STICK = 0x1,
     VEH_ACTIVE_RETICLE_BOUNCING_DIAMOND = 0x2,
     VEH_ACTIVE_RETICLE_COUNT = 0x3,
 };
-enum weaponIconRatioType_t : __int32
+enum weaponIconRatioType_t : int32_t
 {                                       // ...
     WEAPON_ICON_RATIO_1TO1 = 0x0,
     WEAPON_ICON_RATIO_2TO1 = 0x1,
     WEAPON_ICON_RATIO_4TO1 = 0x2,
     WEAPON_ICON_RATIO_COUNT = 0x3,
 };
-enum ammoCounterClipType_t : __int32
+enum ammoCounterClipType_t : int32_t
 {                                       // ...
     AMMO_COUNTER_CLIP_NONE = 0x0,
     AMMO_COUNTER_CLIP_MAGAZINE = 0x1,
@@ -177,20 +177,20 @@ enum ammoCounterClipType_t : __int32
     AMMO_COUNTER_CLIP_ALTWEAPON = 0x6,
     AMMO_COUNTER_CLIP_COUNT = 0x7,
 };
-enum weapOverlayReticle_t : __int32
+enum weapOverlayReticle_t : int32_t
 {                                       // ...
     WEAPOVERLAYRETICLE_NONE = 0x0,
     WEAPOVERLAYRETICLE_CROSSHAIR = 0x1,
     WEAPOVERLAYRETICLE_NUM = 0x2,
 };
-enum WeapOverlayInteface_t : __int32
+enum WeapOverlayInteface_t : int32_t
 {                                       // ...
     WEAPOVERLAYINTERFACE_NONE = 0x0,
     WEAPOVERLAYINTERFACE_JAVELIN = 0x1,
     WEAPOVERLAYINTERFACE_TURRETSCOPE = 0x2,
     WEAPOVERLAYINTERFACECOUNT = 0x3,
 };
-enum weapProjExposion_t : __int32
+enum weapProjExposion_t : int32_t
 {                                       // ...
     WEAPPROJEXP_GRENADE = 0x0,
     WEAPPROJEXP_ROCKET = 0x1,
@@ -201,7 +201,7 @@ enum weapProjExposion_t : __int32
     WEAPPROJEXP_HEAVY = 0x6,
     WEAPPROJEXP_NUM = 0x7,
 };
-enum WeapStickinessType : __int32
+enum WeapStickinessType : int32_t
 {                                       // ...
     WEAPSTICKINESS_NONE = 0x0,
     WEAPSTICKINESS_ALL = 0x1,
@@ -209,7 +209,7 @@ enum WeapStickinessType : __int32
     WEAPSTICKINESS_GROUND_WITH_YAW = 0x3,
     WEAPSTICKINESS_COUNT = 0x4,
 };
-enum guidedMissileType_t : __int32
+enum guidedMissileType_t : int32_t
 {                                       // ...
     MISSILE_GUIDANCE_NONE = 0x0,
     MISSILE_GUIDANCE_SIDEWINDER = 0x1,
@@ -218,14 +218,14 @@ enum guidedMissileType_t : __int32
     MISSILE_GUIDANCE_COUNT = 0x4,
 };
 
-enum OffhandSecondaryClass : __int32
+enum OffhandSecondaryClass : int32_t
 {
     PLAYER_OFFHAND_SECONDARY_SMOKE = 0x0,
     PLAYER_OFFHAND_SECONDARY_FLASH = 0x1,
     PLAYER_OFFHAND_SECONDARIES_TOTAL = 0x2,
 };
 
-enum weaponstate_t : __int32
+enum weaponstate_t : int32_t
 {                                       // ...
     WEAPON_READY = 0x0,
     WEAPON_RAISING = 0x1,
@@ -256,7 +256,7 @@ enum weaponstate_t : __int32
     WEAPON_NIGHTVISION_REMOVE = 0x1A,
     WEAPONSTATES_NUM = 0x1B,
 };
-enum OffhandClass : __int32
+enum OffhandClass : int32_t
 {                                       // ...
     OFFHAND_CLASS_NONE = 0x0,
     OFFHAND_CLASS_FRAG_GRENADE = 0x1,

@@ -3,7 +3,7 @@
 #include <win32/win_local.h>
 #include <cstdarg>
 
-enum AssertOccurance : __int32
+enum AssertOccurance : int32_t
 {
     FIRST_TIME = 0x0,
     RECURSIVE = 0x1,

@@ -37,7 +37,7 @@ bool __cdecl Actor_Death_Start(actor_s *self, ai_state_t ePrevState)
     if (self->eAnimMode != AI_ANIM_NOPHYSICS
         && !self->ent->tagInfo
         && !BG_ActorIsProne(&self->ProneInfo, level.time)
-        && !(unsigned __int8)Com_IsRagdollTrajectory(&self->ent->s.lerp.pos))
+        && !(uint8_t)Com_IsRagdollTrajectory(&self->ent->s.lerp.pos))
     {
         time = level.time;
         ent = self->ent;

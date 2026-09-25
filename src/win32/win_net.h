@@ -25,4 +25,4 @@ void		NET_Sleep(int msec);
 uint32_t __cdecl NET_TCPIPSocket(const char *net_interface, int port, int type);
 
 qboolean Sys_StringToAdr(const char *s, netadr_t *a);
-char __cdecl Sys_SendPacket(int length, unsigned __int8 *data, netadr_t to);
+char __cdecl Sys_SendPacket(int length, uint8_t *data, netadr_t to);

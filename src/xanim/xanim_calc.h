@@ -13,8 +13,8 @@ struct XAnimCalcAnimInfo // sizeof=0x6020
 struct XAnimToXModel // sizeof=0x94
 {                                       // ...
     bitarray<128> partBits;             // ...
-    unsigned __int8 boneCount;          // ...
-    unsigned __int8 boneIndex[128];     // ...
+    uint8_t boneCount;          // ...
+    uint8_t boneIndex[128];     // ...
     // padding byte
     // padding byte
     // padding byte
@@ -34,7 +34,7 @@ void __cdecl XAnimClearRotTransArray(const DObj_s *obj, DObjAnimMat *rotTransArr
 void __cdecl XAnimCalcLeaf(XAnimInfo *info, float weightScale, DObjAnimMat *rotTransArray, XAnimCalcAnimInfo *animInfo);
 void __cdecl XAnimCalcNonLoopEnd(
     const XAnimParts *parts,
-    const unsigned __int8 *animToModel,
+    const uint8_t *animToModel,
     float weightScale,
     DObjAnimMat *rotTransArray,
     const bitarray<128> *ignorePartBits);

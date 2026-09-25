@@ -1,6 +1,6 @@
 #pragma once
 
-enum FS_SERVER_COMPARE_RESULT : __int32
+enum FS_SERVER_COMPARE_RESULT : int32_t
 {                                       // ...
     FILES_MATCH = 0x0,
     NEED_DOWNLOAD = 0x1,

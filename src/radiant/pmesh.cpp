@@ -2592,7 +2592,7 @@ void Patch_NaturalizeSelected( bool unk, bool cap, float x, float y )
 //   layer texCoords either by the TERRAIN dominant-axis path (Patch_TerrainTexProject) or
 //   the curve sample-size resampler (PMESH_02).  When the edit layer is the lightmap layer
 //   (1) it also stamps the sample size into the patch (bDirty + size_of_struct_0x504C@0x5048,
-//   a __int16 version bump@0x5040).  Finally rebuilds the tessellated curveDef and bumps the
+//   a int16_t version bump@0x5040).  Finally rebuilds the tessellated curveDef and bumps the
 //   version.  (Faithful to the disasm: the layer passed to Patch_Terrain/PMESH_02 is the
 //   current edit layer in ecx, not a fixed lightmap layer.)
 static curvePatchDef_t *Patch_Lightmap_Texturing_Sub( patchMesh_t *def )

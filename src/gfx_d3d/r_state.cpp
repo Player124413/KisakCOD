@@ -870,7 +870,7 @@ void __cdecl R_ChangeState_0(GfxCmdBufState *state, uint32_t stateBits0)
     }
 }
 
-void __cdecl R_HW_SetAlphaTestEnable(IDirect3DDevice9 *device, __int16 stateBits0)
+void __cdecl R_HW_SetAlphaTestEnable(IDirect3DDevice9 *device, int16_t stateBits0)
 {
     const char *v2; // eax
     int hr; // [esp+0h] [ebp-4h]
@@ -927,7 +927,7 @@ void __cdecl R_HW_SetColorMask(IDirect3DDevice9 *device, uint32_t stateBits0)
     } while (alwaysfails);
 }
 
-void __cdecl R_HW_SetCullFace(IDirect3DDevice9 *device, __int16 stateBits0)
+void __cdecl R_HW_SetCullFace(IDirect3DDevice9 *device, int16_t stateBits0)
 {
     const char *v2; // eax
     int hr; // [esp+0h] [ebp-4h]
@@ -1213,7 +1213,7 @@ void __cdecl R_HW_SetBlend(
     }
 }
 
-void __cdecl R_SetAlphaTestFunction(GfxCmdBufState *state, __int16 stateBits0)
+void __cdecl R_SetAlphaTestFunction(GfxCmdBufState *state, int16_t stateBits0)
 {
     const char *v2; // eax
     const char *v3; // eax
@@ -2489,7 +2489,7 @@ void __cdecl R_ClearScreen(
 
 void __cdecl R_ForceSetPolygonOffset(IDirect3DDevice9 *device, char stateBits1)
 {
-    __int64 v2; // [esp+10h] [ebp-24h]
+    int64_t v2; // [esp+10h] [ebp-24h]
     uint32_t offset; // [esp+28h] [ebp-Ch]
     float bias; // [esp+2Ch] [ebp-8h]
     float scale; // [esp+30h] [ebp-4h]
@@ -2700,7 +2700,7 @@ void __cdecl R_UpdateCodeConstant(
 }
 
 
-void __cdecl R_SetAlphaAntiAliasingState(IDirect3DDevice9 *device, __int16 stateBits0)
+void __cdecl R_SetAlphaAntiAliasingState(IDirect3DDevice9 *device, int16_t stateBits0)
 {
     const char *v2; // eax
     int hr; // [esp+0h] [ebp-Ch]

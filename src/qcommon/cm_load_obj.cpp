@@ -56,8 +56,8 @@ struct DiskCollAabbTree // sizeof=0x20
 
 struct dbrush_t // sizeof=0x4
 {
-    __int16 numSides;
-    __int16 materialNum;
+    int16_t numSides;
+    int16_t materialNum;
 };
 
 union dbrushside_t_u // sizeof=0x4

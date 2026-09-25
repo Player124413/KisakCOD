@@ -22,7 +22,7 @@
 #define ACTOR_STOP_TIME 500
 #define MAX_ACTORS 32
 
-enum AISpecies : __int32
+enum AISpecies : int32_t
 {
     AI_SPECIES_HUMAN = 0x0,
     AI_SPECIES_DOG = 0x1,
@@ -30,7 +30,7 @@ enum AISpecies : __int32
     AI_SPECIES_ALL = 0x2,
 };
 
-enum ai_state_t : __int32
+enum ai_state_t : int32_t
 {
     AIS_INVALID = 0x0,
     AIS_KEEPCURRENT = 0x0,
@@ -52,7 +52,7 @@ enum ai_state_t : __int32
     AIS_COUNT = 0xB,
 };
 
-enum ai_substate_t : __int32
+enum ai_substate_t : int32_t
 {
     STATE_EXPOSED_COMBAT = 0x64,
     STATE_EXPOSED_NONCOMBAT = 0x65,
@@ -78,14 +78,14 @@ enum ai_state_transition_t
     AIS_TRANSITION_POP = 0x3,
 };
 
-enum actor_think_result_t : __int32
+enum actor_think_result_t : int32_t
 {
     ACTOR_THINK_DONE = 0x0,
     ACTOR_THINK_REPEAT = 0x1,
     ACTOR_THINK_MOVE_TO_BODY_QUEUE = 0x2,
 };
 
-enum aiGoalSources : __int32
+enum aiGoalSources : int32_t
 {
     AI_GOAL_SRC_SCRIPT_GOAL = 0x0,
     AI_GOAL_SRC_SCRIPT_ENTITY_GOAL = 0x1,
@@ -93,7 +93,7 @@ enum aiGoalSources : __int32
     AI_GOAL_SRC_ENEMY = 0x3,
 };
 
-enum ai_orient_mode_t : __int32
+enum ai_orient_mode_t : int32_t
 {
     AI_ORIENT_INVALID = 0x0,
     AI_ORIENT_DONT_CHANGE = 0x1,
@@ -105,7 +105,7 @@ enum ai_orient_mode_t : __int32
     AI_ORIENT_COUNT = 0x7,
 };
 
-enum ai_traverse_mode_t : __int32
+enum ai_traverse_mode_t : int32_t
 {
     AI_TRAVERSE_INVALID = 0x0,
     AI_TRAVERSE_GRAVITY = 0x1,
@@ -114,7 +114,7 @@ enum ai_traverse_mode_t : __int32
     AI_TRAVERSE_COUNT = 0x4,
 };
 
-enum ai_stance_e : __int32
+enum ai_stance_e : int32_t
 {
     STANCE_BAD = 0x0,
     STANCE_STAND = 0x1,
@@ -174,9 +174,9 @@ struct ActorLookAtInfo
     float fLookAtTurnAccel;
     float fLookAtAnimYawLimit;
     float fLookAtYawLimit;
-    unsigned __int16 animLookAtStraight;
-    unsigned __int16 animLookAtLeft;
-    unsigned __int16 animLookAtRight;
+    uint16_t animLookAtStraight;
+    uint16_t animLookAtLeft;
+    uint16_t animLookAtRight;
     bool bDoLookAt;
     bool bLookAtSetup;
     int iLookAtBlendEndTime;
@@ -186,15 +186,15 @@ struct ActorLookAtInfo
 
 struct ActorAnimSets
 {
-    unsigned __int16 aimLow;
-    unsigned __int16 aimLevel;
-    unsigned __int16 aimHigh;
-    unsigned __int16 shootLow;
-    unsigned __int16 shootLevel;
-    unsigned __int16 shootHigh;
-    unsigned __int16 animProneLow;
-    unsigned __int16 animProneLevel;
-    unsigned __int16 animProneHigh;
+    uint16_t aimLow;
+    uint16_t aimLevel;
+    uint16_t aimHigh;
+    uint16_t shootLow;
+    uint16_t shootLevel;
+    uint16_t shootHigh;
+    uint16_t animProneLow;
+    uint16_t animProneLevel;
+    uint16_t animProneHigh;
 };
 
 
@@ -210,7 +210,7 @@ struct ai_orient_t
 struct PhysicsInputs
 {
     float vVelocity[3];
-    unsigned __int16 groundEntNum;
+    uint16_t groundEntNum;
     int bHasGroundPlane;
     float groundplaneSlope;
     int iFootstepTimer;
@@ -227,8 +227,8 @@ struct ai_funcs_t
     void( *pfnPain)(actor_s *, gentity_s *, int, const float *, const int, const float *, const hitLocation_t);
 };
 
-//enum $D416C61A81CE0211A2B0E6C3C6220A84 : __int32
-enum ai_movemode_t : unsigned __int8 // not a real name
+//enum $D416C61A81CE0211A2B0E6C3C6220A84 : int32_t
+enum ai_movemode_t : uint8_t // not a real name
 {
     AI_MOVE_STOP      = 0x0,
     AI_MOVE_STOP_SOON = 0x1,
@@ -261,8 +261,8 @@ struct actor_s
     unsigned int hitCount;
     float debugLastAccuracy;
     int lastShotTime;
-    unsigned __int16 properName;
-    unsigned __int16 weaponName;
+    uint16_t properName;
+    uint16_t weaponName;
     int iTraceCount;
     float fLookPitch;
     float fLookYaw;
@@ -273,7 +273,7 @@ struct actor_s
     ai_orient_t ScriptOrient;
     float fDesiredBodyYaw;
     ActorAnimSets animSets;
-    unsigned __int16 anim_pose;
+    uint16_t anim_pose;
     float fInvProneAnimLowPitch;
     float fInvProneAnimHighPitch;
     float fProneLastDiff;
@@ -285,10 +285,10 @@ struct actor_s
     int iDamageTaken;
     int iDamageYaw;
     float damageDir[3];
-    unsigned __int16 damageHitLoc;
-    unsigned __int16 damageWeapon;
+    uint16_t damageHitLoc;
+    uint16_t damageWeapon;
     ai_stance_e eAllowedStances;
-    unsigned __int16 AnimScriptHandle;
+    uint16_t AnimScriptHandle;
     scr_animscript_t *pAnimScriptFunc;
     scr_animscript_t AnimScriptSpecific;
     ai_traverse_mode_t eTraverseMode;
@@ -310,11 +310,11 @@ struct actor_s
     actor_s *pPileUpActor;
     gentity_s *pPileUpEnt;
     int bDontAvoidPlayer;
-    __int16 chainFallback;
+    int16_t chainFallback;
     float sideMove;
-    unsigned __int8 keepClaimedNode;
-    unsigned __int8 keepClaimedNodeInGoal;
-    unsigned __int8 keepNodeDuringScriptedAnim;
+    uint8_t keepClaimedNode;
+    uint8_t keepClaimedNodeInGoal;
+    uint8_t keepNodeDuringScriptedAnim;
     bool noDodgeMove;
     int mayMoveTime;
     float prevMoveDir[2];
@@ -374,7 +374,7 @@ struct actor_s
     float grenadeAwareness;
     EntHandle pGrenade;
     int iGrenadeWeaponIndex;
-    unsigned __int16 GrenadeTossMethod;
+    uint16_t GrenadeTossMethod;
     int bGrenadeTossValid;
     int bGrenadeTargetValid;
     int iGrenadeAmmo;
@@ -385,9 +385,9 @@ struct actor_s
     int bDrawOnCompass;
     int iUseHintString;
     gentity_s *pTurret;
-    unsigned __int16 turretAnim;
-    unsigned __int8 turretAnimSet;
-    unsigned __int8 useable;
+    uint16_t turretAnim;
+    uint8_t turretAnimSet;
+    uint8_t useable;
     bool ignoreTriggers;
     bool pushable;
     bool inuse;
@@ -395,9 +395,9 @@ struct actor_s
     float badPlaceAwareness;
     float goodShootPos[3];
     int goodShootPosValid;
-    unsigned __int16 scriptState;
-    unsigned __int16 lastScriptState;
-    unsigned __int16 stateChangeReason;
+    uint16_t scriptState;
+    uint16_t lastScriptState;
+    uint16_t stateChangeReason;
     EntHandle pCloseEnt;
     int moveHistoryIndex;
     float moveHistory[10][2];
@@ -634,7 +634,7 @@ static const float g_actorAssumedSpeed[2] = { 190.0, 300.0 };
 
 extern struct AnimScriptList *g_animScriptTable[2];
 
-extern const unsigned __int16 *g_AISpeciesNames[2];
+extern const uint16_t *g_AISpeciesNames[2];
 extern const char *g_entinfoAITextNames[6];
 
 // actor_function_table

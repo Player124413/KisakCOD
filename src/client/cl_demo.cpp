@@ -31,7 +31,7 @@ void __cdecl CL_WriteDemoShortCString(MemoryFile *memFile, const char *string)
     if (string)
     {
         v4 = string;
-        while (*(unsigned __int8 *)v4++)
+        while (*(uint8_t *)v4++)
             ;
         v6 = v4 - string - 1;
         v7 = v6 + 1;
@@ -65,7 +65,7 @@ const char *__cdecl CL_ReadDemoShortCString(MemoryFile *memFile, char *string)
     if (!v7[0])
         return 0;
     v5 = memFile;
-    v6 = (unsigned __int8)(v7[0] - 1);
+    v6 = (uint8_t)(v7[0] - 1);
     MemFile_ReadData(v5, v6, (unsigned char*)string);
     result = string;
     string[v6] = 0;
@@ -153,9 +153,9 @@ void __cdecl CL_WriteDemoDObj(int entnum, const DObj_s *obj)
 {
     const XAnimTree_s *Tree; // r3
     const DObjModel_s *pModel; // r30
-    unsigned __int16 modelCount; // [sp+50h] [-160h] BYREF
+    uint16_t modelCount; // [sp+50h] [-160h] BYREF
     unsigned char modelCountWrite; // [sp+52h] [-15Eh] BYREF
-    unsigned __int16 v10[6]; // [sp+54h] [-15Ch] BYREF
+    uint16_t v10[6]; // [sp+54h] [-15Ch] BYREF
     MemoryFile memFile; // [sp+60h] [-150h] BYREF
     XAnimTree_s *v12; // [sp+7Ch] [-134h] BYREF
     DObjModel_s v13[38]; // [sp+80h] [-130h] BYREF
@@ -193,7 +193,7 @@ void __cdecl CL_ReadDemoDObj(int entnum)
     void *TempMemory; // r31
     int v3; // r3
     XAnimTree_s *v4; // r28
-    unsigned __int16 v5; // r29
+    uint16_t v5; // r29
     int v6; // r31
     DObjModel_s *v7; // r30
     DObj_s *v8; // r3
@@ -233,7 +233,7 @@ void __cdecl CL_ReadDemoDObj(int entnum)
 
 int CL_WriteDemoDObjs()
 {
-    __int16 v0; // r11
+    int16_t v0; // r11
     const DObj_s *ServerDObj; // r31
     _WORD v3[24]; // [sp+50h] [-30h] BYREF
 
@@ -429,7 +429,7 @@ void __cdecl CL_Record_f()
     int nesting; // r7
     const char *v1; // r3
     int i; // r30
-    unsigned __int16 *configstrings; // r30
+    uint16_t *configstrings; // r30
     const char *v4; // r3
     const char *v5; // r3
     char *v6; // r30
@@ -441,7 +441,7 @@ void __cdecl CL_Record_f()
     msg_t v13; // [sp+80h] [-41B0h] BYREF
     char v14[64]; // [sp+B0h] [-4180h] BYREF
     char v15[256]; // [sp+F0h] [-4140h] BYREF
-    unsigned __int8 v16[64]; // [sp+1F0h] [-4040h] BYREF
+    uint8_t v16[64]; // [sp+1F0h] [-4040h] BYREF
 
     nesting = cmd_args.nesting;
     if (cmd_args.nesting >= 8u)
@@ -538,7 +538,7 @@ void __cdecl CL_Record_f()
 
 void CL_DemoPlaybackStartup()
 {
-    unsigned __int8 v0; // r11
+    uint8_t v0; // r11
     int v1; // r30
     int demofile; // r5
     void *v3; // r28
@@ -702,7 +702,7 @@ int __cdecl CL_TimeDemoPlaying()
 // local variable allocation has failed, the output may be wrong!
 void CL_DemoCompleted()
 {
-    //__int64 v1; // r9 OVERLAPPED
+    //int64_t v1; // r9 OVERLAPPED
     int timeMS; // r3
     int timeElapsedMS; // r10
 
@@ -742,7 +742,7 @@ void CL_DemoCompleted()
     }
 }
 
-int __cdecl CL_GetDemoMessage(msg_t *buf, unsigned __int8 *bufData, int bufDataSize)
+int __cdecl CL_GetDemoMessage(msg_t *buf, uint8_t *bufData, int bufDataSize)
 {
     int *p_cursize; // r31
     int result; // r3
@@ -783,7 +783,7 @@ int __cdecl CL_GetDemoMessage(msg_t *buf, unsigned __int8 *bufData, int bufDataS
 void __cdecl CL_ReadDemoMessage()
 {
     msg_t v0; // [sp+50h] [-4040h] BYREF
-    unsigned __int8 v1[16]; // [sp+80h] [-4010h] BYREF
+    uint8_t v1[16]; // [sp+80h] [-4010h] BYREF
 
     if (CL_GetDemoMessage(&v0, v1, 0x4000))
         CL_ParseServerMessage(&v0);
@@ -811,7 +811,7 @@ void __cdecl CL_FinishLoadingDemo()
     int v4; // r10
     msg_t v7; // [sp+50h] [-4470h] BYREF
     char v8[1024]; // [sp+80h] [-4440h] BYREF
-    unsigned __int8 v9[64]; // [sp+480h] [-4040h] BYREF
+    uint8_t v9[64]; // [sp+480h] [-4040h] BYREF
 
     if (CL_GetDemoMessage(&v7, v9, 0x4000))
     {
@@ -836,7 +836,7 @@ void __cdecl CL_FinishLoadingDemo()
             v3 = SL_ConvertToString(ConfigstringConst);
             do
             {
-                v4 = *(unsigned __int8 *)v3 - (unsigned __int8)*v1;
+                v4 = *(uint8_t *)v3 - (uint8_t)*v1;
                 if (!*v3)
                     break;
                 ++v3;

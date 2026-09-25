@@ -345,7 +345,7 @@ void __cdecl CL_CubemapShot_f()
         goto LABEL_18;
     v0 = Cmd_Argv(2);
     v1 = v0;
-    while (*(unsigned __int8 *)v0++)
+    while (*(uint8_t *)v0++)
         ;
     if ((unsigned int)(v0 - v1 - 1) > 0x28)
         goto LABEL_18;
@@ -353,7 +353,7 @@ void __cdecl CL_CubemapShot_f()
     v4 = v33;
     do
     {
-        v5 = *(unsigned __int8 *)v3++;
+        v5 = *(uint8_t *)v3++;
         *v4++ = v5;
     } while (v5);
     v6 = Cmd_Argv(1);

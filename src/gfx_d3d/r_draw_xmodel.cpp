@@ -131,7 +131,7 @@ uint32_t __cdecl R_DrawXModelRigidSurfLitInternal(
     uint32_t depthHackFlags; // [esp+ECh] [ebp-28h]
     uint32_t gfxEntIndex; // [esp+F0h] [ebp-24h]
     float materialTime; // [esp+108h] [ebp-Ch]
-    unsigned __int64 drawSurfKey; // [esp+10Ch] [ebp-8h]
+    uint64_t drawSurfKey; // [esp+10Ch] [ebp-8h]
 
     data = context.source->input.data;
     drawSurf.fields = drawSurfList->fields;
@@ -212,7 +212,7 @@ uint32_t __cdecl R_DrawXModelRigidSurfCameraInternal(
     uint32_t depthHackFlags; // [esp+ECh] [ebp-28h]
     uint32_t gfxEntIndex; // [esp+F0h] [ebp-24h]
     float materialTime; // [esp+108h] [ebp-Ch]
-    unsigned __int64 drawSurfKey; // [esp+10Ch] [ebp-8h]
+    uint64_t drawSurfKey; // [esp+10Ch] [ebp-8h]
 
     data = context.source->input.data;
     drawSurf = *drawSurfList;
@@ -283,7 +283,7 @@ uint32_t __cdecl R_DrawXModelRigidSurfInternal(
     float4 eyeOffset; // [esp+C4h] [ebp-38h]
     GfxDrawSurf drawSurfMask; // [esp+D4h] [ebp-28h]
     const GfxModelRigidSurface *modelSurf; // [esp+DCh] [ebp-20h]
-    unsigned __int64 drawSurfKey; // [esp+F4h] [ebp-8h]
+    uint64_t drawSurfKey; // [esp+F4h] [ebp-8h]
     vector4 worldMat;
 
     data = context.source->input.data;

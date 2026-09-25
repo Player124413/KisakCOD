@@ -97,7 +97,7 @@ void __cdecl Phys_PushLinesAway(
     int surfaceFlags);
 double __cdecl Phys_DistanceOfCylinderFromPlane(const float *plane, const objInfo *info);
 void __cdecl Phys_CollideCylinderWithTriangleList(
-    const unsigned __int16 *a_indices,
+    const uint16_t *a_indices,
     const float (*verts)[3],
     uint32_t triCount,
     const objInfo *info,
@@ -191,7 +191,7 @@ bool __cdecl Phys_CapsuleSeparatingAxisTestMiddleEdge(
     const float *tri2);
 bool __cdecl Phys_TestCapsulePlane(const float *plane, const Capsule *capsule);
 void __cdecl Phys_CollideCapsuleWithTriangleList(
-    const unsigned __int16 *a_indices,
+    const uint16_t *a_indices,
     const float (*verts)[3],
     uint32_t triCount,
     const objInfo *info,

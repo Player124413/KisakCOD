@@ -122,7 +122,7 @@ struct GfxIndexBufferState // sizeof=0x10
     uint16_t* indices;
 };
 
-enum GfxPrimStatsTarget : __int32
+enum GfxPrimStatsTarget : int32_t
 {                                       // ...
     GFX_PRIM_STATS_WORLD = 0x0,
     GFX_PRIM_STATS_SMODELCACHED = 0x1,
@@ -137,7 +137,7 @@ enum GfxPrimStatsTarget : __int32
     GFX_PRIM_STATS_COUNT = 0xA,
 };
 
-enum GfxViewMode : __int32
+enum GfxViewMode : int32_t
 {                                       // ...
     VIEW_MODE_NONE = 0x0,
     VIEW_MODE_3D = 0x1,
@@ -145,20 +145,20 @@ enum GfxViewMode : __int32
     VIEW_MODE_IDENTITY = 0x3,
 };
 
-enum GfxViewportBehavior : __int32
+enum GfxViewportBehavior : int32_t
 {                                       // ...
     GFX_USE_VIEWPORT_FOR_VIEW = 0x0,    // ...
     GFX_USE_VIEWPORT_FULL = 0x1,    // ...
 };
 
-enum GfxDepthRangeType : __int32
+enum GfxDepthRangeType : int32_t
 {                                       // ...
     GFX_DEPTH_RANGE_SCENE = 0x0,
     GFX_DEPTH_RANGE_VIEWMODEL = 0x2,
     GFX_DEPTH_RANGE_FULL = -0x1,
 };
 
-enum MapType : __int32
+enum MapType : int32_t
 {                                       // ...
     MAPTYPE_NONE = 0x0,
     MAPTYPE_INVALID1 = 0x1,
@@ -189,12 +189,12 @@ struct CardMemory // sizeof=0x8
     int platform[2];                    // ...
 };
 
-#define OFFSET_TO_GfxImageLoadDef_DATA sizeof(uint8_t) + sizeof(uint8_t) + sizeof(__int16) + sizeof(__int16) + sizeof(__int16) + sizeof(_D3DFORMAT) + sizeof(int)
+#define OFFSET_TO_GfxImageLoadDef_DATA sizeof(uint8_t) + sizeof(uint8_t) + sizeof(int16_t) + sizeof(int16_t) + sizeof(int16_t) + sizeof(_D3DFORMAT) + sizeof(int)
 struct GfxImageLoadDef // sizeof=0x14
 {
     uint8_t levelCount;
     uint8_t flags;
-    __int16 dimensions[3];
+    int16_t dimensions[3];
     _D3DFORMAT format;
     int resourceSize;
     uint8_t data[4]; // data extends beyond 4... '4' is to force alignment
@@ -209,7 +209,7 @@ union GfxTexture // sizeof=0x4
     GfxImageLoadDef* loadDef;
 };
 
-enum $F18C17676CCABCF3A7521CF0683F7501 : __int32
+enum $F18C17676CCABCF3A7521CF0683F7501 : int32_t
 {
     IMAGE_TRACK_MISC = 0x0,
     IMAGE_TRACK_DEBUG = 0x1,
@@ -333,24 +333,24 @@ struct GfxStaticModelDrawInst // sizeof=0x4C
 
 struct GfxDrawSurfFields // sizeof=0x8
 {                                       // ...
-    /* 0*/ unsigned __int64 objectId : 16;
-    /*16*/ unsigned __int64 reflectionProbeIndex : 8;
-    /*24*/ unsigned __int64 customIndex : 5;         
-    /*29*/ unsigned __int64 materialSortedIndex : 11;
-    /*40*/ unsigned __int64 prepass : 2;             
-    /*42*/ unsigned __int64 primaryLightIndex : 8;   
-    /*50*/ unsigned __int64 surfType : 4;            
-    /*54*/ unsigned __int64 primarySortKey : 6;      
-    /*60*/ unsigned __int64 unused : 4;              
+    /* 0*/ uint64_t objectId : 16;
+    /*16*/ uint64_t reflectionProbeIndex : 8;
+    /*24*/ uint64_t customIndex : 5;         
+    /*29*/ uint64_t materialSortedIndex : 11;
+    /*40*/ uint64_t prepass : 2;             
+    /*42*/ uint64_t primaryLightIndex : 8;   
+    /*50*/ uint64_t surfType : 4;            
+    /*54*/ uint64_t primarySortKey : 6;      
+    /*60*/ uint64_t unused : 4;              
 };
 
-constexpr unsigned __int64 DRAWSURF_KEY_MASK = 0xFFFFFFFFE0000000;
+constexpr uint64_t DRAWSURF_KEY_MASK = 0xFFFFFFFFE0000000;
 
 union GfxDrawSurf // sizeof=0x8
 {                                       // ...
     GfxDrawSurfFields fields;
-    unsigned __int64 packed;
-    unsigned __int32 packed_low;// KISAKTODO dumb hack
+    uint64_t packed;
+    uint32_t packed_low;// KISAKTODO dumb hack
 };
 
 struct GfxDrawSurfList // sizeof=0x8

@@ -276,7 +276,7 @@ int __cdecl R_SkinXModel(
     const DObj_s *obj,
     const GfxPlacement *placement,
     float val,
-    __int16 gfxEntIndex)
+    int16_t gfxEntIndex)
 {
     uint32_t startSurfPos; // [esp+2Ch] [ebp-E58h]
     XSurface* xsurf; // [esp+38h] [ebp-E4Ch]

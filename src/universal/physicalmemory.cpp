@@ -105,7 +105,7 @@ void __cdecl PMem_EndAlloc(const char *name, uint32_t allocType)
 
 void __cdecl PMem_EndAllocInPrim(PhysicalMemoryPrim *prim, const char *name)
 {
-    __int64 v2; // rax
+    int64_t v2; // rax
 
     if (prim->allocName != name)
         MyAssertHandler(".\\universal\\physicalmemory.cpp", 364, 0, "%s", "prim->allocName == name");
@@ -145,9 +145,9 @@ void __cdecl PMem_FreeInPrim(PhysicalMemoryPrim *prim, const char *name)
 
 void __cdecl PMem_FreeIndex(PhysicalMemoryPrim *prim, uint32_t allocIndex)
 {
-    __int64 v2; // rax
+    int64_t v2; // rax
     const char *v3; // eax
-    __int64 v4; // rax
+    int64_t v4; // rax
     PhysicalMemoryAllocation *allocEntry; // [esp+0h] [ebp-Ch]
     const char *name; // [esp+4h] [ebp-8h]
 

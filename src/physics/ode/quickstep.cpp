@@ -349,7 +349,7 @@ static int compare_index_error (const void *a, const void *b)
 #endif
 
 unsigned int *g_holdrand;
-__int64 __cdecl SOR_LCP_irand(int max)
+int64_t __cdecl SOR_LCP_irand(int max)
 {
 	unsigned int holdrand; // [esp+0h] [ebp-Ch]
 

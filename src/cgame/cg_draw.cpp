@@ -199,26 +199,26 @@ LABEL_12:
 
 // local variable allocation has failed, the output may be wrong!
 //int __cdecl CG_CheckPlayerMovement(
-//    __int64 newCmd,
-//    __int64 a2,
-//    __int64 a3,
-//    __int64 a4,
-//    __int64 a5,
-//    __int64 a6,
-//    __int64 a7,
-//    __int64 a8,
-//    __int64 a9,
-//    __int64 a10,
-//    __int64 a11,
-//    __int64 a12,
-//    __int64 a13,
-//    __int64 a14,
+//    int64_t newCmd,
+//    int64_t a2,
+//    int64_t a3,
+//    int64_t a4,
+//    int64_t a5,
+//    int64_t a6,
+//    int64_t a7,
+//    int64_t a8,
+//    int64_t a9,
+//    int64_t a10,
+//    int64_t a11,
+//    int64_t a12,
+//    int64_t a13,
+//    int64_t a14,
 //    int a15,
 //    int a16,
 //    int a17,
-//    __int16 a18)
+//    int16_t a18)
 //{
-//    __int64 *v18; // r11
+//    int64_t *v18; // r11
 //    int v19; // r7
 //    int v20; // r9
 //    int result; // r3
@@ -229,19 +229,19 @@ LABEL_12:
 //    LODWORD(a4) = &a15;
 //    LODWORD(a3) = (char *)&a8 + 4;
 //    a7 = newCmd;
-//    a8 = *(__int64 *)((char *)&a2 + 4);
+//    a8 = *(int64_t *)((char *)&a2 + 4);
 //    a9 = a2;
-//    a10 = *(__int64 *)((char *)&a3 + 4);
-//    a12 = *(__int64 *)((char *)&a4 + 4);
+//    a10 = *(int64_t *)((char *)&a3 + 4);
+//    a12 = *(int64_t *)((char *)&a4 + 4);
 //    do
 //    {
-//        v19 = *(unsigned __int8 *)a4;
-//        v20 = *(unsigned __int8 *)v18 - v19;
-//        if (*(unsigned __int8 *)v18 != v19)
+//        v19 = *(uint8_t *)a4;
+//        v20 = *(uint8_t *)v18 - v19;
+//        if (*(uint8_t *)v18 != v19)
 //            break;
-//        v18 = (__int64 *)((char *)v18 + 1);
+//        v18 = (int64_t *)((char *)v18 + 1);
 //        LODWORD(a4) = a4 + 1;
-//    } while (v18 != (__int64 *)((char *)&a8 + 4));
+//    } while (v18 != (int64_t *)((char *)&a8 + 4));
 //    if (v20)
 //        return 1;
 //    if (HIBYTE(a18))
@@ -260,7 +260,7 @@ int __cdecl CG_CheckPlayerMovement(usercmd_s oldCmd, usercmd_s newCmd)
     return newCmd.forwardmove || newCmd.rightmove;
 }
 
-int __cdecl CG_CheckPlayerStanceChange(int localClientNum, __int16 newButtons, __int16 changedButtons)
+int __cdecl CG_CheckPlayerStanceChange(int localClientNum, int16_t newButtons, int16_t changedButtons)
 {
     if ((changedButtons & (BUTTON_PRONE | BUTTON_CROUCH | BUTTON_TEMP_STANCE)) != 0)
     {
@@ -330,7 +330,7 @@ int __cdecl CG_CheckPlayerWeaponUsage(int localClientNum, char buttons)
     return result;
 }
 
-int __cdecl CG_CheckPlayerOffHandUsage(int localClientNum, __int16 buttons)
+int __cdecl CG_CheckPlayerOffHandUsage(int localClientNum, int16_t buttons)
 {
     if ((buttons & (BUTTON_FRAG | BUTTON_SMOKE)) == 0)
         return 0;
@@ -422,7 +422,7 @@ void __cdecl CG_CheckForPlayerInput(int localClientNum)
 
 void __cdecl CG_CheckHudHealthDisplay(int localClientNum)
 {
-    __int64 v2; // r11
+    int64_t v2; // r11
 
     if (localClientNum)
         MyAssertHandler(
@@ -452,7 +452,7 @@ void __cdecl CG_CheckHudHealthDisplay(int localClientNum)
 
 void __cdecl CG_CheckHudAmmoDisplay(int localClientNum)
 {
-    __int64 v2; // r11
+    int64_t v2; // r11
 
     if (localClientNum)
         MyAssertHandler(
@@ -479,7 +479,7 @@ void __cdecl CG_CheckHudAmmoDisplay(int localClientNum)
 void __cdecl CG_CheckHudCompassDisplay(int localClientNum)
 {
     const dvar_s *v1; // r11
-    __int64 v2; // r9
+    int64_t v2; // r9
 
     v1 = hud_fade_compass;
     if (hud_fade_compass->current.value != 0.0)
@@ -510,7 +510,7 @@ void __cdecl CG_CheckHudCompassDisplay(int localClientNum)
 void __cdecl CG_CheckHudStanceDisplay(int localClientNum)
 {
     int eFlags; // r11
-    __int64 v3; // r11
+    int64_t v3; // r11
 
     if (localClientNum)
         MyAssertHandler(
@@ -537,7 +537,7 @@ void __cdecl CG_CheckHudStanceDisplay(int localClientNum)
 void __cdecl CG_CheckHudSprintDisplay(int localClientNum)
 {
     playerState_s *p_ps; // r30
-    __int64 v3; // r11
+    int64_t v3; // r11
     int v4; // [sp+50h] [-30h]
 
     if (localClientNum)
@@ -576,7 +576,7 @@ void __cdecl CG_CheckHudSprintDisplay(int localClientNum)
 void __cdecl CG_CheckHudOffHandDisplay(int localClientNum)
 {
     const dvar_s *v1; // r11
-    __int64 v2; // r9
+    int64_t v2; // r9
 
     v1 = hud_fade_offhand;
     if (hud_fade_offhand->current.value != 0.0)
@@ -1205,7 +1205,7 @@ void __cdecl CG_Draw2D(int localClientNum)
                 CG_DrawDamageDirectionIndicators(localClientNum);
                 if (nextSnap->ps.pm_type < PM_DEAD)
                 {
-                    if (!cg_drawFriendlyFireCrosshair->current.enabled || !(unsigned __int8)CG_DrawFriendlyFire(cgArray))
+                    if (!cg_drawFriendlyFireCrosshair->current.enabled || !(uint8_t)CG_DrawFriendlyFire(cgArray))
                         CG_DrawCrosshair(localClientNum);
                     CG_DrawGrenadeIndicators(localClientNum);
                     CG_CheckTimedMenus(localClientNum);

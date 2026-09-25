@@ -227,7 +227,7 @@ unreachable:
     return 0;
 }
 
-void __cdecl EmitByte(unsigned __int8 value)
+void __cdecl EmitByte(uint8_t value)
 {
     scrCompileGlob.codePos = (unsigned char*)TempMalloc(1u);
     *scrCompileGlob.codePos = value;
@@ -267,7 +267,7 @@ void __cdecl EmitGetUndefined(sval_u sourcePos)
     AddOpcodePos(sourcePos.stringValue, 1);
 }
 
-void __cdecl EmitShort(__int16 value)
+void __cdecl EmitShort(int16_t value)
 {
     scrCompileGlob.codePos = (unsigned char*)TempMallocAlignStrict(2u);
     *scrCompileGlob.codePos = value;
@@ -822,7 +822,7 @@ void __cdecl EmitPostFunctionCall(sval_u func_name, int param_count, bool bMetho
 
 void __cdecl EmitCall(sval_u func_name, sval_u params, bool bStatement, scr_block_s *block)
 {
-    __int16 v4; // ax
+    int16_t v4; // ax
     int v5; // eax
     void(__cdecl * func)(); // [esp+8h] [ebp-28h]
     char *savedPos; // [esp+Ch] [ebp-24h] BYREF
@@ -954,7 +954,7 @@ void __cdecl EmitMethod(
     bool bStatement,
     scr_block_s *block)
 {
-    __int16 v6; // ax
+    int16_t v6; // ax
     char *savedPos; // [esp+8h] [ebp-28h] BYREF
     unsigned int methId; // [esp+Ch] [ebp-24h]
     void(__cdecl * meth)(scr_entref_t); // [esp+10h] [ebp-20h]
@@ -1597,7 +1597,7 @@ void __cdecl EmitBoolOrExpression(
     sval_u expr2sourcePos,
     scr_block_s *block)
 {
-    unsigned __int8 *pos; // [esp+0h] [ebp-Ch]
+    uint8_t *pos; // [esp+0h] [ebp-Ch]
     char *offset; // [esp+4h] [ebp-8h]
     char *nextPos; // [esp+8h] [ebp-4h]
 
@@ -1682,7 +1682,7 @@ void __cdecl EmitBoolAndExpression(
     sval_u expr2sourcePos,
     scr_block_s *block)
 {
-    unsigned __int8 *pos; // [esp+0h] [ebp-Ch]
+    uint8_t *pos; // [esp+0h] [ebp-Ch]
     char *offset; // [esp+4h] [ebp-8h]
     char *nextPos; // [esp+8h] [ebp-4h]
 
@@ -2146,7 +2146,7 @@ void __cdecl EmitIfStatement(
     scr_block_s *block,
     sval_u *ifStatBlock)
 {
-    unsigned __int8 *pos; // [esp+0h] [ebp-Ch]
+    uint8_t *pos; // [esp+0h] [ebp-Ch]
     char *offset; // [esp+4h] [ebp-8h]
     char *nextPos; // [esp+8h] [ebp-4h]
 
@@ -2181,7 +2181,7 @@ void __cdecl EmitIfElseStatement(
     unsigned int checksum; // [esp+0h] [ebp-24h]
     char *offset; // [esp+4h] [ebp-20h]
     char *nextPos1; // [esp+8h] [ebp-1Ch]
-    unsigned __int8 *pos1; // [esp+Ch] [ebp-18h]
+    uint8_t *pos1; // [esp+Ch] [ebp-18h]
     scr_block_s *childBlocks[2]; // [esp+10h] [ebp-14h] BYREF
     const char *nextPos2; // [esp+18h] [ebp-Ch]
     int childCount; // [esp+1Ch] [ebp-8h]
@@ -2668,7 +2668,7 @@ void __cdecl EmitDeveloperStatementList(sval_u val, sval_u sourcePos, scr_block_
 
 void __cdecl EmitSafeSetWaittillVariableField(sval_u expr, sval_u sourcePos, scr_block_s *block)
 {
-    unsigned __int8 index; // [esp+0h] [ebp-4h]
+    uint8_t index; // [esp+0h] [ebp-4h]
 
     index = Scr_FindLocalVarIndex(expr.stringValue, sourcePos, 1, block);
     EmitOpcode(OP_SafeSetWaittillVariableFieldCached, 0, 0);
@@ -2986,9 +2986,9 @@ void __cdecl EmitSwitchStatement(
     char *nextPos1; // [esp+10h] [ebp-14h]
     CaseStatementInfo *caseStatement; // [esp+14h] [ebp-10h]
     CaseStatementInfo *caseStatementa; // [esp+14h] [ebp-10h]
-    unsigned __int8 *pos1; // [esp+18h] [ebp-Ch]
+    uint8_t *pos1; // [esp+18h] [ebp-Ch]
     signed int num; // [esp+1Ch] [ebp-8h]
-    unsigned __int8 *pos2; // [esp+20h] [ebp-4h]
+    uint8_t *pos2; // [esp+20h] [ebp-4h]
 
     oldCaseStatement = scrCompileGlob.currentCaseStatement;
     bOldCanBreak = scrCompileGlob.bCanBreak;
@@ -4437,14 +4437,14 @@ void __cdecl ScriptCompile(
     PrecacheEntry *v9; // [esp+4h] [ebp-54h]
     int j; // [esp+10h] [ebp-48h]
     VariableValue pos; // [esp+14h] [ebp-44h] BYREF
-    unsigned __int16 filename; // [esp+1Ch] [ebp-3Ch]
+    uint16_t filename; // [esp+1Ch] [ebp-3Ch]
     PrecacheEntry *precachescript; // [esp+20h] [ebp-38h]
     int far_function_count; // [esp+24h] [ebp-34h]
     PrecacheEntry *precachescript2; // [esp+28h] [ebp-30h]
     unsigned int toThreadId; // [esp+2Ch] [ebp-2Ch]
     unsigned int toPosId; // [esp+30h] [ebp-28h]
     unsigned int posId; // [esp+34h] [ebp-24h]
-    unsigned __int16 name; // [esp+38h] [ebp-20h]
+    uint16_t name; // [esp+38h] [ebp-20h]
     unsigned int threadId; // [esp+3Ch] [ebp-1Ch]
     PrecacheEntry *precachescriptList; // [esp+40h] [ebp-18h]
     int i; // [esp+44h] [ebp-14h]

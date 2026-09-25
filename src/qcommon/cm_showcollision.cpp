@@ -136,7 +136,7 @@ int __cdecl CM_ForEachBrushPlaneIntersection(
     int ptCount; // [esp+1Ch] [ebp-50h]
     float xyz[3]; // [esp+20h] [ebp-4Ch] BYREF
     float expandedPlane[3][4]; // [esp+2Ch] [ebp-40h] BYREF
-    __int16 sideIndex[4]; // [esp+5Ch] [ebp-10h] BYREF
+    int16_t sideIndex[4]; // [esp+5Ch] [ebp-10h] BYREF
     const cbrushside_t *sides; // [esp+68h] [ebp-4h]
 
     iassert( brush );
@@ -177,7 +177,7 @@ int __cdecl CM_ForEachBrushPlaneIntersection(
 int __cdecl CM_AddSimpleBrushPoint(
     const cbrush_t *brush,
     const float (*axialPlanes)[4],
-    const __int16 *sideIndices,
+    const int16_t *sideIndices,
     const float *xyz,
     int ptCount,
     ShowCollisionBrushPt *brushPts)

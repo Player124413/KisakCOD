@@ -4,7 +4,7 @@
 #error This File is SinglePlayer Only
 #endif
 
-enum netadrtype_t : __int32
+enum netadrtype_t : int32_t
 {
 	NA_BOT = 0x0,
 	NA_BAD = 0x1,
@@ -13,7 +13,7 @@ enum netadrtype_t : __int32
 	NA_IP = 0x4,
 };
 
-enum netsrc_t : __int32
+enum netsrc_t : int32_t
 {
 	NS_CLIENT1 = 0x0,
 	NS_SERVER = 0x1,
@@ -21,11 +21,11 @@ enum netsrc_t : __int32
 	NS_PACKET = 0x2,
 };
 
-struct __declspec(align(4)) netadr_t
+struct __attribute__((aligned(4))) netadr_t
 {
 	netadrtype_t type;
-	unsigned __int8 ip[4];
-	unsigned __int16 port;
+	uint8_t ip[4];
+	uint16_t port;
 };
 
 struct netchan_t

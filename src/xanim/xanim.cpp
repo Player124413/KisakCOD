@@ -144,7 +144,7 @@ XAnimParts *__cdecl XAnimClone(XAnimParts *fromParts, void *(__cdecl *Alloc)(int
     int size; // [esp+Ch] [ebp-14h]
     XAnimNotifyInfo *notify; // [esp+10h] [ebp-10h]
     int i; // [esp+14h] [ebp-Ch]
-    __int16 notifyInfoIndex; // [esp+18h] [ebp-8h]
+    int16_t notifyInfoIndex; // [esp+18h] [ebp-8h]
     uint16_t *boneNames; // [esp+1Ch] [ebp-4h]
 
     toParts = (XAnimParts*)Alloc(88);
@@ -308,7 +308,7 @@ void __cdecl XAnimFree(XAnimParts *parts)
     int size; // [esp+0h] [ebp-14h]
     XAnimNotifyInfo *notify; // [esp+4h] [ebp-10h]
     int i; // [esp+8h] [ebp-Ch]
-    __int16 notifyInfoIndex; // [esp+Ch] [ebp-8h]
+    int16_t notifyInfoIndex; // [esp+Ch] [ebp-8h]
     uint16_t *boneNames; // [esp+10h] [ebp-4h]
 
     boneNames = parts->names;
@@ -433,9 +433,9 @@ void __cdecl XAnimInitModelMap(XModel* const* models, uint32_t numModels, XModel
     uint32_t boneCount; // [esp+10h] [ebp-10h]
     uint32_t localBoneIndex; // [esp+14h] [ebp-Ch]
     uint32_t i; // [esp+18h] [ebp-8h]
-    unsigned const __int16* boneNames; // [esp+1Ch] [ebp-4h]
+    unsigned const int16_t* boneNames; // [esp+1Ch] [ebp-4h]
 
-    memset((unsigned __int8*)modelMap, 0, 1024);
+    memset((uint8_t*)modelMap, 0, 1024);
     boneIndex = 0;
 
     for (i = 0; i < numModels; ++i)
@@ -451,7 +451,7 @@ void __cdecl XAnimInitModelMap(XModel* const* models, uint32_t numModels, XModel
             boneName = boneNames[localBoneIndex];
             iassert(boneName);
 
-            for (hash = (unsigned __int8)boneName; modelMap[hash].name; hash = (unsigned __int8)(hash + 1));
+            for (hash = (uint8_t)boneName; modelMap[hash].name; hash = (uint8_t)(hash + 1));
 
             modelMap[hash].index = boneIndex;
             modelMap[hash].name = boneName;
@@ -495,7 +495,7 @@ void __cdecl XAnimResetAnimMapLeaf(const XModelNameMap* modelMap, uint32_t infoI
     iassert(animToModel);
     animToModel2 = SL_ConvertToString(animToModel);
     g_xAnimInfo[infoIndex].animToModel = XAnimGetAnimMap(g_xAnimInfo[infoIndex].parts, modelMap);
-    SL_RemoveRefToStringOfSize(animToModel, (unsigned __int8)animToModel2[16] + 17);
+    SL_RemoveRefToStringOfSize(animToModel, (uint8_t)animToModel2[16] + 17);
 }
 
 uint32_t __cdecl XAnimGetAnimMap(const XAnimParts* parts, const XModelNameMap* modelMap)
@@ -516,7 +516,7 @@ uint32_t __cdecl XAnimGetAnimMap(const XAnimParts* parts, const XModelNameMap* m
     for (partIndex = 0; partIndex < boneCount; ++partIndex)
     {
         partName = partNames[partIndex];
-        for (hash = (unsigned __int8)partName; ; hash = (unsigned __int8)(hash + 1))
+        for (hash = (uint8_t)partName; ; hash = (uint8_t)(hash + 1))
         {
             if (!modelMap[hash].name)
             {
@@ -534,7 +534,7 @@ uint32_t __cdecl XAnimGetAnimMap(const XAnimParts* parts, const XModelNameMap* m
         ;
     }
     animToModel.boneCount = boneCount;
-    if ((unsigned __int8)boneCount != boneCount)
+    if ((uint8_t)boneCount != boneCount)
         MyAssertHandler(".\\xanim\\xanim.cpp", 606, 0, "%s", "animToModel.boneCount == boneCount");
     return SL_GetStringOfSize((char*)&animToModel, 0, boneCount + 17, MT_TYPE_MODEL_PART_MAP);
 }
@@ -1139,7 +1139,7 @@ void __cdecl XAnimFreeInfo(XAnimTree_s* tree, uint32_t infoIndex)
         iassert(info->parts);
         iassert(info->animToModel);
         animToModel = SL_ConvertToString(info->animToModel);
-        SL_RemoveRefToStringOfSize(info->animToModel, (unsigned __int8)animToModel[16] + 17);
+        SL_RemoveRefToStringOfSize(info->animToModel, (uint8_t)animToModel[16] + 17);
         info->animToModel = 0;
     }
     else
@@ -1272,7 +1272,7 @@ void __cdecl XAnimUpdateTimeAndNotetrackLeaf(
     XAnimState* state; // [esp+30h] [ebp-10h]
     XAnimInfo* info; // [esp+34h] [ebp-Ch]
     float time; // [esp+38h] [ebp-8h]
-    __int16 cycleCount; // [esp+3Ch] [ebp-4h]
+    int16_t cycleCount; // [esp+3Ch] [ebp-4h]
     float dtimea; // [esp+54h] [ebp+14h]
 
     if (!parts)
@@ -1591,7 +1591,7 @@ void __cdecl XAnimUpdateTimeAndNotetrackSyncSubTree(
     uint32_t nextInfoIndex; // [esp+40h] [ebp-10h]
     XAnimInfo* info; // [esp+44h] [ebp-Ch]
     float time; // [esp+48h] [ebp-8h]
-    __int16 cycleCount; // [esp+4Ch] [ebp-4h]
+    int16_t cycleCount; // [esp+4Ch] [ebp-4h]
     uint32_t infoIndexa; // [esp+5Ch] [ebp+Ch]
 
     info = &g_xAnimInfo[infoIndex];
@@ -2060,7 +2060,7 @@ double __cdecl XAnimFindServerNoteTrackLeafNode(const DObj_s* obj, XAnimInfo* in
     XAnimState* state; // [esp+10h] [ebp-30h]
     float time; // [esp+14h] [ebp-2Ch]
     XAnimState nextState; // [esp+18h] [ebp-28h] BYREF
-    __int16 cycleCount; // [esp+38h] [ebp-8h]
+    int16_t cycleCount; // [esp+38h] [ebp-8h]
     const XAnimParts* parts; // [esp+3Ch] [ebp-4h]
     float dtimea; // [esp+50h] [ebp+10h]
 
@@ -2138,7 +2138,7 @@ double __cdecl XAnimFindServerNoteTrackSyncSubTree(const DObj_s* obj, XAnimInfo*
     XAnimState* state; // [esp+10h] [ebp-2Ch]
     float time; // [esp+14h] [ebp-28h]
     XAnimState nextState; // [esp+18h] [ebp-24h] BYREF
-    __int16 cycleCount; // [esp+38h] [ebp-4h]
+    int16_t cycleCount; // [esp+38h] [ebp-4h]
 
     state = &info->state;
     time = info->state.oldTime + dtime;
@@ -2697,8 +2697,8 @@ void __cdecl XAnimCalcRelDeltaParts(
 {
     uint16_t* v6; // [esp+40h] [ebp-ACh]
     uint16_t* bigTrans; // [esp+44h] [ebp-A8h]
-    unsigned __int8* v8; // [esp+48h] [ebp-A4h]
-    unsigned __int8* pSmallTrans; // [esp+4Ch] [ebp-A0h]
+    uint8_t* v8; // [esp+48h] [ebp-A4h]
+    uint8_t* pSmallTrans; // [esp+4Ch] [ebp-A0h]
     float sizeVec_4; // [esp+54h] [ebp-98h]
     float sizeVec_8; // [esp+58h] [ebp-94h]
     float4 toVec;

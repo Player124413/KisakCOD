@@ -1211,10 +1211,10 @@ bool __cdecl R_SpotLightIsAttachedToDobj(const DObj_s *obj)
 void __cdecl ShortSortArray_GfxReverseSortDrawSurfsInterface_GfxDrawSurf_(GfxDrawSurf *lo, GfxDrawSurf *hi)
 {
     int packed_high; // edx
-    unsigned __int64 v3; // [esp+4h] [ebp-34h]
-    unsigned __int64 packed; // [esp+Ch] [ebp-2Ch]
+    uint64_t v3; // [esp+4h] [ebp-34h]
+    uint64_t packed; // [esp+Ch] [ebp-2Ch]
     GfxDrawSurf *max; // [esp+1Ch] [ebp-1Ch]
-    unsigned __int64 maxKey; // [esp+20h] [ebp-18h]
+    uint64_t maxKey; // [esp+20h] [ebp-18h]
     GfxDrawSurf *walk; // [esp+34h] [ebp-4h]
 
     while (hi > lo)
@@ -1252,12 +1252,12 @@ void __cdecl qsortArray_GfxReverseSortDrawSurfsInterface_GfxDrawSurf_(GfxDrawSur
     int v5; // ecx
     GfxDrawSurf *v6; // edx
     GfxDrawSurf v7; // [esp+4h] [ebp-180h]
-    unsigned __int64 fields; // [esp+Ch] [ebp-178h]
+    uint64_t fields; // [esp+Ch] [ebp-178h]
     int v9; // [esp+10h] [ebp-174h]
     GfxDrawSurf v10; // [esp+14h] [ebp-170h]
     GfxDrawSurf v11; // [esp+1Ch] [ebp-168h]
     GfxDrawSurf v12; // [esp+2Ch] [ebp-158h]
-    unsigned __int64 pivotKey; // [esp+64h] [ebp-120h]
+    uint64_t pivotKey; // [esp+64h] [ebp-120h]
     GfxDrawSurf *loWalk; // [esp+74h] [ebp-110h]
     int sortCount; // [esp+78h] [ebp-10Ch]
     GfxDrawSurf *hiEnd; // [esp+7Ch] [ebp-108h]

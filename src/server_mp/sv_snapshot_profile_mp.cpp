@@ -708,7 +708,7 @@ void __cdecl SV_TrackFieldChange(int clientNum, int entityType, uint32_t field)
 void __cdecl SV_WriteEntityFieldNumbers()
 {
     char *EntityTypeName; // eax
-    __int64 v1; // [esp+4h] [ebp-34h]
+    int64_t v1; // [esp+4h] [ebp-34h]
     uint32_t numFields; // [esp+14h] [ebp-24h] BYREF
     bool estimate; // [esp+1Bh] [ebp-1Dh] BYREF
     int totalData; // [esp+1Ch] [ebp-1Ch]

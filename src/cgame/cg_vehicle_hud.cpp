@@ -44,7 +44,7 @@ bool __cdecl ClampScreenPosToEdges(
 {
     ScreenPlacement *v20; // r30
     double v21; // fp0
-    unsigned __int8 v22; // r27
+    uint8_t v22; // r27
     double v23; // fp13
     double v24; // fp27
     double v25; // fp28
@@ -684,7 +684,7 @@ void CG_DrawPipOnAStickReticle(int localClientNum, rectDef_s *rect, float *color
     centity_s *Entity; // r31
     DObj_s *ClientDObj; // r29
     WeaponDef *WeaponDef; // r25
-    __int64 v7; // r11
+    int64_t v7; // r11
     double v8; // fp12
     double v9; // fp0
     double v10; // fp28
@@ -705,7 +705,7 @@ void CG_DrawPipOnAStickReticle(int localClientNum, rectDef_s *rect, float *color
     int v25; // r4
     float v26; // [sp+80h] [-F0h] BYREF
     float v27; // [sp+84h] [-ECh]
-    __int64 v28; // [sp+88h] [-E8h] BYREF
+    int64_t v28; // [sp+88h] [-E8h] BYREF
     float screenPos[2]; // [sp+90h] [-E0h] BYREF
     //float v30; // [sp+94h] [-DCh]
     float v31; // [sp+98h] [-D8h] BYREF
@@ -986,7 +986,7 @@ void CG_DrawBouncingDiamond(int localClientNum, rectDef_s *rect, float *color)
         float distSqr = dx * dx + dy * dy;
 
         if (reset || distSqr > bounceRadius * bounceRadius) {
-            float angle = random() * 360.0f * (float)(M_PI / 180.0);
+            float angle = Com_Random() * 360.0f * (float)(M_PI / 180.0);
             float sinA = sinf(angle);
             float cosA = cosf(angle);
 

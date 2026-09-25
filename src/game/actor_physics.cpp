@@ -545,7 +545,7 @@ SlideMoveResult AIPhys_NoGravityMove()
 void AIPhys_GroundTrace()
 {
     float stepheight; // fp0
-    unsigned __int16 EntityHitId; // r3
+    uint16_t EntityHitId; // r3
     //float v9; // [sp+50h] [-70h] BYREF
     //float v10; // [sp+54h] [-6Ch]
     //float v11; // [sp+58h] [-68h]

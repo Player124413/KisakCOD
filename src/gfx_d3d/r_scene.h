@@ -131,7 +131,7 @@ struct GfxSceneDpvs // sizeof=0x38
     GfxEntCellRefInfo *entInfo[4];      // ...
 };
 
-struct __declspec(align(64)) GfxScene // sizeof=0x154D00
+struct __attribute__((aligned(64))) GfxScene // sizeof=0x154D00
 {                                       // ...
     GfxDrawSurf bspDrawSurfs[8192];
     GfxDrawSurf smodelDrawSurfsLight[8192]; // ...
@@ -256,7 +256,7 @@ GfxDrawSurf *__cdecl R_AddXModelSurfaces(
     GfxDrawSurf *lastDrawSurf);
 void __cdecl R_AddDObjSurfacesCamera(
     GfxSceneEntity *sceneEnt,
-    __int16 lightingHandle,
+    int16_t lightingHandle,
     uint8_t primaryLightIndex,
     GfxDrawSurf **drawSurfs,
     GfxDrawSurf **lastDrawSurfs);

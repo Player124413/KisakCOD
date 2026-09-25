@@ -4,7 +4,7 @@
 #undef GetObject
 
 // LWSS: Custom enum typename
-enum Vartype_t : __int32
+enum Vartype_t : int32_t
 {
     VAR_UNDEFINED = 0x0,
     VAR_BEGIN_REF = 0x1,

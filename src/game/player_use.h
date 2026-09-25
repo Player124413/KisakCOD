@@ -29,7 +29,7 @@ gentity_s *__cdecl Player_UpdateLookAtEntityTrace(
     const float *end,
     int entNum,
     int contentMask,
-    unsigned __int8 *priorityMap,
+    uint8_t *priorityMap,
     float *forward);
 int __cdecl Player_CheckAlmostStationary(gentity_s *ent, float *dir);
 void __cdecl Player_DebugDrawLOS(const float *center, const float *dir, double dist2D, int debugDrawDuration);

@@ -29,7 +29,7 @@ enum netadrtype_t {
     NA_BROADCAST_IPX
 };
 
-enum netsrc_t : __int32
+enum netsrc_t : int32_t
 {                                       // ...
     NS_CLIENT1 = 0x0,
     NS_SERVER = 0x1,
@@ -178,7 +178,7 @@ int __cdecl FakeLag_GetPacket(bool loopback, netsrc_t sock, netadr_t* net_from, 
 void __cdecl FakeLag_Frame();
 int __cdecl FakeLag_SendLaggedPackets();
 void __cdecl FakeLag_Shutdown();
-void __cdecl Netchan_Init(__int16 port);
+void __cdecl Netchan_Init(int16_t port);
 void __cdecl Net_DumpProfile_f();
 void __cdecl Netchan_Setup(
     netsrc_t sock,

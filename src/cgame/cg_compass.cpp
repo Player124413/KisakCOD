@@ -2424,17 +2424,17 @@ void CG_CompassDrawGoalDistance(
     bool centerY; // mr_fpscr48
     double v17; // fp0
     double v18; // fp1
-    __int64 v19; // r11
+    int64_t v19; // r11
     double x; // fp31
     int v21; // r3
     int v22; // r8
-    __int64 v23; // r11
+    int64_t v23; // r11
     const float *horzAlign; // r9
     double y; // fp2
     double v27; // fp31
     double v28; // fp30
     int v29; // r7
-    __int64 v30; // [sp+70h] [-C0h] BYREF
+    int64_t v30; // [sp+70h] [-C0h] BYREF
     float colour[3]; // [sp+80h] [-B0h] BYREF
     float v32; // [sp+8Ch] [-A4h]
     char txt[64]; // [sp+90h] [-A0h] BYREF

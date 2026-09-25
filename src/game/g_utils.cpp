@@ -216,7 +216,7 @@ int __cdecl G_MaterialIndex(const char *name)
     v2 = (char*)name;
     do
     {
-        v3 = *(unsigned __int8 *)v2;
+        v3 = *(uint8_t *)v2;
         (v2++)[v5 - name] = v3;
     } while (v3);
     I_strlwr(v5);
@@ -391,7 +391,7 @@ int __cdecl G_ShellShockIndex(const char *name)
     return G_FindConfigstringIndex(name, 2503, 16, 1, 0); // CS_SHELLSHOCKS (PC SP, was Xbox 2535)
 }
 
-unsigned int __cdecl G_SoundAliasIndexTransientAdvance(unsigned __int16 aliasIndex, int offset)
+unsigned int __cdecl G_SoundAliasIndexTransientAdvance(uint16_t aliasIndex, int offset)
 {
     unsigned int v4; // r31
 
@@ -411,35 +411,35 @@ unsigned int __cdecl G_SoundAliasIndexTransientAdvance(unsigned __int16 aliasInd
             "%s\n\t(offset) = %i",
             "(offset > 0 && offset < 512 - 256)",
             offset);
-    v4 = (unsigned __int16)(aliasIndex + offset);
+    v4 = (uint16_t)(aliasIndex + offset);
     if (v4 >= 0x200)
-        v4 = (unsigned __int16)(v4 - 256);
-    if ((unsigned __int16)v4 < 0x100u || (unsigned __int16)v4 >= 0x200u)
+        v4 = (uint16_t)(v4 - 256);
+    if ((uint16_t)v4 < 0x100u || (uint16_t)v4 >= 0x200u)
         MyAssertHandler(
             "c:\\trees\\cod3\\cod3src\\src\\game\\g_utils.cpp",
             379,
             0,
             "%s\n\t(aliasIndex) = %i",
             "(aliasIndex >= 256 && aliasIndex < 512)",
-            (unsigned __int16)v4);
+            (uint16_t)v4);
     return v4;
 }
 
 unsigned int __cdecl G_SoundAliasIndexTransient(const char *name)
 {
-    unsigned __int16 soundAliasFirst; // r11
-    unsigned __int16 soundAliasLast; // r3
+    uint16_t soundAliasFirst; // r11
+    uint16_t soundAliasLast; // r3
     int v5; // r31
     const char *v6; // r3
     unsigned int LowercaseString; // r3
     unsigned int v8; // r30
     unsigned int v9; // r29
-    unsigned __int16 v10; // r31
-    unsigned __int16 v11; // r11
+    uint16_t v10; // r31
+    uint16_t v11; // r11
     int v12; // r31
-    unsigned __int16 v13; // r31
+    uint16_t v13; // r31
     unsigned int v14; // r31
-    unsigned __int16 v15; // r31
+    uint16_t v15; // r31
     unsigned int v16; // r31
 
     if (!name)
@@ -474,7 +474,7 @@ unsigned int __cdecl G_SoundAliasIndexTransient(const char *name)
     if (soundAliasFirst != 256)
     {
         v5 = soundAliasFirst;
-        if (soundAliasFirst != (unsigned __int16)G_SoundAliasIndexTransientAdvance(soundAliasLast, 128))
+        if (soundAliasFirst != (uint16_t)G_SoundAliasIndexTransientAdvance(soundAliasLast, 128))
         {
             v6 = va("%i, %i", v5, level.soundAliasLast);
             MyAssertHandler(
@@ -503,7 +503,7 @@ unsigned int __cdecl G_SoundAliasIndexTransient(const char *name)
                 "(aliasIndex >= 256 && aliasIndex < 512)",
                 level.soundAliasLast);
         v11 = v10 + 128;
-        if ((unsigned __int16)(v10 + 128) >= 0x200u)
+        if ((uint16_t)(v10 + 128) >= 0x200u)
             v11 = v10 - 128;
         v12 = v11;
         if (v11 < 0x100u || v11 >= 0x200u)
@@ -525,20 +525,20 @@ unsigned int __cdecl G_SoundAliasIndexTransient(const char *name)
                     "%s\n\t(aliasIndex) = %i",
                     "(aliasIndex >= 256 && aliasIndex < 512)",
                     level.soundAliasFirst);
-            v14 = (unsigned __int16)(v13 + 1);
+            v14 = (uint16_t)(v13 + 1);
             if (v14 >= 0x200)
                 v14 = v14 - 256;
-            if ((unsigned __int16)v14 < 0x100u || (unsigned __int16)v14 >= 0x200u)
+            if ((uint16_t)v14 < 0x100u || (uint16_t)v14 >= 0x200u)
                 MyAssertHandler(
                     "c:\\trees\\cod3\\cod3src\\src\\game\\g_utils.cpp",
                     379,
                     0,
                     "%s\n\t(aliasIndex) = %i",
                     "(aliasIndex >= 256 && aliasIndex < 512)",
-                    (unsigned __int16)v14);
+                    (uint16_t)v14);
             level.soundAliasFirst = v14;
         }
-        if ((unsigned __int16)v8 != level.soundAliasLast)
+        if ((uint16_t)v8 != level.soundAliasLast)
             MyAssertHandler(
                 "c:\\trees\\cod3\\cod3src\\src\\game\\g_utils.cpp",
                 414,
@@ -554,19 +554,19 @@ unsigned int __cdecl G_SoundAliasIndexTransient(const char *name)
                 "%s\n\t(aliasIndex) = %i",
                 "(aliasIndex >= 256 && aliasIndex < 512)",
                 level.soundAliasLast);
-        v16 = (unsigned __int16)(v15 + 1);
+        v16 = (uint16_t)(v15 + 1);
         if (v16 >= 0x200)
             v16 = v16 - 256;
-        if ((unsigned __int16)v16 < 0x100u || (unsigned __int16)v16 >= 0x200u)
+        if ((uint16_t)v16 < 0x100u || (uint16_t)v16 >= 0x200u)
             MyAssertHandler(
                 "c:\\trees\\cod3\\cod3src\\src\\game\\g_utils.cpp",
                 379,
                 0,
                 "%s\n\t(aliasIndex) = %i",
                 "(aliasIndex >= 256 && aliasIndex < 512)",
-                (unsigned __int16)v16);
+                (uint16_t)v16);
         level.soundAliasLast = v16;
-        SV_SetConfigstring(CS_SOUNDALIASES + (unsigned __int16)v8, name);
+        SV_SetConfigstring(CS_SOUNDALIASES + (uint16_t)v8, name);
     }
     else
     {
@@ -574,28 +574,28 @@ unsigned int __cdecl G_SoundAliasIndexTransient(const char *name)
         {
             if (!(_WORD)v8)
                 MyAssertHandler("c:\\trees\\cod3\\cod3src\\src\\game\\g_utils.cpp", 404, 0, "%s", "aliasIndex != 0");
-            if (SV_GetConfigstringConst(CS_SOUNDALIASES + (unsigned __int16)v8) == v9)
+            if (SV_GetConfigstringConst(CS_SOUNDALIASES + (uint16_t)v8) == v9)
                 break;
-            if ((unsigned __int16)v8 < 0x100u || (unsigned __int16)v8 >= 0x200u)
+            if ((uint16_t)v8 < 0x100u || (uint16_t)v8 >= 0x200u)
                 MyAssertHandler(
                     "c:\\trees\\cod3\\cod3src\\src\\game\\g_utils.cpp",
                     372,
                     0,
                     "%s\n\t(aliasIndex) = %i",
                     "(aliasIndex >= 256 && aliasIndex < 512)",
-                    (unsigned __int16)v8);
-            v8 = (unsigned __int16)(v8 + 1);
+                    (uint16_t)v8);
+            v8 = (uint16_t)(v8 + 1);
             if (v8 >= 0x200)
-                v8 = (unsigned __int16)(v8 - 256);
-            if ((unsigned __int16)v8 < 0x100u || (unsigned __int16)v8 >= 0x200u)
+                v8 = (uint16_t)(v8 - 256);
+            if ((uint16_t)v8 < 0x100u || (uint16_t)v8 >= 0x200u)
                 MyAssertHandler(
                     "c:\\trees\\cod3\\cod3src\\src\\game\\g_utils.cpp",
                     379,
                     0,
                     "%s\n\t(aliasIndex) = %i",
                     "(aliasIndex >= 256 && aliasIndex < 512)",
-                    (unsigned __int16)v8);
-            if ((unsigned __int16)v8 == level.soundAliasLast)
+                    (uint16_t)v8);
+            if ((uint16_t)v8 == level.soundAliasLast)
                 goto LABEL_27;
         }
     }
@@ -606,7 +606,7 @@ int __cdecl G_SoundAliasIndexPermanent(const char *name)
 {
     if (!name)
         MyAssertHandler("c:\\trees\\cod3\\cod3src\\src\\game\\g_utils.cpp", 424, 0, "%s", "name");
-    return (unsigned __int16)G_FindConfigstringIndex(name, 1635, 256, 1, 0);
+    return (uint16_t)G_FindConfigstringIndex(name, 1635, 256, 1, 0);
 }
 
 int __cdecl G_RumbleIndex(const char *name)
@@ -971,10 +971,10 @@ void __cdecl G_CheckDObjUpdate(gentity_s *ent)
     XModel *v6; // r29
     int v7; // r27
     XModel **v8; // r28
-    unsigned __int16 *attachTagNames; // r26
+    uint16_t *attachTagNames; // r26
     int v10; // r29
-    unsigned __int16 v11; // [sp+50h] [-190h] BYREF
-    unsigned __int16 v12; // [sp+52h] [-18Eh] BYREF
+    uint16_t v11; // [sp+50h] [-190h] BYREF
+    uint16_t v12; // [sp+52h] [-18Eh] BYREF
     XAnimTree_s *v13; // [sp+54h] [-18Ch] BYREF
 
     DObjModel_s v14[DOBJ_MAX_SUBMODELS]; // [sp+60h] [-180h] BYREF
@@ -1092,13 +1092,13 @@ void __cdecl G_CheckDObjUpdate(gentity_s *ent)
 void __cdecl G_SetModel(gentity_s *ent, const char *modelName)
 {
     int v3; // r3
-    unsigned __int16 v4; // r31
+    uint16_t v4; // r31
 
     if (*modelName)
     {
         v3 = G_ModelIndex(modelName);
         v4 = v3;
-        if (v3 != (unsigned __int16)v3)
+        if (v3 != (uint16_t)v3)
             MyAssertHandler(
                 "c:\\trees\\cod3\\cod3src\\src\\game\\g_utils.cpp",
                 858,
@@ -1109,7 +1109,7 @@ void __cdecl G_SetModel(gentity_s *ent, const char *modelName)
     }
     else
     {
-        ent->model = *(unsigned __int8 *)modelName;
+        ent->model = *(uint8_t *)modelName;
     }
 }
 
@@ -1222,7 +1222,7 @@ bool __cdecl G_SlideMove(
     float *mins,
     const float *maxs,
     const float *gravity,
-    unsigned __int8 passEntityNum,
+    uint8_t passEntityNum,
     int clipMask)
 {
     float endVel[3];
@@ -1382,7 +1382,7 @@ void __cdecl G_StepSlideMove(
     float *mins,
     const float *maxs,
     const float *gravity,
-    unsigned __int8 passEntityNum,
+    uint8_t passEntityNum,
     int clipMask)
 {
     trace_t trace; // [sp+80h] [-A0h] BYREF
@@ -1615,11 +1615,11 @@ void __cdecl G_DObjGetWorldTagPos_CheckTagExists(const gentity_s *ent, unsigned 
     }
 }
 
-gentity_s *__cdecl G_Find(gentity_s *from, int fieldofs, unsigned __int16 match)
+gentity_s *__cdecl G_Find(gentity_s *from, int fieldofs, uint16_t match)
 {
     //gentity_s *result; // r3
     //gentity_s *v4; // r9
-    //unsigned __int8 *i; // r11
+    //uint8_t *i; // r11
     //
     //if (from)
     //    result = from + 1;
@@ -1632,14 +1632,14 @@ gentity_s *__cdecl G_Find(gentity_s *from, int fieldofs, unsigned __int16 match)
     //    return 0;
     //
     //for (i = (unsigned char*)result + fieldofs; 
-    //    !i[168 - fieldofs] || !*(_WORD *)i || *(unsigned __int16 *)i != match; i += 628)
+    //    !i[168 - fieldofs] || !*(_WORD *)i || *(uint16_t *)i != match; i += 628)
     //{
     //    if (++result >= v4)
     //        return 0;
     //}
     //return result;
 
-    unsigned __int16 s; // [esp+0h] [ebp-4h]
+    uint16_t s; // [esp+0h] [ebp-4h]
 
     if (from)
         from = from + 1;
@@ -1667,7 +1667,7 @@ void __cdecl G_InitGentity(gentity_s *e)
     iassert(!e->r.inuse);
     e->r.inuse = 1;
     Scr_SetString(&e->classname, scr_const.noclass);
-    e->s.number = (unsigned __int16)(e - g_entities);
+    e->s.number = (uint16_t)(e - g_entities);
     iassert(e->s.number == e - g_entities);
     iassert(!e->r.ownerNum.isDefined());
     e->r.eventType = 0;
@@ -1678,7 +1678,7 @@ void __cdecl G_InitGentity(gentity_s *e)
 void __cdecl G_PrintEntities()
 {
     int v0; // r30
-    unsigned __int16 *p_model; // r31
+    uint16_t *p_model; // r31
     unsigned int v2; // r11
     double v3; // fp31
     double v4; // fp30
@@ -1706,7 +1706,7 @@ void __cdecl G_PrintEntities()
                     v4 = *((float *)p_model - 13);
                     v5 = *((float *)p_model - 14);
                     v6 = SL_ConvertToStringSafe(p_model[2]);
-                    EntityTypeName = BG_GetEntityTypeName(*((unsigned __int8 *)p_model - 280));
+                    EntityTypeName = BG_GetEntityTypeName(*((uint8_t *)p_model - 280));
                     Com_Printf(
                         CON_CHANNEL_SERVER,
                         "%4i: Type: %s, Class: %s, model '%s', origin: %6.1f %6.1f %6.1f\n",
@@ -1724,7 +1724,7 @@ void __cdecl G_PrintEntities()
                     v8 = *((float *)p_model - 12);
                     v9 = *((float *)p_model - 13);
                     v10 = *((float *)p_model - 14);
-                    v11 = BG_GetEntityTypeName(*((unsigned __int8 *)p_model - 280));
+                    v11 = BG_GetEntityTypeName(*((uint8_t *)p_model - 280));
                     Com_Printf(
                         CON_CHANNEL_SERVER,
                         "%4i: Type: %s, Class: %s, origin: %6.1f %6.1f %6.1f\n",
@@ -1774,7 +1774,7 @@ void __cdecl G_FreeEntityRefs(gentity_s *ed)
 {
     int number; // r29
     int num_entities; // r10
-    unsigned __int16 *p_groundEntityNum; // r11
+    uint16_t *p_groundEntityNum; // r11
     gclient_s *client; // r31
 
     number = ed->s.number;
@@ -1832,13 +1832,13 @@ void __cdecl G_FreeAllEntityRefs()
 
 void __cdecl G_FreeEntityDelay(gentity_s *ed)
 {
-    unsigned __int16 hThread; // [esp+0h] [ebp-4h]
+    uint16_t hThread; // [esp+0h] [ebp-4h]
 
     iassert(g_scr_data.delete_);
     hThread = Scr_ExecEntThread(ed, g_scr_data.delete_, 0);
     Scr_FreeThread(hThread);
     //int delete; // r4
-    //unsigned __int16 v3; // r3
+    //uint16_t v3; // r3
     //
     //delete = g_scr_data.delete_;
     //if (!g_scr_data.delete_)
@@ -1860,11 +1860,11 @@ void __cdecl G_FreeEntityAfterEvent(gentity_s *ent)
     ent->r.eventType |= 1u;
 }
 
-int __cdecl G_SaveFreeEntities(unsigned __int8 *buf)
+int __cdecl G_SaveFreeEntities(uint8_t *buf)
 {
     gentity_s *firstFreeEnt; // r9
     int result; // r3
-    unsigned __int8 *v4; // r11
+    uint8_t *v4; // r11
 
     if (buf)
     {
@@ -1880,7 +1880,7 @@ int __cdecl G_SaveFreeEntities(unsigned __int8 *buf)
         {
             if (buf)
             {
-                *v4 = (unsigned __int8)firstFreeEnt->nextFree;
+                *v4 = (uint8_t)firstFreeEnt->nextFree;
                 v4[1] = BYTE1(firstFreeEnt->nextFree);
                 v4[2] = BYTE2(firstFreeEnt->nextFree);
                 v4[3] = HIBYTE(firstFreeEnt->nextFree);
@@ -1893,12 +1893,12 @@ int __cdecl G_SaveFreeEntities(unsigned __int8 *buf)
     return result;
 }
 
-void __cdecl G_LoadFreeEntities(unsigned __int8 *buf)
+void __cdecl G_LoadFreeEntities(uint8_t *buf)
 {
     _BYTE *v2; // r11
     bool v3; // cr58
-    unsigned __int8 *v4; // r9
-    unsigned __int8 v5; // r10
+    uint8_t *v4; // r9
+    uint8_t v5; // r10
 
     if (!buf)
         MyAssertHandler("c:\\trees\\cod3\\cod3src\\src\\game\\g_utils.cpp", 2608, 0, "%s", "buf");
@@ -1933,7 +1933,7 @@ void __cdecl G_AddPredictableEvent(gentity_s *ent, entity_event_t event, unsigne
 
 void __cdecl G_AddEvent(gentity_s *ent, unsigned int event, unsigned int eventParm)
 {
-    unsigned __int8 v3; // r30
+    uint8_t v3; // r30
     gclient_s *client; // r11
 
     v3 = event;
@@ -1968,10 +1968,10 @@ void __cdecl G_AddEvent(gentity_s *ent, unsigned int event, unsigned int eventPa
     ent->r.eventTime = level.time;
 }
 
-void __cdecl G_RegisterSoundWait(gentity_s *ent, unsigned __int16 index, unsigned int notifyString, int stoppable)
+void __cdecl G_RegisterSoundWait(gentity_s *ent, uint16_t index, unsigned int notifyString, int stoppable)
 {
     int time; // r11
-    unsigned __int16 v14[8]; // [sp+80h] [-890h] BYREF
+    uint16_t v14[8]; // [sp+80h] [-890h] BYREF
     char v15[1024]; // [sp+90h] [-880h] BYREF
     char v16[1024]; // [sp+490h] [-480h] BYREF
 
@@ -2022,7 +2022,7 @@ void __cdecl G_RegisterSoundWait(gentity_s *ent, unsigned __int16 index, unsigne
 
 void __cdecl G_PlaySoundAliasWithNotify(
     gentity_s *ent,
-    unsigned __int16 index,
+    uint16_t index,
     unsigned int notifyString,
     int stoppable,
     unsigned int event,
@@ -2058,7 +2058,7 @@ void __cdecl G_PlaySoundAliasWithNotify(
     }
 }
 
-void __cdecl G_PlaySoundAlias(gentity_s *ent, unsigned __int16 index)
+void __cdecl G_PlaySoundAlias(gentity_s *ent, uint16_t index)
 {
     if (!ent)
         MyAssertHandler("c:\\trees\\cod3\\cod3src\\src\\game\\g_utils.cpp", 2773, 0, "%s", "ent");
@@ -2109,7 +2109,7 @@ void __cdecl G_SetAngle(gentity_s *ent, float *angle)
     ent->r.currentAngles[2] = angle[2];
 }
 
-void __cdecl G_SetConstString(unsigned __int16 *to, const char *from)
+void __cdecl G_SetConstString(uint16_t *to, const char *from)
 {
     Scr_SetString(to, 0);
     *to = SL_GetString(from, 0);
@@ -2161,7 +2161,7 @@ unsigned int __cdecl G_rand()
 
 //float __cdecl G_flrand(double min, double max)
 //{
-//    __int64 v2; // r11
+//    int64_t v2; // r11
 //    double v3; // fp1
 //
 //    HIDWORD(v2) = _xri_a;
@@ -2184,17 +2184,17 @@ float __cdecl G_flrand(float min, float max)
 //    holdrand = 214013 * holdrand + 2531011;
 //    DWORD2(v2) = max - min;
 //    LODWORD(v2) = holdrand >> 17;
-//    return ((__int64)(v2 * *(_QWORD *)((char *)&v2 + 4)) >> 15) + min;
+//    return ((int64_t)(v2 * *(_QWORD *)((char *)&v2 + 4)) >> 15) + min;
 //}
 
 int __cdecl G_irand(int min, int max)
 {
-    return ((G_rand() * (__int64)(max - min)) >> 15) + min;
+    return ((G_rand() * (int64_t)(max - min)) >> 15) + min;
 }
 
 //float __cdecl G_random()
 //{
-//    __int64 v0; // r11
+//    int64_t v0; // r11
 //    double v1; // fp1
 //
 //    HIDWORD(v0) = _xri_a;
@@ -2211,7 +2211,7 @@ float __cdecl G_random()
 
 //float __cdecl G_crandom()
 //{
-//    __int64 v0; // r11
+//    int64_t v0; // r11
 //    double v1; // fp1
 //
 //    HIDWORD(v0) = _xri_a;
@@ -2586,7 +2586,7 @@ gentity_s *__cdecl G_TempEntity(float *origin, int event)
 
     v4 = G_Spawn();
     v4->s.eType = (entityType_t)(event + ET_EVENTS);
-    v6 = (unsigned __int8)(event + ET_EVENTS) == event + ET_EVENTS;
+    v6 = (uint8_t)(event + ET_EVENTS) == event + ET_EVENTS;
     v5 = v4;
     if (!v6)
         MyAssertHandler(
@@ -2606,7 +2606,7 @@ gentity_s *__cdecl G_TempEntity(float *origin, int event)
     return v5;
 }
 
-void __cdecl G_PlaySoundAliasAtPoint(float *origin, unsigned __int16 index)
+void __cdecl G_PlaySoundAliasAtPoint(float *origin, uint16_t index)
 {
     if (!origin)
         MyAssertHandler("c:\\trees\\cod3\\cod3src\\src\\game\\g_utils.cpp", 2756, 0, "%s", "origin");
@@ -2919,7 +2919,7 @@ void __cdecl G_DObjUpdate(gentity_s *ent)
     XModel *model; // r31
     int i; // r29
     int numModels; // r26
-    unsigned __int16 *attachTagNames; // r30
+    uint16_t *attachTagNames; // r30
     unsigned int attachIgnoreCollision; // r11
     DObjModel_s dobjModels[DOBJ_MAX_SUBMODELS]; // [sp+50h] [-170h] BYREF
 
@@ -3000,12 +3000,12 @@ int __cdecl G_EntDetach(gentity_s *ent, const char *modelName, unsigned int tagN
     unsigned int LowercaseString; // r3
     unsigned int v7; // r24
     int v8; // r31
-    unsigned __int16 *attachModelNames; // r29
+    uint16_t *attachModelNames; // r29
     unsigned int v10; // r28
-    unsigned __int16 *v12; // r29
+    uint16_t *v12; // r29
     int v13; // r8
-    unsigned __int16 *v14; // r11
-    unsigned __int16 v15; // r10
+    uint16_t *v14; // r11
+    uint16_t v15; // r10
     unsigned int attachIgnoreCollision; // r10
     int v17; // r7
     unsigned int v18; // r10
@@ -3082,7 +3082,7 @@ int __cdecl G_EntDetach(gentity_s *ent, const char *modelName, unsigned int tagN
 
 void __cdecl G_EntDetachAll(gentity_s *ent)
 {
-    unsigned __int16 *attachTagNames; // r31
+    uint16_t *attachTagNames; // r31
     int v3; // r30
 
     attachTagNames = ent->attachTagNames;
@@ -3248,7 +3248,7 @@ int __cdecl G_EntLinkToWithOffset(
 int __cdecl G_EntAttach(gentity_s *ent, const char *modelName, unsigned int tagName, int ignoreCollision)
 {
     int v8; // r31
-    unsigned __int16 *i; // r11
+    uint16_t *i; // r11
     int v11; // r30
     int v12; // r31
 
@@ -3276,7 +3276,7 @@ int __cdecl G_EntAttach(gentity_s *ent, const char *modelName, unsigned int tagN
     if (!v11)
         return 0;
     //Profile_Begin(249);
-    if (v11 != (unsigned __int16)v11)
+    if (v11 != (uint16_t)v11)
         MyAssertHandler(
             "c:\\trees\\cod3\\cod3src\\src\\game\\g_utils.cpp",
             947,

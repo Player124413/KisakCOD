@@ -21,7 +21,7 @@ extern const dvar_t *mis_01;
 extern const dvar_t *mis_difficulty;
 
 // ui_main
-struct __declspec(align(4)) SaveTimeGlob
+struct __attribute__((aligned(4))) SaveTimeGlob
 {
     bool isSaving;
     bool callWrite;
@@ -181,7 +181,7 @@ char *__cdecl UI_ReplaceConversionInts(
     int a4,
     int a5,
     int a6,
-    __int64 a7);
+    int64_t a7);
 int __cdecl UI_Popup(int localClientNum, const char *menu);
 void __cdecl UI_DrawLoggedInUser(rectDef_s *rect, Font_s *font, double scale, float *color, int textStyle);
 void __cdecl UI_MouseEvent(int localClientNum, int x, int y);

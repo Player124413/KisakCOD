@@ -441,13 +441,13 @@ bool __cdecl LiveStorage_DecryptAndCheck(StatsFile *statsFile, const char *stats
 
     if (*(uint32_t *)statsFile->magic != *(uint32_t *)"iwm0")
         return 0;
-    LiveStorage_GetCryptKey(statsFile->nonce, (unsigned __int8 *)key);
+    LiveStorage_GetCryptKey(statsFile->nonce, (uint8_t *)key);
     xxtea_dec(statsFile->body.hash, 0x845u, key);
     Com_BlockChecksum128(
-        (unsigned __int8 *)&statsFile->body.statsData,
+        (uint8_t *)&statsFile->body.statsData,
         0x2104u,
         statsFile->nonce ^ (key[2] - 1836222900),
-        (unsigned __int8 *)hash);
+        (uint8_t *)hash);
     if (memcmp(hash, &statsFile->body, 0x10u))
         return 0;
     if (statsDir)
@@ -455,7 +455,7 @@ bool __cdecl LiveStorage_DecryptAndCheck(StatsFile *statsFile, const char *stats
     return I_stricmp("", statsFile->body.statsData.path) == 0;
 }
 
-void __cdecl LiveStorage_GetCryptKey(uint32_t nonce, unsigned __int8 *outKey)
+void __cdecl LiveStorage_GetCryptKey(uint32_t nonce, uint8_t *outKey)
 {
 #ifdef KISAK_MP
     uint32_t hashR[4]; // [esp+0h] [ebp-44h] BYREF
@@ -464,18 +464,18 @@ void __cdecl LiveStorage_GetCryptKey(uint32_t nonce, unsigned __int8 *outKey)
     uint32_t opad[4]; // [esp+30h] [ebp-14h] BYREF
     int wordIndex; // [esp+40h] [ebp-4h]
 
-    Com_BlockChecksum128((unsigned __int8 *)cl_cdkey, 0x22u, 529771271, (unsigned __int8 *)keyHash);
+    Com_BlockChecksum128((uint8_t *)cl_cdkey, 0x22u, 529771271, (uint8_t *)keyHash);
     for (wordIndex = 0; wordIndex != 4; ++wordIndex)
     {
         ipad[wordIndex] = keyHash[wordIndex] ^ 0x36363636;
         opad[wordIndex] = keyHash[wordIndex] ^ 0x5C5C5C5C;
     }
-    Com_BlockChecksum128Cat((unsigned __int8 *)ipad, 0x10u, (unsigned __int8 *)&nonce, 4u, (unsigned __int8 *)hashR);
-    Com_BlockChecksum128Cat((unsigned __int8 *)opad, 0x10u, (unsigned __int8 *)hashR, 0x10u, outKey);
+    Com_BlockChecksum128Cat((uint8_t *)ipad, 0x10u, (uint8_t *)&nonce, 4u, (uint8_t *)hashR);
+    Com_BlockChecksum128Cat((uint8_t *)opad, 0x10u, (uint8_t *)hashR, 0x10u, outKey);
 #endif
 }
 
-int __cdecl LiveStorage_ChecksumGamerStats(unsigned __int8 *buffer, int len)
+int __cdecl LiveStorage_ChecksumGamerStats(uint8_t *buffer, int len)
 {
     return Com_BlockChecksumKey32(buffer, len, 0);
 }
@@ -497,12 +497,12 @@ void LiveStorage_NoStatsFound()
     LiveStorage_SetStat(v0, 299, unsignedInt);
 }
 
-void __cdecl LiveStorage_WriteChecksumToBuffer(unsigned __int8 *buffer, int len)
+void __cdecl LiveStorage_WriteChecksumToBuffer(uint8_t *buffer, int len)
 {
     *(uint32_t *)buffer = LiveStorage_ChecksumGamerStats(buffer + 4, len - 4);
 }
 
-bool __cdecl LiveStorage_ReadStatsFile(const char *qpath, unsigned __int8 *buffer, uint32_t lenToRead)
+bool __cdecl LiveStorage_ReadStatsFile(const char *qpath, uint8_t *buffer, uint32_t lenToRead)
 {
     uint32_t len; // [esp+0h] [ebp-8h]
     uint32_t lena; // [esp+0h] [ebp-8h]
@@ -600,12 +600,12 @@ void __cdecl LiveStorage_Encrypt(StatsFile *statsFile)
 
     *(uint32_t *)statsFile->magic = *(uint32_t *)"iwm0";
     statsFile->nonce = timeGetTime();
-    LiveStorage_GetCryptKey(statsFile->nonce, (unsigned __int8 *)key);
+    LiveStorage_GetCryptKey(statsFile->nonce, (uint8_t *)key);
     Com_BlockChecksum128(
-        (unsigned __int8 *)&statsFile->body.statsData,
+        (uint8_t *)&statsFile->body.statsData,
         0x2104u,
         statsFile->nonce ^ (key[2] - 1836222900),
-        (unsigned __int8 *)&statsFile->body);
+        (uint8_t *)&statsFile->body);
     xxtea_enc(statsFile->body.hash, 0x845u, key);
 }
 
@@ -688,11 +688,11 @@ void __cdecl LiveStorage_SetStat(int __formal, int index, uint32_t value)
             MyAssertHandler(".\\win32\\win_storage.cpp", 420, 0, "%s", "debugStats");
         if (debugStats->current.enabled)
         {
-            //Com_Printf(CON_CHANNEL_CLIENT, "Setting stat %i from %i to %i\n", index, *(unsigned __int8 *)(index + 231835788), value);
+            //Com_Printf(CON_CHANNEL_CLIENT, "Setting stat %i from %i to %i\n", index, *(uint8_t *)(index + 231835788), value);
             Com_Printf(CON_CHANNEL_CLIENT, "Setting stat %i from %i to %i\n", index, statData.playerStats[index + 4], value);
         }
         
-        //if (*(unsigned __int8 *)(index + 231835788) != value)
+        //if (*(uint8_t *)(index + 231835788) != value)
         if (statData.playerStats[index + 4] != value)
         {
             //*(_BYTE *)(index + 231835788) = value;

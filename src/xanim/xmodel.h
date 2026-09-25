@@ -5,7 +5,7 @@
 
 #define MAX_LODS 4
 
-enum XModelLodRampType : __int32
+enum XModelLodRampType : int32_t
 {                                       // ...
     XMODEL_LOD_RAMP_RIGID = 0x0,
     XMODEL_LOD_RAMP_SKINNED = 0x1,
@@ -18,10 +18,10 @@ struct XModelLodInfo // sizeof=0x1C
     uint16_t numsurfs;
     uint16_t surfIndex;
     int partBits[4];
-    unsigned __int8 lod;
-    unsigned __int8 smcIndexPlusOne;
-    unsigned __int8 smcAllocBits;
-    unsigned __int8 unused;
+    uint8_t lod;
+    uint8_t smcIndexPlusOne;
+    uint8_t smcAllocBits;
+    uint8_t unused;
 };
 
 struct XModelCollTri_s // sizeof=0x30
@@ -58,15 +58,15 @@ struct XModelStreamInfo // sizeof=0x0
 struct XModel // sizeof=0xDC
 {                                       // ...
     const char* name;
-    unsigned __int8 numBones;
-    unsigned __int8 numRootBones;
-    unsigned __int8 numsurfs;
-    unsigned __int8 lodRampType;
+    uint8_t numBones;
+    uint8_t numRootBones;
+    uint8_t numsurfs;
+    uint8_t lodRampType;
     uint16_t* boneNames;
-    unsigned __int8* parentList;
-    __int16* quats;
+    uint8_t* parentList;
+    int16_t* quats;
     float* trans;
-    unsigned __int8* partClassification;
+    uint8_t* partClassification;
     DObjAnimMat* baseMat;
     struct XSurface* surfs;
     Material** materialHandles;
@@ -78,14 +78,14 @@ struct XModel // sizeof=0xDC
     float radius;
     float mins[3];
     float maxs[3];
-    __int16 numLods;
-    __int16 collLod;
+    int16_t numLods;
+    int16_t collLod;
     XModelStreamInfo streamInfo;
     // padding byte
     // padding byte
     // padding byte
     int memUsage;
-    unsigned __int8 flags;
+    uint8_t flags;
     bool bad;
     // padding byte
     // padding byte
@@ -156,7 +156,7 @@ struct XModelConfig // sizeof=0x1430
     float mins[3];
     float maxs[3];                      // ...
     int collLod;                        // ...
-    unsigned __int8 flags;              // ...
+    uint8_t flags;              // ...
     char physicsPresetFilename[1024];   // ...
     // padding byte
     // padding byte
@@ -164,15 +164,15 @@ struct XModelConfig // sizeof=0x1430
 };
 struct XModelPartsLoad // sizeof=0x1C
 {                                       // ...
-    unsigned __int8 numBones;
-    unsigned __int8 numRootBones;
+    uint8_t numBones;
+    uint8_t numRootBones;
     // padding byte
     // padding byte
     uint16_t *boneNames;
-    unsigned __int8 *parentList;
-    __int16 *quats;
+    uint8_t *parentList;
+    int16_t *quats;
     float *trans;
-    unsigned __int8 *partClassification;
+    uint8_t *partClassification;
     DObjAnimMat *baseMat;
 };
 static_assert(sizeof(XModelPartsLoad) == 28);
@@ -180,11 +180,11 @@ static_assert(sizeof(XModelPartsLoad) == 28);
 struct XModelDefault // sizeof=0x4C
 {                                       // ...
     uint16_t boneNames[1];
-    unsigned __int8 parentList[1];      // ...
+    uint8_t parentList[1];      // ...
     // padding byte
     XModelPartsLoad modelParts;         // ...
     XBoneInfo boneInfo;                 // ...
-    unsigned __int8 partClassification[1]; // ...
+    uint8_t partClassification[1]; // ...
     // padding byte
     uint16_t surfNames[1];
 };
@@ -192,15 +192,15 @@ struct XModelDefault // sizeof=0x4C
 struct XVertexInfo_s // sizeof=0x40
 {                                       // ...
     float normal[3];
-    unsigned __int8 color[4];
+    uint8_t color[4];
     float binormal[3];
     float texCoordX;
     float tangent[3];
     float texCoordY;
     float offset[3];
-    unsigned __int8 numWeights;
-    unsigned __int8 pad;
-    __int16 boneOffset;
+    uint8_t numWeights;
+    uint8_t pad;
+    int16_t boneOffset;
 };
 static_assert(sizeof(XVertexInfo_s) == 64);
 
@@ -288,7 +288,7 @@ bool __cdecl XSurfaceVisitTrianglesInAabb_ProcessVertices(XSurfaceGetTriCandidat
 char __cdecl XSurfaceVisitTrianglesInAabb_ProcessTriangles(XSurfaceGetTriCandidatesLocals *locals);
 char __cdecl XSurfaceVisitTrianglesInAabb_ProcessLeaf(XSurfaceGetTriCandidatesLocals *locals);
 char __cdecl XSurfaceVisitTrianglesInAabb_ProcessNode(XSurfaceGetTriCandidatesLocals *locals);
-int __cdecl XModelGetBoneIndex(const XModel *model, uint32_t name, uint32_t offset, unsigned __int8 *index);
+int __cdecl XModelGetBoneIndex(const XModel *model, uint32_t name, uint32_t offset, uint8_t *index);
 int __cdecl XModelGetStaticBounds(const XModel *model, mat3x3 &axis, float *mins, float *maxs);
 
 // xmodel_utils
@@ -312,12 +312,12 @@ int __cdecl XModelGetStaticModelCacheVertCount(XModel *model, uint32_t lod);
 
 
 // xmodel_load_obj
-void __cdecl ConsumeQuatNoSwap(unsigned __int8 **pos, __int16 *out);
+void __cdecl ConsumeQuatNoSwap(uint8_t **pos, int16_t *out);
 int __cdecl XModelSurfsPrecache(
     XModel *model,
     const char *name,
     void *(__cdecl *Alloc)(int),
-    __int16 modelNumsurfs,
+    int16_t modelNumsurfs,
     const char *modelName,
     XModelSurfs *outModelSurfs);
 

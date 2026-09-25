@@ -337,17 +337,17 @@ void __cdecl DObjSetTrans(DObjAnimMat *rotTrans, const float *trans)
 void __cdecl DObjCompleteHierarchyBits(const DObj_s *obj, int *partBits)
 {
     int j; // [esp+38h] [ebp-B4h]
-    const unsigned __int8 *pos; // [esp+3Ch] [ebp-B0h]
+    const uint8_t *pos; // [esp+3Ch] [ebp-B0h]
     int newBoneIndex; // [esp+40h] [ebp-ACh]
     int newBoneIndexa; // [esp+40h] [ebp-ACh]
     int newBoneIndexb; // [esp+40h] [ebp-ACh]
-    const unsigned __int8 *modelParents; // [esp+44h] [ebp-A8h]
-    const unsigned __int8 *duplicateParts; // [esp+48h] [ebp-A4h]
+    const uint8_t *modelParents; // [esp+44h] [ebp-A8h]
+    const uint8_t *duplicateParts; // [esp+48h] [ebp-A4h]
     int numModels; // [esp+4Ch] [ebp-A0h]
     XModel *subModel; // [esp+50h] [ebp-9Ch]
     int startIndex[33]; // [esp+54h] [ebp-98h]
     int localBoneIndex; // [esp+D8h] [ebp-14h]
-    unsigned __int8 *parentList; // [esp+DCh] [ebp-10h]
+    uint8_t *parentList; // [esp+DCh] [ebp-10h]
     int objBoneIndex; // [esp+E0h] [ebp-Ch]
     const int *duplicatePartBits; // [esp+E4h] [ebp-8h]
     XModel **models; // [esp+E8h] [ebp-4h]
@@ -362,11 +362,11 @@ void __cdecl DObjCompleteHierarchyBits(const DObj_s *obj, int *partBits)
     iassert(obj->duplicateParts);
 
     duplicatePartBits = (const int *)SL_ConvertToString(obj->duplicateParts);
-    duplicateParts = (const unsigned __int8 *)(duplicatePartBits + 4);
+    duplicateParts = (const uint8_t *)(duplicatePartBits + 4);
     newBoneIndex = 0;
     subModel = 0;
     models = obj->models;
-    modelParents = (const unsigned __int8 *)&models[numModels];
+    modelParents = (const uint8_t *)&models[numModels];
     for (j = 0; j < numModels; ++j)
     {
         startIndex[j] = newBoneIndex;
@@ -460,13 +460,13 @@ bool __cdecl DObjSkelExists(const DObj_s *obj, int timeStamp)
 {
     if (obj->skel.timeStamp == timeStamp)
         return obj->skel.mat != 0;
-    memset((unsigned __int8 *)&obj->skel, 0, sizeof(obj->skel));
+    memset((uint8_t *)&obj->skel, 0, sizeof(obj->skel));
     return 0;
 }
 
 void __cdecl DObjClearSkel(const DObj_s *obj)
 {
-    memset((unsigned __int8 *)&obj->skel.partBits, 0, sizeof(DSkelPartBits));
+    memset((uint8_t *)&obj->skel.partBits, 0, sizeof(DSkelPartBits));
 }
 
 int __cdecl DObjSkelAreBonesUpToDate(const DObj_s *obj, int *partBits)
@@ -496,7 +496,7 @@ void __cdecl DObjCreateSkel(DObj_s *obj, char *buf, int timeStamp)
     PROF_SCOPED("DObjCreateSkel");
 
     AllocSkelSize = DObjGetAllocSkelSize(obj);
-    memset((unsigned __int8 *)buf, 0xFFu, AllocSkelSize); // KISAKTODO: this memset is removed in blops, might not be needed
+    memset((uint8_t *)buf, 0xFFu, AllocSkelSize); // KISAKTODO: this memset is removed in blops, might not be needed
 
     obj->skel.mat = (DObjAnimMat *)buf;
     obj->skel.timeStamp = timeStamp;
@@ -543,14 +543,14 @@ void __cdecl DObjUnlock(DObj_s *obj)
 }
 
 // seems blops specific
-//int __cdecl DObjGetChildBones(const DObj_s *obj, unsigned __int8 parentBone, unsigned __int8 *children, int maxChildren)
+//int __cdecl DObjGetChildBones(const DObj_s *obj, uint8_t parentBone, uint8_t *children, int maxChildren)
 //{
-//    unsigned __int8 child_index; // [esp+7h] [ebp-1Dh]
+//    uint8_t child_index; // [esp+7h] [ebp-1Dh]
 //    int j; // [esp+8h] [ebp-1Ch]
-//    unsigned __int8 modelBoneIndex; // [esp+Fh] [ebp-15h]
+//    uint8_t modelBoneIndex; // [esp+Fh] [ebp-15h]
 //    XModel *model; // [esp+14h] [ebp-10h]
 //    int numChildBones; // [esp+18h] [ebp-Ch]
-//    unsigned __int8 childBoneIndexStart; // [esp+1Fh] [ebp-5h]
+//    uint8_t childBoneIndexStart; // [esp+1Fh] [ebp-5h]
 //
 //    iassert(obj);
 //    iassert(parentBone < obj->numBones);

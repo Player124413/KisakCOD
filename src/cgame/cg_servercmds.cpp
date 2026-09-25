@@ -24,7 +24,7 @@
 #include <physics/phys_local.h>
 #include "cg_main.h"
 
-struct __declspec(align(4)) $59835072FC2CD3936CE4A4C9F556010B
+struct __attribute__((aligned(4))) $59835072FC2CD3936CE4A4C9F556010B
 {
     char name[64];
     int index;
@@ -367,7 +367,7 @@ void __cdecl CG_OpenScriptMenu(int localClientNum)
             Cbuf_AddText(localClientNum, v8);
         }
         v9 = ConfigString;
-        while (*(unsigned __int8 *)v9++)
+        while (*(uint8_t *)v9++)
             ;
         if ((unsigned int)(v9 - ConfigString - 1) >= 0x40)
             MyAssertHandler(
@@ -1114,7 +1114,7 @@ void __cdecl CG_DispatchServerCommand(int localClientNum)
     const char *v32; // r11
     int v33; // r8
     const char *v34; // r3
-    unsigned __int16 v35; // r31
+    uint16_t v35; // r31
     const char *v36; // r3
     DynEntityCollType v37; // r30
     const char *v38; // r3
@@ -1298,7 +1298,7 @@ void __cdecl CG_DispatchServerCommand(int localClientNum)
         v5 = v3;
         do
         {
-            v6 = *(unsigned __int8 *)v5 - *(unsigned __int8 *)v4;
+            v6 = *(uint8_t *)v5 - *(uint8_t *)v4;
             if (!*v5)
                 break;
             ++v5;
@@ -1310,7 +1310,7 @@ void __cdecl CG_DispatchServerCommand(int localClientNum)
             v10 = v3;
             do
             {
-                v11 = *(unsigned __int8 *)v10 - *(unsigned __int8 *)v9;
+                v11 = *(uint8_t *)v10 - *(uint8_t *)v9;
                 if (!*v10)
                     break;
                 ++v10;
@@ -1322,7 +1322,7 @@ void __cdecl CG_DispatchServerCommand(int localClientNum)
                 v14 = v3;
                 do
                 {
-                    v15 = *(unsigned __int8 *)v14 - *(unsigned __int8 *)v13;
+                    v15 = *(uint8_t *)v14 - *(uint8_t *)v13;
                     if (!*v14)
                         break;
                     ++v14;
@@ -1334,7 +1334,7 @@ void __cdecl CG_DispatchServerCommand(int localClientNum)
                     v17 = v3;
                     do
                     {
-                        v18 = *(unsigned __int8 *)v17 - *(unsigned __int8 *)v16;
+                        v18 = *(uint8_t *)v17 - *(uint8_t *)v16;
                         if (!*v17)
                             break;
                         ++v17;
@@ -1346,7 +1346,7 @@ void __cdecl CG_DispatchServerCommand(int localClientNum)
                         v22 = v3;
                         do
                         {
-                            v23 = *(unsigned __int8 *)v22 - *(unsigned __int8 *)v21;
+                            v23 = *(uint8_t *)v22 - *(uint8_t *)v21;
                             if (!*v22)
                                 break;
                             ++v22;
@@ -1358,7 +1358,7 @@ void __cdecl CG_DispatchServerCommand(int localClientNum)
                             v27 = v3;
                             do
                             {
-                                v28 = *(unsigned __int8 *)v27 - *(unsigned __int8 *)v26;
+                                v28 = *(uint8_t *)v27 - *(uint8_t *)v26;
                                 if (!*v27)
                                     break;
                                 ++v27;
@@ -1370,7 +1370,7 @@ void __cdecl CG_DispatchServerCommand(int localClientNum)
                                 v32 = v3;
                                 do
                                 {
-                                    v33 = *(unsigned __int8 *)v32 - *(unsigned __int8 *)v31;
+                                    v33 = *(uint8_t *)v32 - *(uint8_t *)v31;
                                     if (!*v32)
                                         break;
                                     ++v32;
@@ -1382,7 +1382,7 @@ void __cdecl CG_DispatchServerCommand(int localClientNum)
                                     v55 = v3;
                                     do
                                     {
-                                        v56 = *(unsigned __int8 *)v55 - *(unsigned __int8 *)v54;
+                                        v56 = *(uint8_t *)v55 - *(uint8_t *)v54;
                                         if (!*v55)
                                             break;
                                         ++v55;
@@ -1394,7 +1394,7 @@ void __cdecl CG_DispatchServerCommand(int localClientNum)
                                         v60 = v3;
                                         do
                                         {
-                                            v61 = *(unsigned __int8 *)v60 - *(unsigned __int8 *)v59;
+                                            v61 = *(uint8_t *)v60 - *(uint8_t *)v59;
                                             if (!*v60)
                                                 break;
                                             ++v60;
@@ -1406,7 +1406,7 @@ void __cdecl CG_DispatchServerCommand(int localClientNum)
                                             v65 = v3;
                                             do
                                             {
-                                                v66 = *(unsigned __int8 *)v65 - *(unsigned __int8 *)v64;
+                                                v66 = *(uint8_t *)v65 - *(uint8_t *)v64;
                                                 if (!*v65)
                                                     break;
                                                 ++v65;
@@ -1418,7 +1418,7 @@ void __cdecl CG_DispatchServerCommand(int localClientNum)
                                                 v70 = v3;
                                                 do
                                                 {
-                                                    v71 = *(unsigned __int8 *)v70 - *(unsigned __int8 *)v69;
+                                                    v71 = *(uint8_t *)v70 - *(uint8_t *)v69;
                                                     if (!*v70)
                                                         break;
                                                     ++v70;
@@ -1430,7 +1430,7 @@ void __cdecl CG_DispatchServerCommand(int localClientNum)
                                                     v73 = v3;
                                                     do
                                                     {
-                                                        v74 = *(unsigned __int8 *)v73 - *(unsigned __int8 *)v72;
+                                                        v74 = *(uint8_t *)v73 - *(uint8_t *)v72;
                                                         if (!*v73)
                                                             break;
                                                         ++v73;
@@ -1442,7 +1442,7 @@ void __cdecl CG_DispatchServerCommand(int localClientNum)
                                                         v76 = v3;
                                                         do
                                                         {
-                                                            v77 = *(unsigned __int8 *)v76 - *(unsigned __int8 *)v75;
+                                                            v77 = *(uint8_t *)v76 - *(uint8_t *)v75;
                                                             if (!*v76)
                                                                 break;
                                                             ++v76;
@@ -1454,7 +1454,7 @@ void __cdecl CG_DispatchServerCommand(int localClientNum)
                                                             v80 = v3;
                                                             do
                                                             {
-                                                                v81 = *(unsigned __int8 *)v80 - *(unsigned __int8 *)v79;
+                                                                v81 = *(uint8_t *)v80 - *(uint8_t *)v79;
                                                                 if (!*v80)
                                                                     break;
                                                                 ++v80;
@@ -1466,7 +1466,7 @@ void __cdecl CG_DispatchServerCommand(int localClientNum)
                                                                 v83 = v3;
                                                                 do
                                                                 {
-                                                                    v84 = *(unsigned __int8 *)v83 - *(unsigned __int8 *)v82;
+                                                                    v84 = *(uint8_t *)v83 - *(uint8_t *)v82;
                                                                     if (!*v83)
                                                                         break;
                                                                     ++v83;
@@ -1478,7 +1478,7 @@ void __cdecl CG_DispatchServerCommand(int localClientNum)
                                                                     v86 = v3;
                                                                     do
                                                                     {
-                                                                        v87 = *(unsigned __int8 *)v86 - *(unsigned __int8 *)v85;
+                                                                        v87 = *(uint8_t *)v86 - *(uint8_t *)v85;
                                                                         if (!*v86)
                                                                             break;
                                                                         ++v86;
@@ -1490,7 +1490,7 @@ void __cdecl CG_DispatchServerCommand(int localClientNum)
                                                                         v93 = v3;
                                                                         do
                                                                         {
-                                                                            v94 = *(unsigned __int8 *)v93 - *(unsigned __int8 *)v92;
+                                                                            v94 = *(uint8_t *)v93 - *(uint8_t *)v92;
                                                                             if (!*v93)
                                                                                 break;
                                                                             ++v93;
@@ -1502,7 +1502,7 @@ void __cdecl CG_DispatchServerCommand(int localClientNum)
                                                                             v98 = v3;
                                                                             do
                                                                             {
-                                                                                v99 = *(unsigned __int8 *)v98 - *(unsigned __int8 *)v97;
+                                                                                v99 = *(uint8_t *)v98 - *(uint8_t *)v97;
                                                                                 if (!*v98)
                                                                                     break;
                                                                                 ++v98;
@@ -1514,7 +1514,7 @@ void __cdecl CG_DispatchServerCommand(int localClientNum)
                                                                                 v105 = v3;
                                                                                 do
                                                                                 {
-                                                                                    v106 = *(unsigned __int8 *)v105 - *(unsigned __int8 *)v104;
+                                                                                    v106 = *(uint8_t *)v105 - *(uint8_t *)v104;
                                                                                     if (!*v105)
                                                                                         break;
                                                                                     ++v105;
@@ -1526,7 +1526,7 @@ void __cdecl CG_DispatchServerCommand(int localClientNum)
                                                                                     v108 = v3;
                                                                                     do
                                                                                     {
-                                                                                        v109 = *(unsigned __int8 *)v108 - *(unsigned __int8 *)v107;
+                                                                                        v109 = *(uint8_t *)v108 - *(uint8_t *)v107;
                                                                                         if (!*v108)
                                                                                             break;
                                                                                         ++v108;
@@ -1538,7 +1538,7 @@ void __cdecl CG_DispatchServerCommand(int localClientNum)
                                                                                         v111 = v3;
                                                                                         do
                                                                                         {
-                                                                                            v112 = *(unsigned __int8 *)v111 - *(unsigned __int8 *)v110;
+                                                                                            v112 = *(uint8_t *)v111 - *(uint8_t *)v110;
                                                                                             if (!*v111)
                                                                                                 break;
                                                                                             ++v111;
@@ -1550,7 +1550,7 @@ void __cdecl CG_DispatchServerCommand(int localClientNum)
                                                                                             v120 = v3;
                                                                                             do
                                                                                             {
-                                                                                                v121 = *(unsigned __int8 *)v120 - *(unsigned __int8 *)v119;
+                                                                                                v121 = *(uint8_t *)v120 - *(uint8_t *)v119;
                                                                                                 if (!*v120)
                                                                                                     break;
                                                                                                 ++v120;
@@ -1562,7 +1562,7 @@ void __cdecl CG_DispatchServerCommand(int localClientNum)
                                                                                                 v123 = v3;
                                                                                                 do
                                                                                                 {
-                                                                                                    v124 = *(unsigned __int8 *)v123 - *(unsigned __int8 *)v122;
+                                                                                                    v124 = *(uint8_t *)v123 - *(uint8_t *)v122;
                                                                                                     if (!*v123)
                                                                                                         break;
                                                                                                     ++v123;
@@ -1574,7 +1574,7 @@ void __cdecl CG_DispatchServerCommand(int localClientNum)
                                                                                                     v126 = v3;
                                                                                                     do
                                                                                                     {
-                                                                                                        v127 = *(unsigned __int8 *)v126 - *(unsigned __int8 *)v125;
+                                                                                                        v127 = *(uint8_t *)v126 - *(uint8_t *)v125;
                                                                                                         if (!*v126)
                                                                                                             break;
                                                                                                         ++v126;
@@ -1586,7 +1586,7 @@ void __cdecl CG_DispatchServerCommand(int localClientNum)
                                                                                                         v129 = v3;
                                                                                                         do
                                                                                                         {
-                                                                                                            v130 = *(unsigned __int8 *)v129 - *(unsigned __int8 *)v128;
+                                                                                                            v130 = *(uint8_t *)v129 - *(uint8_t *)v128;
                                                                                                             if (!*v129)
                                                                                                                 break;
                                                                                                             ++v129;
@@ -1598,7 +1598,7 @@ void __cdecl CG_DispatchServerCommand(int localClientNum)
                                                                                                             v132 = v3;
                                                                                                             do
                                                                                                             {
-                                                                                                                v133 = *(unsigned __int8 *)v132 - *(unsigned __int8 *)v131;
+                                                                                                                v133 = *(uint8_t *)v132 - *(uint8_t *)v131;
                                                                                                                 if (!*v132)
                                                                                                                     break;
                                                                                                                 ++v132;
@@ -1610,7 +1610,7 @@ void __cdecl CG_DispatchServerCommand(int localClientNum)
                                                                                                                 v137 = v3;
                                                                                                                 do
                                                                                                                 {
-                                                                                                                    v138 = *(unsigned __int8 *)v137 - *(unsigned __int8 *)v136;
+                                                                                                                    v138 = *(uint8_t *)v137 - *(uint8_t *)v136;
                                                                                                                     if (!*v137)
                                                                                                                         break;
                                                                                                                     ++v137;
@@ -1622,7 +1622,7 @@ void __cdecl CG_DispatchServerCommand(int localClientNum)
                                                                                                                     v140 = v3;
                                                                                                                     do
                                                                                                                     {
-                                                                                                                        v141 = *(unsigned __int8 *)v140 - *(unsigned __int8 *)v139;
+                                                                                                                        v141 = *(uint8_t *)v140 - *(uint8_t *)v139;
                                                                                                                         if (!*v140)
                                                                                                                             break;
                                                                                                                         ++v140;
@@ -1634,7 +1634,7 @@ void __cdecl CG_DispatchServerCommand(int localClientNum)
                                                                                                                         v143 = v3;
                                                                                                                         do
                                                                                                                         {
-                                                                                                                            v144 = *(unsigned __int8 *)v143 - *(unsigned __int8 *)v142;
+                                                                                                                            v144 = *(uint8_t *)v143 - *(uint8_t *)v142;
                                                                                                                             if (!*v143)
                                                                                                                                 break;
                                                                                                                             ++v143;
@@ -1646,8 +1646,8 @@ void __cdecl CG_DispatchServerCommand(int localClientNum)
                                                                                                                             v146 = v3;
                                                                                                                             do
                                                                                                                             {
-                                                                                                                                v147 = *(unsigned __int8 *)v146
-                                                                                                                                    - *(unsigned __int8 *)v145;
+                                                                                                                                v147 = *(uint8_t *)v146
+                                                                                                                                    - *(uint8_t *)v145;
                                                                                                                                 if (!*v146)
                                                                                                                                     break;
                                                                                                                                 ++v146;
@@ -1659,8 +1659,8 @@ void __cdecl CG_DispatchServerCommand(int localClientNum)
                                                                                                                                 v149 = v3;
                                                                                                                                 do
                                                                                                                                 {
-                                                                                                                                    v150 = *(unsigned __int8 *)v149
-                                                                                                                                        - *(unsigned __int8 *)v148;
+                                                                                                                                    v150 = *(uint8_t *)v149
+                                                                                                                                        - *(uint8_t *)v148;
                                                                                                                                     if (!*v149)
                                                                                                                                         break;
                                                                                                                                     ++v149;
@@ -1672,8 +1672,8 @@ void __cdecl CG_DispatchServerCommand(int localClientNum)
                                                                                                                                     v152 = v3;
                                                                                                                                     do
                                                                                                                                     {
-                                                                                                                                        v153 = *(unsigned __int8 *)v152
-                                                                                                                                            - *(unsigned __int8 *)v151;
+                                                                                                                                        v153 = *(uint8_t *)v152
+                                                                                                                                            - *(uint8_t *)v151;
                                                                                                                                         if (!*v152)
                                                                                                                                             break;
                                                                                                                                         ++v152;
@@ -1685,8 +1685,8 @@ void __cdecl CG_DispatchServerCommand(int localClientNum)
                                                                                                                                         v155 = v3;
                                                                                                                                         do
                                                                                                                                         {
-                                                                                                                                            v156 = *(unsigned __int8 *)v155
-                                                                                                                                                - *(unsigned __int8 *)v154;
+                                                                                                                                            v156 = *(uint8_t *)v155
+                                                                                                                                                - *(uint8_t *)v154;
                                                                                                                                             if (!*v155)
                                                                                                                                                 break;
                                                                                                                                             ++v155;
@@ -1698,8 +1698,8 @@ void __cdecl CG_DispatchServerCommand(int localClientNum)
                                                                                                                                             v158 = v3;
                                                                                                                                             do
                                                                                                                                             {
-                                                                                                                                                v159 = *(unsigned __int8 *)v158
-                                                                                                                                                    - *(unsigned __int8 *)v157;
+                                                                                                                                                v159 = *(uint8_t *)v158
+                                                                                                                                                    - *(uint8_t *)v157;
                                                                                                                                                 if (!*v158)
                                                                                                                                                     break;
                                                                                                                                                 ++v158;
@@ -1711,8 +1711,8 @@ void __cdecl CG_DispatchServerCommand(int localClientNum)
                                                                                                                                                 v161 = v3;
                                                                                                                                                 do
                                                                                                                                                 {
-                                                                                                                                                    v162 = *(unsigned __int8 *)v161
-                                                                                                                                                        - *(unsigned __int8 *)v160;
+                                                                                                                                                    v162 = *(uint8_t *)v161
+                                                                                                                                                        - *(uint8_t *)v160;
                                                                                                                                                     if (!*v161)
                                                                                                                                                         break;
                                                                                                                                                     ++v161;
@@ -1724,8 +1724,8 @@ void __cdecl CG_DispatchServerCommand(int localClientNum)
                                                                                                                                                     v166 = v3;
                                                                                                                                                     do
                                                                                                                                                     {
-                                                                                                                                                        v167 = *(unsigned __int8 *)v166
-                                                                                                                                                            - *(unsigned __int8 *)v165;
+                                                                                                                                                        v167 = *(uint8_t *)v166
+                                                                                                                                                            - *(uint8_t *)v165;
                                                                                                                                                         if (!*v166)
                                                                                                                                                             break;
                                                                                                                                                         ++v166;
@@ -1737,8 +1737,8 @@ void __cdecl CG_DispatchServerCommand(int localClientNum)
                                                                                                                                                         v171 = v3;
                                                                                                                                                         do
                                                                                                                                                         {
-                                                                                                                                                            v172 = *(unsigned __int8 *)v171
-                                                                                                                                                                - *(unsigned __int8 *)v170;
+                                                                                                                                                            v172 = *(uint8_t *)v171
+                                                                                                                                                                - *(uint8_t *)v170;
                                                                                                                                                             if (!*v171)
                                                                                                                                                                 break;
                                                                                                                                                             ++v171;
@@ -1750,8 +1750,8 @@ void __cdecl CG_DispatchServerCommand(int localClientNum)
                                                                                                                                                             v176 = v3;
                                                                                                                                                             do
                                                                                                                                                             {
-                                                                                                                                                                v177 = *(unsigned __int8 *)v176
-                                                                                                                                                                    - *(unsigned __int8 *)v175;
+                                                                                                                                                                v177 = *(uint8_t *)v176
+                                                                                                                                                                    - *(uint8_t *)v175;
                                                                                                                                                                 if (!*v176)
                                                                                                                                                                     break;
                                                                                                                                                                 ++v176;
@@ -1763,8 +1763,8 @@ void __cdecl CG_DispatchServerCommand(int localClientNum)
                                                                                                                                                                 v179 = v3;
                                                                                                                                                                 do
                                                                                                                                                                 {
-                                                                                                                                                                    v180 = *(unsigned __int8 *)v179
-                                                                                                                                                                        - *(unsigned __int8 *)v178;
+                                                                                                                                                                    v180 = *(uint8_t *)v179
+                                                                                                                                                                        - *(uint8_t *)v178;
                                                                                                                                                                     if (!*v179)
                                                                                                                                                                         break;
                                                                                                                                                                     ++v179;
@@ -1776,8 +1776,8 @@ void __cdecl CG_DispatchServerCommand(int localClientNum)
                                                                                                                                                                     v182 = v3;
                                                                                                                                                                     do
                                                                                                                                                                     {
-                                                                                                                                                                        v183 = *(unsigned __int8 *)v182
-                                                                                                                                                                            - *(unsigned __int8 *)v181;
+                                                                                                                                                                        v183 = *(uint8_t *)v182
+                                                                                                                                                                            - *(uint8_t *)v181;
                                                                                                                                                                         if (!*v182)
                                                                                                                                                                             break;
                                                                                                                                                                         ++v182;
@@ -1789,8 +1789,8 @@ void __cdecl CG_DispatchServerCommand(int localClientNum)
                                                                                                                                                                         v189 = v3;
                                                                                                                                                                         do
                                                                                                                                                                         {
-                                                                                                                                                                            v190 = *(unsigned __int8 *)v189
-                                                                                                                                                                                - *(unsigned __int8 *)v188;
+                                                                                                                                                                            v190 = *(uint8_t *)v189
+                                                                                                                                                                                - *(uint8_t *)v188;
                                                                                                                                                                             if (!*v189)
                                                                                                                                                                                 break;
                                                                                                                                                                             ++v189;
@@ -1802,8 +1802,8 @@ void __cdecl CG_DispatchServerCommand(int localClientNum)
                                                                                                                                                                             v192 = v3;
                                                                                                                                                                             do
                                                                                                                                                                             {
-                                                                                                                                                                                v193 = *(unsigned __int8 *)v192
-                                                                                                                                                                                    - *(unsigned __int8 *)v191;
+                                                                                                                                                                                v193 = *(uint8_t *)v192
+                                                                                                                                                                                    - *(uint8_t *)v191;
                                                                                                                                                                                 if (!*v192)
                                                                                                                                                                                     break;
                                                                                                                                                                                 ++v192;
@@ -1815,8 +1815,8 @@ void __cdecl CG_DispatchServerCommand(int localClientNum)
                                                                                                                                                                                 v195 = v3;
                                                                                                                                                                                 do
                                                                                                                                                                                 {
-                                                                                                                                                                                    v196 = *(unsigned __int8 *)v195
-                                                                                                                                                                                        - *(unsigned __int8 *)v194;
+                                                                                                                                                                                    v196 = *(uint8_t *)v195
+                                                                                                                                                                                        - *(uint8_t *)v194;
                                                                                                                                                                                     if (!*v195)
                                                                                                                                                                                         break;
                                                                                                                                                                                     ++v195;
@@ -1828,8 +1828,8 @@ void __cdecl CG_DispatchServerCommand(int localClientNum)
                                                                                                                                                                                     v198 = v3;
                                                                                                                                                                                     do
                                                                                                                                                                                     {
-                                                                                                                                                                                        v199 = *(unsigned __int8 *)v198
-                                                                                                                                                                                            - *(unsigned __int8 *)v197;
+                                                                                                                                                                                        v199 = *(uint8_t *)v198
+                                                                                                                                                                                            - *(uint8_t *)v197;
                                                                                                                                                                                         if (!*v198)
                                                                                                                                                                                             break;
                                                                                                                                                                                         ++v198;

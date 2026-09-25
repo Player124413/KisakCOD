@@ -43,7 +43,7 @@ static const __m128 sse_encodeShift = { { 127.0f, 127.0f, 127.0f, -192.0f } };
 static const __m128 sse_encodeScale = { { 127.0f, 127.0f, 127.0f, 255.0f } };
 
 // Black Ops binormal-sign normalization: keep xyz fully, keep only the sign bit of w, then OR in 1.0
-static const __declspec(align(16)) unsigned int k_binormalSignMask[4] = { 0xFFFFFFFFu, 0xFFFFFFFFu, 0xFFFFFFFFu, 0x80000000u };
+static const __attribute__((aligned(16))) unsigned int k_binormalSignMask[4] = { 0xFFFFFFFFu, 0xFFFFFFFFu, 0xFFFFFFFFu, 0x80000000u };
 static const __m128 sse_wOne = { { 0.0f, 0.0f, 0.0f, 1.0f } };
 
 // ---------------------------------------------------------------------------

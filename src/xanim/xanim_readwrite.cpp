@@ -79,7 +79,7 @@ void __cdecl XAnimSaveAnimTree_r(const XAnimTree_s *tree, MemoryFile *memFile, i
     XAnimInfo *info; // r28
     unsigned int children; // r31
     XAnimInfo *v8; // r30
-    unsigned __int16 animIndex; // [sp+50h] [-40h] BYREF
+    uint16_t animIndex; // [sp+50h] [-40h] BYREF
 
     iassert(tree);
     info = GetAnimInfo(infoIndex);
@@ -102,7 +102,7 @@ void __cdecl XAnimSaveAnimTree_r(const XAnimTree_s *tree, MemoryFile *memFile, i
 void __cdecl XAnimSaveAnimTree(const DObj_s *obj, MemoryFile *memFile)
 {
     XAnimTree_s *tree; // r3
-    __int16 v5[4]; // [sp+50h] [-20h] BYREF
+    int16_t v5[4]; // [sp+50h] [-20h] BYREF
 
     iassert(obj);
 

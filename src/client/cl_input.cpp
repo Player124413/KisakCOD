@@ -1018,7 +1018,7 @@ void __cdecl CL_GamepadMove(usercmd_s *cmd)
     char yawmove; // r10
     int v21; // r3
     GamerSettingState *ProfileSettings; // r3
-    __int64 v23; // r11
+    int64_t v23; // r11
     double v24; // fp31
     int buttons; // r10
     AimOutput v26; // [sp+60h] [-A0h] BYREF
@@ -1131,22 +1131,22 @@ void __cdecl CL_GetMouseMovement(clientActive_t *cl, float *mx, float *my)
 void __cdecl CL_MouseMove(usercmd_s *cmd)
 {
 #if 0
-    __int64 oldAngles; // r9
+    int64_t oldAngles; // r9
     long double side; // fp2
-    __int64 forward; // r11
+    int64_t forward; // r11
     double up; // fp29
     double v12; // fp30
     double v13; // fp12
     double v14; // fp12
     double v15; // fp31
     double v16; // r5
-    __int64 v17; // r9
+    int64_t v17; // r9
     long double v18; // fp2
     int rightmove; // r11
     long double v28; // fp2
     int forwardmove; // r10
     float v30[KEY_FORWARD]; // [sp+50h] [-60h] BYREF
-    __int64 v31[6]; // [sp+58h] [-58h] BYREF
+    int64_t v31[6]; // [sp+58h] [-58h] BYREF
 
     CL_GetMouseMovement(clients, v30, (float *)v31, a4, a5, a7);
     HIDWORD(forward) = frame_msec;
@@ -1410,9 +1410,9 @@ void __cdecl CL_FinishMove(usercmd_s *cmd)
     cmd->weapon = clients[0].cgameUserCmdWeapon;
     cmd->offHandIndex = clients[0].cgameUserCmdOffHandIndex;
     cmd->serverTime = clients[0].serverTime;
-    cmd->angles[0] = (unsigned __int16)(int)(clients[0].viewangles[0] * (float)182.04445);
-    cmd->angles[1] = (unsigned __int16)(int)(clients[0].viewangles[1] * (float)182.04445);
-    cmd->angles[KEY_FORWARD] = (unsigned __int16)(int)(clients[0].viewangles[KEY_FORWARD] * (float)182.04445);
+    cmd->angles[0] = (uint16_t)(int)(clients[0].viewangles[0] * (float)182.04445);
+    cmd->angles[1] = (uint16_t)(int)(clients[0].viewangles[1] * (float)182.04445);
+    cmd->angles[KEY_FORWARD] = (uint16_t)(int)(clients[0].viewangles[KEY_FORWARD] * (float)182.04445);
     buttons = cmd->buttons;
     cmd->gunPitch = clients[0].cgameUserCmdGunPitch;
     cmd->gunYaw = clients[0].cgameUserCmdGunYaw;
@@ -1599,7 +1599,7 @@ void __cdecl CL_CreateCmd(usercmd_s *result)
     oldAngles = clients[0].viewangles[0];
     CL_AdjustAngles();
     memset(result, 0, sizeof(usercmd_s));
-    if (!Key_IsCatcherActive(0, KEYCATCH_LOCATION_SELECTION) || !(unsigned __int8)CG_HandleLocationSelectionInput(0, result))
+    if (!Key_IsCatcherActive(0, KEYCATCH_LOCATION_SELECTION) || !(uint8_t)CG_HandleLocationSelectionInput(0, result))
     {
         CL_CmdButtons(result);
         CL_KeyMove(result);
@@ -1731,7 +1731,7 @@ void PausedModelPreviewerGamepad()
 #if 0
     double v0; // fp31
     int v1; // r3
-    __int64 v2; // r11
+    int64_t v2; // r11
     double v3; // fp31
     double v4; // fp30
     double v5; // fp29
@@ -1933,9 +1933,9 @@ cmd_function_s IN_NightVisionUp_VAR;
 void __cdecl CL_InitInput()
 {
     const char *v0; // r5
-    unsigned __int16 v1; // r4
+    uint16_t v1; // r4
     const char *v2; // r5
-    unsigned __int16 v3; // r4
+    uint16_t v3; // r4
 
     Cmd_AddCommandInternal("mouseMove", IN_RemoteMouseMove, &IN_RemoteMouseMove_VAR);
     Cmd_AddCommandInternal("remoteKey", IN_RemoteKeyboard, &IN_RemoteKeyboard_VAR);

@@ -39,7 +39,7 @@ void __cdecl CG_ShutdownEntity(int localClientNum, centity_s *cent)
         }
     }
     if (cent->pose.isRagdoll
-        || (p_pos = &cent->currentState.pos, (unsigned __int8)Com_IsRagdollTrajectory(&cent->currentState.pos)))
+        || (p_pos = &cent->currentState.pos, (uint8_t)Com_IsRagdollTrajectory(&cent->currentState.pos)))
     {
         ragdollHandle = cent->pose.ragdollHandle;
         if (ragdollHandle)
@@ -81,13 +81,13 @@ void __cdecl CG_InitEntity(centity_s *cent)
 void __cdecl CG_ResetEntity(int localClientNum, centity_s *cent)
 {
     int eType; // r11
-    unsigned __int8 v5; // r11
+    uint8_t v5; // r11
     int time; // r29
     int number; // r4
     int v8; // r3
     const DObj_s *ClientDObj; // r4
     float *v10; // r11
-    unsigned __int8 *wheelBoneIndex; // r11
+    uint8_t *wheelBoneIndex; // r11
     int v12; // ctr
     const DObj_s *v13; // r4
 
@@ -564,7 +564,7 @@ void __cdecl CG_SetNextSnap(int localClientNum)
                     v22 = v21 & ~v20;
                     eFlags = cent->currentState.eFlags;
                     centInPrevSnapshot[v19] = v22;
-                    if ((((unsigned __int8)cent->nextState.lerp.eFlags ^ (unsigned __int8)eFlags) & 2) == 0
+                    if ((((uint8_t)cent->nextState.lerp.eFlags ^ (uint8_t)eFlags) & 2) == 0
                         && cent->currentState.useCount == cent->nextState.lerp.useCount)
                     {
                         goto LABEL_31;
@@ -583,7 +583,7 @@ void __cdecl CG_SetNextSnap(int localClientNum)
         if (!nextValid)
             MyAssertHandler("c:\\trees\\cod3\\cod3src\\src\\cgame\\cg_snapshot.cpp", 689, 0, "%s", "cent->nextValid");
         if (snap == nextSnap
-            || (((unsigned __int8)v24->nextState.lerp.eFlags ^ (unsigned __int8)v24->currentState.eFlags) & 2) != 0)
+            || (((uint8_t)v24->nextState.lerp.eFlags ^ (uint8_t)v24->currentState.eFlags) & 2) != 0)
         {
             memcpy(&snap->ps, &nextSnap->ps, sizeof(snap->ps));
             CG_ResetEntity(localClientNum, v24);

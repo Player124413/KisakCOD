@@ -1153,7 +1153,7 @@ static void __cdecl FX_ExpandMarkVerts_Transform_GfxWorldVertex_(
     const FxMarkPoint *markPoint; // [esp+D8h] [ebp-38h]
     GfxWorldVertex *verts; // [esp+DCh] [ebp-34h]
     float transformedDelta[3]; // [esp+E0h] [ebp-30h] BYREF
-    //__int64 texCoord; // [esp+ECh] [ebp-24h]
+    //int64_t texCoord; // [esp+ECh] [ebp-24h]
     float texCoord[2];
     int32_t pointCount; // [esp+F4h] [ebp-1Ch]
     int32_t loopCount; // [esp+F8h] [ebp-18h]

@@ -2802,7 +2802,7 @@ char __cdecl Material_AddShaderArgumentFromCodeConst(
     char *paramName,
     uint16_t type,
     uint32_t codeIndex,
-    __int16 offset,
+    int16_t offset,
     ShaderUniformDef *dest,
     MaterialShaderArgument *arg,
     char (*registerUsage)[64])
@@ -5506,7 +5506,7 @@ water_t *__cdecl Material_RegisterWaterImage(const MaterialWaterDef *water)
 
     // Match IDA Material_RegisterWaterImage @0x51af40 EXACTLY: textureWidth is read as an int,
     // but the dimension fed into the FFT grid M/N is its low 16 bits only
-    // (v3 = (unsigned __int16)textureWidth). The original masks BEFORE deriving M/N, and the
+    // (v3 = (uint16_t)textureWidth). The original masks BEFORE deriving M/N, and the
     // level-0 assert exists precisely because textureWidth can carry non-zero high bits. The
     // prior port dropped the mask (and had the always-false `textureWidth != textureWidth`),
     // feeding the full 32-bit value into M/N -> wildly out of range -> trips the [4,64] /
@@ -5514,15 +5514,15 @@ water_t *__cdecl Material_RegisterWaterImage(const MaterialWaterDef *water)
     // is attached, since MyAssertHandler int3's). Crash repro: scrolling a water material into
     // the texture browser.
     textureWidth = water->textureWidth;
-    v3 = (unsigned __int16)textureWidth;
-    if (textureWidth != (unsigned __int16)textureWidth)
+    v3 = (uint16_t)textureWidth;
+    if (textureWidth != (uint16_t)textureWidth)
         MyAssertHandler(
             "c:\\trees\\cod3\\src\\qcommon\\../universal/assertive.h",
             281,
             0,
             "i == static_cast< Type >( i )\n\t%i, %i",
             textureWidth,
-            (unsigned __int16)textureWidth);
+            (uint16_t)textureWidth);
     setup.Lx = water->horizontalWorldLength;
     setup.M = v3;
     setup.Lz = water->verticalWorldLength;
@@ -5669,7 +5669,7 @@ void __cdecl Material_ApplyStateBitsRemapRuleSet(
 
 void __cdecl Material_RemapStateBits(
     const Material *material,
-    __int16 toolFlags,
+    int16_t toolFlags,
     const MaterialStateMap *stateMap,
     const uint32_t *refStateBits,
     uint32_t *stateBitsOut)
@@ -5865,7 +5865,7 @@ void __cdecl Material_SetStateBits(Material *material, uint32_t (*stateBitsTable
     Material_UpdateStateFlags(material);
 }
 
-void __cdecl Material_BuildStateBitsTable(Material *material, __int16 toolFlags, const uint32_t *refStateBits)
+void __cdecl Material_BuildStateBitsTable(Material *material, int16_t toolFlags, const uint32_t *refStateBits)
 {
     MaterialTechnique *technique; // [esp+0h] [ebp-474h]
     uint32_t techType; // [esp+4h] [ebp-470h]

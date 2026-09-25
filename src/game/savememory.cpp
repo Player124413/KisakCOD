@@ -12,16 +12,16 @@
 #include <server/sv_game.h>
 #include "savedevice.h"     // OpenDevice/CloseDevice/ReadFromDevice/WriteSaveToDevice
 
-struct __declspec(align(4)) SaveMemoryGlob
+struct __attribute__((aligned(4))) SaveMemoryGlob
 {
     SaveGame *committedGameSave;
     SaveGame *currentGameSave;
     SaveGame game0;
     SaveGame game1;
     SaveGame demo;
-    unsigned __int8 buffer0[1572864];
-    unsigned __int8 buffer1[1572864];
-    unsigned __int8 buffer2[1572864];
+    uint8_t buffer0[1572864];
+    uint8_t buffer1[1572864];
+    uint8_t buffer2[1572864];
     int recentLoadTime;
     bool isCommitForced;
 };
@@ -266,7 +266,7 @@ bool __cdecl SaveMemory_IsSuccessful(SaveGame *save)
 int __cdecl SaveMemory_IsSaving(SaveGame *save)
 {
     SaveBufferState saveState; // r11
-    unsigned __int8 v3; // r11
+    uint8_t v3; // r11
     bool v4; // zf
 
     if (!save)
@@ -295,7 +295,7 @@ bool __cdecl SaveMemory_IsWaitingForCommit(SaveGame *save)
     return save->saveState == AWAITING_COMMIT;
 }
 
-unsigned __int8 *__cdecl SaveMemory_GetBodyBuffer(SaveGame *save)
+uint8_t *__cdecl SaveMemory_GetBodyBuffer(SaveGame *save)
 {
     if (!save)
         MyAssertHandler("c:\\trees\\cod3\\cod3src\\src\\game\\savememory.cpp", 511, 0, "%s", "save");
@@ -311,7 +311,7 @@ unsigned int __cdecl SaveMemory_CalculateChecksum(SaveGame *save)
     return Com_BlockChecksumKey32(save->memFile.buffer, save->header.bodySize, 0);
 }
 
-void __cdecl SaveMemory_InitializeLoadFromBuffer(SaveGame *save, unsigned __int8 *buffer, int length)
+void __cdecl SaveMemory_InitializeLoadFromBuffer(SaveGame *save, uint8_t *buffer, int length)
 {
     if (!save)
         MyAssertHandler("c:\\trees\\cod3\\cod3src\\src\\game\\savememory.cpp", 534, 0, "%s", "save");
@@ -399,7 +399,7 @@ void __cdecl SaveMemory_CreateHeader(
     const dvar_s *v36; // r3
     const char *BuildNumber; // r3
     unsigned int bytesUsed; // r4
-    unsigned __int8 *buffer; // r3
+    uint8_t *buffer; // r3
     const dvar_s *v40; // r3
     int v43; // r11
 

@@ -1113,7 +1113,7 @@ void __cdecl FX_ConvertTrail_CompileVertices(
     FxTrailVertex *emittedVertPtrIter; // [esp+28h] [ebp-68h]
     float secondaryEdgeNorm[2]; // [esp+2Ch] [ebp-64h] BYREF
     float primaryEdgeNorm[2]; // [esp+34h] [ebp-5Ch] BYREF
-    __int64 accumNorm; // [esp+3Ch] [ebp-54h] BYREF
+    int64_t accumNorm; // [esp+3Ch] [ebp-54h] BYREF
     int32_t edgeIter; // [esp+44h] [ebp-4Ch]
     uint16_t *emittedIndPtrBegin; // [esp+48h] [ebp-48h]
     int32_t indCount; // [esp+4Ch] [ebp-44h]

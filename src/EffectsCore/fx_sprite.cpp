@@ -114,14 +114,14 @@ void __cdecl FX_BuildQuadStampCodeMeshVerts(
     int32_t t1)
 {
     double v10; // st7
-    __int16 v11; // [esp+10h] [ebp-1DCh]
-    __int16 v12; // [esp+14h] [ebp-1D8h]
-    __int16 v13; // [esp+18h] [ebp-1D4h]
-    __int16 v14; // [esp+1Ch] [ebp-1D0h]
-    __int16 v15; // [esp+20h] [ebp-1CCh]
-    __int16 v16; // [esp+24h] [ebp-1C8h]
-    __int16 v17; // [esp+28h] [ebp-1C4h]
-    __int16 v18; // [esp+2Ch] [ebp-1C0h]
+    int16_t v11; // [esp+10h] [ebp-1DCh]
+    int16_t v12; // [esp+14h] [ebp-1D8h]
+    int16_t v13; // [esp+18h] [ebp-1D4h]
+    int16_t v14; // [esp+1Ch] [ebp-1D0h]
+    int16_t v15; // [esp+20h] [ebp-1CCh]
+    int16_t v16; // [esp+24h] [ebp-1C8h]
+    int16_t v17; // [esp+28h] [ebp-1C4h]
+    int16_t v18; // [esp+2Ch] [ebp-1C0h]
     int32_t v19; // [esp+7Ch] [ebp-170h]
     int32_t v20; // [esp+90h] [ebp-15Ch]
     int32_t v21; // [esp+B0h] [ebp-13Ch]

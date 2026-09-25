@@ -698,11 +698,11 @@ void __cdecl CG_ScanForCrosshairEntity(int32_t localClientNum);
 void __cdecl CG_CheckTimedMenus(int32_t localClientNum);
 void __cdecl CG_CheckForPlayerInput(int32_t localClientNum);
 bool __cdecl CG_CheckPlayerMovement(usercmd_s oldCmd, usercmd_s newCmd);
-int32_t __cdecl CG_CheckPlayerStanceChange(int32_t localClientNum, __int16 newButtons, __int16 changedButtons);
+int32_t __cdecl CG_CheckPlayerStanceChange(int32_t localClientNum, int16_t newButtons, int16_t changedButtons);
 int32_t __cdecl CG_CheckPlayerWeaponUsage(int32_t localClientNum, char buttons);
 bool __cdecl CG_CheckPlayerTryReload(int32_t localClientNum, char buttons);
 bool __cdecl CG_CheckPlayerFireNonTurret(int32_t localClientNum, char buttons);
-int32_t __cdecl CG_CheckPlayerOffHandUsage(int32_t localClientNum, __int16 buttons);
+int32_t __cdecl CG_CheckPlayerOffHandUsage(int32_t localClientNum, int16_t buttons);
 uint32_t __cdecl CG_CheckPlayerMiscInput(int32_t buttons);
 void __cdecl CG_CheckHudHealthDisplay(int32_t localClientNum);
 void __cdecl CG_CheckHudAmmoDisplay(int32_t localClientNum);
@@ -766,7 +766,7 @@ void __cdecl CG_CalcWeaponVisTrace(
 
 
 // cg_scoreboard_mp
-enum listColumnTypes_t : __int32
+enum listColumnTypes_t : int32_t
 {                                       // ...
     LCT_NAME = 0x0,             // ...
     LCT_CLAN = 0x1,

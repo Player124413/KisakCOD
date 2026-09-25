@@ -35,7 +35,7 @@ bool __cdecl CL_DemoPlaying();
 bool __cdecl CL_DemoRecording();
 int __cdecl CL_TimeDemoPlaying();
 void CL_DemoCompleted();
-int __cdecl CL_GetDemoMessage(msg_t *buf, unsigned __int8 *bufData, int bufDataSize);
+int __cdecl CL_GetDemoMessage(msg_t *buf, uint8_t *bufData, int bufDataSize);
 void __cdecl CL_ReadDemoMessage();
 void __cdecl CL_ReadDemoMessagesUntilNextSnap();
 void __cdecl CL_FinishLoadingDemo();

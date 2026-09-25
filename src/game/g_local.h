@@ -10,7 +10,7 @@
 #include "game_public.h"
 
 
-enum $854C867908149C343981C8BAF4C9A230 : __int32
+enum $854C867908149C343981C8BAF4C9A230 : int32_t
 {
     ENTFIELD_ENTITY = 0x0,
     ENTFIELD_SENTIENT = 0x4000,
@@ -20,7 +20,7 @@ enum $854C867908149C343981C8BAF4C9A230 : __int32
 };
 
 // MOD = Means of Death
-enum meansOfDeath_t : __int32
+enum meansOfDeath_t : int32_t
 {
     MOD_UNKNOWN = 0x0,
     MOD_PISTOL_BULLET = 0x1,
@@ -60,10 +60,10 @@ struct animscripted_s
     float axis[4][3];
     float originError[3];
     float anglesError[3];
-    unsigned __int16 anim;
-    unsigned __int16 root;
-    unsigned __int8 bStarted;
-    unsigned __int8 mode;
+    uint16_t anim;
+    uint16_t root;
+    uint8_t bStarted;
+    uint8_t mode;
     float fHeightOfs;
     float fEndPitch;
     float fEndRoll;
@@ -144,7 +144,7 @@ void __cdecl G_Animscripted(
     unsigned int anim,
     unsigned int root,
     unsigned int notifyName,
-    unsigned __int8 animMode);
+    uint8_t animMode);
 void __cdecl G_ReduceOriginError(float *origin, float *originError, double maxChange);
 void __cdecl G_ReduceAnglesError(float *angles, float *anglesError, double maxChange);
 void __cdecl G_AnimScripted_Think_DeathPlant(gentity_s *ent, XAnimTree_s *tree, float *origin, float *angles);
@@ -268,21 +268,21 @@ void __cdecl G_LocationalTrace(
     const float *end,
     int passEntityNum,
     int contentmask,
-    unsigned __int8 *priorityMap);
+    uint8_t *priorityMap);
 void __cdecl G_LocationalTraceAllowChildren(
     trace_t *results,
     const float *start,
     const float *end,
     int passEntityNum,
     int contentmask,
-    unsigned __int8 *priorityMap);
+    uint8_t *priorityMap);
 int __cdecl G_LocationalTracePassed(
     const float *start,
     const float *end,
     int passEntityNum,
     int passEntityNum1,
     int contentmask,
-    unsigned __int8 *priorityMap);
+    uint8_t *priorityMap);
 void __cdecl G_SightTrace(int *hitNum, const float *start, const float *end, int passEntityNum, int contentmask);
 void __cdecl G_AddDebugString(const float *xyz, const float *color, double scale, const char *pszText);
 void __cdecl G_AddDebugStringWithDuration(
@@ -304,7 +304,7 @@ void __cdecl SP_info_volume(gentity_s *self);
 void __cdecl TeleportPlayer(gentity_s *player, float *origin, const float *angles);
 void __cdecl SP_sound_blend(gentity_s *self);
 gentity_s *__cdecl G_SpawnSoundBlend();
-void __cdecl G_SetSoundBlend(gentity_s *ent, unsigned __int16 alias0, unsigned __int16 alias1, double lerp);
+void __cdecl G_SetSoundBlend(gentity_s *ent, uint16_t alias0, uint16_t alias1, double lerp);
 void __cdecl G_SetSoundBlendVolumeScale(gentity_s *ent, double scale);
 float __cdecl G_GetSoundBlendVolumeScale(gentity_s *ent);
 void __cdecl EntinfoPosAndScale(gentity_s *self, float *source, float *pos, float *textScale, float *dist);
@@ -315,7 +315,7 @@ int ByteFromFloatColor(float from);
 
 // g_client_script_cmd
 int __cdecl G_GetNeededStartAmmo(gentity_s *pSelf, WeaponDef *weapDef);
-void __cdecl InitializeAmmo(gentity_s *pSelf, int weaponIndex, unsigned __int8 weaponModel, int hadWeapon);
+void __cdecl InitializeAmmo(gentity_s *pSelf, int weaponIndex, uint8_t weaponModel, int hadWeapon);
 void __cdecl G_FlushCommandNotifies();
 void __cdecl G_ProcessCommandNotifies();
 
@@ -410,7 +410,7 @@ void __cdecl PlayerCmd_EnableTurretDismount(scr_entref_t entref);
 void __cdecl PlayerCmd_UploadScore(scr_entref_t entref);
 void __cdecl PlayerCmd_UploadTime(scr_entref_t entref);
 void(__cdecl *__cdecl Player_GetMethod(const char **pName))(scr_entref_t);
-void __cdecl G_AddCommandNotify(volatile unsigned __int16 notify);
+void __cdecl G_AddCommandNotify(volatile uint16_t notify);
 
 
 // g_cmds
@@ -445,7 +445,7 @@ void __cdecl ClientCommand(int clientNum, const char *s);
 
 // g_combat
 void __cdecl TRACK_g_combat();
-void __cdecl G_HitLocStrcpy(unsigned __int8 *pMember, const char *pszKeyValue);
+void __cdecl G_HitLocStrcpy(uint8_t *pMember, const char *pszKeyValue);
 void __cdecl G_ParseHitLocDmgTable();
 void __cdecl TossClientItems(gentity_s *self);
 void __cdecl LookAtKiller(gentity_s *self, gentity_s *inflictor, gentity_s *attacker);
@@ -463,7 +463,7 @@ void __cdecl player_die(
 float __cdecl G_GetWeaponHitLocationMultiplier(unsigned int hitLoc, unsigned int weapon);
 void __cdecl handleDeathInvulnerability(gentity_s *targ, int prevHealth, int mod);
 void __cdecl G_DamageNotify(
-    unsigned __int16 notify,
+    uint16_t notify,
     gentity_s *targ,
     gentity_s *attacker,
     const float *dir,
@@ -555,7 +555,7 @@ unsigned int __cdecl G_SetEntityScriptVariableInternal(const char *key, const ch
 void G_SpawnStruct();
 void __cdecl G_DuplicateEntityFields(gentity_s *dest, const gentity_s *source);
 void __cdecl G_DuplicateScriptFields(gentity_s *dest, const gentity_s *source);
-const gitem_s *__cdecl G_GetItemForClassname(const char *classname, unsigned __int8 model);
+const gitem_s *__cdecl G_GetItemForClassname(const char *classname, uint8_t model);
 void(__cdecl *__cdecl G_FindSpawnFunc(
     const char *classname,
     const SpawnFuncEntry *spawnFuncArray,
@@ -573,7 +573,7 @@ void __cdecl Scr_AddHudElem(game_hudelem_s *hud);
 game_hudelem_s *__cdecl Scr_GetHudElem(unsigned int index);
 int __cdecl Scr_ExecEntThread(gentity_s *ent, int handle, unsigned int paramcount);
 void __cdecl Scr_AddExecEntThread(gentity_s *ent, int handle, unsigned int paramcount);
-void __cdecl Scr_Notify(gentity_s *ent, unsigned __int16 stringValue, unsigned int paramcount);
+void __cdecl Scr_Notify(gentity_s *ent, uint16_t stringValue, unsigned int paramcount);
 void __cdecl Scr_GetGenericEnt(unsigned int offset, unsigned int name);
 void __cdecl Scr_GetEnt();
 void __cdecl Scr_GetGenericEntArray(unsigned int offset, unsigned int name);
@@ -585,8 +585,8 @@ void __cdecl G_SetEntityScriptVariable(const char *key, const char *value, genti
 void __cdecl G_ParseEntityField(const char *key, const char *value, gentity_s *ent, int ignoreModel);
 void __cdecl G_ParseEntityFields(gentity_s *ent, int ignoreModel);
 void G_CallSpawn();
-void __cdecl Scr_SetGenericField(unsigned __int8 *b, fieldtype_t type, int ofs);
-void __cdecl Scr_GetGenericField(unsigned __int8 *b, fieldtype_t type, int ofs);
+void __cdecl Scr_SetGenericField(uint8_t *b, fieldtype_t type, int ofs);
+void __cdecl Scr_GetGenericField(uint8_t *b, fieldtype_t type, int ofs);
 void __cdecl G_SpawnEntitiesFromString();
 int __cdecl Scr_SetEntityField(unsigned int entnum, unsigned int offset);
 int __cdecl Scr_SetObjectField(unsigned int classnum, unsigned int entnum, int offset);
@@ -710,7 +710,7 @@ void __cdecl G_EntityCentroidWithBounds(const gentity_s *ent, const float *mins,
 void __cdecl G_EntityCentroid(const gentity_s *ent, float *centroid);
 int __cdecl G_EffectIndex(const char *name);
 int __cdecl G_ShellShockIndex(const char *name);
-unsigned int __cdecl G_SoundAliasIndexTransientAdvance(unsigned __int16 aliasIndex, int offset);
+unsigned int __cdecl G_SoundAliasIndexTransientAdvance(uint16_t aliasIndex, int offset);
 unsigned int __cdecl G_SoundAliasIndexTransient(const char *name);
 int __cdecl G_SoundAliasIndexPermanent(const char *name);
 int __cdecl G_RumbleIndex(const char *name);
@@ -738,7 +738,7 @@ bool __cdecl G_SlideMove(
     float *mins,
     const float *maxs,
     const float *gravity,
-    unsigned __int8 passEntityNum,
+    uint8_t passEntityNum,
     int clipMask);
 void __cdecl G_StepSlideMove(
     float deltaT,
@@ -747,7 +747,7 @@ void __cdecl G_StepSlideMove(
     float *mins,
     const float *maxs,
     const float *gravity,
-    unsigned __int8 passEntityNum,
+    uint8_t passEntityNum,
     int clipMask);
 void __cdecl G_SafeDObjFree(gentity_s *ent);
 int __cdecl G_DObjUpdateServerTime(gentity_s *ent, int bNotify);
@@ -760,7 +760,7 @@ struct DObjAnimMat *__cdecl G_DObjGetLocalTagMatrix(const gentity_s *ent, unsign
 int __cdecl G_DObjGetWorldTagMatrix(const gentity_s *ent, unsigned int tagName, float (*tagMat)[3]);
 int __cdecl G_DObjGetWorldTagPos(const gentity_s *ent, unsigned int tagName, float *pos);
 void __cdecl G_DObjGetWorldTagPos_CheckTagExists(const gentity_s *ent, unsigned int tagName, float *pos);
-gentity_s *__cdecl G_Find(gentity_s *from, int fieldofs, unsigned __int16 match);
+gentity_s *__cdecl G_Find(gentity_s *from, int fieldofs, uint16_t match);
 void __cdecl G_InitGentity(gentity_s *e);
 void __cdecl G_PrintEntities();
 gentity_s *__cdecl G_Spawn();
@@ -769,22 +769,22 @@ void __cdecl G_FreeAllEntityRefs();
 void __cdecl G_FreeEntityDelay(gentity_s *ed);
 void __cdecl G_BroadcastEntity(gentity_s *ent);
 void __cdecl G_FreeEntityAfterEvent(gentity_s *ent);
-int __cdecl G_SaveFreeEntities(unsigned __int8 *buf);
-void __cdecl G_LoadFreeEntities(unsigned __int8 *buf);
+int __cdecl G_SaveFreeEntities(uint8_t *buf);
+void __cdecl G_LoadFreeEntities(uint8_t *buf);
 void __cdecl G_AddPredictableEvent(gentity_s *ent, entity_event_t event, unsigned int eventParm);
 void __cdecl G_AddEvent(gentity_s *ent, unsigned int event, unsigned int eventParm);
-void __cdecl G_RegisterSoundWait(gentity_s *ent, unsigned __int16 index, unsigned int notifyString, int stoppable);
+void __cdecl G_RegisterSoundWait(gentity_s *ent, uint16_t index, unsigned int notifyString, int stoppable);
 void __cdecl G_PlaySoundAliasWithNotify(
     gentity_s *ent,
-    unsigned __int16 index,
+    uint16_t index,
     unsigned int notifyString,
     int stoppable,
     unsigned int event,
     unsigned int notifyevent);
-void __cdecl G_PlaySoundAlias(gentity_s *ent, unsigned __int16 index);
+void __cdecl G_PlaySoundAlias(gentity_s *ent, uint16_t index);
 void __cdecl G_SetOrigin(gentity_s *ent, float *origin);
 void __cdecl G_SetAngle(gentity_s *ent, float *angle);
-void __cdecl G_SetConstString(unsigned __int16 *to, const char *from);
+void __cdecl G_SetConstString(uint16_t *to, const char *from);
 const char *__cdecl G_GetEntityTypeName(const gentity_s *ent);
 void __cdecl G_SetPM_MPViewer(bool setting);
 void __cdecl G_srand(unsigned int seed);
@@ -801,7 +801,7 @@ void __cdecl G_SetFixedLink(gentity_s *ent, unsigned int eAngles);
 void __cdecl G_SetPlayerFixedLink(gentity_s *ent);
 void __cdecl G_GeneralLink(gentity_s *ent);
 gentity_s *__cdecl G_TempEntity(float *origin, int event);
-void __cdecl G_PlaySoundAliasAtPoint(float *origin, unsigned __int16 index);
+void __cdecl G_PlaySoundAliasAtPoint(float *origin, uint16_t index);
 void __cdecl G_EntUnlink(gentity_s *ent);
 void __cdecl G_UpdateTagInfo(gentity_s *ent, int bParentHasDObj);
 void __cdecl G_UpdateTagInfoOfChildren(gentity_s *parent, int bHasDObj);
@@ -823,6 +823,6 @@ int __cdecl G_EntAttach(gentity_s *ent, const char *modelName, unsigned int tagN
 
 
 extern bool g_godModeRemoteInputValid;
-extern unsigned __int16 *modNames[MOD_NUM];
+extern uint16_t *modNames[MOD_NUM];
 
 extern TargetGlob targGlob;

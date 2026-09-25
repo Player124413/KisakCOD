@@ -382,9 +382,9 @@ void __cdecl turret_UpdateSound(gentity_s *self)
     gentity_s *v3; // r3
     char v4; // r11
     char v5; // r10
-    unsigned __int16 fireSndPlayer; // r11
+    uint16_t fireSndPlayer; // r11
     int v7; // r11
-    unsigned __int16 stopSndPlayer; // r4
+    uint16_t stopSndPlayer; // r4
 
     pTurretInfo = self->pTurretInfo;
     iassert(pTurretInfo);
@@ -965,9 +965,9 @@ int __cdecl turret_aimat_Sentient_Internal(
     double v29; // fp0
 
     float dir[2]; // was v30 (BYREF) + v31
-    __int64 v32; // [sp+58h] [-C8h]
+    int64_t v32; // [sp+58h] [-C8h]
 
-    float aimPos[3]; // was v33 (BYREF __int64) + v34 (float)
+    float aimPos[3]; // was v33 (BYREF int64_t) + v34 (float)
     float targetPos[3]; // [sp+70h] [-B0h] BYREF
     //float v36; // [sp+74h] [-ACh]
     //float v37; // [sp+78h] [-A8h]
@@ -1996,7 +1996,7 @@ bool __cdecl turret_canuse(actor_s *actor, gentity_s *pTurret)
     pTurretInfo = pTurret->pTurretInfo;
     if (!pTurretInfo)
         MyAssertHandler("c:\\trees\\cod3\\cod3src\\src\\game\\turret.cpp", 1882, 0, "%s", "pTurretInfo");
-    if ((unsigned __int8)Actor_IsUsingTurret(actor) && actor->pTurret == pTurret)
+    if ((uint8_t)Actor_IsUsingTurret(actor) && actor->pTurret == pTurret)
         return 1;
     if (pTurret->active)
         return 0;
@@ -2008,7 +2008,7 @@ bool __cdecl turret_canuse(actor_s *actor, gentity_s *pTurret)
 void __cdecl turret_controller(const gentity_s *self, int *partBits)
 {
     DObj_s *obj; // r31
-    unsigned __int8 boneIndex; // [sp+50h] [-50h] BYREF
+    uint8_t boneIndex; // [sp+50h] [-50h] BYREF
     float angles[3]; // [sp+58h] [-48h] BYREF // v9
 
     angles[0] = (self->s.lerp.u.turret.gunAngles[0] - self->s.lerp.u.turret.gunAngles[2]);
@@ -2255,7 +2255,7 @@ int __cdecl G_CanSpawnTurret()
 void __cdecl G_SpawnTurret(gentity_s *self, const char *weaponinfoname)
 {
     TurretInfo *turretInfo; // r11
-    unsigned __int8 weaponIdx; // r3
+    uint8_t weaponIdx; // r3
     WeaponDef *weapDef; // r27
     weapStance_t stance; // r11
     float  yawConvergenceTime; // fp0

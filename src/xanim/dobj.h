@@ -69,9 +69,9 @@ struct DObj_s // sizeof=0x64
     XAnimTree_s* tree;
     uint16_t duplicateParts;
     uint16_t entnum;
-    unsigned __int8 duplicatePartsSize;
-    unsigned __int8 numModels;
-    unsigned __int8 numBones;
+    uint8_t duplicatePartsSize;
+    uint8_t numModels;
+    uint8_t numBones;
     // padding byte
     uint32_t ignoreCollision;
     volatile uint32_t locked;
@@ -96,7 +96,7 @@ bool __cdecl DObjIgnoreCollision(const DObj_s *obj, char modelIndex);
 void __cdecl DObjGetHierarchyBits(const DObj_s *obj, int boneIndex, int *partBits);
 bool __cdecl DObjSkelIsBoneUpToDate(DObj_s *obj, int boneIndex);
 void __cdecl DObjSetTree(DObj_s *obj, XAnimTree_s *tree);
-void __cdecl DObjCreate(DObjModel_s *dobjModels, uint32_t numModels, XAnimTree_s *tree, DObj_s *buf, __int16 entnum);
+void __cdecl DObjCreate(DObjModel_s *dobjModels, uint32_t numModels, XAnimTree_s *tree, DObj_s *buf, int16_t entnum);
 void __cdecl DObjCreateDuplicateParts(DObj_s *obj, DObjModel_s *dobjModels, uint32_t numModels);
 void __cdecl DObjDumpCreationInfo(DObjModel_s *dobjModels, uint32_t numModels);
 void __cdecl DObjComputeBounds(DObj_s *obj);
@@ -119,7 +119,7 @@ const char *__cdecl DObjGetName(const DObj_s *obj);
 const char *__cdecl DObjGetBoneName(const DObj_s *obj, int boneIndex);
 char *__cdecl DObjGetModelParentBoneName(const DObj_s *obj, int modelIndex);
 XAnimTree_s *__cdecl DObjGetTree(const DObj_s *obj);
-void __cdecl DObjTraceline(DObj_s *obj, float *start, float *end, unsigned __int8 *priorityMap, DObjTrace_s *trace);
+void __cdecl DObjTraceline(DObj_s *obj, float *start, float *end, uint8_t *priorityMap, DObjTrace_s *trace);
 void __cdecl DObjTracelinePartBits(DObj_s *obj, int *partBits);
 void __cdecl DObjGeomTraceline(
     DObj_s *obj,
@@ -131,9 +131,9 @@ void __cdecl DObjGeomTracelinePartBits(DObj_s *obj, int contentmask, int *partBi
 int __cdecl DObjHasContents(DObj_s *obj, int contentmask);
 int __cdecl DObjGetContents(const DObj_s *obj);
 int __cdecl DObjSetLocalBoneIndex(DObj_s *obj, int *partBits, int boneIndex, const float *trans, const float *angles);
-int __cdecl DObjGetBoneIndex(const DObj_s *obj, uint32_t name, unsigned __int8 *index);
-int __cdecl DObjGetModelBoneIndex(const DObj_s *obj, const char *modelName, uint32_t name, unsigned __int8 *index);
-void __cdecl DObjGetBasePoseMatrix(const DObj_s *obj, unsigned __int8 boneIndex, DObjAnimMat *outMat);
+int __cdecl DObjGetBoneIndex(const DObj_s *obj, uint32_t name, uint8_t *index);
+int __cdecl DObjGetModelBoneIndex(const DObj_s *obj, const char *modelName, uint32_t name, uint8_t *index);
+void __cdecl DObjGetBasePoseMatrix(const DObj_s *obj, uint8_t boneIndex, DObjAnimMat *outMat);
 void __cdecl DObjSetHidePartBits(DObj_s *obj, const uint32_t *partBits);
 int DObjGetNumSurfaces(const DObj_s *obj, char *lods);
 void DObjClone(const DObj_s *from, DObj_s *obj);
@@ -148,11 +148,11 @@ void __cdecl GetControlAndDuplicatePartBits(
     const int *savedDuplicatePartBits,
     int *calcPartBits,
     int *controlPartBits);
-const unsigned __int8 *__cdecl CalcSkelDuplicateBones(
+const uint8_t *__cdecl CalcSkelDuplicateBones(
     const XModel *model,
     DSkel *skel,
     int minBoneIndex,
-    const unsigned __int8 *pos);
+    const uint8_t *pos);
 void __cdecl CalcSkelRootBonesNoParentOrDuplicate(
     const XModel *model,
     DSkel *skel,

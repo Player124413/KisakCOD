@@ -894,7 +894,7 @@ void __cdecl Phys_ObjAddGeomBoxRotated(
 void __cdecl Phys_ObjAddGeomBrushModel(
     PhysWorld worldIndex,
     dxBody *id,
-    unsigned __int16 brushModel,
+    uint16_t brushModel,
     const PhysMass *physMass)
 {
     GeomState geomState; // [esp+14h] [ebp-98h] BYREF
@@ -1606,7 +1606,7 @@ int __cdecl Phys_DoBodyOncePerFrame(uint32_t worldIndex, dxBody *body, float del
 
 void __cdecl Phys_GeomUserGetAAContainedBox(dxGeom *geom, float *mins, float *maxs)
 {
-    unsigned __int16 *ClassData; // eax
+    uint16_t *ClassData; // eax
     const char *v4; // eax
     const char *v5; // eax
     const char *v6; // eax
@@ -1627,7 +1627,7 @@ void __cdecl Phys_GeomUserGetAAContainedBox(dxGeom *geom, float *mins, float *ma
     switch (dGeomGetClass(geom))
     {
     case 11:
-        ClassData = (unsigned __int16 *)dGeomGetClassData(geom);
+        ClassData = (uint16_t *)dGeomGetClassData(geom);
         cmod = CM_ClipHandleToModel(*ClassData);
         Vec3Scale(cmod->mins, 0.0099999998f, mins);
         Vec3Scale(cmod->maxs, 0.0099999998f, maxs);

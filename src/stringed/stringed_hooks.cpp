@@ -335,7 +335,7 @@ int __cdecl SEH_GetLocalizedTokenReference(
     return 1;
 }
 
-bool __cdecl Taiwanese_ValidBig5Code(__int16 uiCode)
+bool __cdecl Taiwanese_ValidBig5Code(int16_t uiCode)
 {
     return (HIBYTE(uiCode) >= 0xA1u && HIBYTE(uiCode) <= 0xC6u || HIBYTE(uiCode) >= 0xC9u && HIBYTE(uiCode) <= 0xF9u)
         && ((uint8_t)uiCode >= 0x40u && (uint8_t)uiCode <= 0x7Eu

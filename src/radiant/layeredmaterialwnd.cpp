@@ -556,7 +556,7 @@ LRESULT CALLBACK LayeredMaterialWnd_WindowProc( HWND hWnd, UINT Msg, WPARAM wPar
     {
         if ( Msg == WM_COMMAND )
         {
-            unsigned int c = (unsigned __int16)wParam - 35010;
+            unsigned int c = (uint16_t)wParam - 35010;
             if ( c <= 5 )
                 LayeredMaterialWnd_Commands( c );
         }
@@ -570,7 +570,7 @@ LRESULT CALLBACK LayeredMaterialWnd_WindowProc( HWND hWnd, UINT Msg, WPARAM wPar
         return 0;
     }
     if ( g_pParentWnd )
-        g_pParentWnd->OnKeyDown( wParam, (unsigned __int16)lParam, HIWORD( lParam ) );
+        g_pParentWnd->OnKeyDown( wParam, (uint16_t)lParam, HIWORD( lParam ) );
     return 0;
 }
 
@@ -750,10 +750,10 @@ LRESULT CALLBACK LayeredMaterialWnd_WindowProcA( HWND hWnd, UINT Msg, WPARAM wPa
         switch ( Msg )
         {
         case WM_VSCROLL:
-            CLayermatWnd_OnScroll( HIWORD( wParam ), (unsigned __int16)wParam );
+            CLayermatWnd_OnScroll( HIWORD( wParam ), (uint16_t)wParam );
             return 0;
         case WM_SIZE:
-            R_Hwnd_Resize( (HWND__ *)hWnd, (unsigned __int16)lParam, HIWORD( lParam ) );
+            R_Hwnd_Resize( (HWND__ *)hWnd, (uint16_t)lParam, HIWORD( lParam ) );
             return 0;
         case WM_PAINT:
             CLayermatWnd_OnPaint();

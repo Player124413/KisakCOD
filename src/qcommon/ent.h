@@ -2,7 +2,7 @@
 
 
 #ifdef KISAK_MP
-enum entityType_t : __int32
+enum entityType_t : int32_t
 {                                       // ...
     ET_GENERAL = 0x0,
     ET_PLAYER = 0x1,
@@ -24,7 +24,7 @@ enum entityType_t : __int32
     ET_EVENTS = 0x11,
 };
 #elif KISAK_SP
-enum entityType_t : __int32
+enum entityType_t : int32_t
 {
     ET_GENERAL = 0x0,
     ET_PLAYER = 0x1,
@@ -57,7 +57,7 @@ struct LerpEntityStateLoopFx // sizeof=0x8
     int period;
 };
 #ifdef KISAK_SP
-struct __declspec(align(4)) LerpEntityStateActor
+struct __attribute__((aligned(4))) LerpEntityStateActor
 {
     float visionFov;
     float visionDist;

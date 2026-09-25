@@ -1123,7 +1123,7 @@ double __cdecl Phys_DistanceOfCylinderFromPlane(const float *plane, const objInf
 }
 
 void __cdecl Phys_CollideCylinderWithTriangleList(
-    const unsigned __int16 *a_indices,
+    const uint16_t *a_indices,
     const float (*verts)[3],
     uint32_t triCount,
     const objInfo *info,
@@ -1137,7 +1137,7 @@ void __cdecl Phys_CollideCylinderWithTriangleList(
     float triVerts[3][3]; // [esp+C4h] [ebp-48h] BYREF
     float triPlane[4]; // [esp+E8h] [ebp-24h] BYREF
     float radius; // [esp+F8h] [ebp-14h]
-    const unsigned __int16 *indices; // [esp+FCh] [ebp-10h]
+    const uint16_t *indices; // [esp+FCh] [ebp-10h]
     uint32_t triIndex; // [esp+100h] [ebp-Ch]
     Poly triPoly; // [esp+104h] [ebp-8h] BYREF
 

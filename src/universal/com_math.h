@@ -164,8 +164,8 @@ void __cdecl TRACK_com_math();
 // == RANDOM == 
 void __cdecl Rand_Init(int seed);
 
-float __cdecl random();
-float __cdecl crandom();
+float __cdecl Com_Random();
+float __cdecl Com_Crandom();
 
 float __cdecl flrand(float min, float max);
 int __cdecl irand(int min, int max);

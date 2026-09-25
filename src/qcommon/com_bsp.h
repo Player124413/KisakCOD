@@ -41,7 +41,7 @@ double __cdecl CosOfSumOfArcCos(float cos0, float cos1);
 void __cdecl Com_UnloadWorld();
 
 
-enum LumpType : __int32
+enum LumpType : int32_t
 {                                       // ...
     LUMP_MATERIALS = 0x0,
     LUMP_LIGHTBYTES = 0x1,
@@ -100,7 +100,7 @@ enum LumpType : __int32
     LUMP_LIGHTREGION_AXES = 0x36,
 };
 
-enum ComSaveLumpBehavior : __int32
+enum ComSaveLumpBehavior : int32_t
 {                                       // ...
     COM_SAVE_LUMP_AND_CLOSE = 0x0,
     COM_SAVE_LUMP_AND_REOPEN = 0x1,

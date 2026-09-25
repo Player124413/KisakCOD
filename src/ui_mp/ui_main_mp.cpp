@@ -26,7 +26,7 @@
 #include <universal/timing.h>
 #include <universal/profile.h>
 
-enum sscType_t : __int32
+enum sscType_t : int32_t
 {                                       // ...
     SSC_STRING = 0x0,
     SSC_YESNO = 0x1,
@@ -2046,7 +2046,7 @@ void UI_AddPlayerProfiles()
     Dvar_SetInt(ui_playerProfileCount, uiInfo->playerProfileCount);
 }
 
-bool __cdecl UI_OwnerDrawVisible(__int16 flags)
+bool __cdecl UI_OwnerDrawVisible(int16_t flags)
 {
     bool vis; // [esp+0h] [ebp-4h]
 

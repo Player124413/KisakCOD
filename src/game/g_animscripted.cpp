@@ -217,7 +217,7 @@ void __cdecl G_Animscripted(
     unsigned int anim,
     unsigned int root,
     unsigned int notifyName,
-    unsigned __int8 animMode)
+    uint8_t animMode)
 {
     XAnimTree_s *pAnimTree; // r26
     animscripted_s *scripted; // r30

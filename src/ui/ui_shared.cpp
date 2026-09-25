@@ -3159,7 +3159,7 @@ scrollInfo_s scrollInfo;
 void __cdecl Item_StartCapture(UiContext *dc, itemDef_s *item, int key)
 {
     int type; // [esp+8h] [ebp-8h]
-    __int16 flags; // [esp+Ch] [ebp-4h]
+    int16_t flags; // [esp+Ch] [ebp-4h]
 
     type = item->type;
     if (type == 6)

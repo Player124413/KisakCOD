@@ -152,7 +152,7 @@ void __cdecl SV_BuildAndSendClientSnapshot(client_t *client)
 {
     int outgoingSequence; // r4
     msg_t msg; // [sp+50h] [-4040h] BYREF
-    unsigned __int8 msgbuf[0x4000]; // [sp+80h] [-4010h] BYREF
+    uint8_t msgbuf[0x4000]; // [sp+80h] [-4010h] BYREF
 
     SV_BuildClientSnapshot(client);
     MSG_Init(&msg, msgbuf, 0x4000);

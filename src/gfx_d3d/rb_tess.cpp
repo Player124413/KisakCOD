@@ -113,7 +113,7 @@ uint32_t __cdecl R_TessCodeMeshList(const GfxDrawSurfListArgs *listArgs, GfxCmdB
     uint32_t argCount; // [esp+6Ch] [ebp-24h]
     const GfxDrawSurf *drawSurfList; // [esp+70h] [ebp-20h]
     GfxDrawPrimArgs args; // [esp+74h] [ebp-1Ch] BYREF
-    unsigned __int64 drawSurfKey; // [esp+80h] [ebp-10h]
+    uint64_t drawSurfKey; // [esp+80h] [ebp-10h]
     uint32_t drawSurfCount; // [esp+8Ch] [ebp-4h]
 
     PROF_SCOPED("TessCodeMesh");
@@ -275,7 +275,7 @@ uint32_t __cdecl R_TessMarkMeshList(const GfxDrawSurfListArgs *listArgs, GfxCmdB
     const GfxDrawSurfListInfo *info; // [esp+60h] [ebp-64h]
     GfxDrawSurf drawSurf; // [esp+64h] [ebp-60h]
     const GfxBackEndData *data; // [esp+6Ch] [ebp-58h]
-    unsigned __int64 drawSurfSubKey; // [esp+74h] [ebp-50h]
+    uint64_t drawSurfSubKey; // [esp+74h] [ebp-50h]
     GfxDrawSurf drawSurfSubMask; // [esp+7Ch] [ebp-48h]
     MaterialTechniqueType baseTechType; // [esp+84h] [ebp-40h]
     uint32_t drawSurfIndex; // [esp+88h] [ebp-3Ch]
@@ -288,7 +288,7 @@ uint32_t __cdecl R_TessMarkMeshList(const GfxDrawSurfListArgs *listArgs, GfxCmdB
     uint32_t markTypeb; // [esp+A0h] [ebp-24h]
     const GfxDrawSurf *drawSurfList; // [esp+A4h] [ebp-20h]
     GfxDrawPrimArgs args; // [esp+A8h] [ebp-1Ch] BYREF
-    unsigned __int64 drawSurfKey; // [esp+B4h] [ebp-10h]
+    uint64_t drawSurfKey; // [esp+B4h] [ebp-10h]
     uint32_t drawSurfCount; // [esp+C0h] [ebp-4h]
 
     PROF_SCOPED("TessCodeMesh");
@@ -1242,7 +1242,7 @@ uint32_t __cdecl R_TessXModelRigidSkinnedDrawSurfList(
     const GfxBackEndData *data; // [esp+6Ch] [ebp-5Ch]
     GfxCmdBufSourceState *commonSource; // [esp+70h] [ebp-58h]
     int setupPixelShader; // [esp+74h] [ebp-54h]
-    unsigned __int64 drawSurfSubKey; // [esp+78h] [ebp-50h]
+    uint64_t drawSurfSubKey; // [esp+78h] [ebp-50h]
     GfxDrawSurf drawSurfSubMask; // [esp+80h] [ebp-48h]
     MaterialTechniqueType baseTechType; // [esp+88h] [ebp-40h]
     int setupVertexShader; // [esp+8Ch] [ebp-3Ch]
@@ -1252,7 +1252,7 @@ uint32_t __cdecl R_TessXModelRigidSkinnedDrawSurfList(
     uint32_t gfxEntIndex; // [esp+ACh] [ebp-1Ch]
     float materialTime; // [esp+B0h] [ebp-18h]
     const GfxDrawSurf *drawSurfList; // [esp+B4h] [ebp-14h]
-    unsigned __int64 drawSurfKey; // [esp+B8h] [ebp-10h]
+    uint64_t drawSurfKey; // [esp+B8h] [ebp-10h]
     uint32_t drawSurfCount; // [esp+C4h] [ebp-4h]
 
     PROF_SCOPED("TessXModRigid");
@@ -1470,14 +1470,14 @@ uint32_t __cdecl R_TessBModel(const GfxDrawSurfListArgs *listArgs, GfxCmdBufCont
     const GfxBackEndData *data; // [esp+68h] [ebp-54h]
     GfxCmdBufSourceState *commonSource; // [esp+6Ch] [ebp-50h]
     const srfTriangles_t *tris; // [esp+70h] [ebp-4Ch]
-    unsigned __int64 drawSurfSubKey; // [esp+74h] [ebp-48h]
+    uint64_t drawSurfSubKey; // [esp+74h] [ebp-48h]
     GfxDrawSurf drawSurfSubMask; // [esp+7Ch] [ebp-40h]
     MaterialTechniqueType baseTechType; // [esp+84h] [ebp-38h]
     uint32_t drawSurfIndex; // [esp+88h] [ebp-34h]
     const BModelSurface *bmodelSurf; // [esp+98h] [ebp-24h]
     const GfxDrawSurf *drawSurfList; // [esp+9Ch] [ebp-20h]
     GfxDrawPrimArgs args; // [esp+A0h] [ebp-1Ch] BYREF
-    unsigned __int64 drawSurfKey; // [esp+ACh] [ebp-10h]
+    uint64_t drawSurfKey; // [esp+ACh] [ebp-10h]
     uint32_t drawSurfCount; // [esp+B8h] [ebp-4h]
 
     PROF_SCOPED("TessBModel");

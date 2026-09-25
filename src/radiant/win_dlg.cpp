@@ -652,7 +652,7 @@ int DoColor( int index )
     int r = (int)( g_qeglobals.d_savedinfo.colors[index][0] * 255.0 );
     int g = (int)( g_qeglobals.d_savedinfo.colors[index][1] * 255.0 );
     int b = (int)( 255.0 * g_qeglobals.d_savedinfo.colors[index][2] );
-    COLORREF seed = ( (unsigned __int8)r ) | ( (unsigned __int8)g << 8 ) | ( (unsigned __int8)b << 16 );
+    COLORREF seed = ( (uint8_t)r ) | ( (uint8_t)g << 8 ) | ( (uint8_t)b << 16 );
 
     // First use: pull the editor's 16 custom swatches from the registry (CMyColorDialog ctor
     // gate on byte_739B0C).

@@ -9,13 +9,13 @@
 
 static DObj_s objBuf[DOBJ_HANDLE_MAX];
 static bool objAlloced[DOBJ_HANDLE_MAX];
-static __int16 clientObjMap[CLIENT_DOBJ_HANDLE_MAX];
-static __int16 serverObjMap[SERVER_DOBJ_HANDLE_MAX];
+static int16_t clientObjMap[CLIENT_DOBJ_HANDLE_MAX];
+static int16_t serverObjMap[SERVER_DOBJ_HANDLE_MAX];
 static int objFreeCount;
 static int com_lastDObjIndex;
 
 // LWSS: used in SP (KISAKTODO: could MP use this?)
-static __int16 clientObjMapBuffered[CLIENT_DOBJ_HANDLE_MAX];
+static int16_t clientObjMapBuffered[CLIENT_DOBJ_HANDLE_MAX];
 static uint8_t serverObjDirty[272];
 
 void __cdecl TRACK_dobj_management()
@@ -280,8 +280,8 @@ void __cdecl Com_InitDObj()
 #ifdef KISAK_SP
     Com_Memset(serverObjDirty, 0, 272);
 #endif
-    Com_Memset(clientObjMap, 0, ARRAY_COUNT(clientObjMap) * sizeof(__int16));
-    Com_Memset(serverObjMap, 0, ARRAY_COUNT(serverObjMap) * sizeof(__int16));
+    Com_Memset(clientObjMap, 0, ARRAY_COUNT(clientObjMap) * sizeof(int16_t));
+    Com_Memset(serverObjMap, 0, ARRAY_COUNT(serverObjMap) * sizeof(int16_t));
     com_lastDObjIndex = 1;
     g_bDObjInited = 1;
 }
@@ -317,7 +317,7 @@ void __cdecl Com_ShutdownDObj()
 DObj_s *Com_DObjCloneToBuffer(uint32_t entnum)
 {
     uint32_t v2; // r27
-    __int16 serverDobjIndex; // r11
+    int16_t serverDobjIndex; // r11
     uint32_t v4; // r26
     uint32_t FreeDObjIndex; // r30
 

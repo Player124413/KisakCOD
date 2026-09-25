@@ -254,7 +254,7 @@ void __cdecl Cmd_Give_f(gentity_s *ent)
     if (!v6)
         return;
     v8 = v6;
-    while (*(unsigned __int8 *)v8++)
+    while (*(uint8_t *)v8++)
         ;
     if (v8 - v6 == 1)
         return;
@@ -400,7 +400,7 @@ void __cdecl Cmd_Take_f(gentity_s *ent)
     if (!v6)
         return;
     v8 = v6;
-    while (*(unsigned __int8 *)v8++)
+    while (*(uint8_t *)v8++)
         ;
     if (v8 - v6 == 1)
         return;
@@ -765,18 +765,18 @@ void __cdecl Cmd_JumpToNode_f(gentity_s *ent)
             }
             v8 = Path_NodeCount();
             v4 = va(aPrint, v8);
-            v5 = (unsigned __int64)(875407347LL * ((char *)ent - (char *)g_entities)) >> 32;
+            v5 = (uint64_t)(875407347LL * ((char *)ent - (char *)g_entities)) >> 32;
         }
         else
         {
             v4 = aPrintGameUsage;
-            v5 = (unsigned __int64)(875407347LL * ((char *)ent - (char *)g_entities)) >> 32;
+            v5 = (uint64_t)(875407347LL * ((char *)ent - (char *)g_entities)) >> 32;
         }
     }
     else
     {
         v4 = "print \"GAME_CHEATSNOTENABLED\"";
-        v5 = (unsigned __int64)(875407347LL * ((char *)ent - (char *)g_entities)) >> 32;
+        v5 = (uint64_t)(875407347LL * ((char *)ent - (char *)g_entities)) >> 32;
     }
     SV_GameSendServerCommand((v5 >> 7) + ((unsigned int)v5 >> 31), v4);
 }

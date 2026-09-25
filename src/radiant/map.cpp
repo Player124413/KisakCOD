@@ -1541,11 +1541,11 @@ void Prefab_NextLevel( void *a1 )
     // Stale the version stamps so every brush/patch/entity re-displays in the sub-map.
     for ( selbrush_t *i = active_brushes.next; i != &active_brushes; i = i->next )
     {
-        i->version = (__int16)( i->def->version - 1 );
+        i->version = (int16_t)( i->def->version - 1 );
         // 0x4895ef also stamps the patch INSTANCE's cached version (patch_t+0x04) from the
         // patch DEF version (patchMesh_t.version @0x5040).
         if ( i->patch )
-            i->patch->version = (__int16)( i->patch->def->version - 1 );
+            i->patch->version = (int16_t)( i->patch->def->version - 1 );
     }
     for ( entity_s *j = entityInsts.next; j != &entityInsts; j = j->next )
     {

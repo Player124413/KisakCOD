@@ -46,7 +46,7 @@ void __cdecl DObjDumpInfo(const DObj_s *obj)
 {
     int j; // [esp+0h] [ebp-20h]
     int numBones; // [esp+4h] [ebp-1Ch]
-    const unsigned __int8 *pos; // [esp+8h] [ebp-18h]
+    const uint8_t *pos; // [esp+8h] [ebp-18h]
     int boneIndex; // [esp+Ch] [ebp-14h]
     int numModels; // [esp+10h] [ebp-10h]
     XModel *model; // [esp+14h] [ebp-Ch]
@@ -74,7 +74,7 @@ void __cdecl DObjDumpInfo(const DObj_s *obj)
         if (obj->duplicateParts)
         {
             Com_Printf(CON_CHANNEL_ANIM, "\nPart duplicates:\n");
-            for (pos = (const unsigned __int8 *)(SL_ConvertToString(obj->duplicateParts) + 16); *pos; pos += 2)
+            for (pos = (const uint8_t *)(SL_ConvertToString(obj->duplicateParts) + 16); *pos; pos += 2)
             {
                 Com_Printf(CON_CHANNEL_ANIM, "%d ('%s') -> %d ('%s')\n", *pos - 1, DObjGetBoneName(obj, *pos - 1), pos[1] - 1, DObjGetBoneName(obj, pos[1] - 1));
             }
@@ -99,17 +99,17 @@ bool __cdecl DObjIgnoreCollision(const DObj_s *obj, char modelIndex)
 void __cdecl DObjGetHierarchyBits(const DObj_s *obj, int boneIndex, int *partBits)
 {
     int j; // [esp+4Ch] [ebp-B8h]
-    const unsigned __int8 *pos; // [esp+50h] [ebp-B4h]
+    const uint8_t *pos; // [esp+50h] [ebp-B4h]
     int newBoneIndex; // [esp+54h] [ebp-B0h]
     int newBoneIndexa = 0; // [esp+54h] [ebp-B0h]
-    const unsigned __int8 *modelParents; // [esp+58h] [ebp-ACh]
-    const unsigned __int8 *duplicateParts; // [esp+5Ch] [ebp-A8h]
+    const uint8_t *modelParents; // [esp+58h] [ebp-ACh]
+    const uint8_t *duplicateParts; // [esp+5Ch] [ebp-A8h]
     uint32_t bit; // [esp+60h] [ebp-A4h]
     int numModels; // [esp+64h] [ebp-A0h]
     XModel *subModel; // [esp+68h] [ebp-9Ch]
     int startIndex[33]; // [esp+6Ch] [ebp-98h]
     int localBoneIndex; // [esp+F0h] [ebp-14h]
-    unsigned __int8 *parentList; // [esp+F4h] [ebp-10h]
+    uint8_t *parentList; // [esp+F4h] [ebp-10h]
     const int *duplicatePartBits; // [esp+F8h] [ebp-Ch]
     XModel **models; // [esp+FCh] [ebp-8h]
     int highBoneIndex; // [esp+100h] [ebp-4h]
@@ -126,11 +126,11 @@ void __cdecl DObjGetHierarchyBits(const DObj_s *obj, int boneIndex, int *partBit
     iassert(numModels > 0);
     iassert(obj->duplicateParts);
     duplicatePartBits = (const int *)SL_ConvertToString(obj->duplicateParts);
-    duplicateParts = (const unsigned __int8 *)(duplicatePartBits + 4);
+    duplicateParts = (const uint8_t *)(duplicatePartBits + 4);
     newBoneIndex = 0;
     subModel = 0;
     models = obj->models;
-    modelParents = (const unsigned __int8 *)&models[numModels];
+    modelParents = (const uint8_t *)&models[numModels];
     for (j = 0; j < numModels; ++j)
     {
         startIndex[j] = newBoneIndex;
@@ -200,7 +200,7 @@ void __cdecl DObjSetTree(DObj_s *obj, XAnimTree_s *tree)
     }
 }
 
-void __cdecl DObjCreate(DObjModel_s *dobjModels, uint32_t numModels, XAnimTree_s *tree, DObj_s *obj, __int16 entnum)
+void __cdecl DObjCreate(DObjModel_s *dobjModels, uint32_t numModels, XAnimTree_s *tree, DObj_s *obj, int16_t entnum)
 {
     PROF_SCOPED("DObjCreate");
 
@@ -209,7 +209,7 @@ void __cdecl DObjCreate(DObjModel_s *dobjModels, uint32_t numModels, XAnimTree_s
     iassert((unsigned)numModels <= DOBJ_MAX_SUBMODELS);
     iassert(obj);
 
-    memset((unsigned __int8 *)&obj->skel, 0, sizeof(obj->skel));
+    memset((uint8_t *)&obj->skel, 0, sizeof(obj->skel));
     obj->duplicatePartsSize = 0;
     obj->duplicateParts = 0;
     obj->ignoreCollision = 0;
@@ -227,10 +227,10 @@ void __cdecl DObjCreate(DObjModel_s *dobjModels, uint32_t numModels, XAnimTree_s
 void __cdecl DObjCreateDuplicateParts(DObj_s *obj, DObjModel_s *dobjModels, uint32_t numModels)
 {
     int numBones; // [esp+30h] [ebp-5ACh]
-    unsigned __int8 modelParents[32]; // [esp+34h] [ebp-5A8h] BYREF
+    uint8_t modelParents[32]; // [esp+34h] [ebp-5A8h] BYREF
     int boneIndex; // [esp+58h] [ebp-584h]
     DObjModel_s *dobjModel; // [esp+5Ch] [ebp-580h]
-    unsigned __int8 *duplicateParts; // [esp+60h] [ebp-57Ch]
+    uint8_t *duplicateParts; // [esp+60h] [ebp-57Ch]
     bool bRootMeld; // [esp+67h] [ebp-575h]
     int boneCount; // [esp+68h] [ebp-574h]
     XModel *model; // [esp+6Ch] [ebp-570h]
@@ -238,18 +238,18 @@ void __cdecl DObjCreateDuplicateParts(DObj_s *obj, DObjModel_s *dobjModels, uint
     uint32_t name; // [esp+74h] [ebp-568h]
     int len; // [esp+78h] [ebp-564h]
     uint32_t size; // [esp+7Ch] [ebp-560h]
-    unsigned __int8 parentIndex; // [esp+83h] [ebp-559h] BYREF
+    uint8_t parentIndex; // [esp+83h] [ebp-559h] BYREF
     int localBoneIndex; // [esp+84h] [ebp-558h]
     int index; // [esp+88h] [ebp-554h]
     int duplicatePartBits[273]; // [esp+8Ch] [ebp-550h] BYREF
     int matOffset[32]; // [esp+4D4h] [ebp-108h]
     XModel *models[32]; // [esp+554h] [ebp-88h] BYREF
     int modelIndex; // [esp+5D4h] [ebp-8h]
-    unsigned const __int16 *boneNames; // [esp+5D8h] [ebp-4h]
+    unsigned const int16_t *boneNames; // [esp+5D8h] [ebp-4h]
 
     PROF_SCOPED("DObjCreateDuplicateParts");
 
-    duplicateParts = (unsigned __int8 *)&duplicatePartBits[4];
+    duplicateParts = (uint8_t *)&duplicatePartBits[4];
     memset(duplicatePartBits, 0, 16);
     len = 0;
     boneCount = 0;
@@ -339,8 +339,8 @@ void __cdecl DObjCreateDuplicateParts(DObj_s *obj, DObjModel_s *dobjModels, uint
     obj->numBones = boneCount;
     iassert(numModels > 0);
     obj->models = (XModel **)MT_Alloc(5 * numModels, MT_TYPE_MODEL_LIST);
-    memcpy((unsigned __int8 *)obj->models, (unsigned __int8 *)models, 4 * numModels);
-    memcpy((unsigned __int8 *)&obj->models[numModels], modelParents, numModels);
+    memcpy((uint8_t *)obj->models, (uint8_t *)models, 4 * numModels);
+    memcpy((uint8_t *)&obj->models[numModels], modelParents, numModels);
     iassert(g_empty);
     iassert(!obj->duplicateParts);
 
@@ -438,7 +438,7 @@ void __cdecl DObjGetCreateParms(
     XAnimTree_s **tree,
     uint16_t *entnum)
 {
-    const unsigned __int8 *modelParents; // [esp+0h] [ebp-A8h]
+    const uint8_t *modelParents; // [esp+0h] [ebp-A8h]
     DObjModel_s *dobjModel; // [esp+4h] [ebp-A4h]
     int boneIndex; // [esp+8h] [ebp-A0h]
     XModel *model; // [esp+Ch] [ebp-9Ch]
@@ -447,7 +447,7 @@ void __cdecl DObjGetCreateParms(
     int matOffset[33]; // [esp+18h] [ebp-90h]
     XModel **models; // [esp+9Ch] [ebp-Ch]
     int modelIndex; // [esp+A0h] [ebp-8h]
-    unsigned const __int16 *boneNames; // [esp+A4h] [ebp-4h]
+    unsigned const int16_t *boneNames; // [esp+A4h] [ebp-4h]
 
     if (!obj)
         MyAssertHandler(".\\xanim\\dobj.cpp", 621, 0, "%s", "obj");
@@ -464,7 +464,7 @@ void __cdecl DObjGetCreateParms(
     *entnum = obj->entnum;
     startBoneIndex = 0;
     models = obj->models;
-    modelParents = (const unsigned __int8 *)&models[obj->numModels];
+    modelParents = (const uint8_t *)&models[obj->numModels];
     modelIndex = 0;
     dobjModel = dobjModels;
     while (modelIndex < obj->numModels)
@@ -552,7 +552,7 @@ void __cdecl DObjUnarchive(DObj_s *obj)
 
 void __cdecl DObjSkelClear(const DObj_s *obj)
 {
-    memset((unsigned __int8 *)&obj->skel, 0, sizeof(obj->skel));
+    memset((uint8_t *)&obj->skel, 0, sizeof(obj->skel));
 }
 
 void __cdecl DObjGetBounds(const DObj_s *obj, float *mins, float *maxs)
@@ -613,7 +613,7 @@ const char *__cdecl DObjGetBoneName(const DObj_s *obj, int boneIndex)
     XModel *model; // [esp+10h] [ebp-10h]
     int index; // [esp+14h] [ebp-Ch]
     XModel **models; // [esp+18h] [ebp-8h]
-    unsigned const __int16 *boneNames; // [esp+1Ch] [ebp-4h]
+    unsigned const int16_t *boneNames; // [esp+1Ch] [ebp-4h]
 
     iassert(obj);
 
@@ -641,7 +641,7 @@ char *__cdecl DObjGetModelParentBoneName(const DObj_s *obj, int modelIndex)
     iassert(obj);
     iassert(modelIndex < obj->numModels);
 
-    return (char*)DObjGetBoneName(obj, *((unsigned __int8 *)&obj->models[obj->numModels] + modelIndex));
+    return (char*)DObjGetBoneName(obj, *((uint8_t *)&obj->models[obj->numModels] + modelIndex));
 }
 
 XAnimTree_s *__cdecl DObjGetTree(const DObj_s *obj)
@@ -650,7 +650,7 @@ XAnimTree_s *__cdecl DObjGetTree(const DObj_s *obj)
     return obj->tree;
 }
 
-void __cdecl DObjTraceline(DObj_s *obj, float *start, float *end, unsigned __int8 *priorityMap, DObjTrace_s *trace)
+void __cdecl DObjTraceline(DObj_s *obj, float *start, float *end, uint8_t *priorityMap, DObjTrace_s *trace)
 {
     double v5; // st7
     float v8; // [esp+20h] [ebp-390h]
@@ -662,8 +662,8 @@ void __cdecl DObjTraceline(DObj_s *obj, float *start, float *end, unsigned __int
     float *normal; // [esp+18Ch] [ebp-224h]
     DObjAnimMat *boneMatrix; // [esp+1A4h] [ebp-20Ch]
     uint32_t j; // [esp+1A8h] [ebp-208h]
-    const unsigned __int8 *pos; // [esp+1ACh] [ebp-204h]
-    const unsigned __int8 *modelParents; // [esp+1B0h] [ebp-200h]
+    const uint8_t *pos; // [esp+1ACh] [ebp-204h]
+    const uint8_t *modelParents; // [esp+1B0h] [ebp-200h]
     float invL2; // [esp+1B4h] [ebp-1FCh]
     int t; // [esp+1B8h] [ebp-1F8h]
     bool bEndSolid; // [esp+1BFh] [ebp-1F1h]
@@ -691,7 +691,7 @@ void __cdecl DObjTraceline(DObj_s *obj, float *start, float *end, unsigned __int
     float *bounds; // [esp+33Ch] [ebp-74h]
     bool bStartSolid; // [esp+343h] [ebp-6Dh]
     uint32_t localBoneIndex; // [esp+344h] [ebp-6Ch]
-    unsigned __int8 parentIndex; // [esp+34Bh] [ebp-65h]
+    uint8_t parentIndex; // [esp+34Bh] [ebp-65h]
     float solidHitFrac; // [esp+34Ch] [ebp-64h]
     float dist2; // [esp+350h] [ebp-60h]
     DSkel *skel; // [esp+354h] [ebp-5Ch]
@@ -1104,7 +1104,7 @@ int __cdecl DObjSetLocalBoneIndex(DObj_s *obj, int *partBits, int boneIndex, con
     return 1;
 }
 
-int __cdecl DObjGetBoneIndex(const DObj_s *obj, uint32_t name, unsigned __int8 *index)
+int __cdecl DObjGetBoneIndex(const DObj_s *obj, uint32_t name, uint8_t *index)
 {
     int j; // [esp+0h] [ebp-18h]
     int ja; // [esp+0h] [ebp-18h]
@@ -1151,7 +1151,7 @@ int __cdecl DObjGetBoneIndex(const DObj_s *obj, uint32_t name, unsigned __int8 *
     return 0;
 }
 
-int __cdecl DObjGetModelBoneIndex(const DObj_s *obj, const char *modelName, uint32_t name, unsigned __int8 *index)
+int __cdecl DObjGetModelBoneIndex(const DObj_s *obj, const char *modelName, uint32_t name, uint8_t *index)
 {
     int j; // [esp+0h] [ebp-18h]
     int ja; // [esp+0h] [ebp-18h]
@@ -1198,7 +1198,7 @@ int __cdecl DObjGetModelBoneIndex(const DObj_s *obj, const char *modelName, uint
 }
 
 // LWSS: for ragdolls
-void __cdecl DObjGetBasePoseMatrix(const DObj_s *obj, unsigned __int8 boneIndex, DObjAnimMat *outMat)
+void __cdecl DObjGetBasePoseMatrix(const DObj_s *obj, uint8_t boneIndex, DObjAnimMat *outMat)
 {
     DObjAnimMat mat[128]; // [esp+8h] [ebp-1010h] BYREF
     int partBits[4]; // [esp+1008h] [ebp-10h] BYREF

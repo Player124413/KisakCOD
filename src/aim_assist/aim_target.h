@@ -8,7 +8,7 @@
 #include <client/client.h>
 
 void __cdecl TRACK_aim_target();
-const dvar_s *__cdecl AimTarget_RegisterDvars(int a1, unsigned __int16 a2, const char *a3);
+const dvar_s *__cdecl AimTarget_RegisterDvars(int a1, uint16_t a2, const char *a3);
 void __cdecl AimTarget_Init();
 void __cdecl AimTarget_ClearTargetList();
 int __cdecl AimTarget_CompareTargets(const AimTarget *targetA, const AimTarget *targetB);

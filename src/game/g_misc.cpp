@@ -153,7 +153,7 @@ gentity_s *__cdecl G_SpawnSoundBlend()
     return result;
 }
 
-void __cdecl G_SetSoundBlend(gentity_s *ent, unsigned __int16 alias0, unsigned __int16 alias1, double lerp)
+void __cdecl G_SetSoundBlend(gentity_s *ent, uint16_t alias0, uint16_t alias1, double lerp)
 {
     iassert(ent->r.inuse);
     iassert(ent->s.eType == ET_SOUND_BLEND);

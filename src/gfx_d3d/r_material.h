@@ -10,7 +10,7 @@
 
 #define MTL_LAYER_LIMIT 5
 
-enum MaterialTechniqueType : __int32
+enum MaterialTechniqueType : int32_t
 {                                       // ...
     TECHNIQUE_DEPTH_PREPASS = 0x0,
     TECHNIQUE_BUILD_FLOAT_Z = 0x1,
@@ -62,7 +62,7 @@ inline MaterialTechniqueType &operator++(MaterialTechniqueType &e, int i)
     return e;
 }
 
-enum $74254F2FBB58A9D84A85080F50CF363D : __int32
+enum $74254F2FBB58A9D84A85080F50CF363D : int32_t
 {
     MTL_ARG_MATERIAL_VERTEX_CONST = 0x0,
     MTL_ARG_LITERAL_VERTEX_CONST = 0x1,
@@ -109,7 +109,7 @@ enum MaterialTextureSource : uint32_t
     TEXTURE_SRC_CODE_COUNT = 0x1B,
 };
 
-enum surfaceType_t : __int32
+enum surfaceType_t : int32_t
 {                                       // ...
     SF_TRIANGLES = 0x0,
     SF_TRIANGLES_PRETESS = 0x1,
@@ -134,7 +134,7 @@ enum surfaceType_t : __int32
     SF_FORCE_32_BITS = -0x1,
 };
 
-enum ShaderParamType : __int32
+enum ShaderParamType : int32_t
 {                                       // ...
     SHADER_PARAM_FLOAT4 = 0x0,
     SHADER_PARAM_SAMPLER_2D = 0x1,
@@ -142,20 +142,20 @@ enum ShaderParamType : __int32
     SHADER_PARAM_SAMPLER_CUBE = 0x3,
 };
 
-enum MaterialShaderType : __int32
+enum MaterialShaderType : int32_t
 {                                       // ...
     MTL_VERTEX_SHADER = 0x0,
     MTL_PIXEL_SHADER = 0x1,
 };
 
-enum MtlParseSuccess : __int32
+enum MtlParseSuccess : int32_t
 {                                       // ...
     MTL_PARSE_SUCCESS = 0x0,
     MTL_PARSE_NO_MATCH = 0x1,
     MTL_PARSE_ERROR = 0x2,
 };
 
-enum MaterialWorldVertexFormat : __int32
+enum MaterialWorldVertexFormat : int32_t
 {                                       // ...
     MTL_WORLDVERT_TEX_1_NRM_1 = 0x0,    // ...
     MTL_WORLDVERT_TEX_2_NRM_1 = 0x1,    // ...
@@ -171,7 +171,7 @@ enum MaterialWorldVertexFormat : __int32
     MTL_WORLDVERT_TEX_5_NRM_3 = 0xB,
 };
 
-enum MaterialUpdateFrequency : __int32
+enum MaterialUpdateFrequency : int32_t
 {                                       // ...
     MTL_UPDATE_PER_PRIM = 0x0,
     MTL_UPDATE_PER_OBJECT = 0x1,        // ...
@@ -573,7 +573,7 @@ struct stream_dest_info_t // sizeof=0x2
     uint8_t UsageIndex;
 };
 
-enum MtlTechSetNotFoundBehavior : __int32
+enum MtlTechSetNotFoundBehavior : int32_t
 {                                       // ...
     MTL_TECHSET_NOT_FOUND_RETURN_NULL = 0x0,
     MTL_TECHSET_NOT_FOUND_RETURN_DEFAULT = 0x1,

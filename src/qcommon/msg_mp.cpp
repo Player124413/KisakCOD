@@ -292,7 +292,7 @@ void __cdecl MSG_WriteData(msg_t *buf, uint8_t *data, uint32_t length)
     }
 }
 
-void __cdecl MSG_WriteShort(msg_t *msg, __int16 c)
+void __cdecl MSG_WriteShort(msg_t *msg, int16_t c)
 {
     int newsize; // [esp+0h] [ebp-4h]
 
@@ -411,7 +411,7 @@ int __cdecl MSG_ReadShort(msg_t *msg)
     int i; // [esp+4h] [ebp-10h]
     int c; // [esp+8h] [ebp-Ch]
     int newcount; // [esp+Ch] [ebp-8h]
-    __int16 read[2]; // [esp+10h] [ebp-4h]
+    int16_t read[2]; // [esp+10h] [ebp-4h]
 
     newcount = msg->readcount + 2;
     if (newcount > msg->splitSize + msg->cursize)
@@ -625,7 +625,7 @@ int __cdecl MSG_ReadDeltaKeyByte(msg_t *msg, uint8_t key, int oldV)
         return oldV;
 }
 
-void __cdecl MSG_WriteDeltaKeyShort(msg_t *msg, __int16 key, __int16 oldV, __int16 newV)
+void __cdecl MSG_WriteDeltaKeyShort(msg_t *msg, int16_t key, int16_t oldV, int16_t newV)
 {
     iassert( !msg->readOnly );
     if (oldV == newV)
@@ -639,7 +639,7 @@ void __cdecl MSG_WriteDeltaKeyShort(msg_t *msg, __int16 key, __int16 oldV, __int
     }
 }
 
-int __cdecl MSG_ReadDeltaKeyShort(msg_t *msg, __int16 key, int oldV)
+int __cdecl MSG_ReadDeltaKeyShort(msg_t *msg, int16_t key, int oldV)
 {
     if (MSG_ReadBit(msg))
         return key ^ (uint16_t)MSG_ReadShort(msg);
@@ -1080,7 +1080,7 @@ void __cdecl MSG_ReadDeltaField(
             *toF = 0;
             iassert( *reinterpret_cast< float * >( toF ) == 0.0f );
         }
-        if ((uint32_t)(__int64)(*(float *)toF + 2048.0) >= 0x1000)
+        if ((uint32_t)(int64_t)(*(float *)toF + 2048.0) >= 0x1000)
             MyAssertHandler(
                 ".\\qcommon\\msg_mp.cpp",
                 1476,

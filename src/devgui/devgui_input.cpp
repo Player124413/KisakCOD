@@ -223,7 +223,7 @@ void __cdecl DevGui_MouseEvent(int32_t dx, int32_t dy)
     s_input.mousePos[1] = (float)dy;
 }
 
-__int16 __cdecl DevGui_GetMenuScroll(DevGuiInputAxis axis)
+int16_t __cdecl DevGui_GetMenuScroll(DevGuiInputAxis axis)
 {
     return s_input.menuScroll[axis];
 }

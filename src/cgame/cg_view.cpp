@@ -171,7 +171,7 @@ void __cdecl CG_SmoothCameraZ(cg_s *cgameGlob)
     float *p_stepViewChange; // r28
     int *p_stepViewStart; // r31
     int *p_time; // r30
-    __int64 v5; // r11 OVERLAPPED
+    int64_t v5; // r11 OVERLAPPED
     int v6; // r9 OVERLAPPED
     double v7; // fp0
 
@@ -758,7 +758,7 @@ void __cdecl CG_CalcVehicleViewValues(int localClientNum)
     double v5; // fp31
     double v6; // fp11
     double v7; // fp0
-    __int64 v8; // r10
+    int64_t v8; // r10
     double v9; // fp30
     double v10; // fp31
     float *v11; // r5
@@ -772,7 +772,7 @@ void __cdecl CG_CalcVehicleViewValues(int localClientNum)
     float v19[4]; // [sp+A0h] [-1B0h] BYREF
     float identQuat[4]; // [sp+B0h] [-1A0h] BYREF
     float deltaQuat[4]; // [sp+C0h] [-190h] BYREF
-    __int64 v22; // [sp+D0h] [-180h]
+    int64_t v22; // [sp+D0h] [-180h]
     float v23[9]; // [sp+E0h] [-170h] BYREF
     float v24[3]; // [sp+104h] [-14Ch] BYREF
     float v25[4][3]; // [sp+110h] [-140h] BYREF
@@ -947,9 +947,9 @@ void CalcTurretViewValues(int localClientNum)
             if (cgArray[0].predictedPlayerState.viewlocked == PLAYERVIEWLOCK_WEAPONJITTER && !cg_paused->current.integer)
             {
                 weapDef = BG_GetWeaponDef(Entity->nextState.weapon);
-                cgArray[0].refdefViewAngles[0] = (float)(crandom() * weapDef->vertViewJitter) + cgArray[0].refdefViewAngles[0];
+                cgArray[0].refdefViewAngles[0] = (float)(Com_Crandom() * weapDef->vertViewJitter) + cgArray[0].refdefViewAngles[0];
                 v6 = BG_GetWeaponDef(Entity->nextState.weapon);
-                cgArray[0].refdefViewAngles[1] = (float)(crandom() * v6->horizViewJitter) + cgArray[0].refdefViewAngles[1];
+                cgArray[0].refdefViewAngles[1] = (float)(Com_Crandom() * v6->horizViewJitter) + cgArray[0].refdefViewAngles[1];
             }
         }
     }
@@ -1421,7 +1421,7 @@ void __cdecl CG_CalcViewValues(int localClientNum)
     double v7; // fp9
     double v8; // fp10
     int pm_type; // r11
-    __int64 v10; // r11
+    int64_t v10; // r11
     double v11; // fp0
 
     cg_s *cgameGlob = CG_GetLocalClientGlobals(localClientNum);

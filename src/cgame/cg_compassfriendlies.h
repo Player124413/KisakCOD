@@ -5,9 +5,9 @@
 #error This file is for SinglePlayer only
 #endif
 
-enum CompassType : __int32;
+enum CompassType : int32_t;
 
-struct __declspec(align(4)) CompassActor
+struct __attribute__((aligned(4))) CompassActor
 {
     int lastUpdate;
     float lastPos[2];
@@ -46,4 +46,4 @@ void __cdecl CG_CompassDrawVehicles(
     const rectDef_s *rect,
     Material *material,
     float *color,
-    unsigned __int8 vehicleCompassType);
+    uint8_t vehicleCompassType);

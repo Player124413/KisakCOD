@@ -9,7 +9,7 @@
 
 #include <client_mp/client_mp.h>
 
-enum //$C3A80A4928DD55B480B15DEB8BFE1B34 : __int32
+enum //$C3A80A4928DD55B480B15DEB8BFE1B34 : int32_t
 {
     CS_FREE          = 0x0,
     CS_ZOMBIE        = 0x1,
@@ -18,7 +18,7 @@ enum //$C3A80A4928DD55B480B15DEB8BFE1B34 : __int32
     CS_ACTIVE        = 0x4,
 };
 
-enum svscmd_type : __int32
+enum svscmd_type : int32_t
 {                                       // ...
     SV_CMD_CAN_IGNORE = 0x0,
     SV_CMD_RELIABLE = 0x1,
@@ -768,7 +768,7 @@ struct tempBanSlot_t // sizeof=0x24
     char cdkeyHash[32];                 // ...
     int banTime;                        // ...
 };
-struct __declspec(align(128)) serverStatic_t // sizeof=0xB227480
+struct __attribute__((aligned(128))) serverStatic_t // sizeof=0xB227480
 {                                       // ...
     cachedSnapshot_t cachedSnapshotFrames[512];
     archivedEntity_s cachedSnapshotEntities[16384]; // ...
@@ -800,7 +800,7 @@ struct __declspec(align(128)) serverStatic_t // sizeof=0xB227480
     tempBanSlot_t tempBans[16];         // ...
     float mapCenter[3];                 // ...
 };
-enum serverState_t : __int32
+enum serverState_t : int32_t
 {                                       // ...
     SS_DEAD = 0x0,
     SS_LOADING = 0x1,
@@ -1113,7 +1113,7 @@ void __cdecl SV_VoicePacket(netadr_t from, msg_t *msg);
 
 
 // sv_snapshot_profile_mp
-enum packetModeList : __int32
+enum packetModeList : int32_t
 {                                       // ...
     PACKETDATA_FIRST = 0x0,
     PACKETDATA_UNDEFINED = 0x0,
@@ -1138,7 +1138,7 @@ enum packetModeList : __int32
     PACKETDATA_ORIGIN = 0x13,
     NUM_PACKETDATA_MODES = 0x14,
 };
-enum PacketDataType : __int32
+enum PacketDataType : int32_t
 {                                       // ...
     ANALYZE_SNAPSHOT_DELTAENTITY = 0x0,
     ANALYZE_SNAPSHOT_NEWENTITY = 0x1,

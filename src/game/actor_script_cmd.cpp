@@ -27,7 +27,7 @@
 #include "turret.h"
 #include "g_public.h"
 
-enum DEBUGMAYMOVE_LIFT_ENUM : __int32
+enum DEBUGMAYMOVE_LIFT_ENUM : int32_t
 {
     DEBUGMAYMOVE_NOT_LIFTED = 0x0,
     DEBUGMAYMOVE_LIFTED = 0x1,
@@ -36,7 +36,7 @@ enum DEBUGMAYMOVE_LIFT_ENUM : __int32
 actor_s *__cdecl Actor_Get(scr_entref_t entref)
 {
     actor_s *result; // r3
-    unsigned __int16 v2; // [sp+74h] [+14h]
+    uint16_t v2; // [sp+74h] [+14h]
 
     v2 = entref.entnum;
     if (entref.classnum)
@@ -266,12 +266,12 @@ void __cdecl ActorCmd_UseCoverNode(scr_entref_t entref)
 {
     actor_s *v1; // r31
     pathnode_t *Pathnode; // r3
-    unsigned __int8 v3; // r3
+    uint8_t v3; // r3
 
     v1 = Actor_Get(entref);
     if (v1->fixedNode)
         Scr_Error("cannot change node when using fixedNode mode");
-    if ((unsigned __int8)Actor_KeepClaimedNode(v1))
+    if ((uint8_t)Actor_KeepClaimedNode(v1))
         Scr_Error("cannot change node when keepclaimednode is set");
     Pathnode = Scr_GetPathnode(0);
     v3 = Actor_Cover_UseCoverNode(v1, Pathnode);
@@ -282,7 +282,7 @@ void __cdecl ActorCmd_ReacquireStep(scr_entref_t entref)
 {
     actor_s *v1; // r31
     double Float; // fp1
-    unsigned __int8 v3; // r3
+    uint8_t v3; // r3
 
     v1 = Actor_Get(entref);
     Float = Scr_GetFloat(0);
@@ -313,10 +313,10 @@ void __cdecl ActorCmd_UseReacquireNode(scr_entref_t entref)
 {
     actor_s *v1; // r31
     pathnode_t *Pathnode; // r3
-    unsigned __int8 v3; // r3
+    uint8_t v3; // r3
 
     v1 = Actor_Get(entref);
-    if ((unsigned __int8)Actor_KeepClaimedNode(v1))
+    if ((uint8_t)Actor_KeepClaimedNode(v1))
         Scr_Error("cannot change node when keepclaimednode is set");
     Pathnode = Scr_GetPathnode(0);
     v3 = Actor_Exposed_UseReacquireNode(v1, Pathnode);
@@ -353,7 +353,7 @@ void __cdecl ActorCmd_TrimPathToAttack(scr_entref_t entref)
     int v2; // r3
 
     v1 = Actor_Get(entref);
-    if (!(unsigned __int8)Actor_MayReacquireMove(v1))
+    if (!(uint8_t)Actor_MayReacquireMove(v1))
         Scr_Error("TrimPathToAttack may only called after calling FindReacquireDirectPath or FindReacquireProximatePath");
     v2 = Actor_TrimPathToAttack(v1);
     Scr_AddBool(v2);
@@ -362,10 +362,10 @@ void __cdecl ActorCmd_TrimPathToAttack(scr_entref_t entref)
 void __cdecl ActorCmd_ReacquireMove(scr_entref_t entref)
 {
     actor_s *v1; // r31
-    unsigned __int8 started; // r3
+    uint8_t started; // r3
 
     v1 = Actor_Get(entref);
-    if (!(unsigned __int8)Actor_MayReacquireMove(v1))
+    if (!(uint8_t)Actor_MayReacquireMove(v1))
         Scr_Error("ReacquireMove may only called after calling FindReacquireDirectPath or FindReacquireProximatePath");
     started = Actor_Exposed_StartReacquireMove(v1);
     Scr_AddBool(started);
@@ -1132,7 +1132,7 @@ void __cdecl ActorCmd_WithinApproxPathDist(scr_entref_t entref)
 {
     actor_s *v1; // r31
     double Float; // fp1
-    __int64 v3; // r11
+    int64_t v3; // r11
 
     v1 = Actor_Get(entref);
     Float = Scr_GetFloat(0);
@@ -1492,7 +1492,7 @@ void __cdecl ActorCmd_ThrowGrenade(scr_entref_t entref)
 bool __cdecl Actor_CheckGrenadeLaunch(actor_s *self, const float *vStartPos, const float *vOffset)
 {
     const char *v6; // r3
-    __int64 v7; // r11
+    int64_t v7; // r11
     float *v8; // r7
     double speed; // fp31
     const char *v10; // r3
@@ -1857,7 +1857,7 @@ void __cdecl ActorCmd_GetAnglesToLikelyEnemyPath(scr_entref_t entref)
     actor_s *v1; // r31
 
     v1 = Actor_Get(entref);
-    if ((unsigned __int8)Actor_GetAnglesToLikelyEnemyPath(v1))
+    if ((uint8_t)Actor_GetAnglesToLikelyEnemyPath(v1))
         Scr_AddVector(v1->anglesToLikelyEnemyPath);
 }
 
@@ -2101,7 +2101,7 @@ void __cdecl ActorCmd_PredictAnim(scr_entref_t entref)
 
 void __cdecl Actor_GetEntType(int entnum)
 {
-    unsigned __int16 obstacle; // r11
+    uint16_t obstacle; // r11
 
     if (entnum == ENTITYNUM_NONE)
     {
@@ -2120,7 +2120,7 @@ void __cdecl Actor_GetEntType(int entnum)
 void __cdecl ActorCmd_GetHitEntType(scr_entref_t entref)
 {
     int iHitEntnum; // r11
-    unsigned __int16 obstacle; // r11
+    uint16_t obstacle; // r11
 
     iHitEntnum = Actor_Get(entref)->Physics.iHitEntnum;
     if (iHitEntnum == ENTITYNUM_NONE)
@@ -2156,7 +2156,7 @@ void __cdecl ActorCmd_GetHitYaw(scr_entref_t entref)
 void __cdecl ActorCmd_GetGroundEntType(scr_entref_t entref)
 {
     int groundEntNum; // r11
-    unsigned __int16 obstacle; // r11
+    uint16_t obstacle; // r11
 
     groundEntNum = Actor_Get(entref)->Physics.groundEntNum;
     if (groundEntNum == ENTITYNUM_NONE)
@@ -2471,7 +2471,7 @@ void __cdecl ActorCmd_ClearFixedNodeSafeVolume(scr_entref_t entref)
 void __cdecl ActorCmd_IsInGoal(scr_entref_t entref)
 {
     actor_s *v1; // r31
-    unsigned __int8 v2; // r3
+    uint8_t v2; // r3
     float v3[4]; // [sp+50h] [-20h] BYREF
 
     v1 = Actor_Get(entref);
@@ -2783,7 +2783,7 @@ void(__cdecl *__cdecl Actor_GetMethod(const char **pName))(scr_entref_t)
         v5 = *pName;
         do
         {
-            v6 = (unsigned __int8)*v5 - *(unsigned __int8 *)actionString;
+            v6 = (uint8_t)*v5 - *(uint8_t *)actionString;
             if (!*v5)
                 break;
             ++v5;

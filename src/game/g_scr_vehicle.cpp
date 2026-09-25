@@ -2710,7 +2710,7 @@ forwardDone:
     if (fireTagName)
     {
         iassert(ent->s.weapon < 0xFFFF);
-        G_AddEvent(ent, event, ((unsigned int)ent->s.weapon << 16) | (unsigned __int16)fireTagName);
+        G_AddEvent(ent, event, ((unsigned int)ent->s.weapon << 16) | (uint16_t)fireTagName);
     }
     else
     {
@@ -4125,7 +4125,7 @@ void G_SpawnVehicle(gentity_s *ent, const char *typeName, int load)
     G_UpdateVehicleTags(ent);
 }
 
-const char* G_GetVehicleInfoName(__int16 index)
+const char* G_GetVehicleInfoName(int16_t index)
 {
     iassert(index >= 0);
     iassert(index < s_numVehicleInfos);
@@ -4241,7 +4241,7 @@ void G_InitScrVehicles()
 {
     int i; // r31
 
-    for (i = 0; i < 64; i = (__int16)(i + 1))
+    for (i = 0; i < 64; i = (int16_t)(i + 1))
     {
         G_VehInitPathPos(&s_vehicles[i].pathPos);
         s_vehicles[i].entNum = ENTITYNUM_NONE;
@@ -4255,7 +4255,7 @@ void G_SetupScrVehicles()
     int entNum; // r3
     gentity_s *Vehicle; // r3
 
-    for (i = 0; i < 64; i = (__int16)(i + 1))
+    for (i = 0; i < 64; i = (int16_t)(i + 1))
     {
         entNum = s_vehicles[i].entNum;
         if (entNum != ENTITYNUM_NONE)
@@ -4270,7 +4270,7 @@ void G_FreeScrVehicles()
 {
     int i; // r31
 
-    for (i = 0; i < 64; i = (__int16)(i + 1))
+    for (i = 0; i < 64; i = (int16_t)(i + 1))
         G_VehFreePathPos(&s_vehicles[i].pathPos);
 }
 
@@ -4367,7 +4367,7 @@ void CMD_VEH_AttachPath(scr_entref_t entref)
     gentity_s *Vehicle; // r28
     scr_vehicle_s *scr_vehicle; // r30
     vehicle_info_t *v4; // r26
-    __int16 VehicleNodeIndex; // r3
+    int16_t VehicleNodeIndex; // r3
 
     if (entref.classnum)
     {
@@ -4413,7 +4413,7 @@ void CMD_VEH_GetAttachPos(scr_entref_t entref)
     uint32_t v2; // r4
     scr_vehicle_s *scr_vehicle; // r31
     vehicle_info_t *v4; // r29
-    __int16 VehicleNodeIndex; // r3
+    int16_t VehicleNodeIndex; // r3
     vehicle_physic_t v6; // [sp+50h] [-1E0h] BYREF
     vehicle_pathpos_t v7; // [sp+150h] [-E0h] BYREF
 
@@ -4476,8 +4476,8 @@ void CMD_VEH_SetSwitchNode(scr_entref_t entref)
 {
     gentity_s *Vehicle; // r11
     vehicle_pathpos_t *p_pathPos; // r31
-    __int16 VehicleNodeIndex; // r30
-    __int16 v6; // r3
+    int16_t VehicleNodeIndex; // r30
+    int16_t v6; // r3
 
     if (entref.classnum)
     {
@@ -5663,20 +5663,20 @@ static void VEH_LinkPlayer(gentity_s *ent, gentity_s *player)
     gclient_s *client; // r31
     scr_vehicle_s *scr_vehicle; // r28
     vehicle_info_t *VehicleInfo; // r25
-    __int64 v7; // r10
-    __int64 v8; // r8
-    __int64 v9; // r6
-    __int64 v10; // r10
-    __int64 v11; // r8
-    __int64 vec; // r6
-    __int64 v13; // r10
-    __int64 v14; // r8
-    __int64 v15; // r6
+    int64_t v7; // r10
+    int64_t v8; // r8
+    int64_t v9; // r6
+    int64_t v10; // r10
+    int64_t v11; // r8
+    int64_t vec; // r6
+    int64_t v13; // r10
+    int64_t v14; // r8
+    int64_t v15; // r6
     int barrel; // r4
-    __int64 v18; // r10
-    __int64 v19; // r8
-    __int64 v20; // r6
-    __int16 type; // r10
+    int64_t v18; // r10
+    int64_t v19; // r8
+    int64_t v20; // r6
+    int16_t type; // r10
 
     float angles[3];           // was v28[4] — only angles[0..2] are used
     float playerMtx[4][3];     // was v29[3][3] + v30[3]
@@ -5741,9 +5741,9 @@ static void VEH_LinkPlayer(gentity_s *ent, gentity_s *player)
 static void VEH_UnlinkPlayer(gentity_s *player)
 {
     gclient_s *client; // r29
-    __int64 v7; // r10
-    __int64 v8; // r8
-    __int64 v9; // r6
+    int64_t v7; // r10
+    int64_t v8; // r8
+    int64_t v9; // r6
     gentity_s *v10; // r31
     scr_vehicle_s *scr_vehicle; // r30
     int detach; // r4

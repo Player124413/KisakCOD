@@ -319,7 +319,7 @@ uint32_t __cdecl FakeLag_SendPacket(netsrc_t sock, int length, uint8_t *data, ne
 {
     static int lastCall;
 
-    __int64 v4; // rax
+    int64_t v4; // rax
     const char *v6; // [esp+Ch] [ebp-28h]
     const char *v7; // [esp+10h] [ebp-24h]
     int v8; // [esp+14h] [ebp-20h]
@@ -399,7 +399,7 @@ uint32_t __cdecl FakeLag_QueueIncomingPacket(bool loopback, netsrc_t sock, netad
 {
     static int lastCall_0;
 
-    __int64 v4; // rax
+    int64_t v4; // rax
     const char *v6; // [esp+14h] [ebp-24h]
     const char *v7; // [esp+18h] [ebp-20h]
     int v8; // [esp+1Ch] [ebp-1Ch]
@@ -638,7 +638,7 @@ void __cdecl Net_SetQPort_f()
     if (Cmd_Argc() < 1)
         Com_PrintError(CON_CHANNEL_SYSTEM, "setqport usage: setqport <qport>\n");
     v0 = Cmd_Argv(1);
-    g_qport = (__int16)atoi(v0);
+    g_qport = (int16_t)atoi(v0);
 }
 
 void __cdecl Net_GetQPort_f()
@@ -651,7 +651,7 @@ cmd_function_s MSG_DumpNetFieldChanges_f_VAR;
 cmd_function_s Net_GetQPort_f_VAR;
 cmd_function_s Net_SetQPort_f_VAR;
 
-void __cdecl Netchan_Init(__int16 port)
+void __cdecl Netchan_Init(int16_t port)
 {
     DvarLimits min; // [esp+4h] [ebp-10h]
 
@@ -1259,7 +1259,7 @@ bool __cdecl NET_OutOfBandVoiceData(netsrc_t sock, netadr_t adr, uint8_t *format
 int __cdecl NET_StringToAdr(char *s, netadr_t *a)
 {
     char *v3; // eax
-    __int16 v4; // ax
+    int16_t v4; // ax
     uint16_t v5; // ax
     char base[1024]; // [esp+18h] [ebp-408h] BYREF
     char *port; // [esp+41Ch] [ebp-4h]

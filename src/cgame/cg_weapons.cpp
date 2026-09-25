@@ -2795,7 +2795,7 @@ void __cdecl FireBulletPenetrate(
     float v11; // [esp+20h] [ebp-1DCh]
     double value; // [esp+24h] [ebp-1D8h]
     float v13; // [esp+2Ch] [ebp-1D0h]
-    __int16 v15; // [esp+34h] [ebp-1C8h]
+    int16_t v15; // [esp+34h] [ebp-1C8h]
     int32_t v16; // [esp+38h] [ebp-1C4h]
     uint32_t v17; // [esp+3Ch] [ebp-1C0h]
     uint32_t v18; // [esp+40h] [ebp-1BCh]
@@ -3463,7 +3463,7 @@ void __cdecl CG_RandomEffectAxis(const float *forward, float *left, float *up)
     dot = Vec3Dot(point, forward);
     scale = -dot;
     Vec3Mad(point, scale, forward, point);
-    degrees = random() * 360.0;
+    degrees = Com_Random() * 360.0;
     RotatePointAroundVector(left, forward, point, degrees);
     Vec3Normalize(left);
     Vec3Cross(forward, left, up);
@@ -3580,7 +3580,7 @@ void __cdecl CG_BulletHitEvent(
     int32_t event,
     uint8_t eventParam,
     int32_t damage,
-    __int16 hitContents)
+    int16_t hitContents)
 {
 #ifdef KISAK_MP
     char hasMuzzlePoint; // [esp+3h] [ebp-29h]
@@ -3700,7 +3700,7 @@ void __cdecl CG_BulletHitEvent_Internal(
     int32_t event,
     uint8_t eventParam,
     int32_t damage,
-    __int16 hitContents)
+    int16_t hitContents)
 {
     snapshot_s *nextSnap; // [esp+4h] [ebp-3Ch]
     snd_alias_list_t *hitSound; // [esp+Ch] [ebp-34h] BYREF

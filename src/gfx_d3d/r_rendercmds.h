@@ -8,9 +8,9 @@
 #include "r_material.h"
 #include <qcommon/com_pack.h>
 
-enum CodeConstant : __int32; // r_state.h
+enum CodeConstant : int32_t; // r_state.h
 
-enum GfxRenderCommand : __int32
+enum GfxRenderCommand : int32_t
 {                                       // ...
     RC_END_OF_LIST = 0x0,
     RC_SET_MATERIAL_COLOR = 0x1,
@@ -61,7 +61,7 @@ enum GfxRenderCommand : __int32
     RC_COUNT = 0x16,
 #endif
 };
-enum GfxRenderTargetId : __int32
+enum GfxRenderTargetId : int32_t
 {                                       // ...
     R_RENDERTARGET_SAVED_SCREEN = 0x0,
     R_RENDERTARGET_FRAME_BUFFER = 0x1,
@@ -83,14 +83,14 @@ enum GfxRenderTargetId : __int32
 };
 
 
-enum ShadowType : __int32
+enum ShadowType : int32_t
 {                                       // ...
     SHADOW_NONE = 0x0,
     SHADOW_COOKIE = 0x1,
     SHADOW_MAP = 0x2,
 };
 
-enum GfxStencilOp : __int32
+enum GfxStencilOp : int32_t
 {
     GFXS_STENCILOP_KEEP = 0x0,
     GFXS_STENCILOP_ZERO = 0x1,
@@ -103,7 +103,7 @@ enum GfxStencilOp : __int32
     GFXS_STENCILOP_COUNT = 0x8,
 };
 
-enum GfxStencilFunc : __int32
+enum GfxStencilFunc : int32_t
 {
     GFXS_STENCILFUNC_NEVER = 0x0,
     GFXS_STENCILFUNC_LESS = 0x1,
@@ -116,13 +116,13 @@ enum GfxStencilFunc : __int32
     GFXS_STENCILFUNC_COUNT = 0x8,
 };
 
-enum GfxProjectionTypes : __int32
+enum GfxProjectionTypes : int32_t
 {                                       // ...
     GFX_PROJECTION_2D = 0x0,
     GFX_PROJECTION_3D = 0x1,
 };
 
-enum FullscreenType : __int32
+enum FullscreenType : int32_t
 {                                       // ...
     FULLSCREEN_DISPLAY = 0x0,
     FULLSCREEN_MIXED = 0x1,
@@ -313,7 +313,7 @@ struct PointLightPartition // sizeof=0x68
     GfxLight light;
     GfxDrawSurfListInfo info;
 };
-struct __declspec(align(16)) ShadowCookie // sizeof=0xC0
+struct __attribute__((aligned(16))) ShadowCookie // sizeof=0xC0
 {                                       // ...
     GfxMatrix shadowLookupMatrix;
     float boxMin[3];
@@ -336,7 +336,7 @@ struct __declspec(align(16)) ShadowCookie // sizeof=0xC0
     // padding byte
     // padding byte
 };
-struct __declspec(align(16)) ShadowCookieList // sizeof=0x1210
+struct __attribute__((aligned(16))) ShadowCookieList // sizeof=0x1210
 {                                       // ...
     ShadowCookie cookies[24];
     uint32_t cookieCount;
@@ -373,7 +373,7 @@ struct GfxSunShadowBoundingPoly // sizeof=0x78
     float points[9][2];
     int pointIsNear[9];
 };
-struct __declspec(align(16)) GfxSunShadowPartition // sizeof=0x200
+struct __attribute__((aligned(16))) GfxSunShadowPartition // sizeof=0x200
 {                                       // ...
     GfxViewParms shadowViewParms;
     int partitionIndex;
@@ -399,7 +399,7 @@ struct GfxSunShadow // sizeof=0x4A0
     GfxSunShadowProjection sunProj;
     GfxSunShadowPartition partition[2]; // 0 = partitionNear, 1 = partitionFar
 };
-struct __declspec(align(16)) GfxSpotShadow // sizeof=0x1F0
+struct __attribute__((aligned(16))) GfxSpotShadow // sizeof=0x1F0
 {                                       // ...
     GfxViewParms shadowViewParms;
     GfxMatrix lookupMatrix;
@@ -430,7 +430,7 @@ struct __declspec(align(16)) GfxSpotShadow // sizeof=0x1F0
 
 struct GfxBackEndData;
 
-struct __declspec(align(8)) GfxCmdBufInput // sizeof=0x430
+struct __attribute__((aligned(8))) GfxCmdBufInput // sizeof=0x430
 {                                       // ...
     float consts[58][4];
     const GfxImage* codeImages[27];     // ...
@@ -443,7 +443,7 @@ struct __declspec(align(8)) GfxCmdBufInput // sizeof=0x430
     // padding byte
 };
 
-const struct GfxViewInfo // sizeof=0x67B0
+struct GfxViewInfo // sizeof=0x67B0
 {                                       // ...
     GfxViewParms viewParms;
     GfxSceneDef sceneDef;
@@ -511,7 +511,7 @@ const struct GfxViewInfo // sizeof=0x67B0
     // padding byte
     GfxCmdBufInput input;
 };
-const struct __declspec(align(16)) GfxBackEndData // sizeof=0x11E780
+struct __attribute__((aligned(16))) GfxBackEndData // sizeof=0x11E780
 {                                       // ...
     uint8_t surfsBuffer[0x20000];
     FxCodeMeshData codeMeshes[2048];

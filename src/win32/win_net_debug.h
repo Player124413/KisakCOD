@@ -17,7 +17,7 @@ void Sys_DebugSocketError(const char *message);
 int __cdecl Sys_ReadDebugSocketInt();
 void __cdecl Sys_WriteDebugSocketInt(int value);
 void __cdecl Sys_WriteDebugSocketString(char *text);
-int __cdecl Sys_ReadDebugSocketMessageType(unsigned __int8 *type, int blocking);
+int __cdecl Sys_ReadDebugSocketMessageType(uint8_t *type, int blocking);
 int __cdecl Sys_UpdateDebugSocket();
 int __cdecl Sys_ReadDebugSocketData(char *buffer, int len, int blocking);
 void __cdecl Sys_ReadDebugSocketStringBuffer(char *buffer, int len);
@@ -25,8 +25,8 @@ void __cdecl Sys_FlushDebugSocketData();
 void __cdecl Sys_AckDebugSocket();
 char *__cdecl Sys_ReadDebugSocketString();
 
-void __cdecl Sys_WriteDebugSocketData(unsigned __int8 *buffer, int len);
-void __cdecl Sys_WriteDebugSocketMessageType(unsigned __int8 type);
+void __cdecl Sys_WriteDebugSocketData(uint8_t *buffer, int len);
+void __cdecl Sys_WriteDebugSocketMessageType(uint8_t type);
 void __cdecl Sys_EndWriteDebugSocket();
 
-extern unsigned __int8 g_debugPacket[1][8192];
+extern uint8_t g_debugPacket[1][8192];

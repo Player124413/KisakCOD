@@ -207,11 +207,11 @@ const char ERRMSG_SINGLE[83] =
 void __cdecl SV_SetValuesFromSkill()
 {
     unsigned int unsignedInt; // r11
-    __int64 v1; // r11
+    int64_t v1; // r11
     int v2; // r4
-    __int64 v3; // r11
-    __int64 v4; // r11
-    __int64 v5; // r11
+    int64_t v3; // r11
+    int64_t v4; // r11
+    int64_t v5; // r11
 
     Dvar_SetInt(sv_player_maxhealth, 100);
     unsignedInt = sv_gameskill->current.unsignedInt;
@@ -307,12 +307,12 @@ int __cdecl ExtractMapStringFromSaveGame(const char *filename, char *mapname)
         MyAssertHandler("c:\\trees\\cod3\\cod3src\\src\\server\\sv_ccmds.cpp", 189, 0, "%s", "mapname");
     if (!filename)
         MyAssertHandler("c:\\trees\\cod3\\cod3src\\src\\server\\sv_ccmds.cpp", 190, 0, "%s", "filename");
-    if (!(unsigned __int8)ReadSaveHeader(filename, &v8))
+    if (!(uint8_t)ReadSaveHeader(filename, &v8))
         return 0;
     v5 = v8.mapName;
     do
     {
-        v6 = (unsigned __int8)*v5;
+        v6 = (uint8_t)*v5;
         (v5++)[mapname - v8.mapName] = v6;
     } while (v6);
     v7 = Dvar_RegisterString("ui_campaign", "american", 0x1000u, "Campaign");
@@ -430,11 +430,11 @@ int __cdecl CheckForSaveGame(char *mapname, char *filename)
     v4 = sv_save_filename;
     do
     {
-        v5 = (unsigned __int8)*v4;
+        v5 = (uint8_t)*v4;
         (v4++)[filename - sv_save_filename] = v5;
     } while (v5);
     sv_save_filename[0] = 0;
-    if ((unsigned __int8)SaveMemory_IsCommittedSaveAvailable(filename, sv.checksum))
+    if ((uint8_t)SaveMemory_IsCommittedSaveAvailable(filename, sv.checksum))
     {
         lastCommittedSave = SaveMemory_GetSaveHandle(2);
         if (!lastCommittedSave)
@@ -445,18 +445,18 @@ int __cdecl CheckForSaveGame(char *mapname, char *filename)
         v8 = (char*)lastCommittedHeader->mapName;
         do
         {
-            v9 = (unsigned __int8)*v8;
+            v9 = (uint8_t)*v8;
             (v8++)[mapname - lastCommittedHeader->mapName] = v9;
         } while (v9);
         G_SetPendingLoadName(filename);
         return 1;
     }
-    else if ((unsigned __int8)ReadSaveHeader(filename, &v13))
+    else if ((uint8_t)ReadSaveHeader(filename, &v13))
     {
         v11 = v13.mapName;
         do
         {
-            v12 = (unsigned __int8)*v11;
+            v12 = (uint8_t)*v11;
             (v11++)[mapname - v13.mapName] = v12;
         } while (v12);
         G_SetPendingLoadName(filename);
@@ -483,7 +483,7 @@ int __cdecl SV_CheckLoadGame()
     }
     else if (sv_save_filename[0])
     {
-        v1 = (unsigned __int8)CheckForSaveGame(v4, v3) == 0;
+        v1 = (uint8_t)CheckForSaveGame(v4, v3) == 0;
         result = 0;
         if (!v1)
         {
@@ -1049,7 +1049,7 @@ void SV_Map_f()
     if (hasSVG)
     {
         I_strncpyz(filename, mapname, 64);
-        if (!(unsigned __int8)ExtractMapStringFromSaveGame(filename, mapname))
+        if (!(uint8_t)ExtractMapStringFromSaveGame(filename, mapname))
         {
             //HIDWORD(v4) = &unk_8207A5B4;
             G_SaveError(ERR_DROP, SAVE_ERROR_MISSING_DEVICE, "Unable to extract map string name from save");

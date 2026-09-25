@@ -24,9 +24,9 @@ void __cdecl Actor_InitLookAt(actor_s *self)
 
 void __cdecl Actor_SetLookAtAnimNodes(
     actor_s *self,
-    unsigned __int16 animStraight,
-    unsigned __int16 animLeft,
-    unsigned __int16 animRight)
+    uint16_t animStraight,
+    uint16_t animLeft,
+    uint16_t animRight)
 {
     XAnimTree_s *tree; // r3
     int time; // r11
@@ -90,7 +90,7 @@ float __cdecl Actor_CurrentLookAtYawMax(actor_s *self)
 
 void __cdecl Actor_SetLookAtYawLimits(actor_s *self, double fAnimYawLimit, double fYawLimit, double fBlendTime)
 {
-    __int64 v4; // r11
+    int64_t v4; // r11
     double v5; // fp0
     double v6; // fp13
 

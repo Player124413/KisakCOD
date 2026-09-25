@@ -22,7 +22,7 @@ struct ClientViewParams
     float height;
 };
 
-enum CubemapShot : __int32;
+enum CubemapShot : int32_t;
 
 void __cdecl TRACK_cg_view();
 void __cdecl CG_PlayTestFx(int localClientNum);

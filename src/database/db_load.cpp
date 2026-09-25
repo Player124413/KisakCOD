@@ -472,7 +472,7 @@ sunflare_t *varsunflare_t     ;
 PhysPreset *varPhysPreset     ;
 //D3DCubeTexture *varIDirect3DCubeTexture9     ;
 //uint8_t *varXQuat2           ;
-__int16 (*varXQuat2)[2];
+int16_t (*varXQuat2)[2];
 //uint16_t (*)[3] varedgeCount_t      ;
 Material **varMaterialHandle     ;
 //XAUDIOREVERBSETTINGS *varXAUDIOREVERBSETTINGS     ;
@@ -1125,7 +1125,7 @@ void __cdecl Load_XAnimDeltaPartQuatDataFrames(bool atStreamStart)
     Load_XAnimDynamicIndicesDeltaQuat(1);
     if (varXAnimDeltaPartQuatDataFrames->frames)
     {
-        varXAnimDeltaPartQuatDataFrames->frames = (__int16 (*)[2])AllocLoad_FxElemVisStateSample();
+        varXAnimDeltaPartQuatDataFrames->frames = (int16_t (*)[2])AllocLoad_FxElemVisStateSample();
         varXQuat2 = varXAnimDeltaPartQuatDataFrames->frames;
         if (varXAnimDeltaPartQuat->size)
             Load_XQuat2Array(1, varXAnimDeltaPartQuat->size + 1);
@@ -1143,7 +1143,7 @@ void __cdecl Load_XAnimDeltaPartQuatData(bool atStreamStart)
     }
     else if (atStreamStart)
     {
-        varXQuat2 = (__int16 (*)[2])varXAnimDeltaPartQuatData;
+        varXQuat2 = (int16_t (*)[2])varXAnimDeltaPartQuatData;
         Load_XQuat2(atStreamStart);
     }
 }
@@ -1345,7 +1345,7 @@ void __cdecl Load_XAnimParts(bool atStreamStart)
     }
     if (varXAnimParts->dataShort)
     {
-        varXAnimParts->dataShort = (__int16 *)AllocLoad_XBlendInfo();
+        varXAnimParts->dataShort = (int16_t *)AllocLoad_XBlendInfo();
         varshort = varXAnimParts->dataShort;
         Load_shortArray(1, varXAnimParts->dataShortCount);
     }
@@ -1357,7 +1357,7 @@ void __cdecl Load_XAnimParts(bool atStreamStart)
     }
     if (varXAnimParts->randomDataShort)
     {
-        varXAnimParts->randomDataShort = (__int16 *)AllocLoad_XBlendInfo();
+        varXAnimParts->randomDataShort = (int16_t *)AllocLoad_XBlendInfo();
         varshort = varXAnimParts->randomDataShort;
         Load_shortArray(1, varXAnimParts->randomDataShortCount);
     }
@@ -3179,9 +3179,9 @@ void __cdecl Load_XModel(bool atStreamStart)
     }
     if (varXModel->quats)
     {
-        if (varXModel->quats == (__int16 *)-1)
+        if (varXModel->quats == (int16_t *)-1)
         {
-            varXModel->quats = (__int16 *)AllocLoad_XBlendInfo();
+            varXModel->quats = (int16_t *)AllocLoad_XBlendInfo();
             varshort = varXModel->quats;
             Load_shortArray(1, 4 * (varXModel->numBones - varXModel->numRootBones));
         }

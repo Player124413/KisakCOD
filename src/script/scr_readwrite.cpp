@@ -15,18 +15,18 @@ static unsigned int g_idHistoryIndex;
 static short idHistory[16];
 
 void __cdecl WriteByte(
-    unsigned __int8 b,
+    uint8_t b,
     MemoryFile *memFile)
 {
     MemFile_WriteData(memFile, 1, &b);
 }
 
-void __cdecl WriteShort(unsigned __int16 i, MemoryFile *memFile)
+void __cdecl WriteShort(uint16_t i, MemoryFile *memFile)
 {
     MemFile_WriteData(memFile, 2, &i);
 }
 
-void __cdecl WriteString(unsigned __int16 str, MemoryFile *memFile)
+void __cdecl WriteString(uint16_t str, MemoryFile *memFile)
 {
     const char *v3; // r3
 
@@ -34,7 +34,7 @@ void __cdecl WriteString(unsigned __int16 str, MemoryFile *memFile)
     MemFile_WriteCString(memFile, v3);
 }
 
-void __cdecl SafeWriteString(unsigned __int16 str, MemoryFile *memFile)
+void __cdecl SafeWriteString(uint16_t str, MemoryFile *memFile)
 {
     unsigned int v3; // r30
     const char *v4; // r3
@@ -62,9 +62,9 @@ int __cdecl Scr_ReadString(MemoryFile *memFile)
 
     CString = MemFile_ReadCString(memFile);
     v2 = CString;
-    while (*(unsigned __int8 *)v2++)
+    while (*(uint8_t *)v2++)
         ;
-    return (unsigned __int16)SL_GetStringOfSize(CString, 0, v2 - CString, MT_TYPE_SCRIPT_STRING);
+    return (uint16_t)SL_GetStringOfSize(CString, 0, v2 - CString, MT_TYPE_SCRIPT_STRING);
 }
 
 int __cdecl Scr_ReadOptionalString(MemoryFile *memFile)
@@ -78,9 +78,9 @@ int __cdecl Scr_ReadOptionalString(MemoryFile *memFile)
         return 0;
     CString = MemFile_ReadCString(memFile);
     v4 = CString;
-    while (*(unsigned __int8 *)v4++)
+    while (*(uint8_t *)v4++)
         ;
-    return (unsigned __int16)SL_GetStringOfSize(CString, 0, v4 - CString, MT_TYPE_SCRIPT_STRING);
+    return (uint16_t)SL_GetStringOfSize(CString, 0, v4 - CString, MT_TYPE_SCRIPT_STRING);
 }
 
 void __cdecl WriteInt(int i, MemoryFile *memFile)
@@ -174,9 +174,9 @@ unsigned int Scr_CheckIdHistory(unsigned int index)
 {
     unsigned int result; // r3
     unsigned int v3; // r11
-    __int16 *v4; // r10
+    int16_t *v4; // r10
     int v5; // r9
-    __int16 *v6; // r11
+    int16_t *v6; // r11
     unsigned int v7; // r10
     int v8; // r9
 
@@ -189,7 +189,7 @@ unsigned int Scr_CheckIdHistory(unsigned int index)
         v7 = 0;
         while (1)
         {
-            v8 = (unsigned __int16)*v6;
+            v8 = (uint16_t)*v6;
             if (index == v8 + 1)
                 break;
             if (index == v8)
@@ -206,7 +206,7 @@ unsigned int Scr_CheckIdHistory(unsigned int index)
         v4 = &idHistory[v3];
         while (1)
         {
-            v5 = (unsigned __int16)*v4;
+            v5 = (uint16_t)*v4;
             if (index == v5 + 1)
                 break;
             if (index == v5)
@@ -224,7 +224,7 @@ unsigned int Scr_CheckIdHistory(unsigned int index)
 void WriteId(unsigned int id, unsigned int opcode, MemoryFile *memFile)
 {
     unsigned int v3; // r31
-    unsigned __int16 v6; // r29
+    uint16_t v6; // r29
     unsigned int v7; // r31
     int v8; // r10
     _WORD v9[32]; // [sp+50h] [-40h] BYREF
@@ -276,12 +276,12 @@ unsigned int Scr_ReadId(MemoryFile *memFile, unsigned int opcode)
     unsigned int v3; // r29
     unsigned int v4; // r30
     unsigned int result; // r3
-    __int16 v6; // [sp+50h] [-30h] BYREF
+    int16_t v6; // [sp+50h] [-30h] BYREF
 
     if (opcode >> 3)
     {
         v2 = g_idHistoryIndex;
-        v3 = *(unsigned __int16 *)((char *)idHistory + ((2 * ((((opcode >> 3) + 1) >> 1) + g_idHistoryIndex)) & 0x1E))
+        v3 = *(uint16_t *)((char *)idHistory + ((2 * ((((opcode >> 3) + 1) >> 1) + g_idHistoryIndex)) & 0x1E))
             + ((opcode >> 3) & 1);
     }
     else
@@ -305,10 +305,10 @@ unsigned int Scr_ReadId(MemoryFile *memFile, unsigned int opcode)
 void __cdecl WriteStack(const VariableStackBuffer *stackBuf, MemoryFile *memFile)
 {
     int v4; // r30
-    __int16 v5; // r11
+    int16_t v5; // r11
     const char *buf; // r31
     unsigned int v7; // r3
-    __int16 v8; // r30
+    int16_t v8; // r30
     VariableUnion *v9; // r4
     _WORD v10[24]; // [sp+50h] [-30h] BYREF
 
@@ -327,7 +327,7 @@ void __cdecl WriteStack(const VariableStackBuffer *stackBuf, MemoryFile *memFile
     {
         do
         {
-            v7 = (unsigned __int8)*buf;
+            v7 = (uint8_t)*buf;
             v8 = v5 - 1;
             v9 = *(VariableUnion **)(buf + 1);
             buf += 5;
@@ -339,21 +339,21 @@ void __cdecl WriteStack(const VariableStackBuffer *stackBuf, MemoryFile *memFile
 
 VariableStackBuffer *__cdecl Scr_ReadStack(MemoryFile *memFile)
 {
-    __int16 v2; // r27
+    int16_t v2; // r27
     int v3; // r28
     int v4; // r31
-    unsigned __int16 v5; // r29
+    uint16_t v5; // r29
     _WORD *v6; // r31
     char *v7; // r29
-    __int16 v8; // r11
-    __int16 v9; // r28
-    unsigned __int8 v11[8]; // [sp+50h] [-40h] BYREF
+    int16_t v8; // r11
+    int16_t v9; // r28
+    uint8_t v11[8]; // [sp+50h] [-40h] BYREF
     VariableValue v12; // [sp+58h] [-38h] BYREF
 
     MemFile_ReadData(memFile, 2, v11);
     v2 = *(_WORD *)v11;
-    v3 = *(unsigned __int16 *)v11;
-    v4 = 5 * *(unsigned __int16 *)v11 + 11;
+    v3 = *(uint16_t *)v11;
+    v4 = 5 * *(uint16_t *)v11 + 11;
     v5 = 5 * *(_WORD *)v11 + 11;
     if (v4 != v5)
         MyAssertHandler(
@@ -414,7 +414,7 @@ void __cdecl Scr_DoLoadEntryInternal(VariableValue *value, MemoryFile *memFile)
             return;
         case VAR_STRING:
         case VAR_ISTRING:
-            value->u.intValue = (unsigned __int16)Scr_ReadString(memFile);
+            value->u.intValue = (uint16_t)Scr_ReadString(memFile);
             break;
         case VAR_VECTOR:
             value->u.intValue = (int)Scr_ReadVec3(memFile);
@@ -449,11 +449,11 @@ int __cdecl Scr_DoLoadEntry(VariableValue *value, bool isArray, MemoryFile *memF
 {
 
     int result;
-    unsigned __int8 byte0;
-    unsigned __int8 byte1;
-    unsigned __int8 byte2;
+    uint8_t byte0;
+    uint8_t byte1;
+    uint8_t byte2;
     unsigned int header = 0;
-    unsigned __int16 header2 = 0;
+    uint16_t header2 = 0;
     int header4 = 0;
 
     Scr_DoLoadEntryInternal(value, memFile);
@@ -470,13 +470,13 @@ int __cdecl Scr_DoLoadEntry(VariableValue *value, bool isArray, MemoryFile *memF
         {
             unsigned int byteRead = 0;
             MemFile_ReadData(memFile, 1, (unsigned char *)&byteRead);
-            result = (int)(__int8)byteRead + 0x800000;
+            result = (int)(int8_t)byteRead + 0x800000;
             break;
         }
         case 2:
             header2 = 0;
             MemFile_ReadData(memFile, 2, (unsigned char *)&header2);
-            result = (int)(__int16)header2 + 0x800000;
+            result = (int)(int16_t)header2 + 0x800000;
             break;
         case 3:
             header4 = 0;
@@ -484,7 +484,7 @@ int __cdecl Scr_DoLoadEntry(VariableValue *value, bool isArray, MemoryFile *memF
             result = header4 + 0x800000;
             break;
         case 4:
-            result = (unsigned __int16)Scr_ReadString(memFile);
+            result = (uint16_t)Scr_ReadString(memFile);
             break;
         case 5:
             result = Scr_ReadId(memFile, tag) + 0x10000;
@@ -514,12 +514,12 @@ void __cdecl AddSaveObjectInternal(unsigned int parentId)
         if (!scrVarPub.saveIdMap[parentId])
         {
             scrVarPub.saveIdMap[parentId] = ++scrVarPub.savecount;
-            *(unsigned __int16 *)((char *)scrVarPub.saveIdMapRev + __ROL4__(scrVarPub.savecount, 1)) = parentId;
+            *(uint16_t *)((char *)scrVarPub.saveIdMapRev + __ROL4__(scrVarPub.savecount, 1)) = parentId;
         }
     }
 }
 
-unsigned int __cdecl Scr_ConvertThreadFromLoad(unsigned __int16 handle)
+unsigned int __cdecl Scr_ConvertThreadFromLoad(uint16_t handle)
 {
     int v2; // r30
     unsigned int v3; // r30
@@ -542,7 +542,7 @@ unsigned int __cdecl Scr_ConvertThreadFromLoad(unsigned __int16 handle)
     return v3;
 }
 
-void __cdecl Scr_DoLoadObjectInfo(unsigned __int16 parentId, MemoryFile *memFile)
+void __cdecl Scr_DoLoadObjectInfo(uint16_t parentId, MemoryFile *memFile)
 {
 
 
@@ -558,7 +558,7 @@ void __cdecl Scr_DoLoadObjectInfo(unsigned __int16 parentId, MemoryFile *memFile
     int v20;
     unsigned int header;       // 1-byte read scratch
     unsigned int header4;      // 4-byte read scratch
-    unsigned __int16 header2;  // 2-byte read scratch
+    uint16_t header2;  // 2-byte read scratch
     VariableValue value;
 
     v2 = parentId;
@@ -622,7 +622,7 @@ void __cdecl Scr_DoLoadObjectInfo(unsigned __int16 parentId, MemoryFile *memFile
                     "!(parentValue->w.classnum & VAR_NAME_HIGH_MASK)");
             header2 = 0;
             MemFile_ReadData(memFile, 2, (unsigned char *)&header2);
-            parentValue->w.type |= ((int)(__int16)header2) << 8;
+            parentValue->w.type |= ((int)(int16_t)header2) << 8;
         }
         else if (v5 == VAR_ARRAY)
         {
@@ -784,7 +784,7 @@ static void Scr_RemoveDebuggerRefs()
 void __cdecl Scr_SaveShutdown(bool savegame)
 {
     char v2; // r20
-    unsigned __int16 *v3; // r25
+    uint16_t *v3; // r25
     int v4; // r30
     VariableValueInternal_w *p_w; // r27
     int v6; // r26
@@ -840,12 +840,12 @@ void __cdecl Scr_SaveShutdown(bool savegame)
 
 void __cdecl Scr_LoadPre(int sys, MemoryFile *memFile)
 {
-    unsigned __int16 savecount; // r11
+    uint16_t savecount; // r11
     unsigned int v4; // r30
-    unsigned __int16 *v5; // r29
+    uint16_t *v5; // r29
     unsigned int v6; // r3
     unsigned int v7; // r29
-    unsigned __int16 *v8; // r30
+    uint16_t *v8; // r30
     unsigned int v9; // r30
     unsigned int Id; // r3
     unsigned int v11; // r30
@@ -857,10 +857,10 @@ void __cdecl Scr_LoadPre(int sys, MemoryFile *memFile)
     unsigned int v17; // r30
     unsigned int v18; // r3
     int v19; // r29
-    unsigned __int16 *p_entArrayId; // r31
-    unsigned __int16 v21; // r10
+    uint16_t *p_entArrayId; // r31
+    uint16_t v21; // r10
     scrVarDebugPub_t *v22; // r11
-    unsigned __int8 v23[96]; // [sp+50h] [-60h] BYREF
+    uint8_t v23[96]; // [sp+50h] [-60h] BYREF
 
     if (sys != 1)
         MyAssertHandler("c:\\trees\\cod3\\cod3src\\src\\script\\scr_readwrite.cpp", 1008, 0, "%s", "sys == SCR_SYS_GAME");
@@ -971,13 +971,13 @@ void __cdecl Scr_LoadPre(int sys, MemoryFile *memFile)
     } while (v19);
 }
 
-static void Scr_AddDebugExprValueRefCount(unsigned __int16 *refCount, sval_u *val)
+static void Scr_AddDebugExprValueRefCount(uint16_t *refCount, sval_u *val)
 {
     if (val->type == 81)
         ++refCount[val[1].type];
 }
 
-static void Scr_AddDebugExprRefCount(unsigned __int16 *refCount, sval_u *debugExprHead)
+static void Scr_AddDebugExprRefCount(uint16_t *refCount, sval_u *debugExprHead)
 {
     sval_u *i; // r31
 
@@ -985,7 +985,7 @@ static void Scr_AddDebugExprRefCount(unsigned __int16 *refCount, sval_u *debugEx
         Scr_AddDebugExprValueRefCount(refCount, i + 1);
 }
 
-static void Scr_AddDebugRefCountChildren(Scr_WatchElement_s *element, unsigned __int16 *refCount)
+static void Scr_AddDebugRefCountChildren(Scr_WatchElement_s *element, uint16_t *refCount)
 {
     Scr_WatchElement_s *i; // r31
 
@@ -995,7 +995,7 @@ static void Scr_AddDebugRefCountChildren(Scr_WatchElement_s *element, unsigned _
         Scr_AddDebugRefCountChildren(i, refCount);
 }
 
-static void Scr_AddDebugRefCount(unsigned __int16 *refCount)
+static void Scr_AddDebugRefCount(uint16_t *refCount)
 {
     Scr_WatchElement_s *i; // r31
 
@@ -1058,7 +1058,7 @@ static void CheckReferenceRange(unsigned int begin, unsigned int end)
                     "%s",
                     "entryValue->u.u.stackValue->localId");
             ++scrVarDebugPub->refCount[sb->localId];
-            unsigned __int8 *p = (unsigned __int8 *)&sb->buf[0];
+            uint8_t *p = (uint8_t *)&sb->buf[0];
             unsigned int count = sb->size;
             while (count)
             {
@@ -1140,7 +1140,7 @@ static int CheckReferences()
         (j->status & 0x60) == 0
         || (j->type & VAR_MASK) < VAR_THREAD
         || *(_WORD *)((char *)scrVarDebugPub->varUsage + v3)
-        && *(unsigned __int16 *)((char *)scrVarDebugPub->varUsage + v3) == (unsigned __int16)j[-1].status + 1;
+        && *(uint16_t *)((char *)scrVarDebugPub->varUsage + v3) == (uint16_t)j[-1].status + 1;
         j += 4)
     {
         v4 += 16;
@@ -1154,7 +1154,7 @@ static int CheckReferences()
 void __cdecl Scr_LoadShutdown()
 {
     unsigned int v0; // r30
-    unsigned __int16 *v1; // r31
+    uint16_t *v1; // r31
 
     v0 = 1;
     if (scrVarPub.savecount)
@@ -1202,7 +1202,7 @@ void __cdecl DoSaveEntryInternal(unsigned int type, VariableUnion *u, MemoryFile
     _BYTE v30[4]; // [sp+50h] [-30h] BYREF
     unsigned int v31[11]; // [sp+54h] [-2Ch] BYREF
 
-    if (type != (unsigned __int8)type)
+    if (type != (uint8_t)type)
         MyAssertHandler(
             "c:\\trees\\cod3\\cod3src\\src\\script\\scr_readwrite.cpp",
             1122,
@@ -1234,7 +1234,7 @@ void __cdecl DoSaveEntryInternal(unsigned int type, VariableUnion *u, MemoryFile
         case VAR_ISTRING:
             v19 = MemFile_GetUsedSize(memFile);
             //ProfMem_Begin("string", v19);
-            v20 = SL_ConvertToString((unsigned __int16)u);
+            v20 = SL_ConvertToString((uint16_t)u);
             MemFile_WriteCString(memFile, v20);
             v21 = MemFile_GetUsedSize(memFile);
             //ProfMem_End(v21);
@@ -1427,17 +1427,17 @@ void __cdecl Scr_SkipSource(MemoryFile *memFile, void *fileHandle)
 void __cdecl AddSaveStackInternal(const VariableStackBuffer *stackBuf)
 {
     int localId; // r7
-    unsigned __int16 size; // r11
+    uint16_t size; // r11
     const char *buf; // r31
     unsigned int v4; // r3
-    unsigned __int16 v5; // r30
+    uint16_t v5; // r30
     VariableUnion *v6; // r4
 
     localId = stackBuf->localId;
     if (stackBuf->localId && !scrVarPub.saveIdMap[localId])
     {
         scrVarPub.saveIdMap[localId] = ++scrVarPub.savecount;
-        *(unsigned __int16 *)((char *)scrVarPub.saveIdMapRev + __ROL4__(scrVarPub.savecount, 1)) = localId;
+        *(uint16_t *)((char *)scrVarPub.saveIdMapRev + __ROL4__(scrVarPub.savecount, 1)) = localId;
     }
     size = stackBuf->size;
     buf = stackBuf->buf;
@@ -1445,7 +1445,7 @@ void __cdecl AddSaveStackInternal(const VariableStackBuffer *stackBuf)
     {
         do
         {
-            v4 = (unsigned __int8)*buf;
+            v4 = (uint8_t)*buf;
             v5 = size - 1;
             v6 = *(VariableUnion **)(buf + 1);
             buf += 5;
@@ -1462,7 +1462,7 @@ void __cdecl AddSaveEntryInternal(unsigned int type, const VariableStackBuffer *
         if (u && !scrVarPub.saveIdMap[(unsigned int)u])
         {
             scrVarPub.saveIdMap[(unsigned int)u] = ++scrVarPub.savecount;
-            *(unsigned __int16 *)((char *)scrVarPub.saveIdMapRev + __ROL4__(scrVarPub.savecount, 1)) = (unsigned __int16)u;
+            *(uint16_t *)((char *)scrVarPub.saveIdMapRev + __ROL4__(scrVarPub.savecount, 1)) = (uint16_t)u;
         }
     }
     else if (type == VAR_STACK)
@@ -1494,7 +1494,7 @@ void __cdecl DoSaveEntry(VariableValue *value, VariableValue *name, bool isArray
     unsigned int v25; // r3
     unsigned int v26; // r3
     unsigned int v27[2]; // [sp+50h] [-40h] BYREF
-    __int64 v28; // [sp+58h] [-38h]
+    int64_t v28; // [sp+58h] [-38h]
 
     if (!value)
         MyAssertHandler("c:\\trees\\cod3\\cod3src\\src\\script\\scr_readwrite.cpp", 391, 0, "%s", "value");
@@ -1616,7 +1616,7 @@ void __cdecl AddSaveObjectChildren(unsigned int parentId)
                 && !scrVarPub.saveIdMap[arrVal.u.intValue])
             {
                 scrVarPub.saveIdMap[arrVal.u.intValue] = ++scrVarPub.savecount;
-                scrVarPub.saveIdMapRev[scrVarPub.savecount] = (unsigned __int16)arrVal.u.intValue;
+                scrVarPub.saveIdMapRev[scrVarPub.savecount] = (uint16_t)arrVal.u.intValue;
             }
         }
         u = entryValue->u;
@@ -1626,7 +1626,7 @@ void __cdecl AddSaveObjectChildren(unsigned int parentId)
             if (u.u.intValue && !scrVarPub.saveIdMap[u.u.intValue])
             {
                 scrVarPub.saveIdMap[u.u.intValue] = ++scrVarPub.savecount;
-                scrVarPub.saveIdMapRev[scrVarPub.savecount] = (unsigned __int16)u.u.intValue;
+                scrVarPub.saveIdMapRev[scrVarPub.savecount] = (uint16_t)u.u.intValue;
             }
         }
         else if (v9 == VAR_STACK)
@@ -1643,11 +1643,11 @@ void __cdecl AddSaveObjectChildren(unsigned int parentId)
         goto LABEL_24;
     case VAR_CHILD_THREAD:
         w = parentValue->w;
-        v11 = (unsigned __int16)((unsigned int)w.status >> 8);
-        if ((unsigned __int16)((unsigned int)w.status >> 8) && !scrVarPub.saveIdMap[v11])
+        v11 = (uint16_t)((unsigned int)w.status >> 8);
+        if ((uint16_t)((unsigned int)w.status >> 8) && !scrVarPub.saveIdMap[v11])
         {
             scrVarPub.saveIdMap[v11] = ++scrVarPub.savecount;
-            *(unsigned __int16 *)((char *)scrVarPub.saveIdMapRev + __ROL4__(scrVarPub.savecount, 1)) = v11;
+            *(uint16_t *)((char *)scrVarPub.saveIdMapRev + __ROL4__(scrVarPub.savecount, 1)) = v11;
         }
     LABEL_24:
         size = parentValue->u.o.u.size;
@@ -1656,7 +1656,7 @@ void __cdecl AddSaveObjectChildren(unsigned int parentId)
             if (!scrVarPub.saveIdMap[size])
             {
                 scrVarPub.saveIdMap[size] = ++scrVarPub.savecount;
-                *(unsigned __int16 *)((char *)scrVarPub.saveIdMapRev + __ROL4__(scrVarPub.savecount, 1)) = size;
+                *(uint16_t *)((char *)scrVarPub.saveIdMapRev + __ROL4__(scrVarPub.savecount, 1)) = size;
             }
         }
         break;
@@ -1667,9 +1667,9 @@ void __cdecl AddSaveObjectChildren(unsigned int parentId)
 
 void __cdecl AddSaveObject(unsigned int parentId)
 {
-    unsigned __int16 savecount; // r11
+    uint16_t savecount; // r11
     int v2; // r29
-    unsigned __int16 *v3; // r30
+    uint16_t *v3; // r30
 
     savecount = scrVarPub.savecount;
     v2 = scrVarPub.savecount;
@@ -1677,7 +1677,7 @@ void __cdecl AddSaveObject(unsigned int parentId)
     {
         ++scrVarPub.savecount;
         scrVarPub.saveIdMap[parentId] = v2 + 1;
-        *(unsigned __int16 *)((char *)scrVarPub.saveIdMapRev + __ROL4__(scrVarPub.savecount, 1)) = parentId;
+        *(uint16_t *)((char *)scrVarPub.saveIdMapRev + __ROL4__(scrVarPub.savecount, 1)) = parentId;
         savecount = scrVarPub.savecount;
     }
     if (v2 < savecount)
@@ -1701,7 +1701,7 @@ void __cdecl DoSaveObjectInfo(unsigned int parentId, MemoryFile *memFile)
     int v8; // r4
     bool v9; // r26
     unsigned int v10; // r3
-    __int16 v11; // r31
+    int16_t v11; // r31
     unsigned int i; // r3
     unsigned int j; // r30
     VariableValueInternal *v14; // r31
@@ -1741,7 +1741,7 @@ void __cdecl DoSaveObjectInfo(unsigned int parentId, MemoryFile *memFile)
         goto LABEL_13;
     case VAR_CHILD_THREAD:
         WriteId(v4->u.o.u.size, 4u, memFile);
-        WriteId((unsigned __int16)((unsigned int)v4->w.status >> 8), 0, memFile);
+        WriteId((uint16_t)((unsigned int)v4->w.status >> 8), 0, memFile);
         goto LABEL_14;
     case VAR_DEAD_ENTITY:
         WriteId(v4->u.o.u.size, 5u, memFile);
@@ -1798,7 +1798,7 @@ void __cdecl DoSaveObjectInfo(unsigned int parentId, MemoryFile *memFile)
     }
 }
 
-int __cdecl Scr_ConvertThreadToSave(unsigned __int16 handle)
+int __cdecl Scr_ConvertThreadToSave(uint16_t handle)
 {
     int v1; // r31
     int v3; // r31
@@ -1830,10 +1830,10 @@ void __cdecl Scr_SavePost(MemoryFile *memFile)
 {
     unsigned int UsedSize; // r3
     unsigned int v3; // r29
-    unsigned __int16 *v4; // r28
+    uint16_t *v4; // r28
     unsigned int v5; // r3
     int v6; // r30
-    unsigned __int16 *p_entArrayId; // r29
+    uint16_t *p_entArrayId; // r29
     unsigned int v8[12]; // [sp+50h] [-30h] BYREF
 
     memset(idHistory, 0, 0x20u);
@@ -1881,7 +1881,7 @@ void __cdecl AddSaveStack(const VariableStackBuffer *stackBuf)
     int size; // r9
     CONST char *buf; // r31
     int v4; // r10
-    __int16 v5; // r29
+    int16_t v5; // r29
     const VariableStackBuffer *v6; // r3
 
     AddSaveObject(stackBuf->localId);
@@ -1891,7 +1891,7 @@ void __cdecl AddSaveStack(const VariableStackBuffer *stackBuf)
     {
         do
         {
-            v4 = (unsigned __int8)*buf;
+            v4 = (uint8_t)*buf;
             v5 = size - 1;
             v6 = *(const VariableStackBuffer **)(buf + 1);
             buf += 5;
@@ -1925,7 +1925,7 @@ void __cdecl AddSaveEntry(unsigned int type, const VariableStackBuffer *u)
 void __cdecl Scr_SavePre(int sys)
 {
     int v2; // r30
-    unsigned __int16 *p_entArrayId; // r29
+    uint16_t *p_entArrayId; // r29
     VariableValueInternal *v4; // r11
     const VariableStackBuffer *stackValue; // r3
     int v6; // r11

@@ -255,8 +255,8 @@ void __cdecl Actor_Grenade_GetTossPositions(
     else
         v9 = SURF_TYPEINDEX(v18.surfaceFlags);
 
-    v10 = 4 * ((unsigned __int8)v9 + 368);
-    v11 = 4 * ((unsigned __int8)v9 + 397);
+    v10 = 4 * ((uint8_t)v9 + 368);
+    v11 = 4 * ((uint8_t)v9 + 397);
     v12 = (float)((float)(vTargetPos[1] - vFrom[1])
         * (float)((float)1.0
             - (float)((float)((float)(*(float *)((char *)&weapDef->szInternalName + v11)
@@ -937,7 +937,7 @@ bool __cdecl Actor_Grenade_IsPointSafe(actor_s *self, const float *vPoint)
     EntHandle *p_pGrenade; // r31
     gentity_s *v5; // r3
     WeaponDef *weapDef; // r27
-    __int64 v7; // r10
+    int64_t v7; // r10
     float radius; // fp29
     gentity_s *v10; // r11
     EntHandle *grenadeEnt; // r3
@@ -1066,7 +1066,7 @@ bool __cdecl Actor_Grenade_ShouldIgnore(actor_s *self, gentity_s *grenade)
     iassert(self->sentient);
     iassert(grenade);
 
-    if (!Actor_HasPath(self) || (unsigned __int8)Actor_PointAtGoal(self->ent->r.currentOrigin, &self->scriptGoal))
+    if (!Actor_HasPath(self) || (uint8_t)Actor_PointAtGoal(self->ent->r.currentOrigin, &self->scriptGoal))
         return 0;
 
     ent = self->ent;
@@ -1130,7 +1130,7 @@ void __cdecl Actor_GrenadePing(actor_s *self, gentity_s *pGrenade)
                 && v5->mover.aDecelTime == 0.0
                 && v5->mover.speed == 0.0)
             {
-                if ((unsigned __int8)Actor_IsAwareOfGrenade(self))
+                if ((uint8_t)Actor_IsAwareOfGrenade(self))
                 {
                     self->pGrenade.setEnt(pGrenade);
                     if (pGrenade->parent.isDefined())
@@ -1168,7 +1168,7 @@ void __cdecl Actor_Grenade_Attach(actor_s *self)
     gentity_s *v2; // r28
     WeaponDef *weapDef; // r30
     const char *Name; // r30
-    unsigned __int8 v5; // r11
+    uint8_t v5; // r11
 
     iassert(self);
     iassert(self->pGrenade.isDefined());
@@ -1192,7 +1192,7 @@ void __cdecl Actor_Grenade_Detach(actor_s *self)
     gentity_s *v2; // r31
     WeaponDef *weapDef; // r30
     const char *Name; // r3
-    unsigned __int8 svFlags; // r10
+    uint8_t svFlags; // r10
     float pos[3]; // [sp+50h] [-40h] BYREF // v6
 
     iassert(self);
@@ -1404,7 +1404,7 @@ void __cdecl G_DrawGrenadeHints()
     double v26; // fp7
     double v27; // fp11
     double v28; // fp12
-    __int64 v29; // [sp+50h] [-C0h] BYREF
+    int64_t v29; // [sp+50h] [-C0h] BYREF
     float v30; // [sp+58h] [-B8h]
     float v31; // [sp+60h] [-B0h] BYREF
     float v32; // [sp+64h] [-ACh]
@@ -2190,7 +2190,7 @@ actor_think_result_t __cdecl Actor_Grenade_Acquire(actor_s *self)
     {
         if (Vec2DistanceSq(self->ent->r.currentOrigin, self->Path.vFinalGoal) > 100.0)
         {
-            if ((unsigned __int8)Actor_Grenade_ReevaluateResponse(self, REEVALUATE_NO_RETURN))
+            if ((uint8_t)Actor_Grenade_ReevaluateResponse(self, REEVALUATE_NO_RETURN))
                 return ACTOR_THINK_REPEAT;
             if (self->eSubState[self->stateLevel] == STATE_GRENADE_ACQUIRE)
             {
@@ -2206,7 +2206,7 @@ actor_think_result_t __cdecl Actor_Grenade_Acquire(actor_s *self)
         }
         if (I_fabs((float)(self->ent->r.currentOrigin[2] - self->Path.vFinalGoal[2])) > 32.0)
         {
-            if ((unsigned __int8)Actor_Grenade_ReevaluateResponse(self, REEVALUATE_NO_RETURN))
+            if ((uint8_t)Actor_Grenade_ReevaluateResponse(self, REEVALUATE_NO_RETURN))
                 return ACTOR_THINK_REPEAT;
             if (self->eSubState[self->stateLevel] == STATE_GRENADE_ACQUIRE)
                 MyAssertHandler(

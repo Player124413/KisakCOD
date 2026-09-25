@@ -9,7 +9,7 @@
 #include "cg_local.h"
 #include <gfx_d3d/r_scene.h>
 
-enum ButtonNames : __int32
+enum ButtonNames : int32_t
 {
     BTN_MODESWITCH = 0x0,
     BTN_DROPMDL = 0x1,
@@ -41,14 +41,14 @@ enum ButtonNames : __int32
     TOTAL_BUTTONNAMES = 0x1B,
 };
 
-enum MdlPrvFreeSpeed : __int32
+enum MdlPrvFreeSpeed : int32_t
 {
     FREESPEED_NORMAL = 0x0,
     FREESPEED_SLOW = 0x1,
     FREESPEED_FAST = 0x2,
 };
 
-enum ModPrvUiModePC : __int32
+enum ModPrvUiModePC : int32_t
 {
     SELECTION_MODE = 0x0,
     MOVE_MODE = 0x1,
@@ -56,7 +56,7 @@ enum ModPrvUiModePC : __int32
     SCALE_MODE = 0x3,
 };
 
-enum MdlPrvUiModeGamepad : __int32
+enum MdlPrvUiModeGamepad : int32_t
 {
     MDLPRVMODE_FOCUSED = 0x0,
     MDLPRVMODE_FREE = 0x1,
@@ -71,7 +71,7 @@ struct MdlPrvClone
     char objBuf[100];
 };
 
-enum MdlPrvFocusedMode : __int32
+enum MdlPrvFocusedMode : int32_t
 {
     FOCUSEDMODE_CAMERA = 0x0,
     FOCUSEDMODE_MODELROTATE = 0x1,
@@ -79,7 +79,7 @@ enum MdlPrvFocusedMode : __int32
     FOCUSEDMODE_FOCALMOVE = 0x3,
 };
 
-enum MdlPrvMRotCamMode : __int32
+enum MdlPrvMRotCamMode : int32_t
 {
     MROTCAMMODE_STATIC = 0x0,
     MROTCAMMODE_TRAVEL = 0x1,
@@ -99,7 +99,7 @@ struct MdlPrvBtnTimes
     int ragdollSpeed;
 };
 
-struct __declspec(align(4)) ModelPreviewer_System
+struct __attribute__((aligned(4))) ModelPreviewer_System
 {
     int modelCount;
     const char **modelNames;
@@ -162,10 +162,10 @@ struct ModelPreviewer_Anim
     float stepCounter;
     bool isFromLooped;
     bool isToLooped;
-    __int16 fromSliderID;
-    __int16 toSliderID;
-    __int16 fromMRUSliderID;
-    __int16 toMRUSliderID;
+    int16_t fromSliderID;
+    int16_t toSliderID;
+    int16_t fromMRUSliderID;
+    int16_t toMRUSliderID;
     float deltaYaw;
 };
 
@@ -181,8 +181,8 @@ struct ModelPreviewer_Model
     float initialYaw;
     int lodDist[4];
     int surfaceCount;
-    __int16 boneInfoSliderID;
-    __int16 loadSliderID;
+    int16_t boneInfoSliderID;
+    int16_t loadSliderID;
     const dvar_s *mruNames[4];
     const char *mruNameTable[5];
     const char *boneNameTable[133];

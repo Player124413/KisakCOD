@@ -1524,7 +1524,7 @@ void __cdecl CM_TransformedBoxTrace(
     const float *end,
     const float *mins,
     const float *maxs,
-    __int64 model,
+    int64_t model,
     const float *origin,
     const float *angles)
 {
@@ -1581,7 +1581,7 @@ void __cdecl CM_TransformedBoxTraceExternal(
     const float *end,
     const float *mins,
     const float *maxs,
-    __int64 model,
+    int64_t model,
     const float *origin,
     const float *angles)
 {

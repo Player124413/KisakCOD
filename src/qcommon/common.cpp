@@ -439,7 +439,7 @@ void Com_OpenLogFile()
 {
     const char* BuildNumber; // eax
     const char* v1; // [esp-4h] [ebp-14h]
-    __int64 aclock; // [esp+0h] [ebp-10h] BYREF
+    int64_t aclock; // [esp+0h] [ebp-10h] BYREF
     tm* newtime; // [esp+Ch] [ebp-4h]
 
     if (Sys_IsMainThread() && !opening_qconsole)

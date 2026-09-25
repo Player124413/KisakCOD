@@ -171,7 +171,7 @@ int32_t __cdecl CG_DrawScoreboard(int32_t localClientNum)
 char szServerIPAddress[128];
 char *__cdecl CL_GetServerIPAddress()
 {
-    __int16 v1; // ax
+    int16_t v1; // ax
     clientConnection_t *clc; // [esp+0h] [ebp-4h]
 
     if (clientUIActives[0].connectionState >= CA_CONNECTED)

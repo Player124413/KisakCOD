@@ -12,7 +12,7 @@ struct GfxPixelCostKey_s // sizeof=0x8
 union GfxPixelCostKey // sizeof=0x8
 {                                       // ...
     GfxPixelCostKey_s mtl;
-    unsigned __int64 packed;
+    uint64_t packed;
 };
 struct GfxPixelCostRecord // sizeof=0x20
 {                                       // ...
@@ -28,7 +28,7 @@ struct $F77C05005AAF2867FE3D26D91A48F99E // sizeof=0x10030
     // padding byte
     // padding byte
     long double msecOverhead;           // ...
-    unsigned __int64 timeBegin;         // ...
+    uint64_t timeBegin;         // ...
     long double msecElapsed;            // ...
     int frameIndex;                     // ...
     int expectedCount;                  // ...
@@ -110,8 +110,8 @@ const Material *__cdecl R_PixelCost_GetAccumulationMaterial(const Material *mate
 void __cdecl R_PixelCost_BeginSurface(GfxCmdBufContext context)
 {
     int cost; // [esp+4h] [ebp-Ch]
-    unsigned __int64 packedKey; // [esp+8h] [ebp-8h]
-    unsigned __int64 packedKeya; // [esp+8h] [ebp-8h]
+    uint64_t packedKey; // [esp+8h] [ebp-8h]
+    uint64_t packedKeya; // [esp+8h] [ebp-8h]
 
     if (pixelCostMode == GFX_PIXEL_COST_MODE_MEASURE_COST)
     {
@@ -161,7 +161,7 @@ void __cdecl R_PixelCost_SetConstant(GfxCmdBufSourceState *source, int cost)
 
 int __cdecl RB_PixelCost_GetCostForRecordIndex(int recordIndex)
 {
-    __int64 v2; // rax
+    int64_t v2; // rax
     int v3; // [esp+4h] [ebp-68h]
     int v4; // [esp+Ch] [ebp-60h]
     int v5; // [esp+10h] [ebp-5Ch]
@@ -226,20 +226,20 @@ int __cdecl RB_PixelCost_GetCostForRecordIndex(int recordIndex)
     }
 }
 
-unsigned __int64 __cdecl R_PixelCost_PackedKeyForMaterial(__int64 material)
+uint64_t __cdecl R_PixelCost_PackedKeyForMaterial(int64_t material)
 {
     iassert( material );
     return material;
 }
 
-bool __cdecl RB_PixelCost_DoesPrimMatch(unsigned __int64 packedKey)
+bool __cdecl RB_PixelCost_DoesPrimMatch(uint64_t packedKey)
 {
     return __PAIR64__(
         pixelCostGlob.records[pixelCostGlob.recordCount].key.mtl.techType,
         pixelCostGlob.records[pixelCostGlob.recordCount].key.mtl.material) == packedKey;
 }
 
-void __cdecl RB_PixelCost_ResetPrim(unsigned __int64 packedKey)
+void __cdecl RB_PixelCost_ResetPrim(uint64_t packedKey)
 {
     GfxPixelCostRecord *record; // [esp+0h] [ebp-4h]
 
@@ -253,9 +253,9 @@ void __cdecl RB_PixelCost_ResetPrim(unsigned __int64 packedKey)
     *(uint32_t *)&record->costHistory[10] = 0;
 }
 
-unsigned __int64 RB_PixelCost_BeginTiming()
+uint64_t RB_PixelCost_BeginTiming()
 {
-    unsigned __int64 result; // rax
+    uint64_t result; // rax
 
     R_HW_FinishGpu();
     result = __rdtsc();

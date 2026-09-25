@@ -60,7 +60,7 @@ char __cdecl UILocalVar_FindLocation(UILocalVarContext *context, const char *nam
 
 uint32_t __cdecl UILocalVar_HashName(const char *name)
 {
-    __int16 hash; // [esp+0h] [ebp-8h]
+    int16_t hash; // [esp+0h] [ebp-8h]
     uint32_t i; // [esp+4h] [ebp-4h]
 
     hash = 0;

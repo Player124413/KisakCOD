@@ -336,7 +336,7 @@ void __cdecl CL_ParseSnapshot(msg_t *msg)
 void __cdecl CL_ParseGamestate(char *configstrings)
 {
     int v2; // r28
-    unsigned __int16 *v3; // r31
+    uint16_t *v3; // r31
     int v4; // r22
     unsigned int v5; // r30
 
@@ -355,8 +355,8 @@ void __cdecl CL_ParseGamestate(char *configstrings)
     v4 = configstrings - (char *)clients[0].configstrings;
     do
     {
-        v5 = *(unsigned __int16 *)((char *)v3 + v4);
-        if (!*(unsigned __int16 *)((char *)v3 + v4))
+        v5 = *(uint16_t *)((char *)v3 + v4);
+        if (!*(uint16_t *)((char *)v3 + v4))
             MyAssertHandler("c:\\trees\\cod3\\cod3src\\src\\client\\cl_parse.cpp", 164, 0, "%s", "s");
         if (*v3)
         {
@@ -400,7 +400,7 @@ void __cdecl CL_RecordServerCommands(serverCommands_s *serverCommands)
 {
     int i; // r31
     msg_t v3; // [sp+50h] [-4050h] BYREF
-    unsigned __int8 v4[32]; // [sp+80h] [-4020h] BYREF
+    uint8_t v4[32]; // [sp+80h] [-4020h] BYREF
 
     if (!cls.demorecording)
         MyAssertHandler("c:\\trees\\cod3\\cod3src\\src\\client\\cl_parse.cpp", 213, 0, "%s", "cls.demorecording");
@@ -408,7 +408,7 @@ void __cdecl CL_RecordServerCommands(serverCommands_s *serverCommands)
     MSG_WriteByte(&v3, 3);
     MSG_WriteShort(&v3, serverCommands->header.sequence - serverCommands->header.sent);
     for (i = serverCommands->header.sent + 1; i <= serverCommands->header.sequence; ++i)
-        MSG_WriteString(&v3, &serverCommands->buf[serverCommands->commands[(unsigned __int8)i]]);
+        MSG_WriteString(&v3, &serverCommands->buf[serverCommands->commands[(uint8_t)i]]);
     MSG_WriteByte(&v3, 4);
     CL_WriteDemoMessage(&v3, 0);
 }
@@ -452,8 +452,8 @@ void __cdecl CL_ParseCommandString(serverCommands_s *serverCommands)
             i <= serverCommands->header.sequence;
             clientConnections[0].serverCommands.commands[v4] = *(int *)((char *)&serverCommands->header.rover + v5))
         {
-            v4 = (unsigned __int8)i;
-            v5 = 4 * ((unsigned __int8)i++ + 2051);
+            v4 = (uint8_t)i;
+            v5 = 4 * ((uint8_t)i++ + 2051);
         }
         if (cls.demorecording)
             CL_RecordServerCommands(serverCommands);

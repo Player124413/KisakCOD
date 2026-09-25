@@ -22,7 +22,7 @@
 
 #define ANIM_FLAG_COMPLETE 1
 
-enum WeapAccuracyType : __int32
+enum WeapAccuracyType : int32_t
 {
     WEAP_ACCURACY_AI_VS_AI = 0x0,
     WEAP_ACCURACY_AI_VS_PLAYER = 0x1,
@@ -31,7 +31,7 @@ enum WeapAccuracyType : __int32
 
 union XAnimIndices // sizeof=0x4
 {                                       // ...
-    unsigned __int8 *_1;
+    uint8_t *_1;
     uint16_t *_2;
     void *data;
 };
@@ -45,12 +45,12 @@ struct XAnimNotifyInfo // sizeof=0x8
 };
 union XAnimDynamicIndices // sizeof=0x2
 {                                       // ...
-    unsigned __int8 _1[1];
+    uint8_t _1[1];
     uint16_t _2[1];
 };
 struct XAnimDeltaPartQuatDataFrames // sizeof=0x8
 {                                       // ...
-    __int16 (*frames)[2];
+    int16_t (*frames)[2];
     XAnimDynamicIndices indices;
     // padding byte
     // padding byte
@@ -58,7 +58,7 @@ struct XAnimDeltaPartQuatDataFrames // sizeof=0x8
 
 union XAnimDynamicFrames // sizeof=0x4
 {                                       // ...
-    unsigned __int8 (*_1)[3];
+    uint8_t (*_1)[3];
     uint16_t (*_2)[3];
 };
 struct XAnimPartTransFrames // sizeof=0x20
@@ -79,19 +79,19 @@ union XAnimPartTransData // sizeof=0x20
 struct XAnimPartTrans // sizeof=0x24
 {
     uint16_t size;
-    unsigned __int8 smallTrans;
+    uint8_t smallTrans;
     // padding byte
     XAnimPartTransData u;
 };
 union XAnimDeltaPartQuatData // sizeof=0x8
 {                                       // ...
     XAnimDeltaPartQuatDataFrames frames;
-    __int16 frame0[2];
+    int16_t frame0[2];
 };
 union XAnimPartQuatFrames // sizeof=0x4
 {                                       // ...
-    __int16 (*frames)[4];
-    __int16 (*frames2)[2];
+    int16_t (*frames)[4];
+    int16_t (*frames2)[2];
 };
 struct XAnimPartQuatDataFrames // sizeof=0x8
 {                                       // ...
@@ -103,8 +103,8 @@ struct XAnimPartQuatDataFrames // sizeof=0x8
 union XAnimPartQuatData // sizeof=0x8
 {                                       // ...
     XAnimPartQuatDataFrames frames;
-    __int16 frame0[4];
-    __int16 frame02[2];
+    int16_t frame0[4];
+    int16_t frame02[2];
 };
 struct XAnimPartQuat // sizeof=0xC
 {
@@ -116,7 +116,7 @@ struct XAnimPartQuat // sizeof=0xC
 struct XAnimPartQuatPtr // sizeof=0x8
 {                                       // ...
     XAnimPartQuat *quat;                // ...
-    unsigned __int8 partIndex;          // ...
+    uint8_t partIndex;          // ...
     // padding byte
     // padding byte
     // padding byte
@@ -124,7 +124,7 @@ struct XAnimPartQuatPtr // sizeof=0x8
 struct XAnimPartTransPtr // sizeof=0x8
 {                                       // ...
     XAnimPartTrans *trans;              // ...
-    unsigned __int8 partIndex;          // ...
+    uint8_t partIndex;          // ...
     // padding byte
     // padding byte
     // padding byte
@@ -159,9 +159,9 @@ struct XAnimParts // sizeof=0x58
     uint16_t numframes;
     bool bLoop;
     bool bDelta;
-    unsigned __int8 boneCount[10];
-    unsigned __int8 notifyCount;
-    unsigned __int8 assetType;
+    uint8_t boneCount[10];
+    uint8_t notifyCount;
+    uint8_t assetType;
     bool isDefault;
     // padding byte
     uint32_t randomDataShortCount;
@@ -169,11 +169,11 @@ struct XAnimParts // sizeof=0x58
     float framerate;
     float frequency;
     uint16_t *names;
-    unsigned __int8 *dataByte;
-    __int16 *dataShort;
+    uint8_t *dataByte;
+    int16_t *dataShort;
     int *dataInt;
-    __int16 *randomDataShort;
-    unsigned __int8 *randomDataByte;
+    int16_t *randomDataShort;
+    uint8_t *randomDataByte;
     int *randomDataInt;
     XAnimIndices indices;
     XAnimNotifyInfo *notify;
@@ -230,8 +230,8 @@ struct XAnimState // sizeof=0x20
 {                                       // ...
     float currentAnimTime;              // ...
     float oldTime;                      // ...
-    __int16 cycleCount;                 // ...
-    __int16 oldCycleCount;              // ...
+    int16_t cycleCount;                 // ...
+    int16_t oldCycleCount;              // ...
     float goalTime;                     // ...
     float goalWeight;                   // ...
     float weight;                       // ...
@@ -245,7 +245,7 @@ struct XAnimState // sizeof=0x20
 struct XAnimInfo // sizeof=0x40
 {                                       // ...
     uint16_t notifyChild;
-    __int16 notifyIndex;
+    int16_t notifyIndex;
     uint16_t notifyName;
     uint16_t notifyType;
     uint16_t prev;              // ...
@@ -314,7 +314,7 @@ struct dmaterial_t // sizeof=0x48
 struct cNode_t // sizeof=0x8
 {
     cplane_s* plane;
-    __int16 children[2];
+    int16_t children[2];
 };
 
 struct cLeafBrushNodeLeaf_t // sizeof=0x4
@@ -334,9 +334,9 @@ union cLeafBrushNodeData_t // sizeof=0xC
 };
 struct cLeafBrushNode_s // sizeof=0x14
 {
-    unsigned __int8 axis;
+    uint8_t axis;
     // padding byte
-    __int16 leafBrushCount;
+    int16_t leafBrushCount;
     int contents;
     cLeafBrushNodeData_t data;
 };
@@ -350,8 +350,8 @@ struct CollisionBorder // sizeof=0x1C
 };
 struct CollisionPartition // sizeof=0xC
 {
-    unsigned __int8 triCount;
-    unsigned __int8 borderCount;
+    uint8_t triCount;
+    uint8_t borderCount;
     // padding byte
     // padding byte
     int firstTri;
@@ -375,22 +375,22 @@ struct cbrushside_t // sizeof=0xC
 {                                       // ...
     cplane_s* plane;                    // ...
     uint32_t materialNum;           // ...
-    __int16 firstAdjacentSideOffset;
-    unsigned __int8 edgeCount;
+    int16_t firstAdjacentSideOffset;
+    uint8_t edgeCount;
     // padding byte
 };
 
-struct __declspec(align(16)) cbrush_t // sizeof=0x50
+struct __attribute__((aligned(16))) cbrush_t // sizeof=0x50
 {                                       // ...
     float mins[3];
     int contents;
     float maxs[3];
     uint32_t numsides;
     cbrushside_t* sides;
-    __int16 axialMaterialNum[2][3];
-    unsigned __int8* baseAdjacentSide;
-    __int16 firstAdjacentSideOffsets[2][3];
-    unsigned __int8 edgeCount[2][3];
+    int16_t axialMaterialNum[2][3];
+    uint8_t* baseAdjacentSide;
+    int16_t firstAdjacentSideOffsets[2][3];
+    uint8_t edgeCount[2][3];
     // padding byte
     // padding byte
     // padding byte
@@ -417,10 +417,10 @@ struct DynEntityColl;
 
 struct ComPrimaryLight // sizeof=0x44 (SP/MP Same)
 {
-    unsigned __int8 type;
-    unsigned __int8 canUseShadowMap;
-    unsigned __int8 exponent;
-    unsigned __int8 unused;
+    uint8_t type;
+    uint8_t canUseShadowMap;
+    uint8_t exponent;
+    uint8_t unused;
     float color[3];
     float dir[3];
     float origin[3];
@@ -903,7 +903,7 @@ union XAssetHeader // sizeof=0x4
     void *data;
 };
 
-enum XAssetType : __int32 // Accurate to SP/MP (Win32)
+enum XAssetType : int32_t // Accurate to SP/MP (Win32)
 {
 //#ifdef KISAK_MP 
     ASSET_TYPE_XMODELPIECES = 0x0,
@@ -1054,7 +1054,7 @@ struct XAssetPool
 struct XAssetEntry // sizeof=0x10
 {                                       // ...
     XAsset asset;                       // ...
-    unsigned __int8 zoneIndex;
+    uint8_t zoneIndex;
     bool inuse;
     uint16_t nextHash;
     uint16_t nextOverride;
@@ -1079,15 +1079,15 @@ struct XZoneInfo // sizeof=0xC
 
 struct XBlock // sizeof=0x8
 {                                       // ...
-    unsigned __int8 *data;
+    uint8_t *data;
     uint32_t size;
 };
 
 struct XZoneMemory // sizeof=0x58
 {                                       // ...
     XBlock blocks[9];
-    unsigned __int8 *lockedVertexData;
-    unsigned __int8 *lockedIndexData;
+    uint8_t *lockedVertexData;
+    uint8_t *lockedIndexData;
     void *vertexBuffer;
     void *indexBuffer;
 };
@@ -1167,18 +1167,18 @@ static_assert(sizeof(XRigidVertList) == 12);
 
 struct XSurfaceVertexInfo // sizeof=0xC
 {                                       // ...
-    __int16 vertCount[4];
+    int16_t vertCount[4];
     uint16_t *vertsBlend;
 };
 static_assert(sizeof(XSurfaceVertexInfo) == 12);
 
 struct XSurface // sizeof=0x38
 {
-    unsigned __int8 tileMode;
+    uint8_t tileMode;
     bool deformed;
     uint16_t vertCount;
     uint16_t triCount;
-    unsigned __int8 zoneHandle;
+    uint8_t zoneHandle;
     // padding byte
     uint16_t baseTriIndex;
     uint16_t baseVertIndex;

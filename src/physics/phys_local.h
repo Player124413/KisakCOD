@@ -10,7 +10,7 @@
 #include <universal/memfile.h>
 #include <universal/pool_allocator.h>
 
-enum $B7C75F5EC8C61F46B3FEFC285D8D85F1 : __int32
+enum $B7C75F5EC8C61F46B3FEFC285D8D85F1 : int32_t
 {
     GEOM_CLASS_BRUSHMODEL = 0xB,
     GEOM_CLASS_BRUSH = 0xC,
@@ -19,7 +19,7 @@ enum $B7C75F5EC8C61F46B3FEFC285D8D85F1 : __int32
     GEOM_CLASS_WORLD = 0xF,
 };
 
-enum BodyState_t : __int32
+enum BodyState_t : int32_t
 {                                       // ...
     BS_DEAD = 0x0,
     BS_DOBJ_WAIT = 0x1,
@@ -46,7 +46,7 @@ struct BodyState // sizeof=0x70
     int enabled; // ODE body awake/enabled flag (dBodyIsEnabled)
 };
 
-enum physStuckState_t : __int32
+enum physStuckState_t : int32_t
 {                                       // ...
     PHYS_OBJ_STATE_POSSIBLY_STUCK = 0x0,
     PHYS_OBJ_STATE_STUCK = 0x1,
@@ -97,9 +97,9 @@ struct BrushWrapper // sizeof=0x50
     float maxs[3];
     uint32_t numsides;
     cbrushside_t *sides;
-    __int16 axialMaterialNum[2][3];
+    int16_t axialMaterialNum[2][3];
     uint8_t *baseAdjacentSide;
-    __int16 firstAdjacentSideOffsets[2][3];
+    int16_t firstAdjacentSideOffsets[2][3];
     uint8_t edgeCount[2][3];
     // padding byte
     // padding byte
@@ -273,7 +273,7 @@ struct dContactGeomExt // sizeof=0x30
 
 union BrushInfo_u // sizeof=0x4
 {                                       // ...
-    unsigned __int16 brushModel;
+    uint16_t brushModel;
     const cbrush_t *brush;
 };
 struct BrushInfo // sizeof=0x10
@@ -340,7 +340,7 @@ void __cdecl Phys_ObjAddGeomBoxRotated(
 void __cdecl Phys_ObjAddGeomBrushModel(
     PhysWorld worldIndex,
     dxBody *id,
-    unsigned __int16 brushModel,
+    uint16_t brushModel,
     const PhysMass *physMass);
 void __cdecl Phys_ObjAddGeomBrush(PhysWorld worldIndex, dxBody *id, const cbrush_t *brush, const PhysMass *physMass);
 void __cdecl Phys_ObjAddGeomCylinder(PhysWorld worldIndex, dxBody *id, const float *boxMin, const float *boxMax);
@@ -496,7 +496,7 @@ void __cdecl Phys_GetCapsuleAABB(dxGeom *geom, float *aabb);
 dxGeom *__cdecl Phys_CreateBrushmodelGeom(
     dxSpace *space,
     dxBody *body,
-    unsigned __int16 brushModel,
+    uint16_t brushModel,
     const float *centerOfMass);
 dxGeom *__cdecl Phys_CreateBrushGeom(dxSpace *space, dxBody *body, const cbrush_t *brush, const float *centerOfMass);
 dxGeom *__cdecl Phys_CreateCylinderGeom(dxSpace *space, dxBody *body, const GeomStateCylinder *cyl);
@@ -505,7 +505,7 @@ dxGeom *__cdecl Phys_CreateCapsuleGeom(dxSpace *space, dxBody *body, const GeomS
 
 
 // phys_coll_boxbrush
-enum PolyOrientation : __int32
+enum PolyOrientation : int32_t
 {                                       // ...
     POLY_COUNTERCLOCKWISE = 0x0,
     POLY_CLOCKWISE = 0x1,
@@ -518,7 +518,7 @@ struct Poly // sizeof=0x8
 };
 struct BrushTrimeshData // sizeof=0x18
 {                                       // ...
-    const unsigned __int16 *indices;    // ...
+    const uint16_t *indices;    // ...
     const float (*verts)[3];            // ...
     int triCount;                       // ...
     const objInfo *input;               // ...
@@ -671,7 +671,7 @@ void __cdecl Phys_CollideOrientedBrushModelWithBrush(const cbrush_t *fixedBrush,
 void __cdecl Phys_CollideOrientedBrushWithBrush_Wrapper(const cbrush_t *orientedBrush, void *userData);
 void __cdecl Phys_CollideOrientedBrushWithTriangleList(
     const cbrush_t *orientedBrush,
-    const unsigned __int16 *indices,
+    const uint16_t *indices,
     const float (*verts)[3],
     int triCount,
     const objInfo *input,
@@ -690,7 +690,7 @@ uint32_t __cdecl Phys_AxialSideToJ(uint32_t axialSide);
 void __cdecl Phys_DrawPolyTransformed(const Poly *poly, const float *color, const float *pos, const float (*R)[3]);
 double __cdecl Phys_TestTriangleAgainstBrushPlane(const float *brushPlane, const float (*triangle)[3]);
 void __cdecl Phys_CollideOrientedBrushModelWithTriangleList(
-    const unsigned __int16 *indices,
+    const uint16_t *indices,
     const float (*verts)[3],
     int triCount,
     const objInfo *info,
@@ -698,7 +698,7 @@ void __cdecl Phys_CollideOrientedBrushModelWithTriangleList(
     Results *results);
 void __cdecl Phys_CollideOrientedBrushWithTriangleList_Wrapper(const cbrush_t *orientedBrush, void *userData);
 void __cdecl Phys_CollideBoxWithTriangleList(
-    const unsigned __int16 *indices,
+    const uint16_t *indices,
     const float (*verts)[3],
     uint32_t triCount,
     const objInfo *info,

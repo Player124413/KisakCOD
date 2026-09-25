@@ -10,13 +10,13 @@
 
 #define PATH_MAX_NODES 8192
 
-enum nearestNodeHeightCheck : __int32
+enum nearestNodeHeightCheck : int32_t
 {
     NEAREST_NODE_DO_HEIGHT_CHECK = 0x0,
     NEAREST_NODE_DONT_DO_HEIGHT_CHECK = 0x1,
 };
 
-enum nodeType : __int32
+enum nodeType : int32_t
 {                                       // ...
     NODE_BADNODE = 0x0,
     NODE_PATHNODE = 0x1,
@@ -70,7 +70,7 @@ struct pathlocal_t_tag
     int maxNodes;
     int nodeCount;
 };
-struct __declspec(align(128)) pathlocal_t
+struct __attribute__((aligned(128))) pathlocal_t
 {
     PathLinkInfo pathLinkInfoArray[2048];
     int pathLinkInfoArrayInited;
@@ -118,10 +118,10 @@ struct pathnode_constant_t // sizeof=0x44
     float forward[2];
     float fRadius;
     float minUseDistSq;
-    __int16 wOverlapNode[2];
-    __int16 wChainId;
-    __int16 wChainDepth;
-    __int16 wChainParent;
+    int16_t wOverlapNode[2];
+    int16_t wChainId;
+    int16_t wChainDepth;
+    int16_t wChainParent;
     uint16_t totalLinkCount;
     pathlink_s *Links;
 };
@@ -133,10 +133,10 @@ struct pathnode_dynamic_t // sizeof=0x20
     int iFreeTime;
     int iValidTime[3];
     int inPlayerLOSTime;
-    __int16 wLinkCount;
-    __int16 wOverlapCount;
-    __int16 turretEntNumber;
-    __int16 userCount;
+    int16_t wLinkCount;
+    int16_t wOverlapCount;
+    int16_t turretEntNumber;
+    int16_t userCount;
 };
 #elif KISAK_SP
 struct pathnode_dynamic_t
@@ -145,10 +145,10 @@ struct pathnode_dynamic_t
     int iFreeTime;
     int iValidTime[3];
     int inPlayerLOSTime;
-    __int16 wLinkCount;
-    __int16 wOverlapCount;
-    __int16 turretEntNumber;
-    __int16 userCount;
+    int16_t wLinkCount;
+    int16_t wOverlapCount;
+    int16_t turretEntNumber;
+    int16_t userCount;
 };
 #elif defined(KISAK_RADIANT)
 struct pathnode_dynamic_t // sizeof=0x20 — same layout as MP; Radiant has no AI
@@ -157,10 +157,10 @@ struct pathnode_dynamic_t // sizeof=0x20 — same layout as MP; Radiant has no A
     int iFreeTime;
     int iValidTime[3];
     int inPlayerLOSTime;
-    __int16 wLinkCount;
-    __int16 wOverlapCount;
-    __int16 turretEntNumber;
-    __int16 userCount;
+    int16_t wLinkCount;
+    int16_t wOverlapCount;
+    int16_t turretEntNumber;
+    int16_t userCount;
 };
 #endif
 

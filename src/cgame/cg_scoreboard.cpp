@@ -186,7 +186,7 @@ void __cdecl CG_DrawObjectiveList(
     const char *v9; // r29
     const char *v11; // r28
     double fadeAlpha; // fp1
-    __int64 v13; // r11
+    int64_t v13; // r11
     const float *v14; // r6
     int lineCharCount; // r5
     int v16; // r4
@@ -212,7 +212,7 @@ void __cdecl CG_DrawObjectiveList(
     double height; // fp30
     long double v40; // fp2
     double w; // fp0
-    __int64 v43; // r11
+    int64_t v43; // r11
     double width; // fp31
     int v45; // r4
     double x; // fp1
@@ -233,9 +233,9 @@ void __cdecl CG_DrawObjectiveList(
     float v61; // [sp+60h] [-180h]
     float v62; // [sp+68h] [-178h]
     float v63; // [sp+70h] [-170h]
-    __int64 v64; // [sp+80h] [-160h] BYREF
+    int64_t v64; // [sp+80h] [-160h] BYREF
     const char *v65; // [sp+88h] [-158h]
-    __int64 v66; // [sp+90h] [-150h]
+    int64_t v66; // [sp+90h] [-150h]
     float v67; // [sp+A0h] [-140h]
     float v68; // [sp+A4h] [-13Ch]
     float v69; // [sp+A8h] [-138h]

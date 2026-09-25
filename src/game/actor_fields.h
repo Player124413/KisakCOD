@@ -16,7 +16,7 @@ struct actor_fields_s
     void(*getter)(actor_s *, const actor_fields_s *);
 };
 
-unsigned __int8 *__cdecl BaseForFields(unsigned __int8 *actor, const actor_fields_s *fields);
+uint8_t *__cdecl BaseForFields(uint8_t *actor, const actor_fields_s *fields);
 const actor_fields_s *__cdecl FindFieldForName(const actor_fields_s *fields, const char *pszFieldName);
 void __cdecl ActorScr_SetSpecies(actor_s *pSelf, const actor_fields_s *pField);
 void __cdecl ActorScr_GetSpecies(actor_s *pSelf, const actor_fields_s *pField);
@@ -40,8 +40,8 @@ void __cdecl PrintFieldUsage(const actor_fields_s *fields);
 void Cmd_AI_PrintUsage();
 void __cdecl Cmd_AI_DisplayInfo(actor_s *actor);
 void __cdecl Cmd_AI_Delete(actor_s *actor);
-void __cdecl Cmd_AI_DisplayValue(actor_s *pSelf, unsigned __int8 *pBase, const actor_fields_s *pField);
-void __cdecl Cmd_AI_SetValue(actor_s *pSelf, int argc, unsigned __int8 *pBase, const actor_fields_s *pField);
+void __cdecl Cmd_AI_DisplayValue(actor_s *pSelf, uint8_t *pBase, const actor_fields_s *pField);
+void __cdecl Cmd_AI_SetValue(actor_s *pSelf, int argc, uint8_t *pBase, const actor_fields_s *pField);
 void __cdecl Cmd_AI_Dispatch(int argc, actor_s *pSelf, const actor_fields_s *fields, const actor_fields_s *pField);
 void __cdecl Cmd_AI_EntityNumber(
     int argc,

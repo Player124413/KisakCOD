@@ -66,7 +66,7 @@ enum //$5D1712DF4D603403B9E48E83EDF32C0E
     GFXS1_STENCILOP_FRONTBACK_MASK = 0x1FF1FF00,
 };
 
-enum CodeConstant : __int32 // LWSS: not a real enum name
+enum CodeConstant : int32_t // LWSS: not a real enum name
 {
     CONST_SRC_CODE_MAYBE_DIRTY_PS_BEGIN = 0x0,
     CONST_SRC_CODE_LIGHT_POSITION = 0x0,
@@ -173,7 +173,7 @@ enum CodeConstant : __int32 // LWSS: not a real enum name
     CONST_SRC_NONE = 0x5B,
 };
 
-enum $091E6234341635363F651E71B7EC01B7 : __int32
+enum $091E6234341635363F651E71B7EC01B7 : int32_t
 {
     STREAM_SRC_POSITION = 0x0,
     STREAM_SRC_COLOR = 0x1,
@@ -189,7 +189,7 @@ enum $091E6234341635363F651E71B7EC01B7 : __int32
     STREAM_SRC_COUNT = 0x9,
 };
 
-enum $DC3485627FCD5339F6A2D1EEC8B74E34 : __int32
+enum $DC3485627FCD5339F6A2D1EEC8B74E34 : int32_t
 {
     SAMPLER_FILTER_SHIFT = 0x0,
     SAMPLER_FILTER_NEAREST = 0x1,
@@ -251,9 +251,9 @@ int __cdecl R_BeginMaterial(GfxCmdBufState *state, const Material *material, Mat
 void __cdecl R_ClearAllStreamSources(GfxCmdBufPrimState *state);
 void __cdecl R_DrawIndexedPrimitive(GfxCmdBufPrimState *state, const GfxDrawPrimArgs *args);
 void __cdecl R_ChangeState_0(GfxCmdBufState *state, uint32_t stateBits0);
-void __cdecl R_HW_SetAlphaTestEnable(IDirect3DDevice9 *device, __int16 stateBits0);
+void __cdecl R_HW_SetAlphaTestEnable(IDirect3DDevice9 *device, int16_t stateBits0);
 void __cdecl R_HW_SetColorMask(IDirect3DDevice9 *device, uint32_t stateBits0);
-void __cdecl R_HW_SetCullFace(IDirect3DDevice9 *device, __int16 stateBits0);
+void __cdecl R_HW_SetCullFace(IDirect3DDevice9 *device, int16_t stateBits0);
 void __cdecl R_HW_SetPolygonMode(IDirect3DDevice9 *device, signed int stateBits0);
 void __cdecl R_HW_DisableBlend(IDirect3DDevice9 *device);
 void __cdecl R_HW_SetBlend(
@@ -261,7 +261,7 @@ void __cdecl R_HW_SetBlend(
     bool blendWasEnabled,
     uint32_t changedBits,
     uint32_t stateBits0);
-void __cdecl R_SetAlphaTestFunction(GfxCmdBufState *state, __int16 stateBits0);
+void __cdecl R_SetAlphaTestFunction(GfxCmdBufState *state, int16_t stateBits0);
 void __cdecl R_ChangeState_1(GfxCmdBufState *state, uint32_t stateBits1);
 void __cdecl R_HW_SetDepthWriteEnable(IDirect3DDevice9 *device, char stateBits1);
 void __cdecl R_HW_SetDepthTestEnable(IDirect3DDevice9 *device, char stateBits1);
@@ -350,7 +350,7 @@ void __cdecl R_SetCodeConstantFromVec4(GfxCmdBufSourceState *source, CodeConstan
 
 
 
-void __cdecl R_SetAlphaAntiAliasingState(IDirect3DDevice9 *device, __int16 stateBits0);
+void __cdecl R_SetAlphaAntiAliasingState(IDirect3DDevice9 *device, int16_t stateBits0);
 
 
 inline bool R_IsMatrixConstantUpToDate(GfxCmdBufSourceState *source, int version)

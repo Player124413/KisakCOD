@@ -57,7 +57,7 @@ enum playerOtherFlags
     POF_PLAYER = 4
 };
 
-enum animBodyPart_t : __int32
+enum animBodyPart_t : int32_t
 {                                       // ...
     ANIM_BP_UNUSED = 0x0,
     ANIM_BP_LEGS = 0x1,
@@ -66,7 +66,7 @@ enum animBodyPart_t : __int32
     NUM_ANIM_BODYPARTS = 0x4,
 };
 
-enum aistateEnum_t : __int32
+enum aistateEnum_t : int32_t
 {                                       // ...
     AISTATE_COMBAT = 0x0,
     MAX_AISTATES = 0x1,
@@ -81,7 +81,7 @@ inline aistateEnum_t &operator--(aistateEnum_t &e, int i)
     return e;
 }
 
-enum scriptAnimStrafeStates_t : __int32
+enum scriptAnimStrafeStates_t : int32_t
 {                                       // ...
     ANIM_STRAFE_NOT = 0x0,
     ANIM_STRAFE_LEFT = 0x1,
@@ -89,7 +89,7 @@ enum scriptAnimStrafeStates_t : __int32
     NUM_ANIM_STRAFESTATES = 0x3,
 };
 
-enum scriptAnimMoveTypes_t : __int32
+enum scriptAnimMoveTypes_t : int32_t
 {                                       // ...
     ANIM_MT_UNUSED = 0x0,
     ANIM_MT_IDLE = 0x1,
@@ -137,7 +137,7 @@ enum scriptAnimMoveTypes_t : __int32
     NUM_ANIM_MOVETYPES = 0x2B,
 };
 
-enum scriptAnimEventTypes_t : __int32
+enum scriptAnimEventTypes_t : int32_t
 {                                       // ...
     ANIM_ET_PAIN = 0x0,
     ANIM_ET_DEATH = 0x1,
@@ -163,14 +163,14 @@ enum scriptAnimEventTypes_t : __int32
     NUM_ANIM_EVENTTYPES = 0x15,
 };
 
-enum scriptAnimNoteType_t : __int32
+enum scriptAnimNoteType_t : int32_t
 {
     ANIM_NOTE_NONE = 0x0,
     ANIM_NOTE_RELOAD = 0x1,
     NUM_ANIM_NOTES = 0x2,
 };
 
-enum animScriptConditionTypes_t : __int32
+enum animScriptConditionTypes_t : int32_t
 {                                       // ...
     ANIM_CONDTYPE_BITFLAGS = 0x0,       // ...
     ANIM_CONDTYPE_VALUE = 0x1,       // ...
@@ -178,7 +178,7 @@ enum animScriptConditionTypes_t : __int32
 };
 
 
-enum ShockViewTypes : __int32
+enum ShockViewTypes : int32_t
 {                                       // ...
     SHELLSHOCK_VIEWTYPE_BLURRED = 0x0,
     SHELLSHOCK_VIEWTYPE_FLASHED = 0x1,
@@ -198,7 +198,7 @@ union hudelem_color_t // sizeof=0x4
 };
 static_assert(sizeof(union hudelem_color_t) == 0x4);
 
-enum ViewLockTypes : __int32
+enum ViewLockTypes : int32_t
 {                                       // XREF: playerState_s/r
     PLAYERVIEWLOCK_NONE = 0x0,
     PLAYERVIEWLOCK_FULL = 0x1,
@@ -354,7 +354,7 @@ struct shellshock_parms_t_movement // sizeof=0x1
 };
 static_assert(sizeof(shellshock_parms_t_movement) == 0x1);
 
-const struct shellshock_parms_t // sizeof=0x268
+struct shellshock_parms_t // sizeof=0x268
 {                                       // ...
     shellshock_parms_t_screenblend screenBlend;
     shellshock_parms_t_view view;
@@ -379,7 +379,7 @@ struct shellshock_t // sizeof=0x20
 };
 static_assert(sizeof(shellshock_t) == 0x20);
 
-struct __declspec(align(8)) animation_s // sizeof=0x68
+struct __attribute__((aligned(8))) animation_s // sizeof=0x68
 {                                       // ...
     char name[64];
     int32_t initialLerp;
@@ -417,7 +417,7 @@ struct animScriptCommand_t // sizeof=0x10
 };
 static_assert(sizeof(animScriptCommand_t) == 0x10);
 
-enum animScriptParseMode_t : __int32
+enum animScriptParseMode_t : int32_t
 {                                       // ...
     PARSEMODE_DEFINES = 0x0,
     PARSEMODE_ANIMATION = 0x1,
@@ -453,7 +453,7 @@ struct scr_animtree_t // sizeof=0x4
 };
 static_assert(sizeof(scr_animtree_t) == 0x4);
 
-struct __declspec(align(8)) animScriptData_t // sizeof=0x9A9D0
+struct __attribute__((aligned(8))) animScriptData_t // sizeof=0x9A9D0
 {                                       // ...
     animation_s animations[512];
     uint32_t numAnimations;
@@ -584,7 +584,7 @@ struct hudElemSoundInfo_t // sizeof=0x4
 static_assert(sizeof(hudElemSoundInfo_t) == 0x4);
 
 #ifdef KISAK_MP
-enum he_type_t : __int32
+enum he_type_t : int32_t
 {                                       // XREF: hudelem_s/r
     HE_TYPE_FREE = 0x0,
     HE_TYPE_TEXT = 0x1,
@@ -603,7 +603,7 @@ enum he_type_t : __int32
     HE_TYPE_COUNT = 0xE,
 };
 #elif KISAK_SP
-enum he_type_t : __int32
+enum he_type_t : int32_t
 {
     HE_TYPE_FREE = 0x0,
     HE_TYPE_TEXT = 0x1,
@@ -620,7 +620,7 @@ enum he_type_t : __int32
 };
 #endif
 
-enum hintType_t : __int32
+enum hintType_t : int32_t
 {
     HINT_NONE = 0x0,
     HINT_NOICON = 0x1,
@@ -737,7 +737,7 @@ struct MantleState // sizeof=0x10
 };
 static_assert(sizeof(MantleState) == 0x10);
 
-enum MantleAnims : __int32
+enum MantleAnims : int32_t
 {
     MANTLE_ROOT = 0x0,
     MANTLE_UP_57 = 0x1,
@@ -759,7 +759,7 @@ enum MantleAnims : __int32
     MANTLE_OVER_COUNT = 0x3,
 };
 
-enum PlayerSpreadOverrideState : __int32
+enum PlayerSpreadOverrideState : int32_t
 {
     PSOS_DISABLED = 0x0,
     PSOS_RESETTING = 0x1,
@@ -780,7 +780,7 @@ struct playerState_s_hud
 };
 #endif
 
-enum ActionSlotType : __int32
+enum ActionSlotType : int32_t
 {                                       // XREF: playerState_s/r
     ACTIONSLOTTYPE_DONOTHING = 0x0,
     ACTIONSLOTTYPE_SPECIFYWEAPON = 0x1,
@@ -811,7 +811,7 @@ struct SprintState // sizeof=0x14
 };
 static_assert(sizeof(SprintState) == 0x14);
 
-enum objectiveState_t : __int32
+enum objectiveState_t : int32_t
 {                                       // XREF: objective_t/r
                                         // Scr_Objective_Add/r ...
     OBJST_EMPTY = 0x0,
@@ -834,7 +834,7 @@ struct objective_t // sizeof=0x1C
 };
 static_assert(sizeof(objective_t) == 0x1C);
 
-enum pmflags_t : __int32 // (MP/SP same)
+enum pmflags_t : int32_t // (MP/SP same)
 {
     PMF_PRONE = 1 << 0,
     PMF_DUCKED = 1 << 1,
@@ -866,7 +866,7 @@ enum pmflags_t : __int32 // (MP/SP same)
 #endif
 };
 
-enum statIndex_t : __int32
+enum statIndex_t : int32_t
 {
     STAT_HEALTH = 0x0,
     STAT_DEAD_YAW = 0x1,
@@ -877,7 +877,7 @@ enum statIndex_t : __int32
 };
 
 #ifdef KISAK_MP
-enum pmtype_t : __int32
+enum pmtype_t : int32_t
 {
     PM_NORMAL = 0x0,
     PM_NORMAL_LINKED = 0x1,
@@ -1017,7 +1017,7 @@ struct playerState_s // sizeof=0x2F64
 static_assert(sizeof(playerState_s) == 0x2F64);
 
 #elif KISAK_SP
-enum pmtype_t : __int32
+enum pmtype_t : int32_t
 {
     PM_NORMAL = 0x0,
     PM_NORMAL_LINKED = 0x1,
@@ -1333,7 +1333,7 @@ struct turretInfo_s // sizeof=0x48
 static_assert(sizeof(turretInfo_s) == 0x48);
 
 #ifdef KISAK_MP
-enum vehicleRideSlots_t : __int32
+enum vehicleRideSlots_t : int32_t
 {
     VEHICLE_RIDESLOT_DRIVER = 0x0,
     VEHICLE_RIDESLOT_PASSENGER = 0x1,
@@ -1474,21 +1474,21 @@ struct VehicleTags
 };
 #endif
 
-enum VehicleMoveState : __int32
+enum VehicleMoveState : int32_t
 {                                       // ...
     VEH_MOVESTATE_STOP = 0x0,
     VEH_MOVESTATE_MOVE = 0x1,
     VEH_MOVESTATE_HOVER = 0x2,
 };
 
-enum VehicleManualMode : __int32
+enum VehicleManualMode : int32_t
 {
     VEH_MANUAL_OFF = 0x0,
     VEH_MANUAL_ON = 0x1,
     VEH_MANUAL_TRANS = 0x2,
 };
 
-enum VehicleTurretState : __int32
+enum VehicleTurretState : int32_t
 {                                       // ...
     VEH_TURRET_STOPPED = 0x0,
     VEH_TURRET_STOPPING = 0x1,
@@ -1594,13 +1594,13 @@ struct scr_vehicle_s // sizeof=0x338
     vehicle_pathpos_t pathPos;
     vehicle_physic_t phys;
     int entNum;
-    __int16 infoIdx;
+    int16_t infoIdx;
     // padding byte
     // padding byte
     int flags;
     int team;
     VehicleMoveState moveState;
-    __int16 waitNode;
+    int16_t waitNode;
     // padding byte
     // padding byte
     float waitSpeed;
@@ -1650,13 +1650,13 @@ struct scr_vehicle_s // sizeof=0x338
 };
 #endif
 
-enum proneCheckType_t : __int32
+enum proneCheckType_t : int32_t
 {                                       // ...
     PCT_CLIENT = 0x0,
     PCT_ACTOR = 0x1,
 };
 
-enum itemType_t : __int32
+enum itemType_t : int32_t
 {                                       // ...
     IT_BAD = 0x0,
     IT_WEAPON = 0x1,
@@ -1668,7 +1668,7 @@ struct gitem_s // sizeof=0x4
 };
 static_assert(sizeof(gitem_s) == 0x4);
 
-enum PmStanceFrontBack : __int32
+enum PmStanceFrontBack : int32_t
 {                                       // ...
     PM_STANCE_STAND = 0x0,
     PM_STANCE_PRONE = 0x1,
@@ -1808,7 +1808,7 @@ extern bgs_t *bgs;
 
 
 // bg_misc
-enum entity_event_t : __int32;
+enum entity_event_t : int32_t;
 struct WeaponDef;
 struct playerState_s;
 struct entityState_s;

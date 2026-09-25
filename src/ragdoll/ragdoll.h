@@ -5,7 +5,7 @@
 
 #define RAGDOLL_DOBJ_VALID_STATE 2
 
-enum JointType : __int32
+enum JointType : int32_t
 {                                       // ...
     RAGDOLL_JOINT_NONE = 0x0,
     RAGDOLL_JOINT_HINGE = 0x1,

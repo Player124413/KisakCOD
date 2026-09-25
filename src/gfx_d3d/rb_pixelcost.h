@@ -2,7 +2,7 @@
 #include "r_material.h"
 #include "rb_backend.h"
 
-enum GfxPixelCostMode : __int32
+enum GfxPixelCostMode : int32_t
 {                                       // ...
     GFX_PIXEL_COST_MODE_OFF = 0x0,
     GFX_PIXEL_COST_MODE_MEASURE_COST = 0x1,
@@ -20,10 +20,10 @@ const Material *__cdecl R_PixelCost_GetAccumulationMaterial(const Material *mate
 void __cdecl R_PixelCost_BeginSurface(GfxCmdBufContext context);
 void __cdecl R_PixelCost_SetConstant(GfxCmdBufSourceState *source, int cost);
 int __cdecl RB_PixelCost_GetCostForRecordIndex(int recordIndex);
-unsigned __int64 __cdecl R_PixelCost_PackedKeyForMaterial(__int64 material);
-bool __cdecl RB_PixelCost_DoesPrimMatch(unsigned __int64 packedKey);
-void __cdecl RB_PixelCost_ResetPrim(unsigned __int64 packedKey);
-unsigned __int64 RB_PixelCost_BeginTiming();
+uint64_t __cdecl R_PixelCost_PackedKeyForMaterial(int64_t material);
+bool __cdecl RB_PixelCost_DoesPrimMatch(uint64_t packedKey);
+void __cdecl RB_PixelCost_ResetPrim(uint64_t packedKey);
+uint64_t RB_PixelCost_BeginTiming();
 void __cdecl R_HW_FinishGpu();
 void __cdecl R_PixelCost_EndSurface(GfxCmdBufContext context);
 int RB_PixelCost_AccumulateMsec();

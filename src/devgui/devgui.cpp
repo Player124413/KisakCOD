@@ -85,7 +85,7 @@ uint16_t __cdecl DevGui_ConstructPath_r(uint16_t parent, const char *path)
 {
     char label[28]; // [esp+0h] [ebp-28h] BYREF
     DevGuiTokenResult tokResult; // [esp+20h] [ebp-8h]
-    __int16 sortKey; // [esp+24h] [ebp-4h] BYREF
+    int16_t sortKey; // [esp+24h] [ebp-4h] BYREF
 
     do
     {
@@ -97,7 +97,7 @@ uint16_t __cdecl DevGui_ConstructPath_r(uint16_t parent, const char *path)
     return parent;
 }
 
-uint16_t __cdecl DevGui_RegisterMenu(uint16_t parentHandle, const char *label, __int16 sortKey)
+uint16_t __cdecl DevGui_RegisterMenu(uint16_t parentHandle, const char *label, int16_t sortKey)
 {
     uint16_t childHandle; // [esp+0h] [ebp-4h]
 
@@ -107,7 +107,7 @@ uint16_t __cdecl DevGui_RegisterMenu(uint16_t parentHandle, const char *label, _
     return childHandle;
 }
 
-uint16_t __cdecl DevGui_CreateMenu(uint16_t parentHandle, const char *label, __int16 sortKey)
+uint16_t __cdecl DevGui_CreateMenu(uint16_t parentHandle, const char *label, int16_t sortKey)
 {
     char v4; // [esp+3h] [ebp-25h]
     DevMenuItem *v5; // [esp+8h] [ebp-20h]
@@ -215,12 +215,12 @@ uint16_t __cdecl DevGui_FindMenu(uint16_t parentHandle, const char *label)
     return 0;
 }
 
-DevGuiTokenResult __cdecl DevGui_PathToken(const char **pathInOut, char *label, __int16 *sortKeyOut)
+DevGuiTokenResult __cdecl DevGui_PathToken(const char **pathInOut, char *label, int16_t *sortKeyOut)
 {
     const char *path; // [esp+0h] [ebp-10h]
-    __int16 sign; // [esp+4h] [ebp-Ch]
+    int16_t sign; // [esp+4h] [ebp-Ch]
     int32_t labelLen; // [esp+8h] [ebp-8h]
-    __int16 sortKey; // [esp+Ch] [ebp-4h]
+    int16_t sortKey; // [esp+Ch] [ebp-4h]
 
     if (!pathInOut)
         MyAssertHandler(".\\devgui\\devgui.cpp", 310, 0, "%s", "pathInOut");
@@ -284,7 +284,7 @@ char __cdecl DevGui_IsValidPath(const char *path)
     char label[28]; // [esp+20h] [ebp-2Ch] BYREF
     const char *originalPath; // [esp+40h] [ebp-Ch]
     DevGuiTokenResult tokResult; // [esp+44h] [ebp-8h]
-    __int16 sortKey; // [esp+48h] [ebp-4h] BYREF
+    int16_t sortKey; // [esp+48h] [ebp-4h] BYREF
 
     if (!path)
         MyAssertHandler(".\\devgui\\devgui.cpp", 408, 0, "%s", "path");
@@ -404,7 +404,7 @@ void __cdecl DevGui_RemoveMenu(const char *path)
     DevMenuItem *menu; // [esp+28h] [ebp-10h]
     DevMenuItem *sibling; // [esp+2Ch] [ebp-Ch]
     DevGuiTokenResult tokResult; // [esp+30h] [ebp-8h]
-    __int16 sortKey; // [esp+34h] [ebp-4h] BYREF
+    int16_t sortKey; // [esp+34h] [ebp-4h] BYREF
 
     if (DevGui_IsValidPath(path))
     {
@@ -491,7 +491,7 @@ void __cdecl DevGui_OpenMenu(const char *path)
     char label[28]; // [esp+4h] [ebp-2Ch] BYREF
     DevMenuItem *menu; // [esp+24h] [ebp-Ch]
     DevGuiTokenResult tokResult; // [esp+28h] [ebp-8h]
-    __int16 sortKey; // [esp+2Ch] [ebp-4h] BYREF
+    int16_t sortKey; // [esp+2Ch] [ebp-4h] BYREF
 
     if (DevGui_IsValidPath(path))
     {
@@ -1684,7 +1684,7 @@ int32_t DevGui_UpdateSelection()
     int32_t scroll; // [esp+0h] [ebp-4h]
 
     result = DevGui_GetMenuScroll(SCROLL_YAXIS);
-    for (scroll = (__int16)result; scroll < 0; ++scroll)
+    for (scroll = (int16_t)result; scroll < 0; ++scroll)
         result = DevGui_ScrollDown();
     while (scroll > 0)
     {
@@ -1976,7 +1976,7 @@ void __cdecl DevGui_UpdateGraph(int32_t localClientNum, float deltaTime)
     float v22; // [esp+6Ch] [ebp-4Ch]
     float *v23; // [esp+74h] [ebp-44h]
     float *v24; // [esp+78h] [ebp-40h]
-    __int16 xAxisDelta; // [esp+7Ch] [ebp-3Ch]
+    int16_t xAxisDelta; // [esp+7Ch] [ebp-3Ch]
     bool graphUpdated; // [esp+83h] [ebp-35h]
     int32_t currentKnotCount; // [esp+84h] [ebp-34h]
     DevGraph *graph; // [esp+90h] [ebp-28h]

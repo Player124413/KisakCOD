@@ -23,7 +23,7 @@ void __cdecl P_DamageFeedback(gentity_s *player)
     signed int maxHealth; // r11
     int v6; // r10
     int v7; // r30
-    __int64 v8; // r11
+    int64_t v8; // r11
     double v9; // fp0
     int damageEvent; // r11
     float viewOrigin[3]; // [sp+58h] [-58h] BYREF
@@ -349,11 +349,11 @@ void __cdecl ClientEvents(gentity_s *ent, int oldEventSequence)
     gclient_s *client; // r23
     int eventSequence; // r10
     int v5; // r22
-    __int64 v6; // r11
+    int64_t v6; // r11
     int v7; // r30
     int v8; // r29
     float damage; // fp0
-    __int64 v10; // r11
+    int64_t v10; // r11
     gclient_s *v11; // r11
     gclient_s *v12; // r11
     sentient_s *sentient; // r11
@@ -563,7 +563,7 @@ void __cdecl G_PlayerStateToEntityStateExtrapolate(playerState_s *ps, entityStat
             v9 = 0;
             for (i = 6; i > 0; i = singleClientEvents[v9])
             {
-                if (i == (unsigned __int8)ps->events[oldEventSequence & 3])
+                if (i == (uint8_t)ps->events[oldEventSequence & 3])
                     break;
                 ++v9;
             }
@@ -610,16 +610,16 @@ void __cdecl ClientThink_real(gentity_s *ent)
     int *p_buttonsSinceLastFrame; // r28
     int v27; // r11
     int *p_latched_buttons; // r26
-    __int64 v29; // r10 OVERLAPPED
+    int64_t v29; // r10 OVERLAPPED
     int v30; // r11
     unsigned int v31; // r5
-    unsigned __int16 confirm_location; // r4
+    uint16_t confirm_location; // r4
     int v33; // r9
     int v34; // r10
     int v35; // r11
     float v36[4]; // [sp+50h] [-1A0h] BYREF
-    __int64 v37; // [sp+60h] [-190h]
-    __int64 v38; // [sp+68h] [-188h]
+    int64_t v37; // [sp+60h] [-190h]
+    int64_t v38; // [sp+68h] [-188h]
     pmove_t v39; // [sp+70h] [-180h] BYREF
 
     client = ent->client;

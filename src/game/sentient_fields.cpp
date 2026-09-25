@@ -116,7 +116,7 @@ void __cdecl GScr_AddFieldsForSentient()
         iassert(!((f - fields_2) & ENTFIELD_MASK));
         iassert((f - fields_2) == (unsigned short)(f - fields_2));
 
-        Scr_AddClassField(CLASS_NUM_ENTITY, (char*)f->name, (unsigned __int16)(f - fields_2) | ENTFIELD_SENTIENT);
+        Scr_AddClassField(CLASS_NUM_ENTITY, (char*)f->name, (uint16_t)(f - fields_2) | ENTFIELD_SENTIENT);
     }
 
 }
@@ -140,7 +140,7 @@ void __cdecl Scr_SetSentientField(sentient_s *sentient, unsigned int offset)
     if (setter)
         ((void(__cdecl *)(sentient_s *))setter)(sentient);
     else
-        Scr_SetGenericField((unsigned __int8 *)sentient, v4->type, v4->ofs);
+        Scr_SetGenericField((uint8_t *)sentient, v4->type, v4->ofs);
 }
 
 void __cdecl Scr_GetSentientField(sentient_s *sentient, unsigned int offset)
@@ -162,6 +162,6 @@ void __cdecl Scr_GetSentientField(sentient_s *sentient, unsigned int offset)
     if (getter)
         ((void(__cdecl *)(sentient_s *))getter)(sentient);
     else
-        Scr_GetGenericField((unsigned __int8 *)sentient, v4->type, v4->ofs);
+        Scr_GetGenericField((uint8_t *)sentient, v4->type, v4->ofs);
 }
 

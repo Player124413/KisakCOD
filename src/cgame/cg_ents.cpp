@@ -115,7 +115,7 @@ void __cdecl CG_LockLightingOrigin(centity_s *cent, float *lightingOrigin)
     lightingOrigin[2] = cent->pose.origin[2] + (float)4.0;
 }
 
-int __cdecl CG_GetRenderFlagForRefEntity(__int16 eFlags)
+int __cdecl CG_GetRenderFlagForRefEntity(int16_t eFlags)
 {
     unsigned int v1; // r11
     int v2; // r10
@@ -176,7 +176,7 @@ void __cdecl CG_Item(centity_s *cent)
 {
     entityState_s *p_nextState; // r31
     int v3; // r10
-    unsigned __int8 v4; // r28
+    uint8_t v4; // r28
     unsigned int v5; // r29
     WeaponDef *weapDef; // r30
     unsigned int RenderFlagForRefEntity; // r3
@@ -195,7 +195,7 @@ void __cdecl CG_Item(centity_s *cent)
         weapDef = BG_GetWeaponDef(v5);
         iassert(weapDef);
         if (!weapDef->worldModel[v4])
-            Com_Error(ERR_DROP, "Bad item/weap index"); //KISAKTODO: "XModel loaded for item index %i weap index %i model %i (%s)", *(unsigned __int16 *)p_nextState->index, v5);
+            Com_Error(ERR_DROP, "Bad item/weap index"); //KISAKTODO: "XModel loaded for item index %i weap index %i model %i (%s)", *(uint16_t *)p_nextState->index, v5);
 
         obj = Com_GetClientDObj(p_nextState->number, 0);
 
@@ -449,7 +449,7 @@ void __cdecl CG_UpdateBModelWorldBounds(unsigned int localClientNum, centity_s *
     __asm { stvx128   v126, r1, r12 }
     _R12 = -64;
     __asm { stvx128   v127, r1, r12 }
-    BrushModel = R_GetBrushModel(*(unsigned __int16 *)cent->nextState.index);
+    BrushModel = R_GetBrushModel(*(uint16_t *)cent->nextState.index);
     _R31 = 16;
     _R11 = BrushModel->bounds[0];
     _R10 = BrushModel->bounds[1];
@@ -581,49 +581,49 @@ void __cdecl CG_UpdateBModelWorldBounds(unsigned int localClientNum, centity_s *
     float v11; // [esp+38h] [ebp-1A8h]
     float4 rotatedBounds[2]; // [esp+3Ch] [ebp-1A4h] BYREF
     int32_t v13; // [esp+5Ch] [ebp-184h]
-    __int64 v14; // [esp+60h] [ebp-180h]
+    int64_t v14; // [esp+60h] [ebp-180h]
     int32_t v15; // [esp+68h] [ebp-178h]
     int32_t v16; // [esp+6Ch] [ebp-174h]
     int32_t v17; // [esp+70h] [ebp-170h]
     int32_t v18; // [esp+74h] [ebp-16Ch]
     int32_t v19; // [esp+78h] [ebp-168h]
-    __int64 v20; // [esp+7Ch] [ebp-164h]
+    int64_t v20; // [esp+7Ch] [ebp-164h]
     int32_t v21; // [esp+84h] [ebp-15Ch]
     int32_t v22; // [esp+88h] [ebp-158h]
     int32_t v23; // [esp+8Ch] [ebp-154h]
     float *v24; // [esp+90h] [ebp-150h]
-    __int64 v25; // [esp+94h] [ebp-14Ch]
+    int64_t v25; // [esp+94h] [ebp-14Ch]
     int32_t v26; // [esp+9Ch] [ebp-144h]
     int32_t v27; // [esp+A0h] [ebp-140h]
-    __int64 v28; // [esp+A4h] [ebp-13Ch]
+    int64_t v28; // [esp+A4h] [ebp-13Ch]
     int32_t v29; // [esp+ACh] [ebp-134h]
     int32_t v30; // [esp+B0h] [ebp-130h]
     int32_t v31; // [esp+B4h] [ebp-12Ch]
     int32_t v32; // [esp+B8h] [ebp-128h]
     int32_t v33; // [esp+BCh] [ebp-124h]
-    __int64 v34; // [esp+C0h] [ebp-120h]
+    int64_t v34; // [esp+C0h] [ebp-120h]
     int32_t v35; // [esp+C8h] [ebp-118h]
     int32_t v36; // [esp+CCh] [ebp-114h]
     int32_t v37; // [esp+D0h] [ebp-110h]
     float *v38; // [esp+D4h] [ebp-10Ch]
-    __int64 v39; // [esp+D8h] [ebp-108h]
+    int64_t v39; // [esp+D8h] [ebp-108h]
     int32_t v40; // [esp+E0h] [ebp-100h]
     int32_t v41; // [esp+E4h] [ebp-FCh]
-    __int64 v42; // [esp+E8h] [ebp-F8h]
+    int64_t v42; // [esp+E8h] [ebp-F8h]
     int32_t v43; // [esp+F0h] [ebp-F0h]
     int32_t v44; // [esp+F4h] [ebp-ECh]
     int32_t v45; // [esp+F8h] [ebp-E8h]
     int32_t v46; // [esp+FCh] [ebp-E4h]
     int32_t v47; // [esp+100h] [ebp-E0h]
-    __int64 v48; // [esp+104h] [ebp-DCh]
+    int64_t v48; // [esp+104h] [ebp-DCh]
     int32_t v49; // [esp+10Ch] [ebp-D4h]
     int32_t v50; // [esp+110h] [ebp-D0h]
     int32_t v51; // [esp+114h] [ebp-CCh]
-    __int64 v52; // [esp+118h] [ebp-C8h]
+    int64_t v52; // [esp+118h] [ebp-C8h]
     float v53; // [esp+120h] [ebp-C0h]
     float v54; // [esp+124h] [ebp-BCh]
     float *v55; // [esp+128h] [ebp-B8h]
-    __int64 v56; // [esp+12Ch] [ebp-B4h]
+    int64_t v56; // [esp+12Ch] [ebp-B4h]
     float v57; // [esp+134h] [ebp-ACh]
     float v58; // [esp+138h] [ebp-A8h]
     float v59; // [esp+13Ch] [ebp-A4h]
@@ -951,9 +951,9 @@ void __cdecl CG_AdjustPositionForMover(
 void __cdecl CG_SetFrameInterpolation(int localClientNum)
 {
     snapshot_s *nextSnap; // r11
-    __int64 v2; // r11
-    __int64 v3; // r10
-    __int64 v4; // [sp+50h] [-30h]
+    int64_t v2; // r11
+    int64_t v3; // r10
+    int64_t v4; // [sp+50h] [-30h]
 
     if (localClientNum)
         MyAssertHandler(
@@ -1010,7 +1010,7 @@ cpose_t *__cdecl CG_GetPose(int localClientNum, int handle)
     return &cgArray[0].viewModelPose;
 }
 
-unsigned __int16 *g_wheelTags[6] =
+uint16_t *g_wheelTags[6] =
 {
   &scr_const.tag_wheel_front_left,
   &scr_const.tag_wheel_front_right,
@@ -1060,7 +1060,7 @@ void __cdecl CG_Vehicle_PreControllers(int localClientNum, const DObj_s *obj, ce
 
     for (int wheelIndex = 0; wheelIndex < ARRAY_COUNT(g_wheelTags); ++wheelIndex)
     {
-        unsigned __int8 *boneIndex = &cent->pose.vehicle.wheelBoneIndex[wheelIndex];
+        uint8_t *boneIndex = &cent->pose.vehicle.wheelBoneIndex[wheelIndex];
         if (DObjGetBoneIndex(obj, *g_wheelTags[wheelIndex], boneIndex))
         {
             MatrixTransformVector43(basePose[*boneIndex].trans, (const mat4x3 &)axis, wheelOrigin);
@@ -1567,7 +1567,7 @@ void __cdecl CG_CalcEntityPhysicsPositions(int localClientNum, centity_s *cent)
             "%s",
             "cent->currentState.pos.trType == TR_PHYSICS && cent->currentState.apos.trType == TR_PHYSICS");
     if (Com_GetClientDObj(cent->nextState.number, localClientNum)
-        && !(unsigned __int8)CG_ExpiredLaunch(localClientNum, cent))
+        && !(uint8_t)CG_ExpiredLaunch(localClientNum, cent))
     {
         if (!cent->pose.physObjId)
             CG_CreatePhysicsObject(localClientNum, cent);
@@ -1658,8 +1658,8 @@ void __cdecl CG_CalcEntityRagdollPositions(int localClientNum, centity_s *cent)
 {
     if (!cent)
         MyAssertHandler("c:\\trees\\cod3\\cod3src\\src\\cgame\\cg_ents.cpp", 1321, 0, "%s", "cent");
-    if (!(unsigned __int8)Com_IsRagdollTrajectory(&cent->currentState.pos)
-        && !(unsigned __int8)Com_IsRagdollTrajectory(&cent->currentState.apos))
+    if (!(uint8_t)Com_IsRagdollTrajectory(&cent->currentState.pos)
+        && !(uint8_t)Com_IsRagdollTrajectory(&cent->currentState.apos))
     {
         MyAssertHandler(
             "c:\\trees\\cod3\\cod3src\\src\\cgame\\cg_ents.cpp",
@@ -1691,7 +1691,7 @@ void __cdecl CG_CalcEntityLerpPositions(int localClientNum, centity_s *cent)
     {
         CG_CalcEntityPhysicsPositions(localClientNum, cent);
     }
-    else if ((unsigned __int8)Com_IsRagdollTrajectory(&cent->currentState.pos))
+    else if ((uint8_t)Com_IsRagdollTrajectory(&cent->currentState.pos))
     {
         CG_InterpolateEntityOrigin(cgArray, cent);
         CG_CalcEntityRagdollPositions(localClientNum, cent);
@@ -1816,7 +1816,7 @@ void __cdecl CG_ClearUnion(int localClientNum, centity_s *cent)
 
 void __cdecl CG_SetUnionType(int localClientNum, centity_s *cent)
 {
-    unsigned __int8 eType; // r11
+    uint8_t eType; // r11
 
     eType = cent->nextState.eType;
     switch (eType)
@@ -1838,7 +1838,7 @@ void __cdecl CG_SetUnionType(int localClientNum, centity_s *cent)
 
 void __cdecl CG_UpdatePoseUnion(int localClientNum, centity_s *cent)
 {
-    unsigned __int8 eType; // r11
+    uint8_t eType; // r11
 
     CG_ClearUnion(localClientNum, cent);
     eType = cent->nextState.eType;
@@ -2137,7 +2137,7 @@ void __cdecl CG_AddPacketEntity(unsigned int localClientNum, unsigned int entnum
     double v11; // fp29
     double v12; // fp26
     char v13; // r11
-    unsigned __int8 v14; // r28
+    uint8_t v14; // r28
     char v15; // r9
     float *v16; // r11
     double v17; // fp0
@@ -2294,7 +2294,7 @@ DObjAnimMat *__cdecl CG_DObjGetLocalBoneMatrix(const cpose_t *pose, DObj_s *obj,
 DObjAnimMat *__cdecl CG_DObjGetLocalTagMatrix(const cpose_t *pose, DObj_s *obj, unsigned int tagName)
 {
     DObjAnimMat *result; // r3
-    unsigned __int8 v7; // [sp+50h] [-30h] BYREF
+    uint8_t v7; // [sp+50h] [-30h] BYREF
 
     if (!obj)
         MyAssertHandler("c:\\trees\\cod3\\cod3src\\src\\cgame\\cg_ents.cpp", 661, 0, "%s", "obj");

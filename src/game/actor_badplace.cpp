@@ -75,7 +75,7 @@ void __cdecl Path_FreeBadPlace(int index)
 int __cdecl Path_FindBadPlace(unsigned int name)
 {
     int v1; // r10
-    unsigned __int16 *p_name; // r11
+    uint16_t *p_name; // r11
 
     v1 = 0;
     p_name = &g_badplaces[0].name;
@@ -95,11 +95,11 @@ int __cdecl Path_FindBadPlace(unsigned int name)
 badplace_t *__cdecl Path_AllocBadPlace(unsigned int name, int duration)
 {
     int v5; // r10
-    unsigned __int16 *p_name; // r11
+    uint16_t *p_name; // r11
     int v7; // r29
     badplace_t *result; // r3
     int v10; // r11
-    unsigned __int8 *p_type; // r10
+    uint8_t *p_type; // r10
     const char *v12; // r3
     int v13; // r31
 
@@ -179,7 +179,7 @@ void __cdecl Path_MakeBadPlace(unsigned int name, int duration, int teamflags, i
             "ubBadPlaceCount[0] ) * (sizeof( ((pathlink_t *) 0)->ubBadPlaceCount ) != 4 || sizeof( ((pathlink_t *) 0)->ubBadPla"
             "ceCount[0] ) <= 4)))))",
             teamflags);
-    if (teamflags != (unsigned __int8)teamflags)
+    if (teamflags != (uint8_t)teamflags)
         MyAssertHandler(
             "c:\\trees\\cod3\\cod3src\\src\\game\\actor_badplace.cpp",
             173,
@@ -187,7 +187,7 @@ void __cdecl Path_MakeBadPlace(unsigned int name, int duration, int teamflags, i
             "%s\n\t(teamflags) = %i",
             "(teamflags == (byte) teamflags)",
             teamflags);
-    if (type != (unsigned __int8)type)
+    if (type != (uint8_t)type)
         MyAssertHandler(
             "c:\\trees\\cod3\\cod3src\\src\\game\\actor_badplace.cpp",
             174,
@@ -366,7 +366,7 @@ void __cdecl Path_InitBadPlaces()
 void __cdecl Path_ShutdownBadPlaces()
 {
     int v0; // r31
-    unsigned __int16 *p_name; // r30
+    uint16_t *p_name; // r30
 
     v0 = 32;
     p_name = &g_badplaces[0].name;
@@ -402,7 +402,7 @@ int __cdecl Actor_IsInAnyBadPlace(actor_s *self)
     v2 = 0;
     for (i = &g_badplaces[0].parms.arc.angle1; ; i += 10)
     {
-        v4 = *((unsigned __int8 *)i - 26);
+        v4 = *((uint8_t *)i - 26);
         if (*((_BYTE *)i - 26))
         {
             if (v4 == 1)
@@ -441,7 +441,7 @@ actor_s *Actor_BadPlace_UpdateFleeingActors()
     result = Actor_FirstActor(-1);
     for (i = result; result; i = result)
     {
-        if (i->eState[i->stateLevel] == AIS_BADPLACE_FLEE && !(unsigned __int8)Actor_IsInAnyBadPlace(i))
+        if (i->eState[i->stateLevel] == AIS_BADPLACE_FLEE && !(uint8_t)Actor_IsInAnyBadPlace(i))
             i->isInBadPlace = 0;
         result = Actor_NextActor(i, -1);
     }
@@ -451,7 +451,7 @@ actor_s *Actor_BadPlace_UpdateFleeingActors()
 float __cdecl Actor_BadPlace_GetMaximumFleeRadius()
 {
     int v0; // r28
-    unsigned __int8 *p_type; // r31
+    uint8_t *p_type; // r31
     double v2; // fp31
     int v3; // r4
     const char *v4; // r3
@@ -529,7 +529,7 @@ int __cdecl Actor_BadPlace_IsNodeInAnyBadPlace(pathnode_t *node)
     v2 = 0;
     for (i = &g_badplaces[0].parms.arc.angle1; ; i += 10)
     {
-        v4 = *((unsigned __int8 *)i - 26);
+        v4 = *((uint8_t *)i - 26);
         if (*((_BYTE *)i - 26))
         {
             if (v4 == 1)
@@ -582,7 +582,7 @@ pathnode_t *__cdecl Actor_BadPlace_FindSafeNodeAlongPath(actor_s *self)
             v5 = v4;
             if (v4)
             {
-                if (!(unsigned __int8)Actor_BadPlace_IsNodeInAnyBadPlace(v4) && Path_CanClaimNode(v5, self->sentient))
+                if (!(uint8_t)Actor_BadPlace_IsNodeInAnyBadPlace(v4) && Path_CanClaimNode(v5, self->sentient))
                     break;
             }
         }
@@ -600,7 +600,7 @@ void __cdecl Actor_BadPlace_Flee_Finish(actor_s *self, ai_state_t eNextState)
 void __cdecl Path_RemoveBadPlace(unsigned int name)
 {
     int v1; // r10
-    unsigned __int16 *p_name; // r11
+    uint16_t *p_name; // r11
 
     v1 = 0;
     p_name = &g_badplaces[0].name;
@@ -634,7 +634,7 @@ void __cdecl Path_RunBadPlaces()
     v3 = 32;
     do
     {
-        v4 = *((unsigned __int8 *)p_angle1 - 26);
+        v4 = *((uint8_t *)p_angle1 - 26);
         if (*((_BYTE *)p_angle1 - 26))
         {
             if (level.time < *((unsigned int *)p_angle1 - 9))
@@ -646,7 +646,7 @@ void __cdecl Path_RunBadPlaces()
                         Actor_BroadcastArcEvent(
                             0,
                             AI_EV_BADPLACE_ARC,
-                            *((unsigned __int8 *)p_angle1 - 25),
+                            *((uint8_t *)p_angle1 - 25),
                             p_angle1 - 6,
                             *(p_angle1 - 3),
                             *(p_angle1 - 1),
@@ -658,7 +658,7 @@ void __cdecl Path_RunBadPlaces()
                         Actor_BroadcastVolumeEvent(
                             0,
                             AI_EV_BADPLACE_VOLUME,
-                            *((unsigned __int8 *)p_angle1 - 25),
+                            *((uint8_t *)p_angle1 - 25),
                             *((gentity_s **)p_angle1 - 6),
                             *(p_angle1 - 5));
                     }
@@ -678,7 +678,7 @@ void __cdecl Path_RunBadPlaces()
                 {
                     Path_UpdateBadPlaceCount((badplace_t *)(p_angle1 - 9), -1);
                     *((_BYTE *)p_angle1 - 26) = 0;
-                    Scr_SetString((unsigned __int16 *)p_angle1 - 14, 0);
+                    Scr_SetString((uint16_t *)p_angle1 - 14, 0);
                 }
                 v0 = 1;
             }
@@ -846,11 +846,11 @@ actor_think_result_t __cdecl Actor_BadPlace_Flee_Think(actor_s *self)
             }
             goto LABEL_13;
         }
-        if ((unsigned __int8)Actor_IsInAnyBadPlace(self))
+        if ((uint8_t)Actor_IsInAnyBadPlace(self))
         {
             if (Actor_NearClaimNode(self, 32.0))
                 Path_MarkNodeInvalid(self->sentient->pClaimedNode, self->sentient->eTeam);
-            if ((unsigned __int8)Actor_BadPlace_AttemptEscape(self))
+            if ((uint8_t)Actor_BadPlace_AttemptEscape(self))
             {
                 Actor_AnimStop(self, &g_animScriptTable[self->species]->stop);
             LABEL_13:

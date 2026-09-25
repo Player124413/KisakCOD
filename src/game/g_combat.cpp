@@ -15,7 +15,7 @@ unsigned char *bulletPriorityMap;
 unsigned char *riflePriorityMap;
 float g_fHitLocDamageMult[19]{ 0.0f };
 
-unsigned __int16 *modNames[MOD_NUM] =
+uint16_t *modNames[MOD_NUM] =
 {
     &scr_const.mod_unknown,
     &scr_const.mod_pistol_bullet,
@@ -58,7 +58,7 @@ const char *g_HitLocNames[19] =
   "gun"
 };
 
-unsigned __int16 g_HitLocConstNames[19]{ 0 };
+uint16_t g_HitLocConstNames[19]{ 0 };
 
 void __cdecl TRACK_g_combat()
 {
@@ -67,15 +67,15 @@ void __cdecl TRACK_g_combat()
     track_static_alloc_internal(g_HitLocConstNames, 38, "g_HitLocConstNames", 9);
 }
 
-void __cdecl G_HitLocStrcpy(unsigned __int8 *pMember, const char *pszKeyValue)
+void __cdecl G_HitLocStrcpy(uint8_t *pMember, const char *pszKeyValue)
 {
     int v2; // r10
     int v3; // r11
 
-    v2 = pMember - (unsigned __int8 *)pszKeyValue;
+    v2 = pMember - (uint8_t *)pszKeyValue;
     do
     {
-        v3 = *(unsigned __int8 *)pszKeyValue;
+        v3 = *(uint8_t *)pszKeyValue;
         ((char*)pszKeyValue++)[v2] = v3;
     } while (v3);
 }
@@ -97,7 +97,7 @@ void __cdecl G_ParseHitLocDmgTable()
 
     g_fHitLocDamageMult[HITLOC_GUN] = 0.0f;
     const char *infoString = Com_LoadInfoString((char *)filename, "hitloc damage table", "LOCDMGTABLE", buffer);
-    if (!ParseConfigStringToStruct((unsigned __int8 *)g_fHitLocDamageMult, fields,
+    if (!ParseConfigStringToStruct((uint8_t *)g_fHitLocDamageMult, fields,
         ARRAY_COUNT(fields), (char *)infoString, 0, 0, G_HitLocStrcpy))
     {
         Com_Error(ERR_DROP, "Error parsing hitloc damage table %s", filename);
@@ -175,9 +175,9 @@ void __cdecl LookAtKiller(gentity_s *self, gentity_s *inflictor, gentity_s *atta
 
 int __cdecl G_MeansOfDeathFromScriptParam(unsigned int scrParam)
 {
-    unsigned __int16 ConstString; // r3
+    uint16_t ConstString; // r3
     int v3; // r10
-    unsigned __int16 **v4; // r11
+    uint16_t **v4; // r11
 
     ConstString = Scr_GetConstString(scrParam);
     v3 = 0;
@@ -381,7 +381,7 @@ void __cdecl handleDeathInvulnerability(gentity_s *targ, int prevHealth, int mod
 }
 
 void __cdecl G_DamageNotify(
-    unsigned __int16 notify,
+    uint16_t notify,
     gentity_s *targ,
     gentity_s *attacker,
     const float *dir,
@@ -405,9 +405,9 @@ void __cdecl G_DamageNotify(
     {
         //v36 = 2 * (modelIndex + 272);
         iassert(targ->attachTagNames[modelIndex - 1]);
-        modelName = SV_GetConfigstringConst(*((unsigned __int16 *)&targ->scripted + modelIndex + 1) + 1123); // CS_MODELS (PC SP, was Xbox 1155)
+        modelName = SV_GetConfigstringConst(*((uint16_t *)&targ->scripted + modelIndex + 1) + 1123); // CS_MODELS (PC SP, was Xbox 1155)
         iassert(modelName);
-        //Scr_AddConstString(*(unsigned __int16 *)(&targ->s.eType + v36));
+        //Scr_AddConstString(*(uint16_t *)(&targ->s.eType + v36));
         Scr_AddConstString(targ->attachTagNames[modelIndex - 1]);
         Scr_AddConstString(modelName);
     }
@@ -584,9 +584,9 @@ void __cdecl G_Damage(
     const gentity_s *v43; // r3
     unsigned int NumWeapons; // r3
     gclient_s *client; // r24
-    __int64 v46; // r10
+    int64_t v46; // r10
     const dvar_s *dmgDvar; // r11
-    __int64 v48; // fp13
+    int64_t v48; // fp13
     double WeaponHitLocationMultiplier; // fp1
     actor_s *actor; // r3
     int v54; // r3

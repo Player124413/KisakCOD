@@ -9,7 +9,7 @@ static int g_debugClient;
 static int g_debugPacketPos[1];
 static int sys_debugMessageType[1];
 
-unsigned __int8 g_debugPacket[1][8192];
+uint8_t g_debugPacket[1][8192];
 
 static int g_debugReadBytesRemote;
 static int g_debugReadBytesSent;
@@ -148,7 +148,7 @@ void __cdecl Sys_SendDebugReadBytes(int read)
 
 void __cdecl Sys_DebugSend(int channel, const char *buf, int len, const char *name);
 
-void __cdecl Sys_WriteDebugSocketData(unsigned __int8 *buffer, int len)
+void __cdecl Sys_WriteDebugSocketData(uint8_t *buffer, int len)
 {
 	int pos; // [esp+0h] [ebp-10h]
 	uint32_t copyLen; // [esp+8h] [ebp-8h]
@@ -185,8 +185,8 @@ void __cdecl Sys_WriteDebugSocketString(char *text)
 	int len; // [esp+10h] [ebp-4h] BYREF
 
 	len = strlen(text);
-	Sys_WriteDebugSocketData((unsigned __int8 *)&len, 4);
-	Sys_WriteDebugSocketData((unsigned __int8 *)text, len);
+	Sys_WriteDebugSocketData((uint8_t *)&len, 4);
+	Sys_WriteDebugSocketData((uint8_t *)text, len);
 }
 
 void __cdecl Sys_WriteDebugSocketInt(int value)
@@ -194,7 +194,7 @@ void __cdecl Sys_WriteDebugSocketInt(int value)
 	Sys_WriteDebugSocketData((unsigned char*)&value, 4);
 }
 
-void __cdecl Sys_WriteDebugSocketMessageType(unsigned __int8 type)
+void __cdecl Sys_WriteDebugSocketMessageType(uint8_t type)
 {
 	Sys_EnterCriticalSection(CRITSECT_DEBUG_SOCKET);
 	Sys_WriteDebugSocketData(&type, 1);
@@ -288,7 +288,7 @@ int __cdecl Sys_UpdateDebugSocket()
 {
 	const char *v1; // eax
 	const char *v2; // eax
-	unsigned __int8 type; // [esp+7h] [ebp-5h] BYREF
+	uint8_t type; // [esp+7h] [ebp-5h] BYREF
 	int i; // [esp+8h] [ebp-4h]
 
 	if (sys_debugMessageType[0])
@@ -322,7 +322,7 @@ int __cdecl Sys_UpdateDebugSocket()
 	return sys_debugMessageType[0];
 }
 
-int __cdecl Sys_ReadDebugSocketMessageType(unsigned __int8 *type, int blocking)
+int __cdecl Sys_ReadDebugSocketMessageType(uint8_t *type, int blocking)
 {
 	return Sys_ReadDebugSocketData((char*)type, 1, blocking);
 }

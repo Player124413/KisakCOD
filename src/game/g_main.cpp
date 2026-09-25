@@ -1269,7 +1269,7 @@ LABEL_43:
 
 void __cdecl G_ShutdownGame(int clearScripts)
 {
-    unsigned __int8 v2; // r11
+    uint8_t v2; // r11
 
     SV_ResetDemo();
     Com_DPrintf(CON_CHANNEL_SERVER, "ShutdownGame:\n");
@@ -1641,7 +1641,7 @@ void __cdecl G_ClientDoPerFrameNotifies(gentity_s *ent)
     WeaponDef *WeaponDef; // r3
     char v5; // r11
     char v6; // r30
-    unsigned __int16 begin_firing; // r4
+    uint16_t begin_firing; // r4
     bool *p_previouslyUsingNightVision; // r11
 
     if (!ent)
@@ -1724,7 +1724,7 @@ void __cdecl G_RunFrameForEntityInternal(gentity_s *ent)
         }
         goto LABEL_16;
     }
-    if ((unsigned __int8)Com_IsRagdollTrajectory(&ent->s.lerp.pos))
+    if ((uint8_t)Com_IsRagdollTrajectory(&ent->s.lerp.pos))
     {
     LABEL_23:
         G_RunThink(ent);
@@ -1902,8 +1902,8 @@ void __cdecl G_SendClientMessages()
     int v6; // ctr
     unsigned int ActorFriendlyIndex; // r3
     unsigned int v8; // r29
-    unsigned __int8 *v9; // r11
-    unsigned __int8 v10; // r10
+    uint8_t *v9; // r11
+    uint8_t v10; // r10
     actor_prone_info_s *v11; // r9
     int *p_entnum; // r11
     int v13; // r4
@@ -2120,7 +2120,7 @@ void __cdecl G_LocationalTrace(
     const float *end,
     int passEntityNum,
     int contentmask,
-    unsigned __int8 *priorityMap)
+    uint8_t *priorityMap)
 {
     IgnoreEntParams ignoreEntParams; // [esp+0h] [ebp-Ch] BYREF
 
@@ -2144,7 +2144,7 @@ void __cdecl G_LocationalTraceAllowChildren(
     const float *end,
     int passEntityNum,
     int contentmask,
-    unsigned __int8 *priorityMap)
+    uint8_t *priorityMap)
 {
     IgnoreEntParams ignoreEntParams; // [esp+0h] [ebp-Ch] BYREF
 
@@ -2169,7 +2169,7 @@ int __cdecl G_LocationalTracePassed(
     int passEntityNum,
     int passEntityNum1,
     int contentmask,
-    unsigned __int8 *priorityMap)
+    uint8_t *priorityMap)
 {
     return SV_TracePassed(
         start,
@@ -2305,7 +2305,7 @@ int __cdecl G_RunFrame(ServerFrameExtent extent, int timeCap)
     gentity_s *k; // r30
     int inuse; // r11
     bool checkAnimChange; // r11
-    unsigned __int8 *p_inuse; // r30
+    uint8_t *p_inuse; // r30
     int v17; // r10
     int v18; // r10
     int v19; // r3
@@ -2323,13 +2323,13 @@ int __cdecl G_RunFrame(ServerFrameExtent extent, int timeCap)
     int v31; // r5
     int v32; // r4
     int v33; // r3
-    __int64 v34; // r8
+    int64_t v34; // r8
     int v35; // r6
     int v36; // r5
     const float *v37; // r4
     int v38; // r3
     int v39; // r30
-    unsigned __int16 *p_classname; // r31
+    uint16_t *p_classname; // r31
     const char *v41; // r3
 
     iassert(extent == SV_FRAME_DO_ALL);

@@ -942,10 +942,10 @@ int __cdecl SV_CheckPaused()
 
 void __cdecl SV_RunFrame()
 {
-    unsigned __int64 v0; // [esp+40h] [ebp-44h]
-    unsigned __int64 start; // [esp+6Ch] [ebp-18h]
+    uint64_t v0; // [esp+40h] [ebp-44h]
+    uint64_t start; // [esp+6Ch] [ebp-18h]
     float time; // [esp+78h] [ebp-Ch]
-    unsigned __int64 ticks; // [esp+7Ch] [ebp-8h]
+    uint64_t ticks; // [esp+7Ch] [ebp-8h]
 
     PROF_SCOPED("SV_RunFrame");
 
@@ -1048,34 +1048,34 @@ void __cdecl SV_BotUserMove(client_t *cl)
         nullcmd.weapon = SV_GameClientNum(cl - svs.clients)->weapon;
         if (!G_GetClientArchiveTime(cl - svs.clients))
         {
-            if (random() < 0.5 && sv_botsPressAttackBtn->current.enabled)
+            if (Com_Random() < 0.5 && sv_botsPressAttackBtn->current.enabled)
                 nullcmd.buttons |= BUTTON_ATTACK;
-            if (random() < 0.5)
+            if (Com_Random() < 0.5)
                 nullcmd.buttons |= BUTTON_USE | BUTTON_USE_RELOAD;
-            if (random() >= 0.3300000131130219)
+            if (Com_Random() >= 0.3300000131130219)
             {
-                if (random() < 0.5)
+                if (Com_Random() < 0.5)
                     nullcmd.forwardmove = -127;
             }
             else
             {
                 nullcmd.forwardmove = 127;
             }
-            if (random() >= 0.3300000131130219)
+            if (Com_Random() >= 0.3300000131130219)
             {
-                if (random() < 0.5)
+                if (Com_Random() < 0.5)
                     nullcmd.rightmove = -127;
             }
             else
             {
                 nullcmd.rightmove = 127;
             }
-            if (random() < 0.3300000131130219)
-                nullcmd.angles[0] = (int)(crandom() * 360.0);
-            if (random() < 0.3300000131130219)
-                nullcmd.angles[1] = (int)(crandom() * 360.0);
-            if (random() < 0.3300000131130219)
-                nullcmd.angles[2] = (int)(crandom() * 360.0);
+            if (Com_Random() < 0.3300000131130219)
+                nullcmd.angles[0] = (int)(Com_Crandom() * 360.0);
+            if (Com_Random() < 0.3300000131130219)
+                nullcmd.angles[1] = (int)(Com_Crandom() * 360.0);
+            if (Com_Random() < 0.3300000131130219)
+                nullcmd.angles[2] = (int)(Com_Crandom() * 360.0);
         }
         cl->header.deltaMessage = cl->header.netchan.outgoingSequence - 1;
         SV_ClientThink(cl, &nullcmd);

@@ -136,7 +136,7 @@ char *__cdecl UI_GetMapDisplayName(const char *pszMap);
 char *__cdecl UI_GetMapDisplayNameFromPartialLoadNameMatch(const char *mapName, int *mapLoadNameLen);
 char *__cdecl UI_GetGameTypeDisplayName(const char *pszGameType);
 int __cdecl UI_OwnerDrawWidth(int ownerDraw, Font_s *font, float scale);
-bool __cdecl UI_OwnerDrawVisible(__int16 flags);
+bool __cdecl UI_OwnerDrawVisible(int16_t flags);
 int __cdecl UI_OwnerDrawHandleKey(int ownerDraw, int flags, float *special, int key);
 
 void __cdecl UI_UpdateTime(int localClientNum, int realtime);

@@ -110,7 +110,7 @@ void __cdecl CG_ModPrvPushMruEntry(
     char v16[304]; // [sp+50h] [-130h] BYREF
 
     v6 = entry;
-    while (*(unsigned __int8 *)v6++)
+    while (*(uint8_t *)v6++)
         ;
     if (v6 - entry - 1 >= 256)
         MyAssertHandler(
@@ -123,7 +123,7 @@ void __cdecl CG_ModPrvPushMruEntry(
     v10 = (char*)entry;
     do
     {
-        v11 = *(unsigned __int8 *)v10;
+        v11 = *(uint8_t *)v10;
         (v10++)[v16 - entry] = v11;
     } while (v11);
     v12 = 0;
@@ -520,7 +520,7 @@ bool __cdecl CG_ModPrvCompareString(const char *string1, const char *string2)
 
     do
     {
-        v3 = *(unsigned __int8 *)string1 - *(unsigned __int8 *)string2;
+        v3 = *(uint8_t *)string1 - *(uint8_t *)string2;
         if (!*string1)
             break;
         ++string1;
@@ -749,7 +749,7 @@ int __cdecl CG_ModPrvGetNumSurfaces(DObj_s *obj, int lod)
 const char *__cdecl CG_ModPrvModelGetBoneName(DObj_s *dobj, int modelIndex, int boneIndex)
 {
     XModel *Model; // r3
-    unsigned __int16 *v7; // r29
+    uint16_t *v7; // r29
 
     if (!dobj)
         MyAssertHandler("c:\\trees\\cod3\\cod3src\\src\\cgame\\cg_modelpreviewer.cpp", 1253, 0, "%s", "dobj");
@@ -872,7 +872,7 @@ void CG_ModPrvDrawBones()
             v10 = v3;
             do
             {
-                v11 = *(unsigned __int8 *)v10 - *(unsigned __int8 *)v9;
+                v11 = *(uint8_t *)v10 - *(uint8_t *)v9;
                 if (!*v10)
                     break;
                 ++v10;
@@ -1233,7 +1233,7 @@ void __cdecl CG_ModPrvAnimRecentAccept(const dvar_s *dvar, int *currentIndex)
             v9 = v4;
             do
             {
-                v10 = *(unsigned __int8 *)v9 - *(unsigned __int8 *)v8;
+                v10 = *(uint8_t *)v9 - *(uint8_t *)v8;
                 if (!*v9)
                     break;
                 ++v9;
@@ -1649,7 +1649,7 @@ void __cdecl MdlPrvDrawOverlayGamepad()
     double v22; // fp31
     int v23; // r11
     ButtonNames v24; // r3
-    __int64 v25; // fp13
+    int64_t v25; // fp13
     int v26; // r11
     double v27; // fp31
     int v28; // r11
@@ -1683,19 +1683,19 @@ void __cdecl MdlPrvDrawOverlayGamepad()
             textHeightStep = CG_DrawSmallDevStringColor(&scrPlaceFull, 300.0, 0.0, (char*)"Focused Mode", colorRed, 0);
         v3 = (textHeightStep * 0.75f);
         v4 = MdlPrvPrintHelpLine(BTN_MODESWITCH, 20.0);
-        v5 = (float)((float)((float)*(__int64 *)v4 * (float)0.75) + 20.0);
+        v5 = (float)((float)((float)*(int64_t *)v4 * (float)0.75) + 20.0);
         v6 = MdlPrvPrintHelpLine(BTN_DROPMDL, v5);
-        v7 = (float)((float)((float)*(__int64 *)v6 * 0.75) + (float)v5);
+        v7 = (float)((float)((float)*(int64_t *)v6 * 0.75) + (float)v5);
         v8 = MdlPrvPrintHelpLine(BTN_WALKABOUT_ENTER, v7);
-        v11 = (float)((float)((float)*(__int64 *)v8 * 0.75) + (float)v7);
+        v11 = (float)((float)((float)*(int64_t *)v8 * 0.75) + (float)v7);
         if (g_mdlprv.system.uiModeGPad != MDLPRVMODE_FREE)
         {
             v26 = MdlPrvPrintHelpLine(BTN_FOCUS_TOGGLEMOV, v11);
-            v27 = (float)((float)((float)*(__int64 *)v26 * 0.75) + (float)v11);
+            v27 = (float)((float)((float)*(int64_t *)v26 * 0.75) + (float)v11);
             v28 = MdlPrvPrintHelpLine(BTN_FOCUS_TOGGLEROT, v27);
-            v29 = (float)((float)((float)*(__int64 *)v28 * 0.75) + (float)v27);
+            v29 = (float)((float)((float)*(int64_t *)v28 * 0.75) + (float)v27);
             v30 = MdlPrvPrintHelpLine(BTN_FOCUS_TOGGLEFOCALMOVE, v29);
-            v22 = (float)((float)((float)*(__int64 *)v30 * 0.75) + (float)v29);
+            v22 = (float)((float)((float)*(int64_t *)v30 * 0.75) + (float)v29);
             if (g_mdlprv.system.focusedMode == FOCUSEDMODE_MODELMOVE)
             {
                 CG_DrawSmallDevStringColor(&scrPlaceFull, 300.0, v3, (char*)"Model Move", colorWhiteFaded, 0);
@@ -1711,11 +1711,11 @@ void __cdecl MdlPrvDrawOverlayGamepad()
                     modelRotateTxt = "Model Rotate";
                 CG_DrawSmallDevStringColor(&scrPlaceFull, 300.0, v3, (char*)modelRotateTxt, colorWhiteFaded, 0);
                 v35 = MdlPrvPrintHelpLine(BTN_FOCUS_MROT_TOGGLECAM, v22);
-                v22 = (float)((float)((float)*(__int64 *)v35 * 0.75) + (float)v22);
+                v22 = (float)((float)((float)*(int64_t *)v35 * 0.75) + (float)v22);
                 if (g_mdlprv.system.modelRotCamMode == MROTCAMMODE_STATIC)
                 {
                     v36 = MdlPrvPrintHelpLine(BTN_FOCUS_MROT_PITCHROLL, v22);
-                    v22 = (float)((float)((float)*(__int64 *)v36 * 0.75) + (float)v22);
+                    v22 = (float)((float)((float)*(int64_t *)v36 * 0.75) + (float)v22);
                 }
                 v37 = MdlPrvPrintHelpLine(BTN_FOCUS_MROT_YAW, v22);
                 v24 = BTN_FOCUS_MROT_RESET;
@@ -1727,16 +1727,16 @@ void __cdecl MdlPrvDrawOverlayGamepad()
                 {
                     CG_DrawSmallDevStringColor(&scrPlaceFull, 300.0, v3, (char*)"Focus Move", colorWhiteFaded, 0);
                     v42 = MdlPrvPrintHelpLine(BTN_FOCUS_FOCALMOVE_2D, v22);
-                    v22 = (float)((float)((float)*(__int64 *)v42 * 0.75) + (float)v22);
+                    v22 = (float)((float)((float)*(int64_t *)v42 * 0.75) + (float)v22);
                     v41 = MdlPrvPrintHelpLine(BTN_FOCUS_FOCALMOVE_UPDOWN, v22);
                     v24 = BTN_FOCUS_FOCALMOVE_RESET;
                 }
                 else
                 {
                     v38 = MdlPrvPrintHelpLine(BTN_FOCUS_DEFAULT_CLONEMODEL, v22);
-                    v39 = (float)((float)((float)*(__int64 *)v38 * 0.75) + (float)v22);
+                    v39 = (float)((float)((float)*(int64_t *)v38 * 0.75) + (float)v22);
                     v40 = MdlPrvPrintHelpLine(BTN_FOCUS_DEFAULT_CLEARCLONES, v39);
-                    v22 = (float)((float)((float)*(__int64 *)v40 * 0.75) + (float)v39);
+                    v22 = (float)((float)((float)*(int64_t *)v40 * 0.75) + (float)v39);
                     v41 = MdlPrvPrintHelpLine(BTN_FOCUS_DEFAULT_ZOOM, v22);
                     v24 = BTN_FOCUS_DEFAULT_ORBIT;
                 }
@@ -1754,15 +1754,15 @@ void __cdecl MdlPrvDrawOverlayGamepad()
             {
             LABEL_14:
                 v13 = MdlPrvPrintHelpLine(BTN_FREE_DROPFRONT, v11);
-                v14 = (float)((float)((float)*(__int64 *)v13 * 0.75) + (float)v11);
+                v14 = (float)((float)((float)*(int64_t *)v13 * 0.75) + (float)v11);
                 v15 = MdlPrvPrintHelpLine(BTN_FREE_DROPPOS, v14);
-                v16 = (float)((float)((float)*(__int64 *)v15 * 0.75) + (float)v14);
+                v16 = (float)((float)((float)*(int64_t *)v15 * 0.75) + (float)v14);
                 v17 = MdlPrvPrintHelpLine(BTN_FREE_TOGGLEMOVESPEED, v16);
-                v18 = (float)((float)((float)*(__int64 *)v17 * 0.75) + (float)v16);
+                v18 = (float)((float)((float)*(int64_t *)v17 * 0.75) + (float)v16);
                 v19 = MdlPrvPrintHelpLine(BTN_FREE_TOGGLERAGDOLL, v18);
-                v20 = (float)((float)((float)*(__int64 *)v19 * 0.75) + (float)v18);
+                v20 = (float)((float)((float)*(int64_t *)v19 * 0.75) + (float)v18);
                 v21 = MdlPrvPrintHelpLine(BTN_FREE_UP, v20);
-                v22 = (float)((float)((float)*(__int64 *)v21 * 0.75) + (float)v20);
+                v22 = (float)((float)((float)*(int64_t *)v21 * 0.75) + (float)v20);
                 v23 = MdlPrvPrintHelpLine(BTN_FREE_DOWN, v22);
                 v24 = BTN_FREE_UPDOWN;
                 v25 = *(_QWORD *)v23;
@@ -2302,7 +2302,7 @@ void MdlPrvRagdollToggle()
 void __cdecl MdlPrvControlsGamepad(int localClientNum, double forward, double side, double pitch, double yaw)
 {
     int v10; // r29
-    __int64 v11; // r11
+    int64_t v11; // r11
     double v12; // fp31
     double v13; // fp26
     double v14; // fp1
@@ -2698,7 +2698,7 @@ void __cdecl CG_AddModelPreviewerModel(int frametime)
     float *right; // r31
     const cpose_t *v14; // r4
     const DObj_s *v15; // r3
-    __int64 v16; // [sp+50h] [-70h] BYREF
+    int64_t v16; // [sp+50h] [-70h] BYREF
     float v17; // [sp+58h] [-68h]
     float v18[3][3]; // [sp+60h] [-60h] BYREF
 
@@ -2868,10 +2868,10 @@ void __cdecl CG_ModelPreviewerBuildInfoStr(char *buffer, int bufferSize)
             "modPrvAnimRate %.2f",
             modPrvAnimRate->current.value);
         I_strncat(buffer, bufferSize, v18);
-        //snprintf(v18, ARRAYSIZE(v18), "modPrvAnimApplyDelta %i,", (_cntlzw(*(unsigned __int8 *)(modPrvAnimApplyDelta + 12)) & 0x20) == 0);
+        //snprintf(v18, ARRAYSIZE(v18), "modPrvAnimApplyDelta %i,", (_cntlzw(*(uint8_t *)(modPrvAnimApplyDelta + 12)) & 0x20) == 0);
         snprintf(v18, ARRAYSIZE(v18), "modPrvAnimApplyDelta %i,", modPrvAnimApplyDelta->current.integer);
         I_strncat(buffer, bufferSize, v18);
-        //snprintf(v18, ARRAYSIZE(v18), "modPrvAnimForceLoop %i,", (_cntlzw(*(unsigned __int8 *)(modPrvAnimForceLoop + 12)) & 0x20) == 0);
+        //snprintf(v18, ARRAYSIZE(v18), "modPrvAnimForceLoop %i,", (_cntlzw(*(uint8_t *)(modPrvAnimForceLoop + 12)) & 0x20) == 0);
         snprintf(v18, ARRAYSIZE(v18), "modPrvAnimForceLoop %i,", modPrvAnimForceLoop->current.integer);
         I_strncat(buffer, bufferSize, v18);
         v9 = Dvar_EnumToString((const dvar_s *)modPrvAnimBlendMode);
@@ -3057,7 +3057,7 @@ void CG_ModPrvModelGetBoneNameList()
 void __cdecl CG_ModPrvLoadModel(const cg_s *cgameGlob, const char *modelFilename)
 {
 #if 0 // KISAKTODO: particularlly nasty
-    __int64 v43; // r4
+    int64_t v43; // r4
     int v44; // r30
     const char *v45; // r28
     double v46; // fp30
@@ -3088,7 +3088,7 @@ void __cdecl CG_ModPrvLoadModel(const cg_s *cgameGlob, const char *modelFilename
     int v71; // r11
     Material **v72; // r10
 
-    v43 = ((__int64 (*)(void))RtlCheckStack12)();
+    v43 = ((int64_t (*)(void))RtlCheckStack12)();
     v44 = HIDWORD(v43);
     v45 = (const char *)v43;
     if (g_mdlprv.model.currentObj)
@@ -3344,8 +3344,8 @@ void __cdecl CG_ModPrvModelRecentAccepted(const cg_s *cgameGlob)
             v14 = v2;
             do
             {
-                v15 = *(unsigned __int8 *)v14;
-                v16 = v15 - *(unsigned __int8 *)v13;
+                v15 = *(uint8_t *)v14;
+                v16 = v15 - *(uint8_t *)v13;
                 if (!*v14)
                     break;
                 ++v14;

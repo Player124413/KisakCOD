@@ -268,12 +268,12 @@ void __cdecl Com_DefaultExtension(char *path, uint32_t maxSize, const char *exte
     Com_sprintf(path, maxSize, "%s%s", oldPath, extension);
 }
 
-int __cdecl ShortSwap(__int16 l)
+int __cdecl ShortSwap(int16_t l)
 {
     return HIBYTE(l) + ((uint8_t)l << 8);
 }
 
-__int16 __cdecl ShortNoSwap(__int16 l)
+int16_t __cdecl ShortNoSwap(int16_t l)
 {
     return l;
 }
@@ -283,19 +283,19 @@ int __cdecl LongSwap(int l)
     return HIBYTE(l) + (BYTE2(l) << 8) + (BYTE1(l) << 16) + ((uint8_t)l << 24);
 }
 
-unsigned __int64 __cdecl Long64Swap(unsigned __int64 l)
+uint64_t __cdecl Long64Swap(uint64_t l)
 {
     return HIBYTE(l)
-        + ((unsigned __int64)BYTE6(l) << 8)
-        + ((unsigned __int64)BYTE5(l) << 16)
-        + ((unsigned __int64)BYTE4(l) << 24)
-        + ((unsigned __int64)BYTE3(l) << 32)
-        + ((unsigned __int64)BYTE2(l) << 40)
-        + ((unsigned __int64)BYTE1(l) << 48)
-        + ((unsigned __int64)(uint8_t)l << 56);
+        + ((uint64_t)BYTE6(l) << 8)
+        + ((uint64_t)BYTE5(l) << 16)
+        + ((uint64_t)BYTE4(l) << 24)
+        + ((uint64_t)BYTE3(l) << 32)
+        + ((uint64_t)BYTE2(l) << 40)
+        + ((uint64_t)BYTE1(l) << 48)
+        + ((uint64_t)(uint8_t)l << 56);
 }
 
-unsigned __int64 __cdecl Long64NoSwap(unsigned __int64 ll)
+uint64_t __cdecl Long64NoSwap(uint64_t ll)
 {
     return ll;
 }
@@ -328,11 +328,11 @@ FloatWriteSwap_union __cdecl FloatWriteSwap(float f)
 }
 
 
-unsigned __int64(__cdecl *LittleLong64)(unsigned __int64);
+uint64_t(__cdecl *LittleLong64)(uint64_t);
 
 void __cdecl Swap_InitLittleEndian()
 {
-    //_BigShort = (__int16(*)(__int16))ShortSwap;
+    //_BigShort = (int16_t(*)(int16_t))ShortSwap;
     //LittleShort = ShortNoSwap;
     //BigLong = LongSwap;
     //LittleLong = (int(__cdecl *)(int))LongNoSwap;
@@ -344,7 +344,7 @@ void __cdecl Swap_InitLittleEndian()
 void __cdecl Swap_InitBigEndian()
 {
     //_BigShort = ShortNoSwap;
-    //LittleShort = (__int16(__cdecl *)(__int16))ShortSwap;
+    //LittleShort = (int16_t(__cdecl *)(int16_t))ShortSwap;
     //BigLong = (int(__cdecl *)(int))LongNoSwap;
     //LittleLong = LongSwap;
     LittleLong64 = Long64Swap;

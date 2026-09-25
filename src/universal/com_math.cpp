@@ -200,14 +200,14 @@ void __cdecl TRACK_com_math()
     track_static_alloc_internal(bytedirs, 1944, "bytedirs", 10);
 }
 
-float __cdecl random()
+float __cdecl Com_Random()
 {
     return (rand() / 32768.0);
 }
 
-float __cdecl crandom()
+float __cdecl Com_Crandom()
 {
-    return (random() * 2.0 - 1.0);
+    return (Com_Random() * 2.0 - 1.0);
 }
 
 void __cdecl GaussianRandom(float *f0, float *f1)
@@ -224,8 +224,8 @@ void __cdecl GaussianRandom(float *f0, float *f1)
 
     do
     {
-        x = crandom();
-        y = crandom();
+        x = Com_Crandom();
+        y = Com_Crandom();
         w = x * x + y * y;
     } while (w > 1.0);
     v4 = log(w);
@@ -2374,7 +2374,7 @@ float __cdecl flrand(float min, float max)
 int __cdecl irand(int min, int max)
 {
     holdrand = 214013 * holdrand + 2531011;
-    return (((holdrand >> 17) * (__int64)(max - min)) >> 15) + min;
+    return (((holdrand >> 17) * (int64_t)(max - min)) >> 15) + min;
 }
 
 void __cdecl MatrixTransformVectorQuatTransEquals(const DObjAnimMat *in, float *inout)

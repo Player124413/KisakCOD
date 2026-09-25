@@ -1100,7 +1100,7 @@ void __cdecl CG_StartAmbient(int localClientNum)
     if (v7 < 0)
         v7 = 0;
     v8 = v3;
-    while (*(unsigned __int8 *)v8++)
+    while (*(uint8_t *)v8++)
         ;
     if (v8 - v3 == 1)
     {

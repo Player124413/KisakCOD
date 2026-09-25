@@ -54,7 +54,7 @@ enum meansOfDeath_t : int32_t
     MOD_NUM = 0x10,
 };
 
-enum HELICOPTER_STAGES : __int32
+enum HELICOPTER_STAGES : int32_t
 {
     HELICOPTER_ONFIRE = 0x0,
     HELICOPTER_HEAVYSMOKE = 0x1,
@@ -963,7 +963,7 @@ void __cdecl VEH_PushEntity(gentity_s *ent, gentity_s *target, float *pushDir, f
 bool __cdecl AttachedStickyMissile(gentity_s *vehicle, gentity_s *missile);
 void __cdecl PushAttachedStickyMissile(gentity_s *vehicle, gentity_s *missile);
 void __cdecl G_VehRegisterDvars();
-struct vehicle_info_t *__cdecl VEH_GetVehicleInfo(__int16 index);
+struct vehicle_info_t *__cdecl VEH_GetVehicleInfo(int16_t index);
 int32_t __cdecl G_VehPlayerRideSlot(gentity_s *vehicle, int32_t playerEntNum);
 void __cdecl VEH_DebugCapsule(float *pos, float rad, float height, float r, float g, float b);
 void __cdecl VEH_SetPosition(gentity_s *ent, const float *origin, const float *angles);
@@ -983,7 +983,7 @@ int32_t __cdecl VEH_ParseSpecificField(uint8_t *pStruct, const char *pValue, int
 void __cdecl VEH_InitModelAndValidateTags(gentity_s *ent, int32_t *infoIdx);
 char __cdecl VEH_DObjHasRequiredTags(gentity_s *ent, int32_t infoIdx);
 void __cdecl InitVehicleTags(gentity_s *ent);
-void __cdecl InitEntityVehicleVars(gentity_s *ent, scr_vehicle_s *veh, __int16 infoIdx);
+void __cdecl InitEntityVehicleVars(gentity_s *ent, scr_vehicle_s *veh, int16_t infoIdx);
 void __cdecl InitEntityVars(gentity_s *ent, scr_vehicle_s *veh, int32_t infoIdx);
 void __cdecl G_VehFreeEntity(gentity_s *vehEnt);
 bool __cdecl G_VehUsable(gentity_s *vehicle, gentity_s *player);

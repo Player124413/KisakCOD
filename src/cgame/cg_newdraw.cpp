@@ -100,7 +100,7 @@ unsigned int __cdecl CG_GetSelectedWeaponIndex(const cg_s *cgameGlob)
 
 int __cdecl CG_IsHudHidden()
 {
-    unsigned __int8 v0; // r11
+    uint8_t v0; // r11
 
     if (!cg_paused->current.integer)
         return 0;
@@ -784,13 +784,13 @@ int __cdecl CG_ServerMaterialName(int localClientNum, int index, char *materialN
     if (!*ConfigString)
         return 0;
     v8 = ConfigString;
-    while (*(unsigned __int8 *)v8++)
+    while (*(uint8_t *)v8++)
         ;
     if (v8 - ConfigString - 1 >= maxLen)
         return 0;
     do
     {
-        v10 = *(unsigned __int8 *)v7;
+        v10 = *(uint8_t *)v7;
         (v7++)[materialName - ConfigString] = v10;
     } while (v10);
     return 1;
@@ -958,19 +958,19 @@ void __cdecl CG_DrawCursorhint(
     double heightScale; // fp29
     double widthScale; // fp23
     double v21; // fp28
-    __int64 v22; // r11
+    int64_t v22; // r11
     double halfscale; // fp25
     double scale; // fp31
-    __int64 v25; // r11
+    int64_t v25; // r11
     double v26; // fp13
     double v27; // fp0
     long double v28; // fp2
     int cursorHintIcon; // r11
     char *UseString; // r3
     const char *v31; // r30
-    __int64 v32; // r11
+    int64_t v32; // r11
     double v33; // fp29
-    __int64 v34; // r7
+    int64_t v34; // r7
     double v35; // fp8
     double v36; // fp7
     double v37; // fp6
@@ -983,9 +983,9 @@ void __cdecl CG_DrawCursorhint(
     const char *v44; // r3
     char *WeaponUseString; // r3
     char *v46; // r3
-    __int64 v47; // r11
+    int64_t v47; // r11
     double length; // fp28
-    __int64 v49; // r11
+    int64_t v49; // r11
     int v50; // r8
     int v51; // r7
     double v52; // fp8
@@ -1755,7 +1755,7 @@ void __cdecl CG_DrawPlayerAmmoValue(
     double v27; // fp5
     double v28; // fp4
     int v29; // r5
-    __int64 v30; // r11
+    int64_t v30; // r11
     double v31; // fp0
     int v32; // r8
     int v33; // r7
@@ -1765,20 +1765,20 @@ void __cdecl CG_DrawPlayerAmmoValue(
     double v37; // fp5
     double v38; // fp4
     double v39; // fp30
-    __int64 v40; // r8
+    int64_t v40; // r8
     double v41; // fp8
     double v42; // fp7
     double v43; // fp6
     double v44; // fp5
     double v45; // fp4
-    __int64 v46; // r11
+    int64_t v46; // r11
     int v47; // r7
     double v48; // fp8
     double v49; // fp7
     double v50; // fp6
     double v51; // fp5
     double v52; // fp4
-    __int64 v53; // r11
+    int64_t v53; // r11
     double v54; // fp30
     int v55; // r8
     int v56; // r7
@@ -1794,7 +1794,7 @@ void __cdecl CG_DrawPlayerAmmoValue(
     double v66; // fp6
     double v67; // fp5
     double v68; // fp4
-    __int64 v69; // r11
+    int64_t v69; // r11
     int v70; // r7
     double v71; // fp8
     double v72; // fp7
@@ -2635,8 +2635,8 @@ void __cdecl CG_DrawPlayerStance(
                 LODWORD(v27) = cgArray[0].proneBlockedEndTime - cgArray[0].time;
                 DWORD2(v27) = v26;
                 v50 = *(float *)&v26;
-                v28 = (float)((float)*(__int64 *)((char *)&v27 + 4) * (float)0.5);
-                *(double *)&v29 = (float)DEG2RAD( (float)((float)((float)(__int64)v27 * (float)0.00066666666) * (float)540.0) );
+                v28 = (float)((float)*(int64_t *)((char *)&v27 + 4) * (float)0.5);
+                *(double *)&v29 = (float)DEG2RAD( (float)((float)((float)(int64_t)v27 * (float)0.00066666666) * (float)540.0) );
                 v30 = sin(v29);
                 v52 = I_fabs((float)*(double *)&v30);
                 UI_DrawText(
@@ -3100,7 +3100,7 @@ void __cdecl CG_OwnerDraw(
     rectDef_s rect; // [sp+60h] [-80h] BYREF
 
     //textAlignMode = *(_QWORD *)&parentRect;
-    //a18 = *(__int64 *)((char *)&vertAlign + 4);
+    //a18 = *(int64_t *)((char *)&vertAlign + 4);
     //a19 = vertAlign;
 
     if (!cg_drawHUD->current.enabled || !hud_drawHUD->current.enabled)

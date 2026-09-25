@@ -5,7 +5,7 @@
 #include <universal/com_files.h>
 #include <qcommon/qcommon.h>
 
-enum $69AF8E44C9D6025F282D494F15F1F016 : __int32
+enum $69AF8E44C9D6025F282D494F15F1F016 : int32_t
 {
     PART_TYPE_NO_QUAT = 0x0,
     PART_TYPE_HALF_QUAT = 0x1,
@@ -119,8 +119,8 @@ int __cdecl XAnimCompareTransParts(const void* arg1, const void* arg2)
 
 void __cdecl XAnimEmitFrameIndices(
     uint32_t tableSize,
-    unsigned __int8 **dataByte,
-    __int16 **dataShort,
+    uint8_t **dataByte,
+    int16_t **dataShort,
     XAnimIndices *indices,
     XAnimDynamicIndices *frameIndices,
     bool useSmallIndices)
@@ -213,10 +213,10 @@ XModelPieces *__cdecl XModelPiecesLoadFile(const char *name, void *(__cdecl *All
 {
     XModelPiece *piece; // [esp+38h] [ebp-A4h]
     int pieceIndex; // [esp+3Ch] [ebp-A0h]
-    unsigned __int8 *pos; // [esp+40h] [ebp-9Ch]
+    uint8_t *pos; // [esp+40h] [ebp-9Ch]
     char filename[64]; // [esp+44h] [ebp-98h] BYREF
     char piecename[64]; // [esp+84h] [ebp-58h] BYREF
-    unsigned __int8 *buf = NULL; // [esp+C8h] [ebp-14h] BYREF
+    uint8_t *buf = NULL; // [esp+C8h] [ebp-14h] BYREF
     int version; // [esp+CCh] [ebp-10h]
     XModelPieces *xmodelPieces; // [esp+D0h] [ebp-Ch]
     int len; // [esp+D4h] [ebp-8h]
@@ -323,9 +323,9 @@ XModelPieces *__cdecl XModelPiecesPrecache(const char *name, void *(__cdecl *All
     }
 }
 
-unsigned __int8 *__cdecl LoadTrans(
+uint8_t *__cdecl LoadTrans(
     void *(__cdecl *Alloc)(int),
-    unsigned __int8 *pos,
+    uint8_t *pos,
     uint16_t numTransIndices,
     XAnimPartTrans *trans)
 {
@@ -353,13 +353,13 @@ unsigned __int8 *__cdecl LoadTrans(
     else
         size = 6 * numTransIndices;
 
-    trans->u.frames.frames._1 = (unsigned __int8 (*)[3])Alloc(size);
+    trans->u.frames.frames._1 = (uint8_t (*)[3])Alloc(size);
 
     memcpy(trans->u.frames.frames._1, pos, size);
     return &pos[size];
 }
 
-void __cdecl ConsumeQuat(unsigned __int8 **pos, __int16 *out)
+void __cdecl ConsumeQuat(uint8_t **pos, int16_t *out)
 {
     int v2; // [esp+8h] [ebp-34h]
     float v3; // [esp+Ch] [ebp-30h]
@@ -392,7 +392,7 @@ void __cdecl ConsumeQuat(unsigned __int8 **pos, __int16 *out)
     out[3] = v2;
 }
 
-void __cdecl ConsumeQuat2(unsigned __int8 **pos, __int16 *out)
+void __cdecl ConsumeQuat2(uint8_t **pos, int16_t *out)
 {
     int v2; // [esp+8h] [ebp-24h]
     float v3; // [esp+Ch] [ebp-20h]
@@ -421,7 +421,7 @@ void __cdecl ConsumeQuat2(unsigned __int8 **pos, __int16 *out)
     out[1] = v2;
 }
 
-void __cdecl ConsumeQuatNoSwap(unsigned __int8 **pos, __int16 *out)
+void __cdecl ConsumeQuatNoSwap(uint8_t **pos, int16_t *out)
 {
     int v2; // [esp+8h] [ebp-34h]
     float v3; // [esp+Ch] [ebp-30h]
@@ -453,19 +453,19 @@ void __cdecl ConsumeQuatNoSwap(unsigned __int8 **pos, __int16 *out)
     out[3] = v2;
 }
 
-unsigned __int8 *__cdecl GetDeltaQuaternions(
+uint8_t *__cdecl GetDeltaQuaternions(
     XAnimDeltaPart *deltaPart,
     void *(__cdecl *Alloc)(int),
-    unsigned __int8 *pos,
+    uint8_t *pos,
     uint16_t numloopframes,
     bool useSmallIndices)
 {
-    __int16 *sQ; // [esp+4h] [ebp-30h]
+    int16_t *sQ; // [esp+4h] [ebp-30h]
     int m; // [esp+10h] [ebp-24h]
     int k; // [esp+14h] [ebp-20h]
     int j; // [esp+18h] [ebp-1Ch]
     int i; // [esp+1Ch] [ebp-18h]
-    __int16 quat[4]; // [esp+20h] [ebp-14h] BYREF
+    int16_t quat[4]; // [esp+20h] [ebp-14h] BYREF
     int size; // [esp+2Ch] [ebp-8h]
     uint16_t numQuatIndices; // [esp+30h] [ebp-4h]
 
@@ -516,7 +516,7 @@ unsigned __int8 *__cdecl GetDeltaQuaternions(
                 }
             }
             deltaPart->quat->size = numQuatIndices - 1;
-            deltaPart->quat->u.frames.frames = (__int16 (*)[2])Alloc(4 * numQuatIndices);
+            deltaPart->quat->u.frames.frames = (int16_t (*)[2])Alloc(4 * numQuatIndices);
             for (k = 0; k < numQuatIndices; ++k)
             {
                 ConsumeQuat2(&pos, quat);
@@ -541,10 +541,10 @@ unsigned __int8 *__cdecl GetDeltaQuaternions(
     return pos;
 }
 
-unsigned __int8 *__cdecl GetDeltaTranslations(
+uint8_t *__cdecl GetDeltaTranslations(
     XAnimDeltaPart *deltaPart,
     void *(__cdecl *Alloc)(int),
-    unsigned __int8 *pos,
+    uint8_t *pos,
     uint16_t numloopframes,
     bool useSmallIndices)
 {
@@ -614,24 +614,24 @@ unsigned __int8 *__cdecl GetDeltaTranslations(
     return pos;
 }
 
-unsigned __int8 *__cdecl GetQuaternions(
+uint8_t *__cdecl GetQuaternions(
     XAnimPartQuatPtr *part,
-    unsigned __int8 *pos,
+    uint8_t *pos,
     bool bFlipQuat,
     bool bSimpleQuat,
     uint16_t numloopframes,
     bool useSmallIndices)
 {
-    __int16 *v8; // [esp+4h] [ebp-44h]
-    __int16 *v9; // [esp+8h] [ebp-40h]
+    int16_t *v8; // [esp+4h] [ebp-44h]
+    int16_t *v9; // [esp+8h] [ebp-40h]
     int ii; // [esp+10h] [ebp-38h]
     int n; // [esp+14h] [ebp-34h]
-    __int16 *sQ; // [esp+18h] [ebp-30h]
+    int16_t *sQ; // [esp+18h] [ebp-30h]
     int m; // [esp+24h] [ebp-24h]
     int k; // [esp+28h] [ebp-20h]
     int j; // [esp+2Ch] [ebp-1Ch]
     int i; // [esp+30h] [ebp-18h]
-    __int16 quat[4]; // [esp+34h] [ebp-14h] BYREF
+    int16_t quat[4]; // [esp+34h] [ebp-14h] BYREF
     int size; // [esp+40h] [ebp-8h]
     uint16_t numQuatIndices; // [esp+44h] [ebp-4h]
 
@@ -708,7 +708,7 @@ unsigned __int8 *__cdecl GetQuaternions(
             }
             if (bSimpleQuat)
             {
-                part->quat->u.frames.u.frames = (__int16 (*)[4])XAnimTempAlloc(4 * numQuatIndices);
+                part->quat->u.frames.u.frames = (int16_t (*)[4])XAnimTempAlloc(4 * numQuatIndices);
                 ConsumeQuat2(&pos, quat);
                 if (bFlipQuat)
                 {
@@ -736,7 +736,7 @@ unsigned __int8 *__cdecl GetQuaternions(
             }
             else
             {
-                part->quat->u.frames.u.frames = (__int16 (*)[4])XAnimTempAlloc(8 * numQuatIndices);
+                part->quat->u.frames.u.frames = (int16_t (*)[4])XAnimTempAlloc(8 * numQuatIndices);
                 ConsumeQuat(&pos, quat);
                 if (bFlipQuat)
                 {
@@ -778,9 +778,9 @@ unsigned __int8 *__cdecl GetQuaternions(
     return pos;
 }
 
-unsigned __int8 *__cdecl GetTranslations(
+uint8_t *__cdecl GetTranslations(
     XAnimPartTransPtr *part,
-    unsigned __int8 *pos,
+    uint8_t *pos,
     uint16_t numloopframes,
     bool useSmallIndices)
 {
@@ -889,22 +889,22 @@ int g_checkBoneOrder;
 
 XAnimParts *__cdecl XAnimLoadFile(char *name, void *(__cdecl *Alloc)(int))
 {
-    __int16 prev; // ax
-    unsigned __int8 *Quaternions; // eax
+    int16_t prev; // ax
+    uint8_t *Quaternions; // eax
     int v6; // eax
     uint32_t v7; // ecx
     int v8; // eax
     uint32_t v9; // ecx
     int v10; // ecx
-    __int16 *v11; // edx
+    int16_t *v11; // edx
     void *v12; // [esp+8h] [ebp-14DCh]
     void *v13; // [esp+Ch] [ebp-14D8h]
     int *v14; // [esp+10h] [ebp-14D4h]
-    unsigned __int8 *v15; // [esp+14h] [ebp-14D0h]
-    unsigned __int8 *v16; // [esp+18h] [ebp-14CCh]
+    uint8_t *v15; // [esp+14h] [ebp-14D0h]
+    uint8_t *v16; // [esp+18h] [ebp-14CCh]
     int *v17; // [esp+1Ch] [ebp-14C8h]
-    __int16 *v18; // [esp+20h] [ebp-14C4h]
-    unsigned __int8 *v19; // [esp+24h] [ebp-14C0h]
+    int16_t *v18; // [esp+20h] [ebp-14C4h]
+    uint8_t *v19; // [esp+24h] [ebp-14C0h]
     int v20; // [esp+28h] [ebp-14BCh]
     int v21; // [esp+2Ch] [ebp-14B8h]
     int v22; // [esp+30h] [ebp-14B4h]
@@ -918,34 +918,34 @@ XAnimParts *__cdecl XAnimLoadFile(char *name, void *(__cdecl *Alloc)(int))
     int v31; // [esp+B4h] [ebp-1430h]
     int v32; // [esp+B8h] [ebp-142Ch]
     int v33; // [esp+BCh] [ebp-1428h]
-    unsigned __int8 v34; // [esp+C0h] [ebp-1424h]
-    __int16 numBones; // [esp+C8h] [ebp-141Ch]
-    __int16 version; // [esp+D0h] [ebp-1414h]
-    unsigned __int8 *pos; // [esp+DCh] [ebp-1408h] BYREF
+    uint8_t v34; // [esp+C0h] [ebp-1424h]
+    int16_t numBones; // [esp+C8h] [ebp-141Ch]
+    int16_t version; // [esp+D0h] [ebp-1414h]
+    uint8_t *pos; // [esp+DCh] [ebp-1408h] BYREF
     bool useSmallIndices; // [esp+E3h] [ebp-1401h]
-    unsigned __int8 dst[16]; // [esp+E4h] [ebp-1400h] BYREF
+    uint8_t dst[16]; // [esp+E4h] [ebp-1400h] BYREF
     uint32_t i; // [esp+F4h] [ebp-13F0h]
     uint32_t v43; // [esp+F8h] [ebp-13ECh]
     char dest[1092]; // [esp+FCh] [ebp-13E8h] BYREF
-    __int16 *dataShort; // [esp+540h] [ebp-FA4h] BYREF
+    int16_t *dataShort; // [esp+540h] [ebp-FA4h] BYREF
     uint32_t animPartIndex; // [esp+544h] [ebp-FA0h]
     uint32_t dataByteCount; // [esp+548h] [ebp-F9Ch]
-    unsigned __int8 *dataByte; // [esp+54Ch] [ebp-F98h] BYREF
+    uint8_t *dataByte; // [esp+54Ch] [ebp-F98h] BYREF
     int *randomDataInt; // [esp+550h] [ebp-F94h]
     int dataIntCount; // [esp+554h] [ebp-F90h]
     int v51[10]; // [esp+558h] [ebp-F8Ch] BYREF
     uint16_t numframes; // [esp+584h] [ebp-F60h]
-    unsigned __int8 *buf; // [esp+588h] [ebp-F5Ch] BYREF
+    uint8_t *buf; // [esp+588h] [ebp-F5Ch] BYREF
     uint32_t count; // [esp+58Ch] [ebp-F58h]
     uint32_t v56; // [esp+590h] [ebp-F54h]
     int *dataInt; // [esp+594h] [ebp-F50h]
     int fileSize; // [esp+598h] [ebp-F4Ch]
     _WORD base[130]; // [esp+59Ch] [ebp-F48h] BYREF
     uint32_t randomDataShortCount; // [esp+6A0h] [ebp-E44h]
-    unsigned __int8 *randomDataShort; // [esp+6A4h] [ebp-E40h]
+    uint8_t *randomDataShort; // [esp+6A4h] [ebp-E40h]
     int indexCount; // [esp+6A8h] [ebp-E3Ch]
-    unsigned __int8 *v63; // [esp+6ACh] [ebp-E38h]
-    unsigned __int8 *randomDataByte; // [esp+6B0h] [ebp-E34h]
+    uint8_t *v63; // [esp+6ACh] [ebp-E38h]
+    uint8_t *randomDataByte; // [esp+6B0h] [ebp-E34h]
     uint32_t tableSize; // [esp+6B4h] [ebp-E30h]
     XAnimIndices indices; // [esp+6B8h] [ebp-E2Ch] BYREF
     XAnimPartQuatPtr part[128]; // [esp+6BCh] [ebp-E28h] BYREF
@@ -1057,8 +1057,8 @@ XAnimParts *__cdecl XAnimLoadFile(char *name, void *(__cdecl *Alloc)(int))
         pos += count;
         memcpy(dst, pos, count);
         pos += count;
-        memset((unsigned __int8 *)part, 0, 8 * numBones);
-        memset((unsigned __int8 *)v73, 0, 8 * numBones);
+        memset((uint8_t *)part, 0, 8 * numBones);
+        memset((uint8_t *)v73, 0, 8 * numBones);
         for (i = 0; i < numBones; ++i)
         {
             part[i].partIndex = i;
@@ -1156,54 +1156,54 @@ XAnimParts *__cdecl XAnimLoadFile(char *name, void *(__cdecl *Alloc)(int))
 
 
         v33 = v51[1] - v51[0];
-        if (v51[1] - v51[0] != (unsigned __int8)(LOBYTE(v51[1]) - LOBYTE(v51[0])))
+        if (v51[1] - v51[0] != (uint8_t)(LOBYTE(v51[1]) - LOBYTE(v51[0])))
             MyAssertHandler(
                 (char *)"c:\\trees\\cod3\\src\\qcommon\\../universal/assertive.h",
                 281,
                 0,
                 "i == static_cast< Type >( i )\n\t%i, %i",
                 v33,
-                (unsigned __int8)v33);
+                (uint8_t)v33);
         parts->boneCount[1] = v33;
 
 
         v32 = v51[2] - v51[1];
-        if (v51[2] - v51[1] != (unsigned __int8)(LOBYTE(v51[2]) - LOBYTE(v51[1])))
+        if (v51[2] - v51[1] != (uint8_t)(LOBYTE(v51[2]) - LOBYTE(v51[1])))
             MyAssertHandler(
                 (char *)"c:\\trees\\cod3\\src\\qcommon\\../universal/assertive.h",
                 281,
                 0,
                 "i == static_cast< Type >( i )\n\t%i, %i",
                 v32,
-                (unsigned __int8)v32);
+                (uint8_t)v32);
         parts->boneCount[2] = v32;
 
 
         v31 = v51[3] - v51[2];
-        if (v51[3] - v51[2] != (unsigned __int8)(LOBYTE(v51[3]) - LOBYTE(v51[2])))
+        if (v51[3] - v51[2] != (uint8_t)(LOBYTE(v51[3]) - LOBYTE(v51[2])))
             MyAssertHandler(
                 (char *)"c:\\trees\\cod3\\src\\qcommon\\../universal/assertive.h",
                 281,
                 0,
                 "i == static_cast< Type >( i )\n\t%i, %i",
                 v31,
-                (unsigned __int8)v31);
+                (uint8_t)v31);
         parts->boneCount[3] = v31;
 
 
         v30 = v51[4] - v51[3];
-        if (v51[4] - v51[3] != (unsigned __int8)(LOBYTE(v51[4]) - LOBYTE(v51[3])))
+        if (v51[4] - v51[3] != (uint8_t)(LOBYTE(v51[4]) - LOBYTE(v51[3])))
             MyAssertHandler(
                 (char *)"c:\\trees\\cod3\\src\\qcommon\\../universal/assertive.h",
                 281,
                 0,
                 "i == static_cast< Type >( i )\n\t%i, %i",
                 v30,
-                (unsigned __int8)v30);
+                (uint8_t)v30);
         parts->boneCount[4] = v30;
 
 
-        memcpy(boneIndexes, (unsigned __int8 *)base, 2 * numBones);
+        memcpy(boneIndexes, (uint8_t *)base, 2 * numBones);
         qsort(boneIndexes, numBones, 2, XAnimCompareTransParts);
         for (i = 0; i < numBones; ++i)
         {
@@ -1361,14 +1361,14 @@ XAnimParts *__cdecl XAnimLoadFile(char *name, void *(__cdecl *Alloc)(int))
         iassert(animPartIndex == parts->boneCount[PART_TYPE_ALL]);
 
         if (dataByteCount)
-            v19 = (unsigned __int8 *)Alloc(2 * dataByteCount);
+            v19 = (uint8_t *)Alloc(2 * dataByteCount);
         else
             v19 = 0;
         dataByte = v19;
         parts->dataByteCount = dataByteCount;
         parts->dataByte = dataByte;
         if (dataShortCount)
-            v18 = (__int16 *)Alloc(2 * dataShortCount);
+            v18 = (int16_t *)Alloc(2 * dataShortCount);
         else
             v18 = 0;
         dataShort = v18;
@@ -1382,19 +1382,19 @@ XAnimParts *__cdecl XAnimLoadFile(char *name, void *(__cdecl *Alloc)(int))
         parts->dataIntCount = dataIntCount;
         parts->dataInt = dataInt;
         if (randomDataByteCount)
-            v16 = (unsigned __int8 *)Alloc(2 * randomDataByteCount);
+            v16 = (uint8_t *)Alloc(2 * randomDataByteCount);
         else
             v16 = 0;
         randomDataByte = v16;
         parts->randomDataByteCount = randomDataByteCount;
         parts->randomDataByte = randomDataByte;
         if (randomDataShortCount)
-            v15 = (unsigned __int8 *)Alloc(2 * randomDataShortCount);
+            v15 = (uint8_t *)Alloc(2 * randomDataShortCount);
         else
             v15 = 0;
         randomDataShort = v15;
         parts->randomDataShortCount = randomDataShortCount;
-        parts->randomDataShort = (__int16 *)randomDataShort;
+        parts->randomDataShort = (int16_t *)randomDataShort;
         if (randomDataIntCount)
             v14 = (int *)Alloc(4 * randomDataIntCount);
         else
@@ -1408,7 +1408,7 @@ XAnimParts *__cdecl XAnimLoadFile(char *name, void *(__cdecl *Alloc)(int))
                 v13 = Alloc(indexCount);
             else
                 v13 = 0;
-            indices._1 = (unsigned __int8 *)v13;
+            indices._1 = (uint8_t *)v13;
         }
         else
         {
@@ -1416,7 +1416,7 @@ XAnimParts *__cdecl XAnimLoadFile(char *name, void *(__cdecl *Alloc)(int))
                 v12 = Alloc(2 * indexCount);
             else
                 v12 = 0;
-            indices._1 = (unsigned __int8 *)v12;
+            indices._1 = (uint8_t *)v12;
         }
         parts->indices = indices;
         parts->indexCount = indexCount;
@@ -1436,7 +1436,7 @@ XAnimParts *__cdecl XAnimLoadFile(char *name, void *(__cdecl *Alloc)(int))
                     tableSize,
                     (uint16_t)tableSize);
             *dataShort++ = tableSize;
-            memcpy(randomDataShort, *(unsigned __int8 **)(v71[2 * animPartIndex] + 4), 2 * (2 * tableSize + 2));
+            memcpy(randomDataShort, *(uint8_t **)(v71[2 * animPartIndex] + 4), 2 * (2 * tableSize + 2));
             randomDataShort += 4 * tableSize + 4;
             XAnimEmitFrameIndices(
                 tableSize,
@@ -1459,7 +1459,7 @@ XAnimParts *__cdecl XAnimLoadFile(char *name, void *(__cdecl *Alloc)(int))
                     tableSize,
                     (uint16_t)tableSize);
             *dataShort++ = tableSize;
-            memcpy(randomDataShort, *(unsigned __int8 **)(v71[2 * animPartIndex] + 4), 2 * (4 * tableSize + 4));
+            memcpy(randomDataShort, *(uint8_t **)(v71[2 * animPartIndex] + 4), 2 * (4 * tableSize + 4));
             randomDataShort += 8 * tableSize + 8;
             XAnimEmitFrameIndices(
                 tableSize,

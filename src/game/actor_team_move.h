@@ -7,7 +7,7 @@
 #include "actor.h"
 #include "sentient.h"
 
-enum ai_teammove_t : __int32
+enum ai_teammove_t : int32_t
 {
     AI_TEAMMOVE_TRAVEL = 0x0,
     AI_TEAMMOVE_WAIT = 0x1,
@@ -51,7 +51,7 @@ struct team_move_other_context_t
 void __cdecl Actor_TeamMoveBlocked(actor_s *self);
 void __cdecl Actor_TeamMoveBlockedClear(actor_s *self);
 bool Actor_TeamMoveCheckWaitTimer(actor_s *self, ai_teammove_t *result);
-bool __cdecl Actor_TeamMoveNeedToCheckWait(unsigned __int8 moveMode, path_t *pPath);
+bool __cdecl Actor_TeamMoveNeedToCheckWait(uint8_t moveMode, path_t *pPath);
 bool __cdecl Actor_IsEnemy(actor_s *self, sentient_s *other);
 void __cdecl Actor_CalcInterval(
     actor_s *self,

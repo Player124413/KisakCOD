@@ -4,7 +4,7 @@
 #error This file is for SinglePlayer only 
 #endif
 
-enum aiphys_t : __int32
+enum aiphys_t : int32_t
 {
     AIPHYS_BAD = 0x0,
     AIPHYS_NORMAL_ABSOLUTE = 0x1,
@@ -14,18 +14,18 @@ enum aiphys_t : __int32
     AIPHYS_ZONLY_PHYSICS_RELATIVE = 0x5,
 };
 
-enum SlideMoveResult : __int32
+enum SlideMoveResult : int32_t
 {
     SLIDEMOVE_COMPLETE = 0x0,
     SLIDEMOVE_CLIPPED = 0x1,
     SLIDEMOVE_FAIL = 0x2,
 };
 
-struct __declspec(align(4)) actor_physics_t
+struct __attribute__((aligned(4))) actor_physics_t
 {
     float vOrigin[3];
     float vVelocity[3];
-    unsigned __int16 groundEntNum;
+    uint16_t groundEntNum;
     int iFootstepTimer;
     int bHasGroundPlane;
     float groundplaneSlope;
@@ -46,8 +46,8 @@ struct __declspec(align(4)) actor_physics_t
     int iHitEntnum;
     float vHitOrigin[2];
     float vHitNormal[2];
-    unsigned __int8 bStuck;
-    unsigned __int8 bDeflected;
+    uint8_t bStuck;
+    uint8_t bDeflected;
 };
 
 void __cdecl TRACK_actor_physics();

@@ -3,7 +3,7 @@
 #include "rb_backend.h"
 #include "fxprimitives.h"
 
-enum WorkerCmdType : __int32
+enum WorkerCmdType : int32_t
 {
     WRKCMD_FIRST_FRONTEND = 0x0,
     WRKCMD_UPDATE_FX_SPOT_LIGHT = 0x0,

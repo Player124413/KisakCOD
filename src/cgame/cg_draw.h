@@ -6,13 +6,13 @@
 #error This file is for SinglePlayer only
 #endif
 
-enum BlurTime : __int32
+enum BlurTime : int32_t
 {
     BLUR_TIME_RELATIVE = 0x0,
     BLUR_TIME_ABSOLUTE = 0x1,
 };
 
-enum BlurPriority : __int32
+enum BlurPriority : int32_t
 {
     BLUR_PRIORITY_NONE = 0x0,
     BLUR_PRIORITY_SCRIPT = 0x1,
@@ -57,29 +57,29 @@ void __cdecl CG_DrawCenterString(
 int __cdecl CG_DrawFriendlyFire(const cg_s *cgameGlob);
 void __cdecl CG_DrawFlashFade(int localClientNum);
 int __cdecl CG_CheckPlayerMovement(
-    __int64 newCmd,
-    __int64 a2,
-    __int64 a3,
-    __int64 a4,
-    __int64 a5,
-    __int64 a6,
-    __int64 a7,
-    __int64 a8,
-    __int64 a9,
-    __int64 a10,
-    __int64 a11,
-    __int64 a12,
-    __int64 a13,
-    __int64 a14,
+    int64_t newCmd,
+    int64_t a2,
+    int64_t a3,
+    int64_t a4,
+    int64_t a5,
+    int64_t a6,
+    int64_t a7,
+    int64_t a8,
+    int64_t a9,
+    int64_t a10,
+    int64_t a11,
+    int64_t a12,
+    int64_t a13,
+    int64_t a14,
     int a15,
     int a16,
     int a17,
-    __int16 a18);
-int __cdecl CG_CheckPlayerStanceChange(int localClientNum, __int16 newButtons, __int16 changedButtons);
+    int16_t a18);
+int __cdecl CG_CheckPlayerStanceChange(int localClientNum, int16_t newButtons, int16_t changedButtons);
 int __cdecl CG_CheckPlayerTryReload(int localClientNum, char buttons);
 int __cdecl CG_CheckPlayerFireNonTurret(int localClientNum, char buttons);
 int __cdecl CG_CheckPlayerWeaponUsage(int localClientNum, char buttons);
-int __cdecl CG_CheckPlayerOffHandUsage(int localClientNum, __int16 buttons);
+int __cdecl CG_CheckPlayerOffHandUsage(int localClientNum, int16_t buttons);
 unsigned int __cdecl CG_CheckPlayerMiscInput(int buttons);
 void __cdecl CG_CheckForPlayerInput(int localClientNum);
 void __cdecl CG_CheckHudHealthDisplay(int localClientNum);

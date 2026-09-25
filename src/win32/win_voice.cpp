@@ -309,7 +309,7 @@ int __cdecl mixerGetRecordSource(char *srcName)
     return 0;
 }
 
-int __cdecl mixerSetRecordLevel(char *SrcName, unsigned __int16 newLevel)
+int __cdecl mixerSetRecordLevel(char *SrcName, uint16_t newLevel)
 {
     const char *v3; // eax
     tagMIXERCONTROLA mxc; // [esp+0h] [ebp-188h] BYREF
@@ -375,7 +375,7 @@ int __cdecl mixerSetRecordLevel(char *SrcName, unsigned __int16 newLevel)
     return 0;
 }
 
-int __cdecl mixerSetMicrophoneMute(unsigned __int8 bMute)
+int __cdecl mixerSetMicrophoneMute(uint8_t bMute)
 {
     const char *v2; // eax
     tagMIXERCONTROLA mxc; // [esp+0h] [ebp-188h] BYREF
@@ -453,12 +453,12 @@ int __cdecl Client_SendVoiceData(int bytes, char *enc_buffer)
 }
 
 int samples_in_partial_audio_buffer;
-__int16 partial_audio_buffer[640];
+int16_t partial_audio_buffer[640];
 char enc_buffer[4096];
 int enc_buffer_pos;
 int __cdecl Record_QueueAudioDataForEncoding(audioSample_t *sample)
 {
-    __int64 v1; // rax
+    int64_t v1; // rax
     int v3; // [esp+0h] [ebp-2030h]
     int v4; // [esp+10h] [ebp-2020h]
     int v5; // [esp+14h] [ebp-201Ch]
@@ -472,8 +472,8 @@ int __cdecl Record_QueueAudioDataForEncoding(audioSample_t *sample)
     {
         for (i = 0; i < sample->lengthInSamples; ++i)
         {
-            *(_WORD*)&sample->buffer[2 * i] = (int)(*(__int16*)&sample->buffer[2 * i] * voice_current_scaler);
-            v1 = *(__int16*)&sample->buffer[2 * i];
+            *(_WORD*)&sample->buffer[2 * i] = (int)(*(int16_t*)&sample->buffer[2 * i] * voice_current_scaler);
+            v1 = *(int16_t*)&sample->buffer[2 * i];
             voice_current_voicelevel = ((HIDWORD(v1) ^ v1) - HIDWORD(v1)) + voice_current_voicelevel;
         }
         voice_current_voicelevel = voice_current_voicelevel / sample->lengthInSamples;
@@ -602,7 +602,7 @@ bool __cdecl Voice_Init()
     mixerGetRecordSource(old_rec_source);
     mixerSetRecordSource((char*)"Mic");
     mic_old_reclevel = mixerGetRecordLevel((char*)"Mic");
-    mic_current_reclevel = (unsigned __int16)(int)winvoice_mic_reclevel->current.value;
+    mic_current_reclevel = (uint16_t)(int)winvoice_mic_reclevel->current.value;
     mixerSetRecordLevel((char*)"Mic", (int)winvoice_mic_reclevel->current.value);
     mixerSetMicrophoneMute(winvoice_mic_mute->current.color[0]);
     g_current_bandwidth_setting = 0;
@@ -612,7 +612,7 @@ bool __cdecl Voice_Init()
     Encode_Init(g_current_bandwidth_setting);
     Decode_Init(g_current_bandwidth_setting);
     g_voice_initialized = recordInitialized && soundInitialized;
-    memset((unsigned __int8 *)s_clientTalkTime, 0, sizeof(s_clientTalkTime));
+    memset((uint8_t *)s_clientTalkTime, 0, sizeof(s_clientTalkTime));
     for (client = 0; client < 64; ++client)
         s_clientSamples[client] = Sound_NewSample();
     return 0;
@@ -684,9 +684,9 @@ void __cdecl Voice_Playback()
 
     if (g_voice_initialized)
     {
-        if (mic_current_reclevel != (unsigned __int16)(int)winvoice_mic_reclevel->current.value)
+        if (mic_current_reclevel != (uint16_t)(int)winvoice_mic_reclevel->current.value)
         {
-            mic_current_reclevel = (unsigned __int16)(int)winvoice_mic_reclevel->current.value;
+            mic_current_reclevel = (uint16_t)(int)winvoice_mic_reclevel->current.value;
             mixerSetRecordLevel((char*)"Mic", (int)winvoice_mic_reclevel->current.value);
         }
         for (client = 0; client < 64; ++client)
@@ -728,12 +728,12 @@ uint32_t __cdecl Sound_UpdateSample(dsound_sample_t *sample, char *data, uint32_
     return DSound_UpdateSample(sample, data, data_len);
 }
 
-void __cdecl Voice_IncomingVoiceData(unsigned __int8 talker, unsigned __int8 *data, int packetDataSize)
+void __cdecl Voice_IncomingVoiceData(uint8_t talker, uint8_t *data, int packetDataSize)
 {
     int v3; // [esp+0h] [ebp-201Ch]
     FILE *stream; // [esp+8h] [ebp-2014h]
     int v5; // [esp+10h] [ebp-200Ch]
-    __int16 out[4096]; // [esp+14h] [ebp-2008h] BYREF
+    int16_t out[4096]; // [esp+14h] [ebp-2008h] BYREF
     uint32_t data_len; // [esp+2018h] [ebp-4h]
 
     if (!playing)

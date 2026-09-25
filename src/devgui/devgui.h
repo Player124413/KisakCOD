@@ -1,14 +1,14 @@
 #pragma once
 #include <qcommon/graph.h>
 
-enum DevGuiInputState : __int32
+enum DevGuiInputState : int32_t
 {                                       // ...
     SCROLL_NONE = 0x0,
     SCROLL_PRESSED = 0x1,
     SCROLL_STALLED = 0x2,
     SCROLL_HELD = 0x3,
 };
-enum DevGuiTokenResult : __int32
+enum DevGuiTokenResult : int32_t
 {                                       // ...
     DEVGUI_TOKEN_ERROR = 0x0,
     DEVGUI_TOKEN_MORE = 0x1,
@@ -29,7 +29,7 @@ struct DevGuiInput // sizeof=0x70
     DevGuiInputState analogStates[2];   // ...
     float analogAxis[2];                // ...
     float analogTimes[2];
-    __int16 menuScroll[2];              // ...
+    int16_t menuScroll[2];              // ...
     float menuScrollTime[2];            // ...
     float digitalSliderTime;            // ...
     float analogSliderTime;             // ...
@@ -52,7 +52,7 @@ struct DevMenuItem // sizeof=0x28
     char label[26];                     // ...
     uint8_t childType;          // ...
     uint8_t childMenuMemory;    // ...
-    __int16 sortKey;
+    int16_t sortKey;
     uint16_t nextSibling;       // ...
     uint16_t prevSibling;       // ...
     uint16_t parent;            // ...
@@ -90,12 +90,12 @@ void __cdecl TRACK_devgui();
 void __cdecl DevGui_AddDvar(const char *path, const dvar_s *dvar);
 devguiGlob_t *__cdecl DevGui_GetMenu(uint16_t handle);
 uint16_t __cdecl DevGui_ConstructPath_r(uint16_t parent, const char *path);
-uint16_t __cdecl DevGui_RegisterMenu(uint16_t parentHandle, const char *label, __int16 sortKey);
-uint16_t __cdecl DevGui_CreateMenu(uint16_t parentHandle, const char *label, __int16 sortKey);
+uint16_t __cdecl DevGui_RegisterMenu(uint16_t parentHandle, const char *label, int16_t sortKey);
+uint16_t __cdecl DevGui_CreateMenu(uint16_t parentHandle, const char *label, int16_t sortKey);
 uint16_t __cdecl DevGui_GetMenuHandle(DevMenuItem *menu);
 int32_t __cdecl DevGui_CompareMenus(const DevMenuItem *menu0, const DevMenuItem *menu1);
 uint16_t __cdecl DevGui_FindMenu(uint16_t parentHandle, const char *label);
-DevGuiTokenResult __cdecl DevGui_PathToken(const char **pathInOut, char *label, __int16 *sortKeyOut);
+DevGuiTokenResult __cdecl DevGui_PathToken(const char **pathInOut, char *label, int16_t *sortKeyOut);
 char __cdecl DevGui_IsValidPath(const char *path);
 void __cdecl DevGui_AddCommand(const char *path, char *command);
 void __cdecl DevGui_AddGraph(const char *path, DevGraph *graph);
@@ -163,14 +163,14 @@ bool __cdecl DevGui_IsActive();
 extern devguiGlob_t devguiGlob;
 
 // devgui_input
-enum DevGuiInputAxis : __int32
+enum DevGuiInputAxis : int32_t
 {                                       // ...
     SCROLL_XAXIS = 0x0,
     SCROLL_YAXIS = 0x1,
     SCROLL_AXIS_COUNT = 0x2,
 };
 
-enum DevGuiInputButton : __int32
+enum DevGuiInputButton : int32_t
 {                                       // ...
     INPUT_UP = 0x0,
     INPUT_DOWN = 0x1,
@@ -193,7 +193,7 @@ void __cdecl DevGui_UpdateScrollInputs(int32_t localClientNum);
 void __cdecl DevGui_UpdateScrollStates(float deltaTime, DevGuiInputState *states, float *axis, float *times);
 void __cdecl DevGui_UpdateMenuScroll(float deltaTime);
 void __cdecl DevGui_MouseEvent(int32_t dx, int32_t dy);
-__int16 __cdecl DevGui_GetMenuScroll(DevGuiInputAxis axis);
+int16_t __cdecl DevGui_GetMenuScroll(DevGuiInputAxis axis);
 int32_t __cdecl DevGui_UpdateIntScroll(float deltaTime, int32_t value, int32_t min, int32_t max, DevGuiInputAxis axis);
 double __cdecl DevGui_UpdateFloatScroll(
     float deltaTime,

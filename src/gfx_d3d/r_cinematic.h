@@ -7,13 +7,13 @@
 
 #define CINEMATIC_INVALID_IMAGE_FRAME -1
 
-enum CinematicEnum : __int32
+enum CinematicEnum : int32_t
 {                                       // ...
     CINEMATIC_NOT_PAUSED = 0x0,
     CINEMATIC_PAUSED = 0x1,
 };
 
-enum CinematicThreadState : __int32
+enum CinematicThreadState : int32_t
 {
     CINEMATIC_THREAD_STATE_FROM_HOST_GO = 0x0,
     CINEMATIC_THREAD_STATE_FROM_HOST_GO_BINK = 0x1,

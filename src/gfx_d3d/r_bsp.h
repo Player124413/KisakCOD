@@ -4,7 +4,7 @@
 #include "r_primarylights.h"
 
 
-enum TrisType : __int32
+enum TrisType : int32_t
 {                                       // ...
     TRIS_TYPE_LAYERED = 0x0,
     TRIS_TYPE_SIMPLE = 0x1,

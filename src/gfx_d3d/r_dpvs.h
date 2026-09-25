@@ -6,7 +6,7 @@
 
 #define DPVS_PORTAL_MAX_PLANES 16
 
-enum $72E71F3D9535328A1AA08FD8E568F55B : __int32
+enum $72E71F3D9535328A1AA08FD8E568F55B : int32_t
 {
     CULL_STATE_OUT = 0x0,
     CULL_STATE_BOUNDED_PENDING = 0x1,
@@ -15,13 +15,13 @@ enum $72E71F3D9535328A1AA08FD8E568F55B : __int32
     CULL_STATE_DONE = 0x4,
 };
 
-enum DpvsClipChildren : __int32
+enum DpvsClipChildren : int32_t
 {                                       // ...
     DPVS_DONT_CLIP_CHILDREN = 0x0,
     DPVS_CLIP_CHILDREN = 0x1,
 };
 
-enum DpvsForceBevels : __int32
+enum DpvsForceBevels : int32_t
 {                                       // ...
     DPVS_DONT_FORCE_BEVELS = 0x0,
     DPVS_FORCE_BEVELS = 0x1,

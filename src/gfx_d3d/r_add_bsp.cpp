@@ -281,7 +281,7 @@ void __cdecl R_AddAllBspDrawSurfacesRangeSunShadow(
     iassert((int)maxDrawSurfCount == scene.maxDrawSurfCount[stage]);
     surfaceMaterials = rgp.world->dpvs.surfaceMaterials;
     surfData.drawSurfList.end = &surfData.drawSurfList.current[maxDrawSurfCount];
-    prevDrawSurf.packed = (unsigned __int64)-1;
+    prevDrawSurf.packed = (uint64_t)-1;
     skipMaterial = 0;
     triSurfCount = 0;
     surfaceCastsSunShadow = rgp.world->dpvs.surfaceCastsSunShadow;

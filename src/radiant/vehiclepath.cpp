@@ -83,8 +83,8 @@ struct VehiclePathNode
     const char *targetname;    // 0x00  "targetname" epair
     const char *target;        // 0x04  "target" epair (the NEXT node's targetname)
     int         spawnflags1;   // 0x08  spawnflags & 1  (the "path start" flag)
-    __int16     index;         // 0x0C  this node's own index
-    __int16     pad_0e;        // 0x0E  (never written)
+    int16_t     index;         // 0x0C  this node's own index
+    int16_t     pad_0e;        // 0x0E  (never written)
     int         isRotateNode;  // 0x10  eclass == info_vehicle_node_rotate
     float       speed;         // 0x14  units/sec (mph * MPH_TO_INCHES_PER_SEC); -1 = "inherit"
     float       lookahead;     // 0x18  -1 = "inherit"
@@ -92,8 +92,8 @@ struct VehiclePathNode
     float       dir[3];        // 0x28  UNIT direction to the next node (LinkNodes)
     float       angles[3];     // 0x34  heading; (PI,PI,PI) = "unset" (see below)
     float       dist;          // 0x40  distance to the next node (LinkNodes)
-    __int16     nextIndex;     // 0x44  node this one targets, or -1
-    __int16     prevIndex;     // 0x46  node that targets this one, or -1
+    int16_t     nextIndex;     // 0x44  node this one targets, or -1
+    int16_t     prevIndex;     // 0x46  node that targets this one, or -1
 };
 static_assert( sizeof( VehiclePathNode ) == 72, "VehiclePathNode must be 72 bytes (IDB stride)" );
 static_assert( offsetof( VehiclePathNode, isRotateNode ) == 0x10, "VehiclePathNode.isRotateNode" );
@@ -108,14 +108,14 @@ static_assert( offsetof( VehiclePathNode, prevIndex )    == 0x46, "VehiclePathNo
 
 // ─────────────────────────────────────────────────────────────────────────────
 //  VehiclePathTracer — the 200-byte simulation state (the IDB shows it only as the
-//  `__int16 v12[100]` stack local in VehiclePath_AddNode).  Field roles recovered
+//  `int16_t v12[100]` stack local in VehiclePath_AddNode).  Field roles recovered
 //  from VehiclePath_InitTracer (0x4B6AC0, which writes +0..+52 then default-
 //  constructs the two embedded nodes) and VehiclePath_AdvanceToLookahead (0x4B6100).
 // ─────────────────────────────────────────────────────────────────────────────
 struct VehiclePathTracer
 {
-    __int16         nodeIndex;      // 0x00  node whose segment we are on
-    __int16         atEnd;          // 0x02  set once the walk cannot advance
+    int16_t         nodeIndex;      // 0x00  node whose segment we are on
+    int16_t         atEnd;          // 0x02  set once the walk cannot advance
     float           frac;           // 0x04  fraction along nodeIndex's segment
     float           speed;          // 0x08  interpolated speed at `frac`
     float           lookahead;      // 0x0C  interpolated lookahead at `frac`
@@ -126,7 +126,7 @@ struct VehiclePathTracer
     VehiclePathNode nodeOverride;   // 0x38  see VehiclePath_StepTracer
     VehiclePathNode nodeSaved;      // 0x80  see VehiclePath_StepTracer
 };
-static_assert( sizeof( VehiclePathTracer ) == 200, "VehiclePathTracer must be 200 bytes (the IDB __int16[100] local)" );
+static_assert( sizeof( VehiclePathTracer ) == 200, "VehiclePathTracer must be 200 bytes (the IDB int16_t[100] local)" );
 static_assert( offsetof( VehiclePathTracer, origin )       == 0x14, "VehiclePathTracer.origin" );
 static_assert( offsetof( VehiclePathTracer, angles )       == 0x20, "VehiclePathTracer.angles" );
 static_assert( offsetof( VehiclePathTracer, lookaheadPos ) == 0x2C, "VehiclePathTracer.lookaheadPos" );
@@ -136,10 +136,10 @@ static_assert( offsetof( VehiclePathTracer, nodeSaved )    == 0x80, "VehiclePath
 #define MAX_VEHICLE_NODES 4000     // the Sys_Printf("...Max vehicle Nodes hit [%d]", 4000) cap
 
 // The node table.  IDB 0x2473D58 is a DWORD slot but EVERY access to the count is
-// 16-bit (`mov word ptr`, `add word ptr [..],1`, `cmp ax,0FA0h`, `(__int16)` compares)
+// 16-bit (`mov word ptr`, `add word ptr [..],1`, `cmp ax,0FA0h`, `(int16_t)` compares)
 // and the upper half is never touched — a `short` reproduces all of them exactly
 // (§11 int16-truncation).
-static __int16         g_vehiclePathNodeCount;                       // 0x2473D58
+static int16_t         g_vehiclePathNodeCount;                       // 0x2473D58
 static VehiclePathNode g_vehiclePathNodes[MAX_VEHICLE_NODES];        // 0x2473D60
 
 // 0x739360 — the "angles were never authored" sentinel a fresh node is stamped with.
@@ -180,7 +180,7 @@ static float VehiclePath_AngleNormalize180( float angle )
 //  parks speed/lookahead at -1 ("inherit from a neighbour"), stamps the angles with
 //  the (PI,PI,PI) unset sentinel and both link indices with -1.
 // ─────────────────────────────────────────────────────────────────────────────
-static VehiclePathNode *VehiclePathNode_Init( VehiclePathNode *node, __int16 index )
+static VehiclePathNode *VehiclePathNode_Init( VehiclePathNode *node, int16_t index )
 {
     node->index      = index;
     node->speed      = -1.0f;
@@ -240,12 +240,12 @@ static VehiclePathNode *VehiclePathNode_Copy( VehiclePathNode *dst, const Vehicl
 //  point passes the selected entity's origin to disambiguate; the link pass passes
 //  NULL because it only has the target STRING to go on.
 // ─────────────────────────────────────────────────────────────────────────────
-static __int16 VehiclePath_FindNode( const float *origin, const char *targetname )
+static int16_t VehiclePath_FindNode( const float *origin, const char *targetname )
 {
     if ( !targetname )
         return -1;
 
-    __int16 i = 0;
+    int16_t i = 0;
     if ( g_vehiclePathNodeCount <= 0 )
         return -1;
 
@@ -265,21 +265,21 @@ static __int16 VehiclePath_FindNode( const float *origin, const char *targetname
 //  if `to` is hit.  The walk stops on a dangling link, on a self-loop back to `from`,
 //  and after g_vehiclePathNodeCount hops (the cycle guard).
 // ─────────────────────────────────────────────────────────────────────────────
-static int VehiclePath_IsNodeReachable( __int16 from, __int16 to )
+static int VehiclePath_IsNodeReachable( int16_t from, int16_t to )
 {
     if ( from < 0 )
         return 0;
     if ( to < 0 )
         return 0;
 
-    __int16 hops = 0;
+    int16_t hops = 0;
     VehiclePathNode *node = &g_vehiclePathNodes[from];
     if ( g_vehiclePathNodeCount <= 0 )
         return 0;
 
     for ( ;; )
     {
-        __int16 next = node->nextIndex;
+        int16_t next = node->nextIndex;
         ++hops;
         if ( next == to )
             break;
@@ -302,13 +302,13 @@ static int VehiclePath_IsNodeReachable( __int16 from, __int16 to )
 //  NOTE the asymmetry vs the lookahead twin below: this one tests `>= 0.0`, the
 //  lookahead one tests `> 0.0`.  Faithful — the binary really does differ.
 // ─────────────────────────────────────────────────────────────────────────────
-static float VehiclePath_ResolveNodeSpeed( __int16 index )
+static float VehiclePath_ResolveNodeSpeed( int16_t index )
 {
     VehiclePathNode *fwdNode = &g_vehiclePathNodes[index];
     if ( g_vehiclePathNodes[index].speed >= 0.0f )
         return g_vehiclePathNodes[index].speed;
 
-    __int16 prev = g_vehiclePathNodes[index].prevIndex;
+    int16_t prev = g_vehiclePathNodes[index].prevIndex;
     float distFwd  = 0.0f;
     float distBack = 0.0f;
     float fwdSpeed  = -1.0f;
@@ -316,7 +316,7 @@ static float VehiclePath_ResolveNodeSpeed( __int16 index )
 
     if ( prev >= 0 )
     {
-        __int16 hops = 0;
+        int16_t hops = 0;
         VehiclePathNode *backNode = &g_vehiclePathNodes[prev];
         if ( g_vehiclePathNodeCount > 0 )
         {
@@ -326,7 +326,7 @@ static float VehiclePath_ResolveNodeSpeed( __int16 index )
                 distBack = backNode->dist + distBack;
                 if ( backNode->speed >= 0.0f )
                     break;
-                __int16 pp = backNode->prevIndex;
+                int16_t pp = backNode->prevIndex;
                 if ( pp >= 0 && pp != index )
                 {
                     backNode = &g_vehiclePathNodes[pp];
@@ -340,7 +340,7 @@ static float VehiclePath_ResolveNodeSpeed( __int16 index )
     }
 backDone:
     {
-        __int16 hops = 0;
+        int16_t hops = 0;
         if ( g_vehiclePathNodeCount > 0 )
         {
             for ( ;; )
@@ -348,7 +348,7 @@ backDone:
                 ++hops;
                 if ( fwdNode->speed >= 0.0f )
                     break;
-                __int16 nx = fwdNode->nextIndex;
+                int16_t nx = fwdNode->nextIndex;
                 if ( nx >= 0 && nx != index )
                 {
                     float acc = fwdNode->dist + distFwd;
@@ -389,13 +389,13 @@ fwdDone:
 //  above over the `lookahead` field, except the "is it authored?" test is `> 0.0`
 //  instead of `>= 0.0`.  Kept as a separate function (the binary does not share one).
 // ─────────────────────────────────────────────────────────────────────────────
-static float VehiclePath_ResolveNodeLookahead( __int16 index )
+static float VehiclePath_ResolveNodeLookahead( int16_t index )
 {
     VehiclePathNode *fwdNode = &g_vehiclePathNodes[index];
     if ( g_vehiclePathNodes[index].lookahead >= 0.0f )
         return g_vehiclePathNodes[index].lookahead;
 
-    __int16 prev = g_vehiclePathNodes[index].prevIndex;
+    int16_t prev = g_vehiclePathNodes[index].prevIndex;
     float distFwd  = 0.0f;
     float distBack = 0.0f;
     float fwdLook  = -1.0f;
@@ -403,7 +403,7 @@ static float VehiclePath_ResolveNodeLookahead( __int16 index )
 
     if ( prev >= 0 )
     {
-        __int16 hops = 0;
+        int16_t hops = 0;
         VehiclePathNode *backNode = &g_vehiclePathNodes[prev];
         if ( g_vehiclePathNodeCount > 0 )
         {
@@ -413,7 +413,7 @@ static float VehiclePath_ResolveNodeLookahead( __int16 index )
                 distBack = backNode->dist + distBack;
                 if ( backNode->lookahead > 0.0f )
                     break;
-                __int16 pp = backNode->prevIndex;
+                int16_t pp = backNode->prevIndex;
                 if ( pp >= 0 && pp != index )
                 {
                     backNode = &g_vehiclePathNodes[pp];
@@ -427,7 +427,7 @@ static float VehiclePath_ResolveNodeLookahead( __int16 index )
     }
 backDone:
     {
-        __int16 hops = 0;
+        int16_t hops = 0;
         if ( g_vehiclePathNodeCount > 0 )
         {
             for ( ;; )
@@ -435,7 +435,7 @@ backDone:
                 ++hops;
                 if ( fwdNode->lookahead > 0.0f )
                     break;
-                __int16 nx = fwdNode->nextIndex;
+                int16_t nx = fwdNode->nextIndex;
                 if ( nx >= 0 && nx != index )
                 {
                     float acc = fwdNode->dist + distFwd;
@@ -478,19 +478,19 @@ fwdDone:
 // ─────────────────────────────────────────────────────────────────────────────
 static void VehiclePath_ResolveNodeAngles( float *out, int index )
 {
-    VehiclePathNode *fwdNode = &g_vehiclePathNodes[(__int16)index];
+    VehiclePathNode *fwdNode = &g_vehiclePathNodes[(int16_t)index];
 
-    if ( g_vehiclePathAnglesUnset[0] != g_vehiclePathNodes[(__int16)index].angles[0]
-      || g_vehiclePathAnglesUnset[1] != g_vehiclePathNodes[(__int16)index].angles[1]
-      || g_vehiclePathAnglesUnset[2] != g_vehiclePathNodes[(__int16)index].angles[2] )
+    if ( g_vehiclePathAnglesUnset[0] != g_vehiclePathNodes[(int16_t)index].angles[0]
+      || g_vehiclePathAnglesUnset[1] != g_vehiclePathNodes[(int16_t)index].angles[1]
+      || g_vehiclePathAnglesUnset[2] != g_vehiclePathNodes[(int16_t)index].angles[2] )
     {
-        out[0] = g_vehiclePathNodes[(__int16)index].angles[0];
-        out[1] = g_vehiclePathNodes[(__int16)index].angles[1];
-        out[2] = g_vehiclePathNodes[(__int16)index].angles[2];
+        out[0] = g_vehiclePathNodes[(int16_t)index].angles[0];
+        out[1] = g_vehiclePathNodes[(int16_t)index].angles[1];
+        out[2] = g_vehiclePathNodes[(int16_t)index].angles[2];
         return;
     }
 
-    __int16 prev = g_vehiclePathNodes[(__int16)index].prevIndex;
+    int16_t prev = g_vehiclePathNodes[(int16_t)index].prevIndex;
     float distFwd  = 0.0f;
     float distBack = 0.0f;
     float backAng[3] = { g_vehiclePathAnglesUnset[0], g_vehiclePathAnglesUnset[1], g_vehiclePathAnglesUnset[2] };
@@ -498,7 +498,7 @@ static void VehiclePath_ResolveNodeAngles( float *out, int index )
 
     if ( prev >= 0 )
     {
-        __int16 hops = 0;
+        int16_t hops = 0;
         VehiclePathNode *backNode = &g_vehiclePathNodes[prev];
         if ( g_vehiclePathNodeCount > 0 )
         {
@@ -510,8 +510,8 @@ static void VehiclePath_ResolveNodeAngles( float *out, int index )
                   || g_vehiclePathAnglesUnset[1] != backNode->angles[1]
                   || g_vehiclePathAnglesUnset[2] != backNode->angles[2] )
                     break;
-                __int16 pp = backNode->prevIndex;
-                if ( pp >= 0 && pp != (__int16)index )
+                int16_t pp = backNode->prevIndex;
+                if ( pp >= 0 && pp != (int16_t)index )
                 {
                     backNode = &g_vehiclePathNodes[pp];
                     if ( hops < g_vehiclePathNodeCount )
@@ -526,7 +526,7 @@ static void VehiclePath_ResolveNodeAngles( float *out, int index )
     }
 backDone:
     {
-        __int16 hops = 0;
+        int16_t hops = 0;
         if ( g_vehiclePathNodeCount > 0 )
         {
             for ( ;; )
@@ -536,8 +536,8 @@ backDone:
                   || g_vehiclePathAnglesUnset[1] != fwdNode->angles[1]
                   || g_vehiclePathAnglesUnset[2] != fwdNode->angles[2] )
                     break;
-                __int16 nx = fwdNode->nextIndex;
-                if ( nx >= 0 && nx != (__int16)index )
+                int16_t nx = fwdNode->nextIndex;
+                if ( nx >= 0 && nx != (int16_t)index )
                 {
                     float acc = fwdNode->dist + distFwd;
                     fwdNode = &g_vehiclePathNodes[nx];
@@ -608,7 +608,7 @@ fwdDone:
 // ─────────────────────────────────────────────────────────────────────────────
 static float VehiclePath_RotateNodeBlend( const VehiclePathTracer *tracer )
 {
-    __int16 next = g_vehiclePathNodes[tracer->nodeIndex].nextIndex;
+    int16_t next = g_vehiclePathNodes[tracer->nodeIndex].nextIndex;
     if ( next >= 0 )
     {
         VehiclePathNode *nextNode = &g_vehiclePathNodes[next];
@@ -633,7 +633,7 @@ static float VehiclePath_RotateNodeBlend( const VehiclePathTracer *tracer )
 // ─────────────────────────────────────────────────────────────────────────────
 static void VehiclePath_BlendRotateAngles( const VehiclePathTracer *tracer, float *angles )
 {
-    __int16 next = g_vehiclePathNodes[tracer->nodeIndex].nextIndex;
+    int16_t next = g_vehiclePathNodes[tracer->nodeIndex].nextIndex;
     VehiclePathNode *node = &g_vehiclePathNodes[tracer->nodeIndex];
 
     if ( next < 0 )
@@ -704,7 +704,7 @@ static void VehiclePath_GetLookaheadPos( const VehiclePathTracer *tracer, float 
 {
     VehiclePathNode *node = &g_vehiclePathNodes[tracer->nodeIndex];
     float ahead = tracer->lookahead * tracer->speed;
-    __int16 hops = 0;
+    int16_t hops = 0;
     float remaining = ahead + g_vehiclePathNodes[tracer->nodeIndex].dist * tracer->frac;
     float along = 0.0f;
 
@@ -716,7 +716,7 @@ static void VehiclePath_GetLookaheadPos( const VehiclePathTracer *tracer, float 
     {
         for ( ;; )
         {
-            __int16 next = node->nextIndex;
+            int16_t next = node->nextIndex;
             ++hops;
             if ( next < 0 || 0.0f == node->dist )
             {
@@ -750,13 +750,13 @@ emit:
 //  fraction is the ratio of the two projections.  Returns 1 if `stopNode` was visited
 //  during the walk (VehiclePath_DrawPath's loop terminator).
 // ─────────────────────────────────────────────────────────────────────────────
-static int VehiclePath_AdvanceToLookahead( VehiclePathTracer *tracer, const float *dir, __int16 stopNode )
+static int VehiclePath_AdvanceToLookahead( VehiclePathTracer *tracer, const float *dir, int16_t stopNode )
 {
-    __int16 cur = tracer->nodeIndex;
+    int16_t cur = tracer->nodeIndex;
     float   frac = tracer->frac;
     VehiclePathNode *node = &g_vehiclePathNodes[cur];
     int hitStop = 0;
-    __int16 hops = 0;
+    int16_t hops = 0;
 
     if ( g_vehiclePathNodeCount > 0 )
     {
@@ -767,7 +767,7 @@ static int VehiclePath_AdvanceToLookahead( VehiclePathTracer *tracer, const floa
             node = &g_vehiclePathNodes[cur];
             if ( cur == stopNode )
                 hitStop = 1;
-            __int16 next = node->nextIndex;
+            int16_t next = node->nextIndex;
             if ( next < 0 )
                 break;
             if ( 0.0f == node->dist )
@@ -807,10 +807,10 @@ seat:
     // PREVIOUS node's link (0x4B624B reads the stale ECX).  Harmless in practice —
     // that path is only reached after following a link that was >= 0 — but transcribed
     // as-is rather than "fixed".
-    tracer->atEnd = (__int16)( node->nextIndex < 0 );
+    tracer->atEnd = (int16_t)( node->nextIndex < 0 );
     tracer->frac  = frac;
 
-    __int16 nx = g_vehiclePathNodes[cur].nextIndex;
+    int16_t nx = g_vehiclePathNodes[cur].nextIndex;
     if ( nx >= 0 )
         tracer->speed = ( g_vehiclePathNodes[nx].speed - g_vehiclePathNodes[cur].speed ) * frac
                       + g_vehiclePathNodes[cur].speed;
@@ -956,7 +956,7 @@ static void VehiclePath_DrawArrow( const float *angles, const float *origin )
 //  segment.  The two embedded nodes are default-constructed (targetname NULL), which
 //  is what makes VehiclePath_StepTracer's node write-back a no-op in the editor.
 // ─────────────────────────────────────────────────────────────────────────────
-static void VehiclePath_InitTracer( __int16 index, VehiclePathTracer *tracer )
+static void VehiclePath_InitTracer( int16_t index, VehiclePathTracer *tracer )
 {
     float blend = 0.0f;
     tracer->frac      = 0.0f;
@@ -994,14 +994,14 @@ static void VehiclePath_InitTracer( __int16 index, VehiclePathTracer *tracer )
 //  with a NULL targetname, so VehiclePath_FindNode returns -1 immediately and neither
 //  copy ever runs; the table is never mutated by the preview.
 // ─────────────────────────────────────────────────────────────────────────────
-static int VehiclePath_StepTracer( VehiclePathTracer *tracer, __int16 stopNode )
+static int VehiclePath_StepTracer( VehiclePathTracer *tracer, int16_t stopNode )
 {
     int result = 0;
 
     if ( tracer->atEnd )
         return 0;
 
-    __int16 slot = VehiclePath_FindNode( 0, tracer->nodeOverride.targetname );
+    int16_t slot = VehiclePath_FindNode( 0, tracer->nodeOverride.targetname );
     if ( slot >= 0 )
         VehiclePathNode_Copy( &g_vehiclePathNodes[slot], &tracer->nodeOverride );
 
@@ -1068,13 +1068,13 @@ static void VehiclePath_DrawPath( const VehiclePathTracer *start )
         if ( steps + 1 > 50000 )
             break;
 
-        __int16 startIndex = start->nodeIndex;
+        int16_t startIndex = start->nodeIndex;
         // Arm the loop terminator once the walk has actually left the start node.
         if ( prev.nodeIndex != startIndex )
-            stopNode = (unsigned __int16)startIndex;
+            stopNode = (uint16_t)startIndex;
 
         memcpy( &prev, &cur, sizeof( prev ) );
-        int hitStop = VehiclePath_StepTracer( &cur, (__int16)stopNode );
+        int hitStop = VehiclePath_StepTracer( &cur, (int16_t)stopNode );
         if ( cur.atEnd || hitStop )
             done = 1;
 
@@ -1116,19 +1116,19 @@ static void VehiclePath_DrawPath( const VehiclePathTracer *start )
 // ─────────────────────────────────────────────────────────────────────────────
 static void VehiclePath_LinkNodes()
 {
-    __int16 count = g_vehiclePathNodeCount;
-    __int16 i = 0;
+    int16_t count = g_vehiclePathNodeCount;
+    int16_t i = 0;
 
     if ( g_vehiclePathNodeCount > 0 )
     {
         VehiclePathNode *node = &g_vehiclePathNodes[0];
-        __int16 last = 0;
+        int16_t last = 0;
         do
         {
             if ( node->target )
                 node->nextIndex = VehiclePath_FindNode( 0, node->target );
 
-            __int16 j = 0;
+            int16_t j = 0;
             for ( ;; )
             {
                 last = i;
@@ -1147,15 +1147,15 @@ selfLinkCheck:
             ++node;
             ++i;
         }
-        while ( (__int16)( last + 1 ) < g_vehiclePathNodeCount );
+        while ( (int16_t)( last + 1 ) < g_vehiclePathNodeCount );
 
         if ( g_vehiclePathNodeCount > 0 )
         {
             VehiclePathNode *n = &g_vehiclePathNodes[0];
-            unsigned __int16 left = (unsigned __int16)g_vehiclePathNodeCount;
+            uint16_t left = (uint16_t)g_vehiclePathNodeCount;
             do
             {
-                __int16 next = n->nextIndex;
+                int16_t next = n->nextIndex;
                 if ( next >= 0 )
                 {
                     n->dir[0] = g_vehiclePathNodes[next].origin[0] - n->origin[0];
@@ -1179,8 +1179,8 @@ selfLinkCheck:
         VehiclePathNode *n = &g_vehiclePathNodes[0];
         do
         {
-            n->speed     = VehiclePath_ResolveNodeSpeed( (__int16)k );
-            n->lookahead = VehiclePath_ResolveNodeLookahead( (__int16)k );
+            n->speed     = VehiclePath_ResolveNodeSpeed( (int16_t)k );
+            n->lookahead = VehiclePath_ResolveNodeLookahead( (int16_t)k );
             if ( n->isRotateNode )
                 VehiclePath_ResolveNodeAngles( n->angles, k );
 
@@ -1200,7 +1200,7 @@ selfLinkCheck:
             ++k;
             ++n;
         }
-        while ( (__int16)k < g_vehiclePathNodeCount );
+        while ( (int16_t)k < g_vehiclePathNodeCount );
     }
 }
 
@@ -1309,10 +1309,10 @@ void VehiclePath_AddNode()
         }
     }
 
-    __int16 selNode = VehiclePath_FindNode( brush->owner->def->origin, value );
+    int16_t selNode = VehiclePath_FindNode( brush->owner->def->origin, value );
     if ( selNode >= 0 )
     {
-        for ( __int16 i = 0; i < g_vehiclePathNodeCount; ++i )
+        for ( int16_t i = 0; i < g_vehiclePathNodeCount; ++i )
         {
             if ( g_vehiclePathNodes[i].spawnflags1 )       // path START nodes only
             {

@@ -22,7 +22,7 @@ int __cdecl CompressUnit(double unit);
 void __cdecl LocalConvertQuatToMat(const DObjAnimMat *mat, float (*axis)[3]);
 const ComPrimaryLight *__cdecl Com_GetPrimaryLight(unsigned int primaryLightIndex);
 void __cdecl CG_LockLightingOrigin(centity_s *cent, float *lightingOrigin);
-int __cdecl CG_GetRenderFlagForRefEntity(__int16 eFlags);
+int __cdecl CG_GetRenderFlagForRefEntity(int16_t eFlags);
 void __cdecl CG_General(int localClientNum, centity_s *cent);
 void __cdecl CG_Item(centity_s *cent);
 void __cdecl CG_AddEntityLoopSound(int localClientNum, const centity_s *cent);

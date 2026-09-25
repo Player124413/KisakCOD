@@ -16,7 +16,7 @@ int __cdecl R_SkinXModel(
     const DObj_s* obj,
     const GfxPlacement* placement,
     float scale,
-    __int16 gfxEntIndex);
+    int16_t gfxEntIndex);
 void __cdecl R_SkinSceneEnt(GfxSceneEntity *sceneEnt);
 int __cdecl R_SkinAndBoundSceneEnt(GfxSceneEntity *sceneEnt);
 void __cdecl R_UnlockSkinnedCache();

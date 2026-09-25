@@ -4,7 +4,7 @@
 #error This file is for SinglePlayer only 
 #endif
 
-enum ai_animmode_t : __int32
+enum ai_animmode_t : int32_t
 {
     AI_ANIM_UNKNOWN = 0x0,
     AI_ANIM_MOVE_CODE = 0x1,
@@ -18,10 +18,10 @@ enum ai_animmode_t : __int32
     AI_ANIM_POINT_RELATIVE = 0x9,
 };
 
-struct __declspec(align(4)) scr_animscript_t
+struct __attribute__((aligned(4))) scr_animscript_t
 {
     int func;
-    unsigned __int16 name;
+    uint16_t name;
 };
 
 struct AnimScriptList
@@ -51,7 +51,7 @@ struct AnimScriptList
 };
 
 struct actor_s;
-enum ai_movemode_t : unsigned __int8;
+enum ai_movemode_t : uint8_t;
 
 void __cdecl Actor_InitAnim(actor_s *self);
 unsigned int __cdecl Actor_IsAnimScriptAlive(actor_s *self);

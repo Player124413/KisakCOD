@@ -410,7 +410,7 @@ void __cdecl SnapAngles(float *vAngles)
 void __cdecl SV_PointTraceToEntity(const pointtrace_t *clip, svEntity_s *check, trace_t *trace)
 {
     const char *v3; // eax
-    __int64 v4; // [esp+8h] [ebp-F8h]
+    int64_t v4; // [esp+8h] [ebp-F8h]
     float v5; // [esp+1Ch] [ebp-E4h]
     uint16_t number; // [esp+22h] [ebp-DEh]
     float v7; // [esp+28h] [ebp-D8h]
@@ -582,7 +582,7 @@ void __cdecl SV_PointTraceToEntity(const pointtrace_t *clip, svEntity_s *check, 
 
 void __cdecl SV_ClipMoveToEntity(const moveclip_t *clip, svEntity_s *check, trace_t *trace)
 {
-    __int64 v3; // [esp-Ch] [ebp-40h]
+    int64_t v3; // [esp-Ch] [ebp-40h]
     uint16_t number; // [esp+6h] [ebp-2Eh]
     gentity_s *touch; // [esp+8h] [ebp-2Ch]
     uint32_t clipHandle; // [esp+Ch] [ebp-28h]

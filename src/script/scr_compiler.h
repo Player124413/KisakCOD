@@ -4,7 +4,7 @@
 
 #define MAX_PRECACHE_ENTRIES 1024
 
-enum : __int32
+enum : int32_t
 {
     SOURCE_TYPE_NONE = 0,
     SOURCE_TYPE_BREAKPOINT = 0x1,
@@ -13,7 +13,7 @@ enum : __int32
     SOURCE_TYPE_BUILTIN_CALL = 0x8,
     SOURCE_TYPE_NOTIFY = 0x10,
 };
-enum : __int32
+enum : int32_t
 {
     SCR_DEV_NO = 0x0,
     SCR_DEV_YES = 0x1,
@@ -21,7 +21,7 @@ enum : __int32
     SCR_DEV_EVALUATE = 0x3,
 };
 
-enum : __int32
+enum : int32_t
 {
     SCR_ABORT_NONE = 0x0,
     SCR_ABORT_CONTINUE = 0x1,

@@ -171,7 +171,7 @@ int __cdecl Actor_ResumeState(actor_s *self, ai_state_t ePrevState)
 
 void __cdecl Actor_StartDefaultState(actor_s *self)
 {
-    if (!(unsigned __int8)Actor_StartState(self, AIS_EXPOSED))
+    if (!(uint8_t)Actor_StartState(self, AIS_EXPOSED))
         MyAssertHandler("c:\\trees\\cod3\\cod3src\\src\\game\\actor_state.cpp", 228, 0, "%s", "startSuccess");
 }
 
@@ -190,7 +190,7 @@ void __cdecl Actor_ResumePopedState(actor_s *self, ai_state_t state)
         if (v4)
             return;
     }
-    if (!(unsigned __int8)Actor_StartState(self, AIS_EXPOSED))
+    if (!(uint8_t)Actor_StartState(self, AIS_EXPOSED))
         MyAssertHandler("c:\\trees\\cod3\\cod3src\\src\\game\\actor_state.cpp", 228, 0, "%s", "startSuccess");
 }
 
@@ -237,8 +237,8 @@ void __cdecl Actor_ThinkStateTransitions(actor_s *self)
             {
             case 1:
                 Actor_FinishState(self, *p_eState);
-                if (!(unsigned __int8)Actor_StartState(self, *p_eState)
-                    && !(unsigned __int8)Actor_StartState(self, AIS_EXPOSED))
+                if (!(uint8_t)Actor_StartState(self, *p_eState)
+                    && !(uint8_t)Actor_StartState(self, AIS_EXPOSED))
                 {
                     MyAssertHandler("c:\\trees\\cod3\\cod3src\\src\\game\\actor_state.cpp", 228, 0, "%s", "startSuccess");
                 }
@@ -253,7 +253,7 @@ void __cdecl Actor_ThinkStateTransitions(actor_s *self)
                         "self->stateLevel + 1 < ARRAY_COUNT( self->eState )");
                 Actor_SuspendState(self, *p_eState);
                 ++self->stateLevel;
-                if (!(unsigned __int8)Actor_StartState(self, *p_eState))
+                if (!(uint8_t)Actor_StartState(self, *p_eState))
                     Actor_ResumePopedState(self, *p_eState);
                 break;
             case 3:

@@ -30,5 +30,5 @@ inline int __cdecl CompressUnit(double unit)
             "%s\n\t(unit) = %g",
             HIDWORD(unit),
             LODWORD(unit));
-    return (unsigned __int16)(__int64)(float)((float)((float)unit * (float)65535.0) + (float)0.5);
+    return (uint16_t)(int64_t)(float)((float)((float)unit * (float)65535.0) + (float)0.5);
 }

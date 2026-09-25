@@ -6,7 +6,7 @@
 #error This file is for SinglePlayer only 
 #endif
 
-enum PredictionTraceResult : __int32
+enum PredictionTraceResult : int32_t
 {
     PTR_SUCCESS = 0x0,
     PTR_HIT_WORLD = 0x1,
@@ -24,12 +24,12 @@ struct pathpoint_t
 struct path_t
 {
     pathpoint_t pts[32];
-    __int16 wPathLen;
-    __int16 wOrigPathLen;
-    __int16 wDodgeCount;
-    __int16 wNegotiationStartNode;
-    __int16 lookaheadNextNode;
-    __int16 wDodgeEntity;
+    int16_t wPathLen;
+    int16_t wOrigPathLen;
+    int16_t wDodgeCount;
+    int16_t wNegotiationStartNode;
+    int16_t lookaheadNextNode;
+    int16_t wDodgeEntity;
     float vFinalGoal[3];
     float lookaheadDir[3];
     float forwardLookaheadDir2D[2];
@@ -64,7 +64,7 @@ struct actor_goal_s
 
 struct actor_s;
 struct pathnode_t;
-enum ai_stance_e : __int32;
+enum ai_stance_e : int32_t;
 
 bool __cdecl Path_IsPathStanceNode(const pathnode_t *node);
 float __cdecl Path_GetPathDir(float *delta, const float *vFrom, const float *vTo);
@@ -101,7 +101,7 @@ bool __cdecl Path_PredictionTrace(
     double stepheight,
     int allowStartSolid);
 int __cdecl Path_IsTrimmed(path_t *pPath);
-void __cdecl Path_RemoveCompletedPathPoints(path_t *pPath, __int16 pathPointIndex);
+void __cdecl Path_RemoveCompletedPathPoints(path_t *pPath, int16_t pathPointIndex);
 void __cdecl Path_TrimCompletedPath(path_t *pPath, const float *vStartPos);
 void __cdecl Path_BacktrackCompletedPath(path_t *pPath, const float *vStartPos);
 void __cdecl PathCalcLookahead_CheckMinLookaheadNodes(path_t *pPath, const pathpoint_t *pt, int currentNode);

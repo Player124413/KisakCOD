@@ -2,7 +2,7 @@
 
 #include "q_shared.h"
 
-enum FsThread : __int32
+enum FsThread : int32_t
 {                                       // ...
     FS_THREAD_MAIN = 0x0,
     FS_THREAD_STREAM = 0x1,
@@ -13,7 +13,7 @@ enum FsThread : __int32
     FS_THREAD_INVALID = 0x6,
 };
 
-enum fsMode_t : __int32
+enum fsMode_t : int32_t
 {                                       // ...
     FS_READ = 0x0,
     FS_WRITE = 0x1,
@@ -144,7 +144,7 @@ void __cdecl FS_SV_Rename(char *from, char *to);
 int __cdecl FS_SV_FileExists(char *file);
 
 uint32_t __cdecl FS_FTell(int f);
-enum FsListBehavior_e : __int32
+enum FsListBehavior_e : int32_t
 {                                       // ...
     FS_LIST_PURE_ONLY = 0x0,
     FS_LIST_ALL = 0x1,

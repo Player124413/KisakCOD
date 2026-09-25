@@ -518,7 +518,7 @@ void __cdecl CL_ForwardCommandToServer(int32_t localClientNum, const char *strin
 
 void __cdecl CL_RequestAuthorization(int localClientNum)
 {
-    //__int16 v1; // ax
+    //int16_t v1; // ax
     //const char *v2; // eax
     //int32_t j; // [esp+10h] [ebp-78h]
     //int32_t l; // [esp+14h] [ebp-74h]
@@ -1169,8 +1169,8 @@ char __cdecl CL_ConnectionlessPacket(int localClientNum, netadr_t from, msg_t *m
 
 void __cdecl CL_UpdateInfoPacket(netadr_t from)
 {
-    __int16 v1; // ax
-    __int16 v2; // ax
+    int16_t v1; // ax
+    int16_t v2; // ax
     const char *v3; // eax
     int32_t v4; // eax
     char *v5; // eax
@@ -2561,7 +2561,7 @@ void __cdecl CL_Record_f()
     int32_t v0; // eax
     int32_t number; // [esp+4h] [ebp-2C8h]
     clientActive_t *LocalClientGlobals; // [esp+8h] [ebp-2C4h]
-    __int16 configStringCount; // [esp+Ch] [ebp-2C0h]
+    int16_t configStringCount; // [esp+Ch] [ebp-2C0h]
     int32_t compressedSize; // [esp+18h] [ebp-2B4h]
     connstate_t connstate; // [esp+1Ch] [ebp-2B0h]
     uint8_t (*bufData)[131072]; // [esp+20h] [ebp-2ACh]
@@ -3259,7 +3259,7 @@ void __cdecl Com_WriteLocalizedSoundAliasFiles()
 
 void __cdecl CL_CheckAutoUpdate()
 {
-    __int16 v0; // ax
+    int16_t v0; // ax
     const char *v1; // eax
     int32_t rnd; // [esp+0h] [ebp-3Ch]
     netadr_t temp; // [esp+4h] [ebp-38h] BYREF

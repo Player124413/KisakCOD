@@ -223,7 +223,7 @@ void __cdecl SP_trigger_friendlychain(gentity_s *ent)
     ent->handler = ENT_HANDLER_FRIENDLYCHAIN;
     if (!target)
         Com_Error(ERR_DROP, "trigger_friendlychain must target a friendly chain node");
-    if ((unsigned __int8)InitTrigger(ent))
+    if ((uint8_t)InitTrigger(ent))
     {
         InitSentientTrigger(ent);
         SV_LinkEntity(ent);
@@ -309,7 +309,7 @@ void __cdecl SP_trigger_hurt(gentity_s *self)
     bool v2; // cr58
     EntHandler_t v3; // r11
 
-    if ((unsigned __int8)InitTrigger(self))
+    if ((uint8_t)InitTrigger(self))
     {
         if (!self->damage)
             self->damage = 5;
@@ -329,7 +329,7 @@ void __cdecl SP_trigger_once(gentity_s *ent)
     spawnflags = ent->spawnflags;
     ent->handler = ENT_HANDLER_TRIGGER_MULTIPLE;
     ent->spawnflags = spawnflags | 0x40;
-    if ((unsigned __int8)InitTrigger(ent))
+    if ((uint8_t)InitTrigger(ent))
     {
         InitSentientTrigger(ent);
         SV_LinkEntity(ent);
@@ -435,7 +435,7 @@ void __cdecl SP_trigger_damage(gentity_s *pSelf)
     pSelf->takedamage = 1;
     pSelf->handler = ENT_HANDLER_TRIGGER_DAMAGE;
     InitTriggerWait(pSelf, 512);
-    if ((unsigned __int8)InitTrigger(pSelf))
+    if ((uint8_t)InitTrigger(pSelf))
         SV_LinkEntity(pSelf);
 }
 

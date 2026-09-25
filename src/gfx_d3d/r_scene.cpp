@@ -389,7 +389,7 @@ void __cdecl R_AddBModelSurfacesCamera(
 {
     uint16_t surfaceCount; // [esp+4h] [ebp-28h]
     uint32_t surfId; // [esp+8h] [ebp-24h]
-    //unsigned __int64 drawSurf; // [esp+Ch] [ebp-20h]
+    //uint64_t drawSurf; // [esp+Ch] [ebp-20h]
     const Material *material; // [esp+14h] [ebp-18h]
     BModelSurface *modelSurf; // [esp+18h] [ebp-14h]
     const GfxSurface *bspSurf; // [esp+1Ch] [ebp-10h]
@@ -527,7 +527,7 @@ void __cdecl R_AddXModelSurfacesCamera(
     const XSurface *v12; // eax
     uint32_t surfId; // [esp+8h] [ebp-38h]
     int totalVertCount; // [esp+Ch] [ebp-34h]
-    //__int64 drawSurf; // [esp+10h] [ebp-30h]
+    //int64_t drawSurf; // [esp+10h] [ebp-30h]
     int totalTriCount; // [esp+1Ch] [ebp-24h]
     Material **material; // [esp+20h] [ebp-20h]
     uint32_t subMatIndex; // [esp+24h] [ebp-1Ch]
@@ -674,7 +674,7 @@ GfxDrawSurf *__cdecl R_AddXModelSurfaces(
     uint32_t surfId; // [esp+10h] [ebp-2Ch]
     Material **material; // [esp+14h] [ebp-28h]
     uint32_t subMatIndex; // [esp+18h] [ebp-24h]
-    //unsigned __int64 newDrawSurf; // [esp+1Ch] [ebp-20h]
+    //uint64_t newDrawSurf; // [esp+1Ch] [ebp-20h]
     int skinnedCachedOffset; // [esp+28h] [ebp-14h]
     int lod; // [esp+2Ch] [ebp-10h]
     GfxModelRigidSurface *modelSurf; // [esp+30h] [ebp-Ch]
@@ -748,7 +748,7 @@ GfxDrawSurf *__cdecl R_AddXModelSurfaces(
 
 void __cdecl R_AddDObjSurfacesCamera(
     GfxSceneEntity *sceneEnt,
-    __int16 lightingHandle,
+    int16_t lightingHandle,
     uint8_t primaryLightIndex,
     GfxDrawSurf **drawSurfs,
     GfxDrawSurf **lastDrawSurfs)
@@ -759,7 +759,7 @@ void __cdecl R_AddDObjSurfacesCamera(
     uint32_t surfId; // [esp+Ch] [ebp-64h]
     int totalVertCount; // [esp+10h] [ebp-60h]
     const DObj_s *obj; // [esp+14h] [ebp-5Ch]
-    //unsigned __int64 drawSurf; // [esp+18h] [ebp-58h]
+    //uint64_t drawSurf; // [esp+18h] [ebp-58h]
     int totalTriCount; // [esp+20h] [ebp-50h]
     Material **material; // [esp+24h] [ebp-4Ch]
     XModel *model; // [esp+28h] [ebp-48h]

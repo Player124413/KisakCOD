@@ -772,7 +772,7 @@ void Brush_Deselect_Helper( selbrush_t *b )
     {
         b->brushFlags &= ~0x100u;
         eDef->modelClass = nullptr;
-        ++*(unsigned __int16 *)&eDef->version_prob_wrong;   // IDA 0x476383: add word ptr [def+0x78],1 (def model version @0x78, 16-bit — NOT version@0x4C)
+        ++*(uint16_t *)&eDef->version_prob_wrong;   // IDA 0x476383: add word ptr [def+0x78],1 (def model version @0x78, 16-bit — NOT version@0x4C)
         b->def->unk01 = 0;
         Entity_RebuildBounds( eDef );
     }
@@ -853,7 +853,7 @@ void Brush_Select_Helper( selbrush_t *b )
         {
             b->brushFlags |= 0x100u;
             eDef->modelClass = nullptr;
-            ++*(unsigned __int16 *)&eDef->version_prob_wrong;   // IDA 0x4764e7: add [def+0x78],cx (def model version @0x78, 16-bit — NOT version@0x4C)
+            ++*(uint16_t *)&eDef->version_prob_wrong;   // IDA 0x4764e7: add [def+0x78],cx (def model version @0x78, 16-bit — NOT version@0x4C)
             b->def->unk01 = 0;
         }
     }
@@ -5977,7 +5977,7 @@ void DrawGeo( GfxColor *col, Material *mtlOverride, selbrush_t *b,
     // HIBYTE(def->unk01) marks "special material" brushes: suppress 2D back-face
     // culling (cullMode -1) on the wireframe, and ALSO emit the back-facing fan on
     // the filled branches (0x47ae81 / 0x47af13).
-    const bool specialMtl = ( ( (unsigned __int16)def->unk01 >> 8 ) & 0xFF ) != 0;
+    const bool specialMtl = ( ( (uint16_t)def->unk01 >> 8 ) & 0xFF ) != 0;
     const int  cullMode   = specialMtl ? -1 : viewType;
 
     for ( int facenum = 0; facenum < def->faceCount; ++facenum )
@@ -6333,7 +6333,7 @@ void sub_47D060( int listHead )
             if ( owner->prefab )                              // 0x47d0d0
                 sub_47D060( (int)(intptr_t)( (char *)owner->prefab + 0xC ) );    // 0x47d0d6
             entity_s *eDef = (entity_s *)owner->def;          // 0x47d0e1
-            ++*(unsigned __int16 *)&eDef->version_prob_wrong; // 0x47d0e4  add word [def+0x78],1
+            ++*(uint16_t *)&eDef->version_prob_wrong; // 0x47d0e4  add word [def+0x78],1
         }
     }
 }
@@ -7653,7 +7653,7 @@ entity_s *Brush_Move( const float *move, brush_t *def, char snap )
         ent->origin[1] += move[1];
         ent->origin[2] += move[2];
         // IDA ++LOWORD(owner[1].xx9): the 16-bit render-version counter at entity+0x78.
-        ++*(unsigned __int16 *)( (char *)ent + 0x78 );
+        ++*(uint16_t *)( (char *)ent + 0x78 );
     }
     return ent;
 }

@@ -22,7 +22,7 @@ void __cdecl TRACK_aim_target()
     track_static_alloc_internal(&atGlob, 5640, "atGlob", 10);
 }
 
-const dvar_s *__cdecl AimTarget_RegisterDvars(int a1, unsigned __int16 a2, const char *a3)
+const dvar_s *__cdecl AimTarget_RegisterDvars(int a1, uint16_t a2, const char *a3)
 {
     const dvar_s *result; // r3
 
@@ -382,7 +382,7 @@ void __cdecl AimTarget_ProcessEntity(gentity_s *ent)
         MyAssertHandler("c:\\trees\\cod3\\cod3src\\src\\aim_assist\\aim_target.cpp", 410, 0, "%s", "ps");
     if (client->ps.pm_type >= PM_NOCLIP && client->ps.pm_type <= PM_DEAD_LINKED)
         goto LABEL_35;
-    if (!ent->r.linked || !(unsigned __int8)AimTarget_IsTargetValid(ent))
+    if (!ent->r.linked || !(uint8_t)AimTarget_IsTargetValid(ent))
     {
         ent->flags &= ~(FL_VISIBLE_AIMTARGET);
         goto LABEL_35;

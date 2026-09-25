@@ -4,7 +4,7 @@
 #include <Windows.h>
 
 // LWSS: this enum name is kinda retarded
-enum Enum_t : __int32
+enum Enum_t : int32_t
 {
     ENUM_NOP = 0x0,
     ENUM_program = 0x1,

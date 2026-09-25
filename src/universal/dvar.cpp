@@ -724,7 +724,7 @@ const char *Dvar_DomainToString_GetLines(
 void __cdecl Dvar_PrintDomain(uint8_t type, DvarLimits domain)
 {
     //const char *v2; // eax
-    //__int64 v3; // [esp-8h] [ebp-410h]
+    //int64_t v3; // [esp-8h] [ebp-410h]
     //char domainBuffer[1024]; // [esp+0h] [ebp-408h] BYREF
     //
     //HIDWORD(v3) = 1024;

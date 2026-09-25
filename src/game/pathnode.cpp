@@ -209,7 +209,7 @@ void __cdecl Scr_SetPathnodeField(unsigned int entnum, unsigned int offset)
 void __cdecl Scr_GetPathnodeField(unsigned int entnum, unsigned int offset)
 {
     node_field_t *v4; // r11
-    unsigned __int8 *v5; // r3
+    uint8_t *v5; // r3
     void(__cdecl * getter)(pathnode_t *, int); // r10
 
     if (offset >= 0xB)
@@ -229,7 +229,7 @@ void __cdecl Scr_GetPathnodeField(unsigned int entnum, unsigned int offset)
             entnum,
             g_path.actualNodeCount);
     v4 = &fields_3[offset];
-    v5 = (unsigned __int8 *)&gameWorldSp.path.nodes[entnum];
+    v5 = (uint8_t *)&gameWorldSp.path.nodes[entnum];
     getter = v4->getter;
     if (getter)
         getter((pathnode_t *)v5, offset);
@@ -237,7 +237,7 @@ void __cdecl Scr_GetPathnodeField(unsigned int entnum, unsigned int offset)
         Scr_GetGenericField(v5, v4->type, v4->ofs);
 }
 
-void __cdecl PathNode_ClearStringField(unsigned __int16 *destScrString)
+void __cdecl PathNode_ClearStringField(uint16_t *destScrString)
 {
     unsigned int v2; // r3
 
@@ -251,7 +251,7 @@ void __cdecl PathNode_ClearStringField(unsigned __int16 *destScrString)
 
 void __cdecl PathNode_UpdateStringField(
     const char *destKey,
-    unsigned __int16 *destScrString,
+    uint16_t *destScrString,
     const char *key,
     const char *value)
 {
@@ -407,7 +407,7 @@ void __cdecl GScr_AddFieldsForPathnode()
     for (node_field_t *f = fields_3; f->name; ++f)
     {
         iassert((f - fields_3) == (unsigned short)(f - fields_3));
-        Scr_AddClassField(CLASS_NUM_PATHNODE, (char *)f->name, (unsigned __int16)(f - fields_3));
+        Scr_AddClassField(CLASS_NUM_PATHNODE, (char *)f->name, (uint16_t)(f - fields_3));
     }
 }
 
@@ -565,7 +565,7 @@ void __cdecl Path_NodesInCylinder_r(pathnode_tree_t *tree)
     }
 
     pathnode_t *pnode;
-    unsigned __int16 *leafNodes = tree->u.s.nodes;
+    uint16_t *leafNodes = tree->u.s.nodes;
     for (int i = 0; i < tree->u.s.nodeCount && g_path.circle.nodeCount < g_path.circle.maxNodes; i++)
     {
         //iassert(Vec3Compare(node->vOrigin, gameWorldSp.path.nodes[leafNodes[i]].constant.vOrigin));
@@ -626,7 +626,7 @@ bool __cdecl Path_IsBadPlaceLink(unsigned int nodeNumFrom, unsigned int nodeNumT
     pathnode_t *v8; // r10
     unsigned int totalLinkCount; // r9
     pathlink_s *Links; // r8
-    unsigned __int16 *p_nodeNum; // r10
+    uint16_t *p_nodeNum; // r10
     const char *v12; // r3
 
     actualNodeCount = g_path.actualNodeCount;
@@ -732,9 +732,9 @@ unsigned int Path_InitLinkCounts()
 void Path_InitLinkInfoArray()
 {
     int i; // r11
-    unsigned __int16 v1; // r10
+    uint16_t v1; // r10
     int v2; // r9
-    unsigned __int16 v3; // r10
+    uint16_t v3; // r10
     
     g_path.pathLinkInfoArrayInited = 1;
     for (i = 0; i < 2048; ++i)
@@ -1287,7 +1287,7 @@ void __cdecl Path_DrawFriendlyChain()
     gentity_s *v3; // r23
     int integer; // r11
     pathnode_t *pActualChainPos; // r3
-    __int16 wChainId; // r11
+    int16_t wChainId; // r11
     int v7; // r21
     unsigned int v8; // r24
     int v9; // r28
@@ -1520,10 +1520,10 @@ int __cdecl Path_ExpandedNodeVisible(const pathnode_t *node0, const pathnode_t *
 pathnode_t *__cdecl Path_FindChainPos(const float *vOrigin, pathnode_t *pPrevChainPos)
 {
     pathnode_t *result; // r3
-    __int16 wChainId; // r31
+    int16_t wChainId; // r31
     unsigned int v6; // r7
     double v7; // fp11
-    unsigned __int16 *v8; // r10
+    uint16_t *v8; // r10
     unsigned int v9; // r5
     pathnode_t *v10; // r11
     double v11; // fp0
@@ -1545,7 +1545,7 @@ pathnode_t *__cdecl Path_FindChainPos(const float *vOrigin, pathnode_t *pPrevCha
     double v27; // fp13
     double v28; // fp12
     double v29; // fp0
-    unsigned __int16 *v30; // r10
+    uint16_t *v30; // r10
     unsigned int v31; // r7
     pathnode_t *v32; // r11
     double v33; // fp0
@@ -1699,14 +1699,14 @@ int __cdecl Path_CanSetDesiredChainPos(actor_s *claimer, const pathnode_t *node)
     return 0;
 }
 
-void __cdecl Path_AttachSentientToChainNode(sentient_s *sentient, unsigned __int16 targetname)
+void __cdecl Path_AttachSentientToChainNode(sentient_s *sentient, uint16_t targetname)
 {
     unsigned int v4; // r28
     pathnode_t *pActualChainPos; // r11
     unsigned int v6; // r31
-    unsigned __int16 *nodeForChainNode; // r7
+    uint16_t *nodeForChainNode; // r7
     pathnode_t *nodes; // r9
-    unsigned __int16 *v9; // r11
+    uint16_t *v9; // r11
     pathnode_t *v10; // r10
     unsigned int actualNodeCount; // r10
     int v12; // r29
@@ -1750,7 +1750,7 @@ void __cdecl Path_AttachSentientToChainNode(sentient_s *sentient, unsigned __int
                     v12 = v6;
                     do
                     {
-                        if (*(unsigned __int16 *)((char *)&nodes->constant.targetname + __ROL4__(nodeForChainNode[v12], 7)) == v4)
+                        if (*(uint16_t *)((char *)&nodes->constant.targetname + __ROL4__(nodeForChainNode[v12], 7)) == v4)
                         {
                             v13 = SL_ConvertToString(v4);
                             Com_Error(ERR_DROP, "\x15Node '%s' is not part of a friendly chain\n", v13);
@@ -1931,7 +1931,7 @@ int __cdecl Path_CanStealNode(const pathnode_t *node, sentient_s *claimer)
         return 0;
     if (claimer->pClaimedNode)
         return 0;
-    if ((unsigned __int8)Actor_IsMoving(actor))
+    if ((uint8_t)Actor_IsMoving(actor))
         return 0;
     if (!Actor_PointNearNode(claimer->ent->r.currentOrigin, node))
         return 0;
@@ -1947,7 +1947,7 @@ void __cdecl Path_ClaimNodeInternal(pathnode_t *node, sentient_s *claimer)
     actor_s *actor; // r3
 
     actor = claimer->ent->actor;
-    if (actor && (unsigned __int8)Actor_KeepClaimedNode(actor))
+    if (actor && (uint8_t)Actor_KeepClaimedNode(actor))
         MyAssertHandler(
             "c:\\trees\\cod3\\cod3src\\src\\game\\pathnode.cpp",
             3066,
@@ -1971,7 +1971,7 @@ void __cdecl Path_ClaimNode(pathnode_t *node, sentient_s *claimer)
 {
     int iFreeTime; // r8
     int loopItr; // r18
-    __int16 *wOverlapNode; // r20
+    int16_t *wOverlapNode; // r20
     int v8; // r11
     pathnode_t *otherNode; // r31
     SentientHandle *p_pOwner; // r30
@@ -2044,7 +2044,7 @@ void __cdecl Path_RelinquishNode(sentient_s *claimer, int timeUntilRelinquished)
     actor_s *actor; // r11
     int v9; // r29
     sentient_s *v10; // r28
-    __int16 *wOverlapNode; // r26
+    int16_t *wOverlapNode; // r26
     int i; // r25
     int v13; // r11
     pathnode_t *otherNode; // r31
@@ -2085,7 +2085,7 @@ void __cdecl Path_RelinquishNode(sentient_s *claimer, int timeUntilRelinquished)
             break;
         otherNode = &gameWorldSp.path.nodes[v13];
         iassert(!otherNode->dynamic.pOwner.isDefined());
-        v15 = (__int16)(otherNode->dynamic.wOverlapCount - 1);
+        v15 = (int16_t)(otherNode->dynamic.wOverlapCount - 1);
         otherNode->dynamic.wOverlapCount = v15;
         if (!v15)
         {
@@ -2326,7 +2326,7 @@ void __cdecl Path_DisconnectPath(pathnode_t *node, pathlink_s *link)
     pathlink_s *v18; // r11
 
     Path_ValidateNode(node);
-    v4 = (unsigned __int8)(link->disconnectCount + 1);
+    v4 = (uint8_t)(link->disconnectCount + 1);
     link->disconnectCount = v4;
     if (!v4)
         Scr_Error("too many disconnects on a single path link (overflow on disconnect count)");
@@ -2334,7 +2334,7 @@ void __cdecl Path_DisconnectPath(pathnode_t *node, pathlink_s *link)
         MyAssertHandler("c:\\trees\\cod3\\cod3src\\src\\game\\pathnode.cpp", 3435, 0, "%s", "link->disconnectCount");
     if (link->disconnectCount <= 1u)
     {
-        v10 = (__int16)(node->dynamic.wLinkCount - 1);
+        v10 = (int16_t)(node->dynamic.wLinkCount - 1);
         node->dynamic.wLinkCount = v10;
         if (v10 < 0)
         {
@@ -2384,12 +2384,12 @@ void __cdecl Path_DisconnectPath(pathnode_t *node, pathlink_s *link)
         v7 = (unsigned int)&v5[wLinkCount];
         if (v7 > (unsigned int)link)
         {
-            v8 = (int)((unsigned __int64)(715827883LL * ((char *)link - (char *)v5)) >> 32) >> 1;
+            v8 = (int)((uint64_t)(715827883LL * ((char *)link - (char *)v5)) >> 32) >> 1;
             v9 = va(
                 "node: %d, %d (%d) %d (%d)",
                 node - gameWorldSp.path.nodes,
                 wLinkCount,
-                *(unsigned __int16 *)(v7 + 4),
+                *(uint16_t *)(v7 + 4),
                 v8 + (v8 >> 31),
                 link->nodeNum);
             MyAssertHandler(
@@ -2425,7 +2425,7 @@ void __cdecl Path_ConnectPath(pathnode_t *node, pathlink_s *link)
             "%s",
             "&node->constant.Links[node->dynamic.wLinkCount] <= link");
     Path_ValidateNode(node);
-    v4 = (unsigned __int8)(link->disconnectCount - 1);
+    v4 = (uint8_t)(link->disconnectCount - 1);
     link->disconnectCount = v4;
     if (!v4)
     {
@@ -2481,7 +2481,7 @@ void __cdecl Path_ConnectPathsForEntity(gentity_s *ent)
 {
     int disconnectedLinks; // r7
     int next; // r11
-    unsigned __int16 prev; // r8
+    uint16_t prev; // r8
     int v5; // r30
 
     if ((ent->flags & 0x100) == 0)
@@ -2497,9 +2497,9 @@ void __cdecl Path_ConnectPathsForEntity(gentity_s *ent)
     if (disconnectedLinks)
     {
         ent->disconnectedLinks = 0;
-        *(unsigned __int16 *)((char *)&g_path.pathLinkInfoArray[0].next
+        *(uint16_t *)((char *)&g_path.pathLinkInfoArray[0].next
             + __ROL4__(g_path.pathLinkInfoArray[disconnectedLinks].prev, 3)) = 0;
-        *(unsigned __int16 *)((char *)&g_path.pathLinkInfoArray[0].next + __ROL4__(g_path.pathLinkInfoArray[0].prev, 3)) = disconnectedLinks;
+        *(uint16_t *)((char *)&g_path.pathLinkInfoArray[0].next + __ROL4__(g_path.pathLinkInfoArray[0].prev, 3)) = disconnectedLinks;
         prev = g_path.pathLinkInfoArray[0].prev;
         g_path.pathLinkInfoArray[0].prev = g_path.pathLinkInfoArray[disconnectedLinks].prev;
         g_path.pathLinkInfoArray[disconnectedLinks].prev = prev;
@@ -2517,7 +2517,7 @@ void __cdecl Path_ConnectPathsForEntity(gentity_s *ent)
 void __cdecl Path_DisconnectPath_0(gentity_s *ent, pathnode_t *node, pathlink_s *link)
 {
     int next; // r29
-    unsigned __int16 v7; // r28
+    uint16_t v7; // r28
     PathLinkInfo *v8; // r11
     int v9; // r7
     int v10; // r10
@@ -2529,16 +2529,16 @@ void __cdecl Path_DisconnectPath_0(gentity_s *ent, pathnode_t *node, pathlink_s 
     v8 = &g_path.pathLinkInfoArray[next];
     v9 = node - gameWorldSp.path.nodes;
     g_path.pathLinkInfoArray[0].next = v8->next;
-    *(unsigned __int16 *)((char *)&g_path.pathLinkInfoArray[0].prev + __ROL4__(v8->next, 3)) = 0;
+    *(uint16_t *)((char *)&g_path.pathLinkInfoArray[0].prev + __ROL4__(v8->next, 3)) = 0;
     v8->from = v9;
     v8->to = link->nodeNum;
     if (ent->disconnectedLinks)
     {
         v8->prev = ent->disconnectedLinks;
-        v10 = *(unsigned __int16 *)((char *)&g_path.pathLinkInfoArray[0].next + __ROL4__(ent->disconnectedLinks, 3));
+        v10 = *(uint16_t *)((char *)&g_path.pathLinkInfoArray[0].next + __ROL4__(ent->disconnectedLinks, 3));
         v8->next = v10;
-        *(unsigned __int16 *)((char *)&g_path.pathLinkInfoArray[0].prev + __ROL4__(v10, 3)) = v7;
-        *(unsigned __int16 *)((char *)&g_path.pathLinkInfoArray[0].next + __ROL4__(v8->prev, 3)) = v7;
+        *(uint16_t *)((char *)&g_path.pathLinkInfoArray[0].prev + __ROL4__(v10, 3)) = v7;
+        *(uint16_t *)((char *)&g_path.pathLinkInfoArray[0].next + __ROL4__(v8->prev, 3)) = v7;
     }
     else
     {
@@ -2928,7 +2928,7 @@ void __cdecl Scr_SetNodePriority()
     char v5; // r11
     int v6; // r31
     const char **p_name; // r30
-    unsigned __int16 v8; // r11
+    uint16_t v8; // r11
 
     if (Scr_GetNumParam() == 2)
     {
@@ -3142,7 +3142,7 @@ void __cdecl Scr_GetNode()
             do
             {
                 if (*(_WORD *)((char *)&v8->constant.type + v4->ofs)
-                    && *(unsigned __int16 *)((char *)&v8->constant.type + v4->ofs) == ConstString)
+                    && *(uint16_t *)((char *)&v8->constant.type + v4->ofs) == ConstString)
                 {
                     if (v5)
                     {
@@ -3204,7 +3204,7 @@ void __cdecl Scr_GetNodeArray()
         {
             if (*(_WORD *)((char *)&v7->constant.type + v4->ofs))
             {
-                if (*(unsigned __int16 *)((char *)&v7->constant.type + v4->ofs) == ConstString)
+                if (*(uint16_t *)((char *)&v7->constant.type + v4->ofs) == ConstString)
                 {
                     v8 = Path_ConvertNodeToIndex(v7);
                     Scr_AddEntityNum(v8, CLASS_NUM_PATHNODE);
@@ -3388,7 +3388,7 @@ void __cdecl Path_MarkNodeInvalid(pathnode_t *node, team_t eTeam)
 {
     pathnode_dynamic_t *p_dynamic; // r23
     int v6; // r27
-    __int16 *wOverlapNode; // r28
+    int16_t *wOverlapNode; // r28
     int v8; // r11
     pathnode_t *v9; // r31
 
@@ -3603,7 +3603,7 @@ int __cdecl Path_CanClaimNode(const pathnode_t *node, sentient_s *claimer)
     iFreeTime = node->dynamic.iFreeTime;
     if (level.time > iFreeTime)
         return 1;
-    if (iFreeTime == 0x7FFFFFFF && (unsigned __int8)Path_CanStealNode(node, claimer))
+    if (iFreeTime == 0x7FFFFFFF && (uint8_t)Path_CanStealNode(node, claimer))
     {
         NodeOwner = Path_GetNodeOwner(node);
         Path_RelinquishNode(NodeOwner, 0);
@@ -3624,7 +3624,7 @@ void __cdecl Path_ForceClaimNode(pathnode_t *node, sentient_s *claimer)
     pathnode_t *pClaimedNode; // r11
     int v6; // r11
     int v7; // r11
-    __int16 v8; // r11
+    int16_t v8; // r11
     int v9; // r11
 
     if (!node)
@@ -3686,9 +3686,9 @@ pathnode_t *__cdecl Path_ChooseSubsequentChainNode_r(
     pathnode_t *pParent,
     actor_s *claimer)
 {
-    __int16 wChainId; // r9
+    int16_t wChainId; // r9
     int v9; // r23
-    __int16 v10; // r10
+    int16_t v10; // r10
     int v11; // r24
     pathnode_t *v12; // r25
     int v13; // r11
@@ -3752,7 +3752,7 @@ pathnode_t *__cdecl Path_ChooseSubsequentChainNode_r(
                 v20 = v17->constant.wChainDepth;
                 if ((v20 == depthMax || !v12 && v20 >= depthMin)
                     && Path_CanClaimNode(v17, claimer->sentient)
-                    && (unsigned __int8)Path_CanSetDesiredChainPos(claimer, v17))
+                    && (uint8_t)Path_CanSetDesiredChainPos(claimer, v17))
                 {
                     Path_UpdateBestChainNode(v17, &v22, v23);
                     v12 = v22;
@@ -3771,7 +3771,7 @@ pathnode_t *__cdecl Path_ChooseAnyChainNodeIfDeadEnd(
     pathnode_t *chainPos,
     actor_s *claimer)
 {
-    __int16 wChainId; // r10
+    int16_t wChainId; // r10
     int v9; // r26
     unsigned int v10; // r29
     int v11; // r27
@@ -3795,7 +3795,7 @@ pathnode_t *__cdecl Path_ChooseAnyChainNodeIfDeadEnd(
     if (!claimer)
         MyAssertHandler("c:\\trees\\cod3\\cod3src\\src\\game\\pathnode.cpp", 2460, 0, "%s", "claimer");
     wChainId = chainPos->constant.wChainId;
-    v9 = (__int16)(chainPos - gameWorldSp.path.nodes);
+    v9 = (int16_t)(chainPos - gameWorldSp.path.nodes);
     v17 = 0;
     v16 = 0;
     v10 = gameWorldSp.path.chainNodeForNode[v9] + 1;
@@ -3815,7 +3815,7 @@ pathnode_t *__cdecl Path_ChooseAnyChainNodeIfDeadEnd(
                 return 0;
             if (wChainDepth >= depthMin && Path_CanClaimNode(v13, claimer->sentient))
             {
-                if ((unsigned __int8)Path_CanSetDesiredChainPos(claimer, v13))
+                if ((uint8_t)Path_CanSetDesiredChainPos(claimer, v13))
                     Path_UpdateBestChainNode(v13, &v16, &v17);
             }
             ++v10;
@@ -3852,7 +3852,7 @@ pathnode_t *__cdecl Path_ChoosePreviousChainNode(int depthMin, int depthMax, pat
     if (chainPos->constant.wChainDepth < depthMin)
         return 0;
     while (!Path_CanClaimNode(chainPos, claimer->sentient)
-        || !(unsigned __int8)Path_CanSetDesiredChainPos(claimer, chainPos))
+        || !(uint8_t)Path_CanSetDesiredChainPos(claimer, chainPos))
     {
         v9 = chainPos->constant.wChainParent;
         if (v9 >= 0)
@@ -3888,7 +3888,7 @@ pathnode_t *__cdecl Path_ChooseDesperationChainNode(
         MyAssertHandler("c:\\trees\\cod3\\cod3src\\src\\game\\pathnode.cpp", 2535, 0, "%s", "claimer");
     if (depthMin > depthMax)
         MyAssertHandler("c:\\trees\\cod3\\cod3src\\src\\game\\pathnode.cpp", 2536, 0, "%s", "depthMin <= depthMax");
-    if ((unsigned __int16)refPos->constant.wChainParent != 0xFFFF)
+    if ((uint16_t)refPos->constant.wChainParent != 0xFFFF)
         MyAssertHandler(
             "c:\\trees\\cod3\\cod3src\\src\\game\\pathnode.cpp",
             2537,
@@ -3923,7 +3923,7 @@ pathnode_t *__cdecl Path_ChooseDesperationChainNode(
             {
                 if (Path_CanClaimNode(v14, claimer->sentient))
                 {
-                    if ((unsigned __int8)Path_CanSetDesiredChainPos(claimer, v14))
+                    if ((uint8_t)Path_CanSetDesiredChainPos(claimer, v14))
                     {
                         v9 = v16;
                         v8 = v14;
@@ -3964,7 +3964,7 @@ pathnode_t *__cdecl Path_ChooseDesperationNewChainNode(
         MyAssertHandler("c:\\trees\\cod3\\cod3src\\src\\game\\pathnode.cpp", 2589, 0, "%s", "claimer");
     if (depthMin > depthMax)
         MyAssertHandler("c:\\trees\\cod3\\cod3src\\src\\game\\pathnode.cpp", 2590, 0, "%s", "depthMin <= depthMax");
-    if ((unsigned __int16)refPos->constant.wChainParent != 0xFFFF)
+    if ((uint16_t)refPos->constant.wChainParent != 0xFFFF)
         MyAssertHandler(
             "c:\\trees\\cod3\\cod3src\\src\\game\\pathnode.cpp",
             2591,
@@ -4001,7 +4001,7 @@ pathnode_t *__cdecl Path_ChooseDesperationNewChainNode(
                 {
                     if (Path_CanClaimNode(v14, claimer->sentient))
                     {
-                        if ((unsigned __int8)Path_CanSetDesiredChainPos(claimer, v14))
+                        if ((uint8_t)Path_CanSetDesiredChainPos(claimer, v14))
                         {
                             v9 = v16;
                             v8 = v14;
@@ -4031,7 +4031,7 @@ pathnode_t *__cdecl Path_ChooseChainPos(
     signed int v10; // r30
     pathnode_t *pDesiredChainPos; // r28
     int wChainDepth; // r11
-    __int16 wChainId; // r23
+    int16_t wChainId; // r23
     int v14; // r29
     int v15; // r30
     int v16; // r11
@@ -4094,7 +4094,7 @@ pathnode_t *__cdecl Path_ChooseChainPos(
             {
                 if (pDesiredChainPos && pDesiredChainPos->constant.wChainId == wChainId)
                     return pDesiredChainPos;
-                if ((unsigned __int16)v5->constant.wChainParent != 0xFFFF)
+                if ((uint16_t)v5->constant.wChainParent != 0xFFFF)
                     MyAssertHandler(
                         "c:\\trees\\cod3\\cod3src\\src\\game\\pathnode.cpp",
                         2737,

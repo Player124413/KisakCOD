@@ -30,7 +30,7 @@
 #include <sound/snd_local.h>
 #include <server/server.h>
 
-enum MovieToPlayScriptOp : __int32
+enum MovieToPlayScriptOp : int32_t
 {
     MTPSOP_PLUS = 0x0,
     MTPSOP_MINUS = 0x1,
@@ -212,8 +212,8 @@ void __cdecl CL_DumpReliableCommands(clientConnection_t *clc)
     char *v8; // r30
 
     reliableAcknowledge = clc->reliableAcknowledge;
-    reliableSequence = (unsigned __int8)clc->reliableSequence;
-    v4 = (unsigned __int8)(reliableAcknowledge + 1);
+    reliableSequence = (uint8_t)clc->reliableSequence;
+    v4 = (uint8_t)(reliableAcknowledge + 1);
     Com_Printf(
         CON_CHANNEL_DONT_FILTER,
         "command numbers %d - %d = %d %d -> %d\n",
@@ -403,7 +403,7 @@ void __cdecl CL_MapLoading_CalcMovieToPlay(const char *buffer, const char *inMap
             v9 = "then";
             do
             {
-                v10 = *(unsigned __int8 *)v8 - *(unsigned __int8 *)v9;
+                v10 = *(uint8_t *)v8 - *(uint8_t *)v9;
                 if (!*v8)
                     break;
                 ++v8;
@@ -415,7 +415,7 @@ void __cdecl CL_MapLoading_CalcMovieToPlay(const char *buffer, const char *inMap
                 v12 = "if";
                 do
                 {
-                    v13 = *(unsigned __int8 *)v11 - *(unsigned __int8 *)v12;
+                    v13 = *(uint8_t *)v11 - *(uint8_t *)v12;
                     if (!*v11)
                         break;
                     ++v11;
@@ -446,7 +446,7 @@ void __cdecl CL_MapLoading_CalcMovieToPlay(const char *buffer, const char *inMap
                 v16 = v7;
                 do
                 {
-                    v17 = *(unsigned __int8 *)v16 - *(unsigned __int8 *)opName;
+                    v17 = *(uint8_t *)v16 - *(uint8_t *)opName;
                     if (!*v16)
                         break;
                     ++v16;
@@ -506,7 +506,7 @@ void __cdecl CL_MapLoading_CalcMovieToPlay(const char *buffer, const char *inMap
                 v33 = &v39[64 * v3 - 64];
                 do
                 {
-                    v34 = (unsigned __int8)*v33 - (unsigned __int8)*v32;
+                    v34 = (uint8_t)*v33 - (uint8_t)*v32;
                     if (!*v33)
                         break;
                     ++v33;
@@ -648,7 +648,7 @@ void __cdecl CL_ResetSkeletonCache()
 
 void __cdecl CL_ClearState()
 {
-    unsigned __int16 *configstrings; // r31
+    uint16_t *configstrings; // r31
 
     CG_CreateNextSnap(0, 0.0, 0);
     CG_SetNextSnap(0);
@@ -805,7 +805,7 @@ void __cdecl CL_Frame(int localClientNum, int msec)
     int v14; // r29
     char v21; // cr34
     const dvar_s *v22; // r11
-    __int64 v23; // r11
+    int64_t v23; // r11
     int v24; // r3
 
     v14 = msec;
@@ -1795,9 +1795,9 @@ void __cdecl CL_Init(int localClientNum)
     int v21; // r28
     const dvar_s **v22; // r29
     const char *v23; // r5
-    unsigned __int16 v24; // r4
+    uint16_t v24; // r4
     const char *v26; // r5
-    unsigned __int16 v27; // r4
+    uint16_t v27; // r4
     char v29[80]; // [sp+70h] [-90h] BYREF
 
     Com_Printf(CON_CHANNEL_CLIENT, "----- Client Initialization -----\n");

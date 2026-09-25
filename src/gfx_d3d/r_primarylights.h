@@ -1,7 +1,7 @@
 #pragma once
 #include "r_rendercmds.h"
 
-enum GfxLightType : __int32
+enum GfxLightType : int32_t
 {
     GFX_LIGHT_TYPE_NONE = 0x0,
     GFX_LIGHT_TYPE_DIR = 0x1,

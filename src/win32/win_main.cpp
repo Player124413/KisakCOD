@@ -130,7 +130,7 @@ sysEvent_t* __cdecl Win_GetEvent(sysEvent_t* result)
 		}
 		else
 		{
-			ev = eventQue[(unsigned __int8)eventTail++];
+			ev = eventQue[(uint8_t)eventTail++];
 		}
 		Sys_LeaveCriticalSection(CRITSECT_SYS_EVENT_QUEUE);
 		*result = ev;
@@ -138,7 +138,7 @@ sysEvent_t* __cdecl Win_GetEvent(sysEvent_t* result)
 	}
 	else
 	{
-		ev = eventQue[(unsigned __int8)eventTail++];
+		ev = eventQue[(uint8_t)eventTail++];
 		Sys_LeaveCriticalSection(CRITSECT_SYS_EVENT_QUEUE);
 		*result = ev;
 		return result;
@@ -381,7 +381,7 @@ void Sys_SpawnQuitProcess()
 
 	if (sys_exitCmdLine[0])
 	{
-		memset((unsigned __int8*)&dst, 0, sizeof(dst));
+		memset((uint8_t*)&dst, 0, sizeof(dst));
 		dst.cb = 68;
 		if (!CreateProcessA(0, sys_exitCmdLine, 0, 0, 0, 0, 0, 0, &dst, &pi))
 		{
@@ -486,7 +486,7 @@ void __cdecl Sys_QueEvent(uint32_t time, sysEventType_t type, int value, int val
 	sysEvent_t *ev; // [esp+0h] [ebp-4h]
 
 	Sys_EnterCriticalSection(CRITSECT_SYS_EVENT_QUEUE);
-	ev = &eventQue[(unsigned __int8)eventHead];
+	ev = &eventQue[(uint8_t)eventHead];
 	if (eventHead - eventTail >= 256)
 	{
 		Com_Printf(CON_CHANNEL_SYSTEM, "Sys_QueEvent: overflow\n");
@@ -513,7 +513,7 @@ void Sys_ShutdownEvents()
 	Sys_EnterCriticalSection(CRITSECT_SYS_EVENT_QUEUE);
 	while (eventHead > eventTail)
 	{
-		ev = &eventQue[(unsigned __int8)eventTail++];
+		ev = &eventQue[(uint8_t)eventTail++];
 		if (ev->evPtr)
 			Z_Free((char *)ev->evPtr, 10);
 	}
@@ -861,5 +861,5 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	return 0;
 }
 
-extern "C" __declspec(dllexport) DWORD NvOptimusEnablement = 1;
-extern "C" __declspec(dllexport) DWORD AmdPowerXpressRequestHighPerformance = 1;
+extern "C" __attribute__((visibility("default"))) DWORD NvOptimusEnablement = 1;
+extern "C" __attribute__((visibility("default"))) DWORD AmdPowerXpressRequestHighPerformance = 1;

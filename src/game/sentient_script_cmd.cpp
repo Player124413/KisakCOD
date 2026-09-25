@@ -309,7 +309,7 @@ void(__cdecl *__cdecl Sentient_GetMethod(const char **pName))(scr_entref_t)
         v5 = *pName;
         do
         {
-            v6 = (unsigned __int8)*v5 - *(unsigned __int8 *)actionString;
+            v6 = (uint8_t)*v5 - *(uint8_t *)actionString;
             if (!*v5)
                 break;
             ++v5;

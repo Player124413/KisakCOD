@@ -49,7 +49,7 @@ const char *animModeNames[10] =
   "point_relative"
 };
 
-const unsigned __int16 *g_AISpeciesNames[2] =
+const uint16_t *g_AISpeciesNames[2] =
 { 
     &scr_const.human,
     &scr_const.dog
@@ -310,7 +310,7 @@ void __cdecl Actor_FinishSpawning(actor_s *self)
     gentity_s *v3; // r29
     const char *v4; // r29
     int *DataForFile; // r29
-    unsigned __int16 v6; // r3
+    uint16_t v6; // r3
 
     if (!self->ent)
         MyAssertHandler("c:\\trees\\cod3\\cod3src\\src\\game\\actor.cpp", 747, 0, "%s", "self->ent");
@@ -603,7 +603,7 @@ void __cdecl Actor_Pain(
     double v20; // fp31
     long double v21; // fp2
     long double v22; // fp2
-    unsigned __int16 HitLocationString; // r3
+    uint16_t HitLocationString; // r3
     WeaponDef *WeaponDef; // r30
     sentient_s *sentient; // r4
 
@@ -707,7 +707,7 @@ void __cdecl Actor_Die(
     double v19; // fp31
     long double v20; // fp2
     long double v21; // fp2
-    unsigned __int16 HitLocationString; // r3
+    uint16_t HitLocationString; // r3
     WeaponDef *WeaponDef; // r29
 
     actor = self->actor;
@@ -1251,7 +1251,7 @@ pathnode_t *__cdecl Actor_FindClaimedNode(actor_s *self)
             return self->sentient->pClaimedNode;
     }
     else if (Actor_Cover_IsValidCover(self, node)
-        && (unsigned __int8)Actor_PointAtGoal(self->codeGoal.node->constant.vOrigin, &self->codeGoal))
+        && (uint8_t)Actor_PointAtGoal(self->codeGoal.node->constant.vOrigin, &self->codeGoal))
     {
         return self->codeGoal.node;
     }
@@ -1347,7 +1347,7 @@ int __cdecl Actor_IsAlongPath(actor_s *self, float *origin, float *pathPoint, in
 int __cdecl Actor_IsDoingCover(actor_s *self)
 {
     scr_animscript_t *pAnimScriptFunc; // r11
-    unsigned __int8 v2; // r11
+    uint8_t v2; // r11
     bool v3; // zf
 
     pAnimScriptFunc = self->pAnimScriptFunc;
@@ -1389,7 +1389,7 @@ gentity_s *__cdecl Actor_IsKnownEnemyInRegion(
     const float *i; // r31
     sentient_s *v11; // r11
     int v12; // r10
-    __int64 v13; // r10
+    int64_t v13; // r10
     gentity_s *ent; // r11
     const actor_s *actor; // r3
     bool v16; // cr58
@@ -1448,7 +1448,7 @@ int __cdecl Actor_InFixedNodeExposedCombat(actor_s *self)
     gentity_s *TargetEntity; // r3
     sentient_s *sentient; // r9
     bool v7; // r3
-    unsigned __int8 v8; // r11
+    uint8_t v8; // r11
 
     if (!self)
         MyAssertHandler("c:\\trees\\cod3\\cod3src\\src\\game\\actor.cpp", 3882, 0, "%s", "self");
@@ -1526,7 +1526,7 @@ void __cdecl Actor_GetAnimDeltas(actor_s *self, float *rotation, float *translat
 
 int __cdecl Actor_IsMovingToMeleeAttack(actor_s *self)
 {
-    unsigned __int8 v1; // r11
+    uint8_t v1; // r11
 
     if (self->meleeAttackDist == 0.0)
         return 0;
@@ -1588,7 +1588,7 @@ void __cdecl Actor_PathEndActions(actor_s *self)
     double v7; // fp30
     double v8; // fp28
     double v9; // fp29
-    __int64 v10; // r11
+    int64_t v10; // r11
     double v11; // fp12
 
     if (!self)
@@ -1778,7 +1778,7 @@ int __cdecl Actor_TrimPathToAttack(actor_s *self)
 
 int __cdecl Actor_MayReacquireMove(actor_s *self)
 {
-    unsigned __int8 v1; // r11
+    uint8_t v1; // r11
 
     if (self->Path.wPathLen <= 0)
         return 1;
@@ -2236,7 +2236,7 @@ void __cdecl Actor_AddStationaryMoveHistory(actor_s *self)
 
 int __cdecl Actor_IsMoving(actor_s *self)
 {
-    unsigned __int8 v1; // r11
+    uint8_t v1; // r11
 
     if (self->eAnimMode != AI_ANIM_MOVE_CODE)
         return 0;
@@ -2847,7 +2847,7 @@ void __cdecl Actor_FinishSpawningAll()
     int eType; // r11
     const char *classname; // r31
     AITypeScript *typeScript; // r31
-    unsigned __int16 v7; // r3
+    uint16_t v7; // r3
     actor_s *j; // r31
 
     for (i = 0; i < level.num_entities; i++)
@@ -2947,7 +2947,7 @@ int __cdecl Actor_KeepClaimedNode(actor_s *self)
     if (self->keepClaimedNodeInGoal)
     {
         pClaimedNode = self->sentient->pClaimedNode;
-        if (pClaimedNode && (unsigned __int8)Actor_PointAtGoal(pClaimedNode->constant.vOrigin, &self->codeGoal))
+        if (pClaimedNode && (uint8_t)Actor_PointAtGoal(pClaimedNode->constant.vOrigin, &self->codeGoal))
             return 1;
         self->keepClaimedNodeInGoal = 0;
     }
@@ -2974,7 +2974,7 @@ void __cdecl Actor_CheckNodeClaim(actor_s *self)
     if (self->Physics.bIsAlive
         && !self->fixedNode
         && !self->arrivalInfo.animscriptOverrideRunTo
-        && !(unsigned __int8)Actor_KeepClaimedNode(self))
+        && !(uint8_t)Actor_KeepClaimedNode(self))
     {
         if (Actor_HasPath(self))
             vFinalGoal = self->Path.vFinalGoal;
@@ -3156,7 +3156,7 @@ static const float colorTeam[5][4] =
 
 void __cdecl Actor_EntInfo(gentity_s *self, float *source)
 {
-    unsigned __int8 drawLines; // r29
+    uint8_t drawLines; // r29
     char drawGoalLineRadius; // r19
     int integer; // r11
     actor_s *actor; // r31
@@ -3185,11 +3185,11 @@ void __cdecl Actor_EntInfo(gentity_s *self, float *source)
     const float *v33; // r4
     gentity_s *v34; // r3
     WeaponDef *weapDef; // r28
-    __int64 v36; // r11
+    int64_t v36; // r11
     double v37; // fp31
     gentity_s *v38; // r3
     const float *v39; // r4
-    __int64 v41; // r11
+    int64_t v41; // r11
     double fact; // fp0
     const float *v43; // r4
     const float *v44; // r4
@@ -3265,7 +3265,7 @@ void __cdecl Actor_EntInfo(gentity_s *self, float *source)
     //float v121; // [sp+A4h] [-14Ch]
     //float v122; // [sp+A8h] [-148h]
     //float v123; // [sp+ACh] [-144h]
-    //__int64 v124; // [sp+B0h] [-140h] BYREF // vAngles
+    //int64_t v124; // [sp+B0h] [-140h] BYREF // vAngles
     float goalYaw[3];
     //float v126; // [sp+C0h] [-130h] BYREF // goalYaw
     //float v127; // [sp+C4h] [-12Ch]
@@ -4696,7 +4696,7 @@ int __cdecl SP_actor(gentity_s *ent)
     sentient_s *v4; // r3
     sentient_s *v5; // r27
     int eFlags; // r11
-    unsigned __int8 v7; // r10
+    uint8_t v7; // r10
     float *currentOrigin; // r26
     float *v10; // r11
     int v11; // r10
@@ -4850,9 +4850,9 @@ int __cdecl Actor_CheckGoalNotify(actor_s *self)
     sentient_s *sentient; // r11
     const pathnode_t *pClaimedNode; // r31
     double v5; // fp1
-    unsigned __int8 v6; // r11
+    uint8_t v6; // r11
 
-    if (!(unsigned __int8)Actor_IsAtScriptGoal(self))
+    if (!(uint8_t)Actor_IsAtScriptGoal(self))
         return 0;
     if (self->ScriptOrient.eMode)
         return 1;
@@ -4879,7 +4879,7 @@ void __cdecl Actor_CheckNotify(actor_s *self)
         MyAssertHandler("c:\\trees\\cod3\\cod3src\\src\\game\\actor.cpp", 1290, 0, "%s", "self->sentient");
     if (!self->ent)
         MyAssertHandler("c:\\trees\\cod3\\cod3src\\src\\game\\actor.cpp", 1291, 0, "%s", "self->ent");
-    if ((unsigned __int8)Actor_CheckGoalNotify(self))
+    if ((uint8_t)Actor_CheckGoalNotify(self))
         Scr_Notify(self->ent, scr_const.goal, 0);
     if (self->arrivalInfo.animscriptOverrideRunTo)
     {
@@ -4949,7 +4949,7 @@ void __cdecl Actor_Think(gentity_s *self)
 
             Vec3Copy(self->r.currentOrigin, actor->sentient->oldOrigin);
 
-            self->s.lerp.pos.trType = (unsigned __int8)Com_IsRagdollTrajectory(&self->s.lerp.pos) == 0
+            self->s.lerp.pos.trType = (uint8_t)Com_IsRagdollTrajectory(&self->s.lerp.pos) == 0
                 ? TR_INTERPOLATE
                 : TR_RAGDOLL_INTERPOLATE;
             Vec3Copy(self->r.currentOrigin, self->s.lerp.pos.trBase);
@@ -4960,7 +4960,7 @@ void __cdecl Actor_Think(gentity_s *self)
 
             updateProne = originChanged || anglesChanged;
 
-            self->s.lerp.apos.trType = (unsigned __int8)Com_IsRagdollTrajectory(&self->s.lerp.apos) == 0
+            self->s.lerp.apos.trType = (uint8_t)Com_IsRagdollTrajectory(&self->s.lerp.apos) == 0
                 ? TR_INTERPOLATE
                 : TR_RAGDOLL_INTERPOLATE;
             Vec3Copy(self->r.currentAngles, self->s.lerp.apos.trBase);
@@ -5023,7 +5023,7 @@ void __cdecl Actor_Think(gentity_s *self)
 int __cdecl Actor_PhysicsAndDodge(actor_s *self)
 {
     gentity_s *ent; // r11
-    unsigned __int16 groundEntNum; // r22
+    uint16_t groundEntNum; // r22
     int bHasGroundPlane; // r21
     double groundplaneSlope; // fp28
     int iFootstepTimer; // r20
@@ -5083,7 +5083,7 @@ int __cdecl Actor_PhysicsAndDodge(actor_s *self)
     v12 = (gentityFlags_t)0;
     if (!self->Physics.bStuck && Actor_IsDodgeEntity(self, self->Physics.iHitEntnum) && Path_IsTrimmed(&self->Path))
     {
-        if ((unsigned __int16)self->Path.wNegotiationStartNode >= 0x8000u)
+        if ((uint16_t)self->Path.wNegotiationStartNode >= 0x8000u)
             MyAssertHandler(
                 "c:\\trees\\cod3\\cod3src\\src\\game\\actor.cpp",
                 2529,
@@ -5180,7 +5180,7 @@ int __cdecl Actor_PhysicsAndDodge(actor_s *self)
             }
             v24 = self->Physics.iHitEntnum;
         }
-        wDodgeCount = (unsigned __int16)self->Path.wDodgeCount;
+        wDodgeCount = (uint16_t)self->Path.wDodgeCount;
         self->Path.wDodgeEntity = v24;
         if (!wDodgeCount)
             self->Path.wDodgeCount = -1;
@@ -5237,7 +5237,7 @@ void __cdecl Actor_DoMove(actor_s *self)
     iassert(Vec3Compare(self->ent->r.maxs, self->Physics.vMaxs));
     iassert(self->Physics.ePhysicsType != AIPHYS_BAD);
 
-    unsigned __int16 oldGroundEntNum = self->Physics.groundEntNum;
+    uint16_t oldGroundEntNum = self->Physics.groundEntNum;
 
     if (self->Physics.ePhysicsType != AIPHYS_NORMAL_ABSOLUTE)
     {
@@ -5366,13 +5366,13 @@ bool __cdecl Actor_IsAtGoal(actor_s *self)
     ent = self->ent;
     if (!self->ent)
         MyAssertHandler("c:\\trees\\cod3\\cod3src\\src\\game\\actor.cpp", 3221, 0, "%s", "ent");
-    if (!(unsigned __int8)Actor_PointAtGoal(ent->r.currentOrigin, &self->codeGoal))
+    if (!(uint8_t)Actor_PointAtGoal(ent->r.currentOrigin, &self->codeGoal))
         return 0;
     if (Path_Exists(&self->Path))
     {
-        if (!(unsigned __int8)Actor_PointAtGoal(self->Path.vFinalGoal, &self->codeGoal))
+        if (!(uint8_t)Actor_PointAtGoal(self->Path.vFinalGoal, &self->codeGoal))
             return 0;
-        if (self->sentient->pClaimedNode && !(unsigned __int8)Actor_KeepClaimedNode(self))
+        if (self->sentient->pClaimedNode && !(uint8_t)Actor_KeepClaimedNode(self))
             return Actor_PointAt(ent->r.currentOrigin, self->sentient->pClaimedNode->constant.vOrigin);
     }
     else if (self->sentient->pClaimedNode)
@@ -5561,7 +5561,7 @@ int __cdecl Actor_FindPathToClaimNode(actor_s *self, pathnode_t *node)
                         "!Actor_PointAt( self->ent->r.currentOrigin, node->constant.vOrigin )");
             }
             else if (Actor_PointNearNode(currentOrigin, node)
-                && (unsigned __int8)Actor_PointAtGoal(self->ent->r.currentOrigin, &self->codeGoal))
+                && (uint8_t)Actor_PointAtGoal(self->ent->r.currentOrigin, &self->codeGoal))
             {
                 Actor_ClearPath(self);
                 result = 1;
@@ -5591,7 +5591,7 @@ int __cdecl Actor_CheckStop(actor_s *self, bool canUseEnemyGoal, pathnode_t *nod
     double v16; // fp1
     pathnode_t *pClaimedNode; // r11
     char v18; // r3
-    unsigned __int8 v19; // r11
+    uint8_t v19; // r11
     float v20[20]; // [sp+50h] [-50h] BYREF
 
     TargetSentient = Actor_GetTargetSentient(self);
@@ -5628,7 +5628,7 @@ int __cdecl Actor_CheckStop(actor_s *self, bool canUseEnemyGoal, pathnode_t *nod
         }
         return 1;
     }
-    if ((unsigned __int8)Actor_PointAtGoal(currentOrigin, &self->codeGoal))
+    if ((uint8_t)Actor_PointAtGoal(currentOrigin, &self->codeGoal))
     {
         if (Actor_CanSeeEnemy(self))
         {
@@ -5641,15 +5641,15 @@ int __cdecl Actor_CheckStop(actor_s *self, bool canUseEnemyGoal, pathnode_t *nod
     }
     if (!canUseEnemyGoal
         || self->useEnemyGoal
-        || (unsigned __int8)Actor_PointAtGoal(self->ent->r.currentOrigin, &self->codeGoal)
-        || !(unsigned __int8)Actor_IsAlongPath(self, TargetSentient->ent->r.currentOrigin, v20, hadPath))
+        || (uint8_t)Actor_PointAtGoal(self->ent->r.currentOrigin, &self->codeGoal)
+        || !(uint8_t)Actor_IsAlongPath(self, TargetSentient->ent->r.currentOrigin, v20, hadPath))
     {
         return 0;
     }
     self->useEnemyGoal = 1;
     Actor_UpdateGoalPos(self);
     pClaimedNode = self->sentient->pClaimedNode;
-    if (pClaimedNode && (unsigned __int8)Actor_PointAtGoal(pClaimedNode->constant.vOrigin, &self->codeGoal))
+    if (pClaimedNode && (uint8_t)Actor_PointAtGoal(pClaimedNode->constant.vOrigin, &self->codeGoal))
         return ((char *)self->sentient->pClaimedNode - (char *)node) != 0;
         //return (_cntlzw((char *)self->sentient->pClaimedNode - (char *)node) & 0x20) == 0;
     if (!node)
@@ -5708,7 +5708,7 @@ void __cdecl Actor_FindPathToFixedNode(actor_s *self)
         Scr_Notify(self->ent, scr_const.goal_changed, 0);
         self->commitToFixedNode = 0;
     }
-    if ((unsigned __int8)Actor_InFixedNodeExposedCombat(self))
+    if ((uint8_t)Actor_InFixedNodeExposedCombat(self))
         return;
     v7 = Actor_KeepClaimedNode(self);
     species = self->species;
@@ -5716,12 +5716,12 @@ void __cdecl Actor_FindPathToFixedNode(actor_s *self)
     {
         if (species)
             MyAssertHandler("c:\\trees\\cod3\\cod3src\\src\\game\\actor.cpp", 3951, 0, "%s", "Actor_UsingCoverNodes( self )");
-        if ((unsigned __int8)Actor_IsDoingCover(self))
+        if ((uint8_t)Actor_IsDoingCover(self))
             self->Path.flags |= 0x100u;
         sentient = self->sentient;
         node = self->codeGoal.node;
         pClaimedNode = sentient->pClaimedNode;
-        if (!(unsigned __int8)Actor_IsFixedNodeUseable(self) && !self->commitToFixedNode)
+        if (!(uint8_t)Actor_IsFixedNodeUseable(self) && !self->commitToFixedNode)
             goto LABEL_14;
         if (self->arrivalInfo.animscriptOverrideRunTo)
         {
@@ -5739,7 +5739,7 @@ void __cdecl Actor_FindPathToFixedNode(actor_s *self)
                 }
                 goto LABEL_24;
             }
-            if (!(unsigned __int8)Actor_FindPathToClaimNode(self, node))
+            if (!(uint8_t)Actor_FindPathToClaimNode(self, node))
             {
                 Actor_TeamMoveBlocked(self);
                 node = 0;
@@ -5854,7 +5854,7 @@ void __cdecl Actor_FindPathToGoal(actor_s *self)
     {
         if (Actor_IsReactingToEnemyDuringReacquireMove(self) && !self->arrivalInfo.animscriptOverrideRunTo)
             return;
-        if ((unsigned __int8)Actor_IsDoingCover(self))
+        if ((uint8_t)Actor_IsDoingCover(self))
             self->Path.flags |= 0x100u;
         ClaimedNode = Actor_FindClaimedNode(self);
     }
@@ -5881,7 +5881,7 @@ void __cdecl Actor_FindPathToGoal(actor_s *self)
         Actor_TeamMoveBlocked(self);
         goto LABEL_46;
     }
-    if (!(unsigned __int8)Actor_FindPathToClaimNode(self, ClaimedNode))
+    if (!(uint8_t)Actor_FindPathToClaimNode(self, ClaimedNode))
     {
         if (!Actor_IsSuppressedInAnyway(self))
             Path_MarkNodeInvalid(ClaimedNode, sentient->eTeam);
@@ -5891,7 +5891,7 @@ void __cdecl Actor_FindPathToGoal(actor_s *self)
     }
     if (!Actor_HasPath(self) && self->useEnemyGoal)
     {
-        if (!(unsigned __int8)Actor_PointAtGoal(self->ent->r.currentOrigin, &self->codeGoal)
+        if (!(uint8_t)Actor_PointAtGoal(self->ent->r.currentOrigin, &self->codeGoal)
             || !Actor_PointNearNode(self->ent->r.currentOrigin, ClaimedNode))
         {
             self->useEnemyGoal = 0;
@@ -5900,7 +5900,7 @@ void __cdecl Actor_FindPathToGoal(actor_s *self)
         goto LABEL_45;
     }
 LABEL_46:
-    if ((unsigned __int8)Actor_CheckStop(self, v3, ClaimedNode, v2))
+    if ((uint8_t)Actor_CheckStop(self, v3, ClaimedNode, v2))
     {
     LABEL_21:
         Actor_ClearPath(self);

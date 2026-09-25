@@ -28,7 +28,7 @@ struct ColorCorrectionData // sizeof=0x54
     float range;
 };
 
-enum CubemapShot : __int32
+enum CubemapShot : int32_t
 {                                       // ...
     CUBEMAPSHOT_NONE = 0x0,
     CUBEMAPSHOT_RIGHT = 0x1,

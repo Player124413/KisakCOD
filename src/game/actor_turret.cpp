@@ -31,7 +31,7 @@ int __cdecl Actor_IsUsingTurret(actor_s *self)
 {
     gentity_s *pTurret; // r11
     gentity_s *v3; // r3
-    unsigned __int8 v4; // r11
+    uint8_t v4; // r11
 
     pTurret = self->pTurret;
     if (!pTurret)
@@ -87,7 +87,7 @@ bool __cdecl Actor_Turret_Start(actor_s *self, ai_state_t ePrevState)
             "!pTurret || pTurret->r.inuse");
     if (pTurret->active || !G_EntLinkTo(self->ent, pTurret, 0))
         return 0;
-    if ((unsigned __int8)Actor_IsUsingTurret(self))
+    if ((uint8_t)Actor_IsUsingTurret(self))
         MyAssertHandler(
             "c:\\trees\\cod3\\cod3src\\src\\game\\actor_turret.cpp",
             36,
@@ -99,7 +99,7 @@ bool __cdecl Actor_Turret_Start(actor_s *self, ai_state_t ePrevState)
     pTurret->r.ownerNum.setEnt(self->ent);
     if (Scr_IsSystemActive())
         Scr_Notify(pTurret, scr_const.turretownerchange, 0);
-    if (!(unsigned __int8)Actor_IsUsingTurret(self))
+    if (!(uint8_t)Actor_IsUsingTurret(self))
         MyAssertHandler("c:\\trees\\cod3\\cod3src\\src\\game\\actor_turret.cpp", 46, 0, "%s", "Actor_IsUsingTurret( self )");
     if (!G_EntIsLinkedTo(self->ent, pTurret))
         MyAssertHandler(
@@ -728,7 +728,7 @@ actor_think_result_t __cdecl Actor_Turret_Think(actor_s *self)
                                 Path_ForceClaimNode(v16, self->sentient);
                         }
                         Actor_SetAnimScript(self, v13, AI_MOVE_STOP, AI_ANIM_MOVE_CODE);
-                        if ((unsigned __int8)Actor_IsUsingTurret(self))
+                        if ((uint8_t)Actor_IsUsingTurret(self))
                         {
                             self->bUseGoalWeight = 0;
                             //Profile_Begin(235);
@@ -787,7 +787,7 @@ void __cdecl Actor_Turret_Pain(
     int flags; // r10
 
     if (pAttacker->sentient
-        && (unsigned __int8)Actor_IsUsingTurret(self)
+        && (uint8_t)Actor_IsUsingTurret(self)
         && pAttacker->sentient->eTeam == Sentient_EnemyTeam(self->sentient->eTeam))
     {
         if (!self->pTurret)

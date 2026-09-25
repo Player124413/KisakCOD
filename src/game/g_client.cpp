@@ -12,7 +12,7 @@
 
 void __cdecl G_FinishSetupSpawnPoint(gentity_s *ent)
 {
-    unsigned __int16 EntityHitId; // r3
+    uint16_t EntityHitId; // r3
     double fraction; // fp0
     float start[3]; // [sp+58h] [-88h] BYREF
     float end[3]; // [sp+68h] [-78h] BYREF
@@ -259,7 +259,7 @@ void __cdecl SetClientOrigin(gentity_s *ent, float *origin)
 //{
 //    int v2; // r30
 //    int *angles; // r31
-//    __int64 v4; // r11
+//    int64_t v4; // r11
 //    double v5; // fp31
 //
 //    v2 = 3;
@@ -506,10 +506,10 @@ char *__cdecl ClientConnect(int clientNum)
     memset(v2, 0, sizeof(gclient_s));
     v2->pers.connected = CON_CONNECTING;
     integer = g_player_maxhealth->current.integer;
-    v2->ps.clientNum = (unsigned __int16)clientNum;
+    v2->ps.clientNum = (uint16_t)clientNum;
     v2->pers.maxHealth = integer;
     v2->ps.stats[STAT_MAX_HEALTH] = integer;
-    if ((unsigned __int16)clientNum != clientNum)
+    if ((uint16_t)clientNum != clientNum)
         MyAssertHandler(
             "c:\\trees\\cod3\\cod3src\\src\\game\\g_client.cpp",
             554,

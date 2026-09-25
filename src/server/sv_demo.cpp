@@ -21,8 +21,8 @@
 #include <cgame/cg_main.h> // replay_time
 #include <game/savedevice.h>
 
-unsigned __int8 g_buf[2][3145728];
-unsigned __int8 g_msgBuf[10485760];
+uint8_t g_buf[2][3145728];
+uint8_t g_msgBuf[10485760];
 FileSkip g_fileSkips[3600]{ 0 };
 FileMarkSkip g_fileMarkSkips[50];
 server_demo_history_t g_historyBuffers[2];
@@ -53,11 +53,11 @@ unsigned int __cdecl SV_GetHistoryIndex(server_demo_history_t *history)
     return 0;
 }
 
-int __cdecl SV_GetBufferIndex(unsigned __int8 *ptr)
+int __cdecl SV_GetBufferIndex(uint8_t *ptr)
 {
     int v1; // r8
     int v2; // r10
-    unsigned __int8 *v3; // r11
+    uint8_t *v3; // r11
     const char *v4; // r3
 
     v1 = 0;
@@ -79,7 +79,7 @@ int __cdecl SV_GetBufferIndex(unsigned __int8 *ptr)
     return 0;
 }
 
-void __cdecl SV_HistoryFree(unsigned __int8 *ptr, int size)
+void __cdecl SV_HistoryFree(uint8_t *ptr, int size)
 {
     int BufferIndex; // r3
     int v5; // r10
@@ -96,13 +96,13 @@ void __cdecl SV_HistoryFree(unsigned __int8 *ptr, int size)
             "ptr == g_buf[bufferIndex] + g_bufSize[bufferIndex]");
 }
 
-int __cdecl SV_HistoryAlloc(server_demo_history_t *history, unsigned __int8 **pData, int size)
+int __cdecl SV_HistoryAlloc(server_demo_history_t *history, uint8_t **pData, int size)
 {
     unsigned int HistoryIndex; // r3
     unsigned int v7; // r28
     int v8; // r11
     int v9; // r31
-    unsigned __int8 *v10; // r3
+    uint8_t *v10; // r3
     int result; // r3
 
     if (size <= 0)
@@ -293,7 +293,7 @@ _iobuf *SV_ClearHistoryCache()
 
 void __cdecl SV_FreeDemoSaveBuf(server_demo_save_t *save)
 {
-    unsigned __int8 *buf; // r3
+    uint8_t *buf; // r3
 
     buf = save->buf;
     if (buf)
@@ -306,9 +306,9 @@ void __cdecl SV_FreeDemoSaveBuf(server_demo_save_t *save)
 
 void __cdecl SV_FreeHistoryData(server_demo_history_t *history)
 {
-    unsigned __int8 *freeEntBuf; // r3
-    unsigned __int8 *cmBuf; // r3
-    unsigned __int8 *buf; // r3
+    uint8_t *freeEntBuf; // r3
+    uint8_t *cmBuf; // r3
+    uint8_t *buf; // r3
 
     if (!history)
         MyAssertHandler("c:\\trees\\cod3\\cod3src\\src\\server\\sv_demo.cpp", 717, 0, "%s", "history");
@@ -387,7 +387,7 @@ void __cdecl SV_ShutdownDemo()
         SV_FreeHistoryData(g_history);
         g_history = 0;
     }
-    if ((unsigned __int8)SV_WaitForSaveHistoryDone())
+    if ((uint8_t)SV_WaitForSaveHistoryDone())
     {
         if (sv.demo.save.buf)
         {
@@ -713,7 +713,7 @@ void __cdecl SV_WriteDemo(SaveGame *save)
     SaveMemory_SetBuffer(sv.demo.save.buf, sv.demo.save.bufLen, save);
 }
 
-void __cdecl SV_SaveDemo(const char *demoName, const char *description, unsigned __int32 saveType)
+void __cdecl SV_SaveDemo(const char *demoName, const char *description, uint32_t saveType)
 {
     const char *v3; // r29
     SaveGame *SaveHandle; // r31
@@ -780,7 +780,7 @@ void __cdecl SV_AutoSaveDemo(const char *baseName, const char *description, int 
     if (!Sys_IsDatabaseThread() && sv.state == SS_GAME && sv.demo.msg.data && (force || sv.demo.changed))
     {
         SaveHandle = SaveMemory_GetSaveHandle(1);
-        if (!(unsigned __int8)SaveMemory_IsSaving(SaveHandle))
+        if (!(uint8_t)SaveMemory_IsSaving(SaveHandle))
         {
             SV_GetFreeDemoName(baseName, demoCount, v9);
             SV_SaveDemo(v9, description, 0);
@@ -912,7 +912,7 @@ void __cdecl SV_DemoRestart_f()
 
 int __cdecl SV_DemoHasMark()
 {
-    unsigned __int8 v0; // r11
+    uint8_t v0; // r11
 
     if (!sv.demo.playing)
         MyAssertHandler("c:\\trees\\cod3\\cod3src\\src\\server\\sv_demo.cpp", 1899, 0, "%s", "sv.demo.playing");
@@ -928,7 +928,7 @@ void __cdecl SV_LoadDemo(SaveGame *save, void *fileHandle)
 {
     const SaveHeader *Header; // r30
     int bodySize; // r5
-    unsigned __int8 *buf; // r31
+    uint8_t *buf; // r31
     MemoryFile *MemoryFile; // r3
     unsigned int v8; // [sp+50h] [-40h] BYREF
 
@@ -947,7 +947,7 @@ void __cdecl SV_LoadDemo(SaveGame *save, void *fileHandle)
     ReadFromDevice(&v8, 4, fileHandle);
     if (sv.demo.msg.data)
         MyAssertHandler("c:\\trees\\cod3\\cod3src\\src\\server\\sv_demo.cpp", 1927, 0, "%s", "!sv.demo.msg.data");
-    if (!(unsigned __int8)SV_MsgAlloc(v8))
+    if (!(uint8_t)SV_MsgAlloc(v8))
         Sys_OutOfMemErrorInternal("c:\\trees\\cod3\\cod3src\\src\\server\\sv_demo.cpp", 1929);
     MSG_Init(&sv.demo.msg, sv.demo.msg.data, sv.demo.msg.maxsize);
     sv.demo.msg.cursize = v8;
@@ -1212,7 +1212,7 @@ server_demo_history_t *__cdecl SV_DemoGetFreeBuffer()
 
 int __cdecl SV_HistoryIsNew(server_demo_history_t *history)
 {
-    unsigned __int8 v1; // r11
+    uint8_t v1; // r11
 
     if (!g_numFileSkips)
         return 1;
@@ -1337,7 +1337,7 @@ server_demo_history_t *__cdecl SV_DemoGetBuffer()
 
 server_demo_history_t *__cdecl SV_GetMarkHistory(const char *name)
 {
-    if (!SV_DemoGetBuffer() || !(unsigned __int8)SV_WaitForSaveHistoryDone())
+    if (!SV_DemoGetBuffer() || !(uint8_t)SV_WaitForSaveHistoryDone())
         return 0;
     g_history->manual = 1;
     I_strncpyz(g_history->name, name, 64);
@@ -1460,7 +1460,7 @@ bool __cdecl SV_DemoRead(void *buffer, unsigned int len, _iobuf *file)
 
 int __cdecl SV_DemoAllocRead(
     server_demo_history_t *history,
-    unsigned __int8 **buffer,
+    uint8_t **buffer,
     unsigned int len,
     _iobuf *file)
 {
@@ -1527,7 +1527,7 @@ bool __cdecl SV_LoadHistoryForTime(int time)
     FileSkip *v3; // r10
     int v4; // r31
 
-    if (!SV_DemoGetBuffer() || !(unsigned __int8)SV_WaitForSaveHistoryDone())
+    if (!SV_DemoGetBuffer() || !(uint8_t)SV_WaitForSaveHistoryDone())
         return 0;
     v2 = 0;
     if (g_numFileSkips > 0)
@@ -1631,7 +1631,7 @@ void __cdecl SV_DemoGoto_f()
             v0 = "";
         else
             v0 = SV_Cmd_Argv(1);
-        if ((unsigned __int8)SV_LoadHistoryForMark(v0))
+        if ((uint8_t)SV_LoadHistoryForMark(v0))
         {
             sv.demo.nextLevelSave = g_history;
             SV_DemoRestart();

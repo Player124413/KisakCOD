@@ -69,7 +69,7 @@ void __cdecl SV_AddReliableCommand(client_t *cl, int index, const char *cmd)
     int v11; // r9
 
     v5 = cmd;
-    while (*(unsigned __int8 *)v5++)
+    while (*(uint8_t *)v5++)
         ;
     v8 = v5 - cmd - 1;
     if (v5 - cmd + cl->reliableCommands.header.rover > 0x2000)
@@ -81,7 +81,7 @@ void __cdecl SV_AddReliableCommand(client_t *cl, int index, const char *cmd)
     cl->reliableCommands.commands[index] = cl->reliableCommands.header.rover;
     for (i = &cl->reliableCommands.buf[cl->reliableCommands.header.rover]; v9 < v8; ++i)
     {
-        v11 = (unsigned __int8)cmd[v9];
+        v11 = (uint8_t)cmd[v9];
         *i = v11;
         if (v11 == 37)
             *i = 46;
@@ -104,7 +104,7 @@ void __cdecl SV_Startup()
 
 void __cdecl SV_ClearServer()
 {
-    unsigned __int16 *configstrings; // r31
+    uint16_t *configstrings; // r31
 
     if (svs.clients)
         Com_Memset(&svs.clients->reliableCommands, 0, 12);
@@ -192,7 +192,7 @@ bool __cdecl SV_Loaded()
 void __cdecl SV_Init()
 {
     const char *v0; // r5
-    unsigned __int16 v1; // r4
+    uint16_t v1; // r4
 
     Memcard_InitializeSystem();
     SaveDevice_Init();
@@ -288,7 +288,7 @@ void __cdecl SV_SetConfigstring(unsigned int index, const char *val)
     const char *v5; // r3
     const char *v6; // r11
     int v7; // r9
-    unsigned __int16 v8; // r3
+    uint16_t v8; // r3
     client_t *clients; // r27
     const char *v10; // r11
     int v12; // r30
@@ -307,7 +307,7 @@ void __cdecl SV_SetConfigstring(unsigned int index, const char *val)
         v6 = val;
         do
         {
-            v7 = *(unsigned __int8 *)v6 - *(unsigned __int8 *)v5;
+            v7 = *(uint8_t *)v6 - *(uint8_t *)v5;
             if (!*v6)
                 break;
             ++v6;
@@ -324,7 +324,7 @@ void __cdecl SV_SetConfigstring(unsigned int index, const char *val)
                 if (svs.clients->state == 1)
                 {
                     v10 = val;
-                    while (*(unsigned __int8 *)v10++)
+                    while (*(uint8_t *)v10++)
                         ;
                     v12 = v10 - val - 1;
                     if (v12 < 1000)

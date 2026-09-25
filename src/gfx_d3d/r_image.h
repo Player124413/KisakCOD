@@ -2,14 +2,14 @@
 #include "r_material.h"
 #include <xanim/xanim.h>
 
- enum $92364187413C9A0320C404614F91083D : __int32
+ enum $92364187413C9A0320C404614F91083D : int32_t
  {
      PICMIP_PLATFORM_USED    = 0x0,
      PICMIP_PLATFORM_MINSPEC = 0x1,
      PICMIP_PLATFORM_COUNT   = 0x2,
  };
 
-enum GfxRefBlendMode : __int32
+enum GfxRefBlendMode : int32_t
 {                                       // ...
     BLENDMODE_OPAQUE = 0x0,
     BLENDMODE_BLEND = 0x1,
@@ -19,7 +19,7 @@ enum GfxRefBlendMode : __int32
     BLENDMODE_ADD = 0x5,
 };
 
-enum GfxImageFileFormat : __int32
+enum GfxImageFileFormat : int32_t
 {
     IMG_FORMAT_INVALID = 0x0,
     IMG_FORMAT_BITMAP_RGBA = 0x1,
@@ -39,7 +39,7 @@ enum GfxImageFileFormat : __int32
     IMG_FORMAT_COUNT = 0xF,
 };
 
-enum file_image_flags_t : __int32
+enum file_image_flags_t : int32_t
 {
     IMG_FLAG_NOPICMIP = 0x1,
     IMG_FLAG_NOMIPMAPS = 0x2,
@@ -53,7 +53,7 @@ enum file_image_flags_t : __int32
     IMG_FLAG_RENDER_TARGET = 0x20000,
     IMG_FLAG_SYSTEMMEM = 0x40000,
 };
-enum $E681A048096CB9E4B36F1590F98F8E52 : __int32
+enum $E681A048096CB9E4B36F1590F98F8E52 : int32_t
 {
     IMG_CATEGORY_UNKNOWN = 0x0,
     IMG_CATEGORY_AUTO_GENERATED = 0x1,
@@ -65,7 +65,7 @@ enum $E681A048096CB9E4B36F1590F98F8E52 : __int32
     IMG_CATEGORY_RENDERTARGET = 0x6,
     IMG_CATEGORY_TEMP = 0x7,
 };
-enum $1B8EAFF1434832E143B04F7E036A82BD : __int32
+enum $1B8EAFF1434832E143B04F7E036A82BD : int32_t
 {
     TS_2D = 0x0,
     TS_FUNCTION = 0x1,
@@ -142,7 +142,7 @@ struct GfxImageFileHeader // sizeof=0x1C
     uint8_t version;
     uint8_t format;
     uint8_t flags;              // ...
-    __int16 dimensions[3];              // ...
+    int16_t dimensions[3];              // ...
     int fileSizeForPicmip[4];           // ...
 };
 

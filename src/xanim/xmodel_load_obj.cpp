@@ -28,7 +28,7 @@ void __cdecl XModelReadSurface_BuildCollisionTree(
     uint32_t vertListIndex,
     void *(__cdecl *Alloc)(int))
 {
-    unsigned __int8 *v3; // eax
+    uint8_t *v3; // eax
     int v5; // [esp+64h] [ebp-134h]
     int v7; // [esp+6Ch] [ebp-12Ch]
     int v9; // [esp+74h] [ebp-124h]
@@ -47,7 +47,7 @@ void __cdecl XModelReadSurface_BuildCollisionTree(
     float nodeMaxs[3]; // [esp+BCh] [ebp-DCh] BYREF
     uint32_t allocSize; // [esp+C8h] [ebp-D0h]
     uint32_t alignedAddr; // [esp+CCh] [ebp-CCh]
-    unsigned __int8 *alloced; // [esp+D0h] [ebp-C8h]
+    uint8_t *alloced; // [esp+D0h] [ebp-C8h]
     float combinedVolume; // [esp+D4h] [ebp-C4h]
     float thisVolume; // [esp+D8h] [ebp-C0h]
     float tmp[3]; // [esp+DCh] [ebp-BCh] BYREF
@@ -450,10 +450,10 @@ static void ReadBlend(XSurface *surface, int *partBits, XBlendLoadInfo *blend, u
 void __cdecl XModelReadSurface(XModel *model, unsigned char **pos, void *(__cdecl *Alloc)(int), XSurface *surface)
 {
     int vertCount; // edx
-    __int16 v32; // [esp+84h] [ebp-6BCh]
+    int16_t v32; // [esp+84h] [ebp-6BCh]
     float check[3]; // [esp+88h] [ebp-6B8h] BYREF
     int j; // [esp+94h] [ebp-6ACh]
-    unsigned __int8 numWeights; // [esp+9Bh] [ebp-6A5h]
+    uint8_t numWeights; // [esp+9Bh] [ebp-6A5h]
     int weightCount[4]; // [esp+9Ch] [ebp-6A4h] BYREF
     XVertexInfo0 *vert0Out; // [esp+ACh] [ebp-694h]
     XVertexInfo2 *vert2Out; // [esp+B0h] [ebp-690h]
@@ -892,16 +892,16 @@ XModelSurfs *__cdecl R_XModelSurfsLoadFile(
     XModel *model,
     const char *name,
     void *(__cdecl *Alloc)(int),
-    __int16 modelNumsurfs,
+    int16_t modelNumsurfs,
     const char *modelName)
 {
-    unsigned __int8 *pos; // [esp+8h] [ebp-64h] BYREF
+    uint8_t *pos; // [esp+8h] [ebp-64h] BYREF
     char filename[68]; // [esp+Ch] [ebp-60h] BYREF
-    unsigned __int8 *buf = NULL; // [esp+54h] [ebp-18h] BYREF
+    uint8_t *buf = NULL; // [esp+54h] [ebp-18h] BYREF
     XModelSurfs *modelSurfs; // [esp+5Ch] [ebp-10h]
     int size; // [esp+60h] [ebp-Ch]
     int fileSize; // [esp+64h] [ebp-8h]
-    __int16 numsurfs; // [esp+68h] [ebp-4h]
+    int16_t numsurfs; // [esp+68h] [ebp-4h]
 
     if (Com_sprintf(filename, 0x40u, "xmodelsurfs/%s", name) < 0)
     {
@@ -975,7 +975,7 @@ int __cdecl XModelSurfsPrecache(
     XModel *model,
     const char *name,
     void *(__cdecl *Alloc)(int),
-    __int16 modelNumsurfs,
+    int16_t modelNumsurfs,
     const char *modelName,
     XModelSurfs *outModelSurfs)
 {
@@ -1013,7 +1013,7 @@ PhysPreset *__cdecl XModel_PhysPresetPrecache(const char *name, void *(__cdecl *
 }
 
 void __cdecl XModelLoadCollData(
-    unsigned __int8 **pos,
+    uint8_t **pos,
     XModel *model,
     void *(__cdecl *AllocColl)(int),
     const char *name)
@@ -1089,7 +1089,7 @@ void __cdecl XModelLoadCollData(
     }
 }
 
-char __cdecl XModelLoadConfigFile(const char *name, unsigned __int8 **pos, XModelConfig *config)
+char __cdecl XModelLoadConfigFile(const char *name, uint8_t **pos, XModelConfig *config)
 {
     short version = Buf_Read<short>(pos);
 
@@ -1202,7 +1202,7 @@ XModel *__cdecl XModelLoadFile(char *name, void *(__cdecl *Alloc)(int), void *(_
     Material *v6; // eax
     PhysPreset *v7; // eax
     PhysGeomList *PhysicsCollMap; // eax
-    unsigned __int8 *pos; // [esp+68h] [ebp-160Ch] BYREF
+    uint8_t *pos; // [esp+68h] [ebp-160Ch] BYREF
     int j; // [esp+6Ch] [ebp-1608h]
     int numBones; // [esp+70h] [ebp-1604h]
     char dest[68]; // [esp+74h] [ebp-1600h] BYREF
@@ -1224,7 +1224,7 @@ XModel *__cdecl XModelLoadFile(char *name, void *(__cdecl *Alloc)(int), void *(_
     XModelConfig config; // [esp+234h] [ebp-1440h] BYREF
     XModelPartsLoad *modelParts; // [esp+166Ch] [ebp-8h]
     const char *v40; // [esp+1670h] [ebp-4h]
-    unsigned __int8 *v36;
+    uint8_t *v36;
 
     if (Com_IsLegacyXModelName(name))
     {
@@ -1254,7 +1254,7 @@ XModel *__cdecl XModelLoadFile(char *name, void *(__cdecl *Alloc)(int), void *(_
         return 0;
     }
 
-    pos = (unsigned __int8 *)buf;
+    pos = (uint8_t *)buf;
     if (!XModelLoadConfigFile(name, &pos, &config))
         goto LABEL_28;
 
@@ -1336,7 +1336,7 @@ XModel *__cdecl XModelLoadFile(char *name, void *(__cdecl *Alloc)(int), void *(_
                     partBits[2] = outModelSurfs.partBits[2];
                     partBits[3] = outModelSurfs.partBits[3];
                     modelLodInfo->surfIndex = surfIndex;
-                    iassert(i == (unsigned __int8)i);
+                    iassert(i == (uint8_t)i);
                     modelLodInfo->lod = i;
                     modelLodInfo->smcIndexPlusOne = 0;
 
@@ -1400,8 +1400,8 @@ void __cdecl XModelCalcBasePose(XModelPartsLoad *modelParts)
     float len; // [esp+88h] [ebp-30h]
     int numBones; // [esp+90h] [ebp-28h]
     float *trans; // [esp+94h] [ebp-24h]
-    __int16 *quats; // [esp+98h] [ebp-20h]
-    unsigned __int8 *parentList; // [esp+9Ch] [ebp-1Ch]
+    int16_t *quats; // [esp+98h] [ebp-20h]
+    uint8_t *parentList; // [esp+9Ch] [ebp-1Ch]
     int i; // [esp+A0h] [ebp-18h]
     float tempQuat[4]; // [esp+A4h] [ebp-14h] BYREF
     DObjAnimMat *quatTrans; // [esp+B4h] [ebp-4h]
@@ -1458,19 +1458,19 @@ void __cdecl XModelCalcBasePose(XModelPartsLoad *modelParts)
 XModelPartsLoad *__cdecl XModelPartsLoadFile(XModel *model, const char *name, void *(__cdecl *Alloc)(int))
 {
     uint16_t prev; // ax
-    unsigned __int8 *pos; // [esp+30h] [ebp-88h] BYREF
+    uint8_t *pos; // [esp+30h] [ebp-88h] BYREF
     int numBones; // [esp+34h] [ebp-84h]
     char filename[64]; // [esp+38h] [ebp-80h] BYREF
     int numRootBones; // [esp+7Ch] [ebp-3Ch]
-    __int16 numChildBones; // [esp+80h] [ebp-38h]
-    unsigned __int8 *buf = NULL; // [esp+84h] [ebp-34h] BYREF
+    int16_t numChildBones; // [esp+80h] [ebp-38h]
+    uint8_t *buf = NULL; // [esp+84h] [ebp-34h] BYREF
     float *trans; // [esp+88h] [ebp-30h]
-    __int16 version; // [esp+8Ch] [ebp-2Ch]
+    int16_t version; // [esp+8Ch] [ebp-2Ch]
     int len; // [esp+90h] [ebp-28h]
     int size; // [esp+94h] [ebp-24h]
-    __int16 *quats; // [esp+98h] [ebp-20h]
+    int16_t *quats; // [esp+98h] [ebp-20h]
     int fileSize; // [esp+9Ch] [ebp-1Ch]
-    unsigned __int8 *parentList; // [esp+A0h] [ebp-18h]
+    uint8_t *parentList; // [esp+A0h] [ebp-18h]
     int index; // [esp+A4h] [ebp-14h]
     int i; // [esp+A8h] [ebp-10h]
     XModelPartsLoad *modelParts; // [esp+ACh] [ebp-Ch]
@@ -1522,7 +1522,7 @@ XModelPartsLoad *__cdecl XModelPartsLoadFile(XModel *model, const char *name, vo
     {
         size = numChildBones;
         if (numChildBones)
-            parentList = (unsigned __int8 *)Alloc(size);
+            parentList = (uint8_t *)Alloc(size);
         else
             parentList = 0;
 
@@ -1538,7 +1538,7 @@ XModelPartsLoad *__cdecl XModelPartsLoadFile(XModel *model, const char *name, vo
         if (numChildBones)
         {
             size = 8 * numChildBones;
-            modelParts->quats = (__int16 *)Alloc(size);
+            modelParts->quats = (int16_t *)Alloc(size);
             model->memUsage += size;
 
             size = 16 * numChildBones;
@@ -1551,7 +1551,7 @@ XModelPartsLoad *__cdecl XModelPartsLoadFile(XModel *model, const char *name, vo
             modelParts->trans = 0;
         }
         size = numBones;
-        modelParts->partClassification = (unsigned __int8 *)Alloc(numBones);
+        modelParts->partClassification = (uint8_t *)Alloc(numBones);
         model->memUsage += size;
         modelParts->numBones = numBones;
         modelParts->numRootBones = numRootBones;
@@ -1581,13 +1581,13 @@ XModelPartsLoad *__cdecl XModelPartsLoadFile(XModel *model, const char *name, vo
             boneNames[i] = prev;
             pos += len;
         }
-        memcpy(modelParts->partClassification, (unsigned __int8 *)pos, numBones);
+        memcpy(modelParts->partClassification, (uint8_t *)pos, numBones);
         pos += numBones;
         useBones = *pos++ != 0;
         FS_FreeFile((char *)buf);
         XModelCalcBasePose(modelParts);
         if (!useBones)
-            memset((unsigned __int8 *)modelParts->trans, 0, 16 * numChildBones);
+            memset((uint8_t *)modelParts->trans, 0, 16 * numChildBones);
         return modelParts;
     }
     else
@@ -1630,7 +1630,7 @@ static void __cdecl XModelMakeDefault(XModel *model)
     model->bad = 1;
     DefaultParts = XModelCreateDefaultParts();
     XModelCopyXModelParts(DefaultParts, model);
-    memset((unsigned __int8 *)model->lodInfo, 0, sizeof(model->lodInfo));
+    memset((uint8_t *)model->lodInfo, 0, sizeof(model->lodInfo));
     model->numLods = 1;
     model->collLod = 0;
     model->name = "DEFAULT";

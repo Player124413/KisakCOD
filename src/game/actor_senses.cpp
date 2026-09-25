@@ -109,7 +109,7 @@ int __cdecl Actor_CanSeeEnemyViaClaimedNode(actor_s *self)
     sentient_s *TargetSentient; // r31
     const pathnode_t *v4; // r4
     int v5; // r3
-    unsigned __int8 v6; // r11
+    uint8_t v6; // r11
 
     pClaimedNode = self->sentient->pClaimedNode;
     if (!pClaimedNode)
@@ -132,14 +132,14 @@ sentient_s *__cdecl Actor_KnowAboutEnemy(actor_s *self, int hadPath)
     sentient_s *result; // r3
     sentient_s *v5; // r30
     int lastKnownPosTime; // r11
-    unsigned __int8 v7; // r11
+    uint8_t v7; // r11
     bool v8; // zf
 
     result = Actor_GetTargetSentient(self);
     v5 = result;
     if (result)
     {
-        if (hadPath || !(unsigned __int8)Actor_CanSeeEnemyViaClaimedNode(self))
+        if (hadPath || !(uint8_t)Actor_CanSeeEnemyViaClaimedNode(self))
         {
             lastKnownPosTime = self->sentientInfo[v5 - level.sentients].lastKnownPosTime;
             if (!lastKnownPosTime)
@@ -162,9 +162,9 @@ int __cdecl Actor_CanShootFrom(actor_s *self, const float *vTarget, const float 
 {
     double v6; // fp13
     double v7; // fp12
-    unsigned __int16 EntityHitId; // r31
+    uint16_t EntityHitId; // r31
     sentient_s *sentient; // r11
-    unsigned __int8 v11; // r11
+    uint8_t v11; // r11
     bool v12; // zf
     trace_t v13[2]; // [sp+50h] [-60h] BYREF
 
@@ -708,7 +708,7 @@ int __cdecl Actor_CanSeeEnemyExtended(actor_s *self, int useClaimedNode)
 {
     sentient_s *TargetSentient; // r30
     int iLastVisTime; // r11
-    unsigned __int8 v7; // r11
+    uint8_t v7; // r11
     bool v8; // zf
     const gentity_s *v9; // r3
 
@@ -719,7 +719,7 @@ int __cdecl Actor_CanSeeEnemyExtended(actor_s *self, int useClaimedNode)
     TargetSentient = Actor_GetTargetSentient(self);
     if (TargetSentient)
     {
-        if (useClaimedNode && (unsigned __int8)Actor_CanSeeEnemyViaClaimedNode(self))
+        if (useClaimedNode && (uint8_t)Actor_CanSeeEnemyViaClaimedNode(self))
         {
             return 1;
         }

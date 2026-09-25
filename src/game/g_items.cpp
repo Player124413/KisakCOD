@@ -659,9 +659,9 @@ gentity_s *__cdecl Drop_Item(gentity_s *ent, const gitem_s *item, float angle, i
         AngleVectors(angles, velocity, 0, 0);
 #ifdef KISAK_MP
         Vec3Scale(velocity, g_dropForwardSpeed->current.value, velocity);
-        velocity[2] = crandom() * g_dropUpSpeedRand->current.value + g_dropUpSpeedBase->current.value + velocity[2];
-        velocity[0] = crandom() * g_dropHorzSpeedRand->current.value + velocity[0];
-        velocity[1] = crandom() * g_dropHorzSpeedRand->current.value + velocity[1];
+        velocity[2] = Com_Crandom() * g_dropUpSpeedRand->current.value + g_dropUpSpeedBase->current.value + velocity[2];
+        velocity[0] = Com_Crandom() * g_dropHorzSpeedRand->current.value + velocity[0];
+        velocity[1] = Com_Crandom() * g_dropHorzSpeedRand->current.value + velocity[1];
 #elif KISAK_SP
         Vec3Scale(velocity, 150.0f, velocity);
         velocity[2] = (float)((float)((float)(G_crandom() * (float)50.0) + velocity[2]) + (float)200.0);

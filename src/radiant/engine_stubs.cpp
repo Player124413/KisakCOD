@@ -38,7 +38,7 @@ struct unz_file_info_s;
 struct unz_global_info_s;
 
 // snd_stopsounds_arg_t forward (from sound/snd_public.h which pulls mss.h)
-enum snd_stopsounds_arg_t : __int32;
+enum snd_stopsounds_arg_t : int32_t;
 
 // Globals from database/db_registry.cpp / win32/win_main.cpp / qcommon/threads.cpp
 // (those files are not in the Radiant build set).
@@ -57,7 +57,7 @@ volatile uint32_t g_mainThreadBlocked = 0;
 namespace
 {
     constexpr long RADIANT_SKEL_MEMORY_SIZE = 0x200000;
-    __declspec(align(16)) unsigned char s_radiantSkelMemory[RADIANT_SKEL_MEMORY_SIZE];
+    __attribute__((aligned(16))) unsigned char s_radiantSkelMemory[RADIANT_SKEL_MEMORY_SIZE];
     volatile long s_radiantSkelMemoryPos = 0;
     uint32_t s_radiantSkelFrame = UINT32_MAX;
 }

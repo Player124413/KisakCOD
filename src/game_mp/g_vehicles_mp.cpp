@@ -277,7 +277,7 @@ void __cdecl VehicleClearRideSlotForPlayer(gentity_s *ent, int32_t playerEntNum)
 
 void __cdecl G_VehiclesInit(int32_t restarting)
 {
-    __int16 i; // [esp+0h] [ebp-4h]
+    int16_t i; // [esp+0h] [ebp-4h]
 
     InitInfos(restarting);
     for (i = 0; i < 8; ++i)
@@ -312,7 +312,7 @@ void __cdecl InitInfos(int32_t restarting)
 void __cdecl G_VehiclesSetupSpawnedEnts()
 {
     gentity_s *ent; // [esp+4h] [ebp-8h]
-    __int16 i; // [esp+8h] [ebp-4h]
+    int16_t i; // [esp+8h] [ebp-4h]
 
     for (i = 0; i < 8; ++i)
     {
@@ -441,7 +441,7 @@ void __cdecl InitVehicleTags(gentity_s *ent)
         veh->boneIndex.wheel[i] = SV_DObjGetBoneIndex(ent, *s_wheelTags[i]);
 }
 
-void __cdecl InitEntityVehicleVars(gentity_s *ent, scr_vehicle_s *veh, __int16 infoIdx)
+void __cdecl InitEntityVehicleVars(gentity_s *ent, scr_vehicle_s *veh, int16_t infoIdx)
 {
     VEH_InitPhysics(ent);
     veh->entNum = ent->s.number;

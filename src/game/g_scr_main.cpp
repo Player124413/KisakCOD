@@ -601,7 +601,7 @@ void __cdecl TRACK_g_scr_main()
 
 void __cdecl Scr_LoadLevel()
 {
-    unsigned __int16 v0; // r3
+    uint16_t v0; // r3
 
     if (g_scr_data.levelscript)
     {
@@ -1063,7 +1063,7 @@ unsigned int __cdecl Scr_NonLocalizedStringErrorPrefix(
 int __cdecl Scr_IsValidMessageChar(char key)
 {
     bool IsValidGamePadChar; // r3
-    unsigned __int8 v2; // r11
+    uint8_t v2; // r11
 
     if (key >= 31)
         return 1;
@@ -1106,7 +1106,7 @@ void __cdecl Scr_ConstructMessageString(
             IString = Scr_GetIString(v10);
             v12 = IString;
             v13 = IString;
-            while (*(unsigned __int8 *)v13++)
+            while (*(uint8_t *)v13++)
                 ;
             v15 = v13 - IString - 1;
             Scr_ValidateLocalizedStringRef(v10, IString, v15);
@@ -1123,10 +1123,10 @@ void __cdecl Scr_ConstructMessageString(
             v17 = Scr_GetString(v10);
             v12 = v17;
             v18 = v17;
-            while (*(unsigned __int8 *)v18++)
+            while (*(uint8_t *)v18++)
                 ;
             v15 = v18 - v17 - 1;
-            v20 = (unsigned __int8)Scr_ValidateNonLocalizedStringRef(v10, v17, v15, errorContext) == 0;
+            v20 = (uint8_t)Scr_ValidateNonLocalizedStringRef(v10, v17, v15, errorContext) == 0;
             if (v15 + v9 + 1 >= stringLimit)
             {
                 v21 = va("%s is too long. Max length is %i\n", errorContext, stringLimit);
@@ -1740,7 +1740,7 @@ int __cdecl Scr_GetTeamFlags(unsigned int i, const char *pszCaller)
     return j;
 }
 
-int __cdecl Scr_GetSpecies(unsigned __int16 speciesString)
+int __cdecl Scr_GetSpecies(uint16_t speciesString)
 {
     int speciesIndex; // r10
     const char *String; // r3
@@ -1787,7 +1787,7 @@ actor_s *Scr_GetAISpeciesArray()
 {
     const char *String; // r3
     int TeamFlag; // r29
-    unsigned __int16 ConstString; // r3
+    uint16_t ConstString; // r3
     int Species; // r30
     actor_s *result; // r3
     actor_s *i; // r31
@@ -2183,7 +2183,7 @@ void __cdecl ScrCmd_detach(scr_entref_t entref)
     gentity_s *Entity; // r31
     const char *String; // r27
     unsigned int ConstLowercaseString; // r28
-    unsigned __int16 *attachModelNames; // r31
+    uint16_t *attachModelNames; // r31
     int v5; // r30
     const char *v6; // r26
     unsigned int v7; // r3
@@ -2235,7 +2235,7 @@ void __cdecl ScrCmd_GetAttachSize(scr_entref_t entref)
 {
     gentity_s *Entity; // r3
     int v2; // r11
-    unsigned __int16 *attachModelNames; // r10
+    uint16_t *attachModelNames; // r10
 
     Entity = GetEntity(entref);
     v2 = 0;
@@ -2304,7 +2304,7 @@ void __cdecl ScrCmd_hidepart(scr_entref_t entref)
     const char *v5; // r3
     const char *String; // r30
     const char *v7; // r3
-    unsigned __int8 v8[16]; // [sp+50h] [-40h] BYREF
+    uint8_t v8[16]; // [sp+50h] [-40h] BYREF
     unsigned int v9[12]; // [sp+60h] [-30h] BYREF
 
     Entity = GetEntity(entref);
@@ -2347,7 +2347,7 @@ void __cdecl ScrCmd_showpart(scr_entref_t entref)
     const char *v5; // r3
     const char *String; // r30
     const char *v7; // r3
-    unsigned __int8 v8[16]; // [sp+50h] [-40h] BYREF
+    uint8_t v8[16]; // [sp+50h] [-40h] BYREF
     unsigned int v9[12]; // [sp+60h] [-30h] BYREF
 
     Entity = GetEntity(entref);
@@ -2385,7 +2385,7 @@ void __cdecl ScrCmd_showallparts(scr_entref_t entref)
 {
     gentity_s *Entity; // r3
     DObj_s *ServerDObj; // r31
-    __int64 v3; // r10
+    int64_t v3; // r10
     _QWORD v4[2]; // [sp+50h] [-20h] BYREF
 
     Entity = GetEntity(entref);
@@ -2961,7 +2961,7 @@ void __cdecl ScrCmd_GetStance(scr_entref_t entref)
 void __cdecl ScrCmd_SetStance(scr_entref_t entref)
 {
     gentity_s *Entity; // r31
-    __int16 ConstString; // r3
+    int16_t ConstString; // r3
     gclient_s *client; // r11
     unsigned int v4; // r10
     unsigned int v5; // r10
@@ -3533,7 +3533,7 @@ void __cdecl ParsePlaySoundCmd(scr_entref_t entref, int event, int notifyevent)
     gentity_s *Entity; // r30
     const char *String; // r31
     const char *v7; // r3
-    unsigned __int16 v8; // r28
+    uint16_t v8; // r28
     int Int; // r29
     unsigned int ConstString; // r31
     unsigned int NumParam; // r3
@@ -3591,8 +3591,8 @@ void __cdecl ScrCmd_PlayLoopSound(scr_entref_t entref)
     gentity_s *Entity; // r30
     const char *String; // r31
     const char *v3; // r3
-    unsigned __int16 v4; // r3
-    unsigned __int8 svFlags; // r11
+    uint16_t v4; // r3
+    uint8_t svFlags; // r11
 
     Entity = GetEntity(entref);
     String = Scr_GetString(0);
@@ -3744,10 +3744,10 @@ void __cdecl ScrCmd_SetShadowHint(scr_entref_t entref)
 void __cdecl ScrCmd_GetNormalHealth(scr_entref_t entref)
 {
     gentity_s *Entity; // r3
-    //__int64 v3; // r11 OVERLAPPED
+    //int64_t v3; // r11 OVERLAPPED
     gclient_s *client;
-    __int64 v4; // r11
-    __int64 v5; // [sp+50h] [-20h]
+    int64_t v4; // r11
+    int64_t v5; // [sp+50h] [-20h]
 
     Entity = GetEntity(entref);
     //HIDWORD(v3) = Entity->client;
@@ -4306,7 +4306,7 @@ void __cdecl GScr_SetConvergenceTime(scr_entref_t entref)
         v8 = String;
         do
         {
-            v9 = *(unsigned __int8 *)v8 - *(unsigned __int8 *)v7;
+            v9 = *(uint8_t *)v8 - *(uint8_t *)v7;
             if (!*v8)
                 break;
             ++v8;
@@ -4317,7 +4317,7 @@ void __cdecl GScr_SetConvergenceTime(scr_entref_t entref)
             v10 = "pitch";
             do
             {
-                v11 = *(unsigned __int8 *)String - *(unsigned __int8 *)v10;
+                v11 = *(uint8_t *)String - *(uint8_t *)v10;
                 if (!*String)
                     break;
                 ++String;
@@ -4586,7 +4586,7 @@ int __cdecl G_GetHintStringIndex(int *piIndex, const char *pszString)
         v6 = pszString;
         do
         {
-            v7 = *(unsigned __int8 *)v6 - (unsigned __int8)*v5;
+            v7 = *(uint8_t *)v6 - (uint8_t)*v5;
             if (!*v6)
                 break;
             ++v6;
@@ -4765,7 +4765,7 @@ void __cdecl SetObjectiveIconIntoConfigString(char *objConfigString, unsigned in
                 v6 = va(
                     "Illegal character '%c'(ascii %i) in objective icon name: %s\n",
                     String[v4],
-                    (unsigned __int8)String[v4],
+                    (uint8_t)String[v4],
                     String);
                 Scr_ParamError(3u, v6);
             }
@@ -4846,7 +4846,7 @@ int Scr_Objective_Add()
             IString = Scr_GetIString(2);
             v9 = IString;
             v10 = IString;
-            while (*(unsigned __int8 *)v10++)
+            while (*(uint8_t *)v10++)
                 ;
             v12 = v10 - IString - 1;
             if (v12 > 1)
@@ -4868,10 +4868,10 @@ int Scr_Objective_Add()
             v15 = Scr_GetString(2);
             v9 = v15;
             v16 = v15;
-            while (*(unsigned __int8 *)v16++)
+            while (*(uint8_t *)v16++)
                 ;
             v12 = v16 - v15 - 1;
-            if (!(unsigned __int8)Scr_ValidateNonLocalizedStringRef(2u, v15, v12, "Objective String"))
+            if (!(uint8_t)Scr_ValidateNonLocalizedStringRef(2u, v15, v12, "Objective String"))
             {
                 v18 = Scr_NonLocalizedStringErrorPrefix(2u, v12, "Objective String", 0, 0x400u, v30);
                 memcpy(&v30[v18], v9, v12);
@@ -4891,7 +4891,7 @@ int Scr_Objective_Add()
         }
         for (j = 0; j < v12; ++j)
         {
-            v22 = (unsigned __int8)v9[j];
+            v22 = (uint8_t)v9[j];
             if (v9[j] && v22 <= 0x1F || v22 >= 0x7F)
             {
                 v23 = va("Illegal character '%c'(ascii %i) in objective string: %s\n", v9[j], v22, v9);
@@ -4983,7 +4983,7 @@ void __cdecl Scr_Objective_String_Internal(int makeUpdateMessage)
     const char *v13; // r3
     const char *v14; // r3
     int v15; // r3
-    unsigned __int16 empty; // r11
+    uint16_t empty; // r11
     char v17[1024]; // [sp+50h] [-830h] BYREF
     char v18[1072]; // [sp+450h] [-430h] BYREF
 
@@ -5013,10 +5013,10 @@ void __cdecl Scr_Objective_String_Internal(int makeUpdateMessage)
     }
     for (i = 0; i < v8; ++i)
     {
-        v12 = (unsigned __int8)v17[i];
+        v12 = (uint8_t)v17[i];
         if (v17[i] && v12 <= 0x1F && v12 != 20 && v12 != 21 || v12 >= 0x7F)
         {
-            v13 = va("Illegal character '%c'(ascii %i) in objective string: %s\n", (char)v12, (unsigned __int8)v17[i], v17);
+            v13 = va("Illegal character '%c'(ascii %i) in objective string: %s\n", (char)v12, (uint8_t)v17[i], v17);
             Scr_Error(v13);
         }
     }
@@ -5152,7 +5152,7 @@ int Scr_Objective_Current()
     int NumParam; // r3
     signed int v1; // r29
     _QWORD *v2; // r11
-    __int64 v3; // r9
+    int64_t v3; // r9
     int v4; // ctr
     signed int v5; // r31
     unsigned int Int; // r3
@@ -5226,7 +5226,7 @@ int Scr_Objective_AdditionalCurrent()
     int NumParam; // r3
     signed int v1; // r29
     _QWORD *v2; // r11
-    __int64 v3; // r9
+    int64_t v3; // r9
     int v4; // ctr
     signed int v5; // r31
     unsigned int Int; // r3
@@ -6109,7 +6109,7 @@ void Scr_StrTok()
     SL_AddRefToString(ConstString);
     SL_AddRefToString(v1);
     v4 = v3;
-    while (*(unsigned __int8 *)v4++)
+    while (*(uint8_t *)v4++)
         ;
     v6 = 0;
     v7 = v4 - v3 - 1;
@@ -6621,7 +6621,7 @@ void Scr_SaveGame()
     v2 = Scr_GetString(0);
     v3 = v2;
     v4 = v2;
-    while (*(unsigned __int8 *)v4++)
+    while (*(uint8_t *)v4++)
         ;
     if (v4 - v2 == 1)
         v3 = "auto";
@@ -6679,7 +6679,7 @@ void Scr_SaveGameNoCommit()
     v2 = Scr_GetString(0);
     v3 = v2;
     v4 = v2;
-    while (*(unsigned __int8 *)v4++)
+    while (*(uint8_t *)v4++)
         ;
     if (v4 - v2 == 1)
         v3 = "auto";
@@ -6999,7 +6999,7 @@ void __cdecl GScr_SetMissionDvar()
         v3 = String;
         do
         {
-            v4 = *(unsigned __int8 *)v3 - *(unsigned __int8 *)v2;
+            v4 = *(uint8_t *)v3 - *(uint8_t *)v2;
             if (!*v3)
                 break;
             ++v3;
@@ -7176,7 +7176,7 @@ void GScr_WeaponFireTime()
 {
     const char *String; // r31
     int WeaponIndexForName; // r30
-    __int64 v2; // r11
+    int64_t v2; // r11
 
     String = Scr_GetString(0);
     WeaponIndexForName = G_GetWeaponIndexForName(String);
@@ -7844,7 +7844,7 @@ void Scr_GetFXVis()
 void Scr_PhysicsExplosionSphere()
 {
     gentity_s *v0; // r31
-    __int64 v1; // r11
+    int64_t v1; // r11
     double Float; // fp1
     float v3[6]; // [sp+58h] [-28h] BYREF
 
@@ -7865,7 +7865,7 @@ void Scr_PhysicsExplosionSphere()
 void Scr_PhysicsRadiusJolt()
 {
     gentity_s *v0; // r31
-    __int64 v1; // r11
+    int64_t v1; // r11
     double Float; // fp1
     float *v3; // r31
     float v4[4]; // [sp+58h] [-28h] BYREF
@@ -7890,7 +7890,7 @@ void Scr_PhysicsRadiusJolt()
 void Scr_PhysicsRadiusJitter()
 {
     gentity_s *v0; // r31
-    __int64 v1; // r11
+    int64_t v1; // r11
     double Float; // fp1
     double v3; // fp1
     double v4; // fp0
@@ -7918,7 +7918,7 @@ void Scr_PhysicsRadiusJitter()
 void Scr_PhysicsExplosionCylinder()
 {
     gentity_s *v0; // r31
-    __int64 v1; // r11
+    int64_t v1; // r11
     double Float; // fp1
     float v3[6]; // [sp+58h] [-28h] BYREF
 
@@ -8328,7 +8328,7 @@ void __cdecl GScr_GetPartName()
     unsigned int Int; // r30
     unsigned int v3; // r3
     const char *v4; // r3
-    unsigned __int16 *v5; // r3
+    uint16_t *v5; // r3
     unsigned int v6; // r31
 
     if (Scr_GetNumParam() != 2)
@@ -8388,8 +8388,8 @@ void __cdecl Scr_AnimRelative(scr_entref_t entref)
 {
     gentity_s *Entity; // r31
     XAnimTree_s *EntAnimTree; // r30
-    __int16 v3; // r25
-    unsigned __int16 v4; // r26
+    int16_t v3; // r25
+    uint16_t v4; // r26
     unsigned int v5; // r29
     XAnimTree_s *v6; // r5
     unsigned int ConstString; // r3
@@ -8776,7 +8776,7 @@ void __cdecl GScr_SetAnimInternal(scr_entref_t entref, unsigned int flags)
     double goalWeight; // fp31
     double goalTime; // fp29
     XAnimTree_s *EntAnimTree; // r31
-    unsigned __int16 animIndex; // r30
+    uint16_t animIndex; // r30
     const char *funcName; // r3
     DObj_s *obj; // r31
     int error; // r3
@@ -8900,7 +8900,7 @@ void __cdecl GScr_GetAnimAssetType(scr_entref_t entref)
     gentity_s *Entity; // r3
     XAnimTree_s *EntAnimTree; // r31
     XAnimTree_s *v3; // r5
-    unsigned __int8 AssetType; // r3
+    uint8_t AssetType; // r3
     scr_anim_s Anim; // [sp+50h] [-20h]
 
     Entity = GetEntity(entref);
@@ -9315,7 +9315,7 @@ void __cdecl GScr_ShellShock(scr_entref_t entref)
     int v3; // r30
     const char *v4; // r3
     long double v5; // fp2
-    __int64 v6; // r10
+    int64_t v6; // r10
     long double v7; // fp2
     unsigned int v8; // r31
     double v9; // r4
@@ -9598,9 +9598,9 @@ void __cdecl GScr_SetSoundBlend(scr_entref_t entref)
 {
     gentity_s *Entity; // r29
     const char *String; // r3
-    unsigned __int16 v3; // r31
+    uint16_t v3; // r31
     const char *v4; // r3
-    unsigned __int16 v5; // r30
+    uint16_t v5; // r30
     double Float; // fp1
     double v7; // fp31
 
@@ -10042,7 +10042,7 @@ void GScr_OpenFile()
         v7 = v1;
         do
         {
-            v8 = *(unsigned __int8 *)v7 - *(unsigned __int8 *)v6;
+            v8 = *(uint8_t *)v7 - *(uint8_t *)v6;
             if (!*v7)
                 break;
             ++v7;
@@ -10073,7 +10073,7 @@ void GScr_OpenFile()
         v15 = v1;
         do
         {
-            v16 = *(unsigned __int8 *)v15 - *(unsigned __int8 *)v14;
+            v16 = *(uint8_t *)v15 - *(uint8_t *)v14;
             if (!*v15)
                 break;
             ++v15;
@@ -10085,7 +10085,7 @@ void GScr_OpenFile()
             v20 = v1;
             do
             {
-                v21 = *(unsigned __int8 *)v20 - *(unsigned __int8 *)v19;
+                v21 = *(uint8_t *)v20 - *(uint8_t *)v19;
                 if (!*v20)
                     break;
                 ++v20;
@@ -10202,7 +10202,7 @@ void __cdecl Scr_FPrint_internal(bool commaBetweenFields)
     {
         String = Scr_GetString(i);
         v6 = String;
-        while (*(unsigned __int8 *)v6++)
+        while (*(uint8_t *)v6++)
             ;
         FS_Write(String, v6 - String - 1, level.openScriptIOFileHandles[v3]);
         if (commaBetweenFields)
@@ -10669,7 +10669,7 @@ void __cdecl ScrCmd_StopRumble(scr_entref_t entref)
 void __cdecl ScrCmd_AddAIEventListener(scr_entref_t entref)
 {
     gentity_s *Entity; // r31
-    unsigned __int16 ConstString; // r3
+    uint16_t ConstString; // r3
 
     Entity = GetEntity(entref);
     if (!Entity)
@@ -10681,7 +10681,7 @@ void __cdecl ScrCmd_AddAIEventListener(scr_entref_t entref)
 void __cdecl ScrCmd_RemoveAIEventListener(scr_entref_t entref)
 {
     gentity_s *Entity; // r31
-    unsigned __int16 ConstString; // r3
+    uint16_t ConstString; // r3
 
     Entity = GetEntity(entref);
     if (!Entity)
@@ -10721,14 +10721,14 @@ void __cdecl GScr_GetLightColor(scr_entref_t entref)
     float unpackedColor[4]; // [esp+4h] [ebp-10h] BYREF
 
     ent = GScr_SetupLightEntity(entref);
-    Byte4UnpackRgba((const unsigned __int8 *)&ent->s.lerp.u, unpackedColor);
+    Byte4UnpackRgba((const uint8_t *)&ent->s.lerp.u, unpackedColor);
     Scr_AddVector(unpackedColor);
 }
 
 void __cdecl GScr_SetLightColor(scr_entref_t entref)
 {
     gentity_s *v1; // r31
-    unsigned __int8 v2; // r30
+    uint8_t v2; // r30
     float v3[3]; // [sp+50h] [-30h] BYREF
     float v4; // [sp+5Ch] [-24h]
 
@@ -10907,7 +10907,7 @@ void __cdecl GScr_SetLightExponent(scr_entref_t entref)
 {
     gentity_s *v1; // r30
     unsigned int Int; // r3
-    unsigned __int8 v3; // r31
+    uint8_t v3; // r31
 
     v1 = GScr_SetupLightEntity(entref);
     Int = Scr_GetInt(0);
@@ -10965,7 +10965,7 @@ void __cdecl GScr_StartRagdoll(scr_entref_t entref)
 void __cdecl GScr_IsRagdoll(scr_entref_t entref)
 {
     gentity_s *Entity; // r3
-    unsigned __int8 IsRagdollTrajectory; // r3
+    uint8_t IsRagdollTrajectory; // r3
 
     Entity = GetEntity(entref);
     IsRagdollTrajectory = Com_IsRagdollTrajectory(&Entity->s.lerp.pos);
@@ -10989,7 +10989,7 @@ void(__cdecl *__cdecl BuiltIn_GetMethod(const char **pName, int *type))(scr_entr
         v6 = *pName;
         do
         {
-            v7 = (unsigned __int8)*v6 - *(unsigned __int8 *)actionString;
+            v7 = (uint8_t)*v6 - *(uint8_t *)actionString;
             if (!*v6)
                 break;
             ++v6;
@@ -11292,8 +11292,8 @@ void __cdecl ScrCmd_animscriptedInternal(scr_entref_t entref, int bDelayForActor
     gentity_s *Entity; // r31
     DObj_s *ServerDObj; // r19
     XAnimTree_s *EntAnimTree; // r28
-    __int16 v6; // r20
-    unsigned __int16 v7; // r27
+    int16_t v6; // r20
+    uint16_t v7; // r27
     unsigned int v8; // r25
     XAnimTree_s *v9; // r5
     unsigned int ConstString; // r3
@@ -11314,7 +11314,7 @@ void __cdecl ScrCmd_animscriptedInternal(scr_entref_t entref, int bDelayForActor
     animscripted_s *scripted; // r11
     unsigned int v26; // r5
     int flags; // r11
-    unsigned __int16 v28; // r3
+    uint16_t v28; // r3
     tagInfo_s *tagInfo; // r30
     scr_anim_s Anim; // [sp+50h] [-100h]
     float v31[4]; // [sp+58h] [-F8h] BYREF

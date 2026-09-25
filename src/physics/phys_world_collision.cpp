@@ -144,7 +144,7 @@ void __cdecl CM_PositionGeomTestInAabbTree_r(CollisionAabbTree *aabbTree, const 
     int i; // [esp+70h] [ebp-20h]
     int surfaceFlags; // [esp+74h] [ebp-1Ch]
     int childIndex; // [esp+78h] [ebp-18h]
-    unsigned __int16 *indices; // [esp+7Ch] [ebp-14h]
+    uint16_t *indices; // [esp+7Ch] [ebp-14h]
     int partitionIndex; // [esp+80h] [ebp-10h]
     CollisionAabbTree *child; // [esp+84h] [ebp-Ch]
     int checkStamp; // [esp+88h] [ebp-8h]
@@ -410,7 +410,7 @@ static int dCollideWorldGeom(dxGeom *o1, dxGeom *o2, int flags, dContactGeomExt 
     BrushInfo *brushInfo; // [esp+1B0h] [ebp-93Ch]
     float rotatedCenterOfMass[3]; // [esp+1B4h] [ebp-938h] BYREF
     float radius; // [esp+1C0h] [ebp-92Ch]
-    unsigned __int16 leafs[1026]; // [esp+1C4h] [ebp-928h] BYREF
+    uint16_t leafs[1026]; // [esp+1C4h] [ebp-928h] BYREF
     float bounds[2][3]; // [esp+9CCh] [ebp-120h] BYREF
     objInfo input; // [esp+9E4h] [ebp-108h] BYREF
     float maxs[3]; // [esp+A8Ch] [ebp-60h] BYREF
@@ -937,7 +937,7 @@ void __cdecl Phys_GetCapsuleAABB(dxGeom *geom, float *aabb)
 dxGeom *__cdecl Phys_CreateBrushmodelGeom(
     dxSpace *space,
     dxBody *body,
-    unsigned __int16 brushModel,
+    uint16_t brushModel,
     const float *centerOfMass)
 {
     GeomStateBrush *ClassData; // eax

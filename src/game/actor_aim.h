@@ -6,9 +6,9 @@
 
 #include <qcommon/graph.h>
 
-enum WeapAccuracyType : __int32;
+enum WeapAccuracyType : int32_t;
 
-enum enumLastShot : __int32
+enum enumLastShot : int32_t
 {
     LAST_SHOT_IN_CLIP = 0x0,
     NOT_LAST_SHOT_IN_CLIP = 0x1,

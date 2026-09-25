@@ -26,7 +26,7 @@ void __cdecl Actor_Exposed_CheckLockGoal(actor_s *self)
         if (eAnimMode != AI_ANIM_MOVE_CODE
             && eAnimMode != AI_ANIM_USE_ANGLE_DELTAS
             && level.time >= self->mayMoveTime + 1000
-            && !(unsigned __int8)Actor_KeepClaimedNode(self))
+            && !(uint8_t)Actor_KeepClaimedNode(self))
         {
             v3 = (float)(self->codeGoal.radius - (float)30.0);
             if (v3 <= 0.0
@@ -319,7 +319,7 @@ int __cdecl Actor_Exposed_ReacquireStepMove(actor_s *self, double fDist)
     //        v17 = prone ? 10.0 : 18.0;
     //        if (Path_PredictionTrace(&vStartPos, v30, ENTITYNUM_NONE, self->Physics.iTraceMask | 4, v32, v17, v15))
     //        {
-    //            if ((unsigned __int8)Actor_PointAtGoal(v32, &self->codeGoal))
+    //            if ((uint8_t)Actor_PointAtGoal(v32, &self->codeGoal))
     //            {
     //                Actor_FindPath(self, v32, 0, 0);
     //                if (Actor_HasPath(self))
@@ -352,7 +352,7 @@ void __cdecl Actor_Exposed_FindReacquireDirectPath(actor_s *self, bool ignoreSup
             Actor_FindPathToSentient(self, TargetSentient, !ignoreSuppression);
         else
             Actor_FindPath(self, v5, 1, ignoreSuppression);
-        if (!(unsigned __int8)Actor_PointAtGoal(v5, &self->codeGoal))
+        if (!(uint8_t)Actor_PointAtGoal(v5, &self->codeGoal))
             Actor_ClipPathToGoal(self);
         Actor_BeginTrimPath(self);
     }

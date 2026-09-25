@@ -276,7 +276,7 @@ void __cdecl Actor_UpdateMeleeGoalPos(actor_s *self, float *goalPos)
 
 int __cdecl Actor_Dog_IsAttackScriptRunning(actor_s *self)
 {
-    unsigned __int8 v2; // r11
+    uint8_t v2; // r11
 
     if ((AnimScriptList *)self->pAnimScriptFunc != &g_scr_data.dogAnim)
         return 0;
@@ -398,7 +398,7 @@ actor_think_result_t __cdecl Actor_Dog_Exposed_Think(actor_s *self)
     sentient_s *TargetSentient; // r30
     float *v5; // r6
     int v6; // r5
-    unsigned __int8 v7; // r11
+    uint8_t v7; // r11
     int v8; // r26
     int *v9; // r6
     int v10; // r5
@@ -439,7 +439,7 @@ actor_think_result_t __cdecl Actor_Dog_Exposed_Think(actor_s *self)
         }
         IsEnemyInAttackRange = Actor_Dog_IsEnemyInAttackRange(self, TargetSentient, &v18);
     }
-    if (!TargetSentient || !(unsigned __int8)Actor_PointAtGoal(TargetSentient->ent->r.currentOrigin, &self->codeGoal))
+    if (!TargetSentient || !(uint8_t)Actor_PointAtGoal(TargetSentient->ent->r.currentOrigin, &self->codeGoal))
         goto LABEL_14;
 LABEL_15:
     if (!v18)

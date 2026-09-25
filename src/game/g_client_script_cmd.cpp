@@ -21,7 +21,7 @@ struct $1CCC8782424A70CD39BB8AAD8063E797
 {
     volatile unsigned int write;
     volatile unsigned int read;
-    volatile unsigned __int16 data[64];
+    volatile uint16_t data[64];
 };
 
 $1CCC8782424A70CD39BB8AAD8063E797 s_cmdNotify;
@@ -60,7 +60,7 @@ int __cdecl G_GetNeededStartAmmo(gentity_s *pSelf, WeaponDef *weapDef)
         return weapDef->iStartAmmo;
 }
 
-void __cdecl InitializeAmmo(gentity_s *pSelf, int weaponIndex, unsigned __int8 weaponModel, int hadWeapon)
+void __cdecl InitializeAmmo(gentity_s *pSelf, int weaponIndex, uint8_t weaponModel, int hadWeapon)
 {
     signed int altWeaponIndex; // r31
     int NumWeapons; // r14
@@ -169,7 +169,7 @@ void __cdecl PlayerCmd_takeWeapon(scr_entref_t entref)
     const char *v2; // r3
     const char *String; // r30
     int WeaponIndexForName; // r29
-    unsigned __int16 v5; // [sp+84h] [+14h]
+    uint16_t v5; // [sp+84h] [+14h]
 
     v5 = entref.entnum;
     if (entref.classnum)
@@ -204,7 +204,7 @@ void __cdecl PlayerCmd_takeAllWeapons(scr_entref_t entref)
     gentity_s *v1; // r30
     const char *v2; // r3
     unsigned int v3; // r31
-    unsigned __int16 v4; // [sp+84h] [+14h]
+    uint16_t v4; // [sp+84h] [+14h]
 
     v4 = entref.entnum;
     if (entref.classnum)
@@ -240,7 +240,7 @@ void __cdecl PlayerCmd_getCurrentWeapon(scr_entref_t entref)
     gclient_s *client; // r11
     unsigned int weapon; // r3
     const char *szInternalName; // r3
-    unsigned __int16 v6; // [sp+84h] [+14h]
+    uint16_t v6; // [sp+84h] [+14h]
 
     v6 = entref.entnum;
     if (entref.classnum)
@@ -279,7 +279,7 @@ void __cdecl PlayerCmd_getCurrentWeaponClipAmmo(scr_entref_t entref)
     const char *v2; // r3
     gclient_s *client; // r31
     int v4; // r3
-    unsigned __int16 v5; // [sp+84h] [+14h]
+    uint16_t v5; // [sp+84h] [+14h]
 
     v5 = entref.entnum;
     if (entref.classnum)
@@ -317,7 +317,7 @@ void __cdecl PlayerCmd_getCurrentOffhand(scr_entref_t entref)
     const char *v2; // r3
     signed int offHandIndex; // r3
     const char *szInternalName; // r3
-    unsigned __int16 v5; // [sp+84h] [+14h]
+    uint16_t v5; // [sp+84h] [+14h]
 
     v5 = entref.entnum;
     if (entref.classnum)
@@ -355,7 +355,7 @@ void __cdecl PlayerCmd_setOffhandSecondaryClass(scr_entref_t entref)
     const char *v2; // r3
     const char *v3; // r3
     unsigned int ConstString; // r3
-    unsigned __int16 v5; // [sp+84h] [+14h]
+    uint16_t v5; // [sp+84h] [+14h]
 
     v5 = entref.entnum;
     if (entref.classnum)
@@ -406,7 +406,7 @@ void __cdecl PlayerCmd_getOffhandSecondaryClass(scr_entref_t entref)
     gentity_s *v1; // r31
     const char *v2; // r3
     OffhandSecondaryClass offhandSecondary; // r11
-    unsigned __int16 v4; // [sp+94h] [+14h]
+    uint16_t v4; // [sp+94h] [+14h]
 
     v4 = entref.entnum;
     if (entref.classnum)
@@ -456,7 +456,7 @@ void __cdecl PlayerCmd_hasWeapon(scr_entref_t entref)
     int WeaponIndexForName; // r30
     int v5; // r3
     bool v6; // zf
-    unsigned __int16 v7; // [sp+84h] [+14h]
+    uint16_t v7; // [sp+84h] [+14h]
 
     v7 = entref.entnum;
     if (entref.classnum)
@@ -490,7 +490,7 @@ void __cdecl PlayerCmd_hasWeapon(scr_entref_t entref)
 
 void __cdecl PlayerCmd_switchToWeapon(scr_entref_t entref)
 {
-    unsigned __int16 v1; // r27
+    uint16_t v1; // r27
     gentity_s *v2; // r31
     const char *v3; // r3
     const char *String; // r30
@@ -540,7 +540,7 @@ void __cdecl PlayerCmd_switchToWeapon(scr_entref_t entref)
 
 void __cdecl PlayerCmd_switchToOffhand(scr_entref_t entref)
 {
-    unsigned __int16 v1; // r27
+    uint16_t v1; // r27
     gentity_s *v2; // r29
     const char *v3; // r3
     const char *String; // r30
@@ -601,7 +601,7 @@ void __cdecl PlayerCmd_giveStartAmmo(scr_entref_t entref)
     const char *String; // r30
     int WeaponIndexForName; // r29
     gclient_s *client; // r30
-    unsigned __int16 v6; // [sp+94h] [+14h]
+    uint16_t v6; // [sp+94h] [+14h]
 
     v6 = entref.entnum;
     if (entref.classnum)
@@ -646,7 +646,7 @@ void __cdecl PlayerCmd_giveMaxAmmo(scr_entref_t entref)
     WeaponDef *WeaponDef; // r3
     gclient_s *v8; // r11
     int v9; // r6
-    unsigned __int16 v10; // [sp+94h] [+14h]
+    uint16_t v10; // [sp+94h] [+14h]
 
     v10 = entref.entnum;
     if (entref.classnum)
@@ -696,9 +696,9 @@ void __cdecl PlayerCmd_getFractionStartAmmo(scr_entref_t entref)
     int WeaponIndexForName; // r30
     gclient_s *client; // r31
     WeaponDef *WeaponDef; // r3
-    __int64 v7; // r11 OVERLAPPED
+    int64_t v7; // r11 OVERLAPPED
     gclient_s *v8; // r9 OVERLAPPED
-    unsigned __int16 v9; // [sp+A4h] [+14h]
+    uint16_t v9; // [sp+A4h] [+14h]
 
     v9 = entref.entnum;
     if (entref.classnum)
@@ -752,9 +752,9 @@ void __cdecl PlayerCmd_getFractionMaxAmmo(scr_entref_t entref)
     int WeaponIndexForName; // r29
     gclient_s *client; // r31
     WeaponDef *WeaponDef; // r3
-    __int64 v7; // r11 OVERLAPPED
+    int64_t v7; // r11 OVERLAPPED
     gclient_s *v8; // r9 OVERLAPPED
-    unsigned __int16 v9; // [sp+A4h] [+14h]
+    uint16_t v9; // [sp+A4h] [+14h]
 
     v9 = entref.entnum;
     if (entref.classnum)
@@ -826,7 +826,7 @@ void __cdecl PlayerCmd_setOrigin(scr_entref_t entref)
     gentity_s *v1; // r31
     const char *v2; // r3
     float v3[6]; // [sp+50h] [-30h] BYREF
-    unsigned __int16 v4; // [sp+94h] [+14h]
+    uint16_t v4; // [sp+94h] [+14h]
 
     v4 = entref.entnum;
     if (entref.classnum)
@@ -860,7 +860,7 @@ void __cdecl PlayerCmd_SetVelocity(scr_entref_t entref)
     const char *v2; // r3
     float *p_commandTime; // r11
     float v4[6]; // [sp+50h] [-30h] BYREF
-    unsigned __int16 v5; // [sp+94h] [+14h]
+    uint16_t v5; // [sp+94h] [+14h]
 
     v5 = entref.entnum;
     if (entref.classnum)
@@ -895,7 +895,7 @@ void __cdecl PlayerCmd_GetVelocity(scr_entref_t entref)
 {
     gentity_s *v1; // r31
     const char *v2; // r3
-    unsigned __int16 v3; // [sp+84h] [+14h]
+    uint16_t v3; // [sp+84h] [+14h]
 
     v3 = entref.entnum;
     if (entref.classnum)
@@ -928,7 +928,7 @@ void __cdecl PlayerCmd_setAngles(scr_entref_t entref)
     const char *v2; // r3
     long double v3; // fp2
     float v4[6]; // [sp+50h] [-30h] BYREF
-    unsigned __int16 v5; // [sp+94h] [+14h]
+    uint16_t v5; // [sp+94h] [+14h]
 
     v5 = entref.entnum;
     if (entref.classnum)
@@ -960,7 +960,7 @@ void __cdecl PlayerCmd_getAngles(scr_entref_t entref)
 {
     gentity_s *v1; // r31
     const char *v2; // r3
-    unsigned __int16 v3; // [sp+84h] [+14h]
+    uint16_t v3; // [sp+84h] [+14h]
 
     v3 = entref.entnum;
     if (entref.classnum)
@@ -991,7 +991,7 @@ void __cdecl PlayerCmd_getViewHeight(scr_entref_t entref)
 {
     gentity_s *v1; // r31
     const char *v2; // r3
-    unsigned __int16 v3; // [sp+84h] [+14h]
+    uint16_t v3; // [sp+84h] [+14h]
 
     v3 = entref.entnum;
     if (entref.classnum)
@@ -1059,7 +1059,7 @@ void __cdecl PlayerCmd_useButtonPressed(scr_entref_t entref)
 {
     gentity_s *v1; // r31
     const char *v2; // r3
-    unsigned __int16 v3; // [sp+84h] [+14h]
+    uint16_t v3; // [sp+84h] [+14h]
 
     v3 = entref.entnum;
     if (entref.classnum)
@@ -1083,14 +1083,14 @@ void __cdecl PlayerCmd_useButtonPressed(scr_entref_t entref)
             Scr_ObjectError(v2);
         }
     }
-    Scr_AddInt((((unsigned __int8)v1->client->buttonsSinceLastFrame | (unsigned __int8)v1->client->buttons) & (BUTTON_USE | BUTTON_USE_RELOAD)) != 0);
+    Scr_AddInt((((uint8_t)v1->client->buttonsSinceLastFrame | (uint8_t)v1->client->buttons) & (BUTTON_USE | BUTTON_USE_RELOAD)) != 0);
 }
 
 void __cdecl PlayerCmd_attackButtonPressed(scr_entref_t entref)
 {
     gentity_s *v1; // r31
     const char *v2; // r3
-    unsigned __int16 v3; // [sp+84h] [+14h]
+    uint16_t v3; // [sp+84h] [+14h]
 
     v3 = entref.entnum;
     if (entref.classnum)
@@ -1114,14 +1114,14 @@ void __cdecl PlayerCmd_attackButtonPressed(scr_entref_t entref)
             Scr_ObjectError(v2);
         }
     }
-    Scr_AddInt((((unsigned __int8)v1->client->buttonsSinceLastFrame | (unsigned __int8)v1->client->buttons) & BUTTON_ATTACK) != 0);
+    Scr_AddInt((((uint8_t)v1->client->buttonsSinceLastFrame | (uint8_t)v1->client->buttons) & BUTTON_ATTACK) != 0);
 }
 
 void __cdecl PlayerCmd_adsButtonPressed(scr_entref_t entref)
 {
     gentity_s *v1; // r31
     const char *v2; // r3
-    unsigned __int16 v3; // [sp+84h] [+14h]
+    uint16_t v3; // [sp+84h] [+14h]
 
     v3 = entref.entnum;
     if (entref.classnum)
@@ -1145,14 +1145,14 @@ void __cdecl PlayerCmd_adsButtonPressed(scr_entref_t entref)
             Scr_ObjectError(v2);
         }
     }
-    Scr_AddInt((((unsigned __int16)v1->client->buttonsSinceLastFrame | (unsigned __int16)v1->client->buttons) & BUTTON_ADS) != 0);
+    Scr_AddInt((((uint16_t)v1->client->buttonsSinceLastFrame | (uint16_t)v1->client->buttons) & BUTTON_ADS) != 0);
 }
 
 void __cdecl PlayerCmd_meleeButtonPressed(scr_entref_t entref)
 {
     gentity_s *v1; // r31
     const char *v2; // r3
-    unsigned __int16 v3; // [sp+84h] [+14h]
+    uint16_t v3; // [sp+84h] [+14h]
 
     v3 = entref.entnum;
     if (entref.classnum)
@@ -1176,7 +1176,7 @@ void __cdecl PlayerCmd_meleeButtonPressed(scr_entref_t entref)
             Scr_ObjectError(v2);
         }
     }
-    Scr_AddInt((((unsigned __int8)v1->client->buttonsSinceLastFrame | (unsigned __int8)v1->client->buttons) & BUTTON_MELEE) != 0);
+    Scr_AddInt((((uint8_t)v1->client->buttonsSinceLastFrame | (uint8_t)v1->client->buttons) & BUTTON_MELEE) != 0);
 }
 
 int __cdecl PlayerCmd_CheckButtonPressed()
@@ -1239,7 +1239,7 @@ void __cdecl G_FlushCommandNotifies()
                 s_cmdNotify.write - s_cmdNotify.read,
                 2);
         ++s_cmdNotify.read;
-        v0 = *(unsigned __int16 *)((char *)s_cmdNotify.data + ((2 * s_cmdNotify.read++) & 0x7E));
+        v0 = *(uint16_t *)((char *)s_cmdNotify.data + ((2 * s_cmdNotify.read++) & 0x7E));
         if (!v0 || v0 > 0xA)
             MyAssertHandler(
                 "c:\\trees\\cod3\\cod3src\\src\\game\\g_client_script_cmd.cpp",
@@ -1259,7 +1259,7 @@ void __cdecl G_FlushCommandNotifies()
                 s_cmdNotify.write - s_cmdNotify.read);
         for (; v0; --v0)
         {
-            v1 = *(unsigned __int16 *)((char *)s_cmdNotify.data + ((2 * s_cmdNotify.read++) & 0x7E));
+            v1 = *(uint16_t *)((char *)s_cmdNotify.data + ((2 * s_cmdNotify.read++) & 0x7E));
             SL_RemoveRefToString(v1);
         }
         //__lwsync();
@@ -1268,7 +1268,7 @@ void __cdecl G_FlushCommandNotifies()
 
 void __cdecl G_ProcessCommandNotifies()
 {
-    unsigned __int16 v0; // r26
+    uint16_t v0; // r26
     unsigned int v1; // r28
     unsigned int v2; // r30
     unsigned int v3; // r29
@@ -1287,8 +1287,8 @@ void __cdecl G_ProcessCommandNotifies()
                     "s_cmdNotify.write - s_cmdNotify.read >= 2\n\t%i, %i",
                     s_cmdNotify.write - s_cmdNotify.read,
                     2);
-            v0 = *(volatile unsigned __int16 *)((char *)s_cmdNotify.data + ((2 * s_cmdNotify.read++) & 0x7E));
-            v1 = *(unsigned __int16 *)((char *)s_cmdNotify.data + ((2 * s_cmdNotify.read++) & 0x7E));
+            v0 = *(volatile uint16_t *)((char *)s_cmdNotify.data + ((2 * s_cmdNotify.read++) & 0x7E));
+            v1 = *(uint16_t *)((char *)s_cmdNotify.data + ((2 * s_cmdNotify.read++) & 0x7E));
             if (!v1 || v1 > 0xA)
                 MyAssertHandler(
                     "c:\\trees\\cod3\\cod3src\\src\\game\\g_client_script_cmd.cpp",
@@ -1311,7 +1311,7 @@ void __cdecl G_ProcessCommandNotifies()
                 v2 = v1;
                 do
                 {
-                    v3 = *(unsigned __int16 *)((char *)s_cmdNotify.data + ((2 * s_cmdNotify.read++) & 0x7E));
+                    v3 = *(uint16_t *)((char *)s_cmdNotify.data + ((2 * s_cmdNotify.read++) & 0x7E));
                     Scr_AddConstString(v3);
                     SL_RemoveRefToString(v3);
                     --v2;
@@ -1342,7 +1342,7 @@ void __cdecl PlayerCmd_playerADS(scr_entref_t entref)
 {
     gentity_s *v1; // r31
     const char *v2; // r3
-    unsigned __int16 v3; // [sp+84h] [+14h]
+    uint16_t v3; // [sp+84h] [+14h]
 
     v3 = entref.entnum;
     if (entref.classnum)
@@ -1375,7 +1375,7 @@ void __cdecl PlayerCmd_isOnGround(scr_entref_t entref)
     const char *v2; // r3
     gclient_s *client; // r11
     bool v4; // r3
-    unsigned __int16 v5; // [sp+84h] [+14h]
+    uint16_t v5; // [sp+84h] [+14h]
 
     v5 = entref.entnum;
     if (entref.classnum)
@@ -1413,7 +1413,7 @@ void __cdecl PlayerCmd_SetViewmodel(scr_entref_t entref)
     const char *String; // r3
     const char *v4; // r31
     int v5; // r31
-    unsigned __int16 v6; // [sp+94h] [+14h]
+    uint16_t v6; // [sp+94h] [+14h]
 
     v6 = entref.entnum;
     if (entref.classnum)
@@ -1443,7 +1443,7 @@ void __cdecl PlayerCmd_SetViewmodel(scr_entref_t entref)
         Scr_ParamError(0, "usage: setviewmodel(<model name>)");
     v5 = G_ModelIndex(v4);
     Com_Printf(CON_CHANNEL_SERVER, "PlayerCmd_SetViewmodel: model='%s' modelIndex=%d ent=%d\n", v4, v5, v6);
-    if (v5 != (unsigned __int16)v5)
+    if (v5 != (uint16_t)v5)
         MyAssertHandler(
             "c:\\trees\\cod3\\cod3src\\src\\game\\g_client_script_cmd.cpp",
             1144,
@@ -1461,7 +1461,7 @@ void __cdecl PlayerCmd_AllowADS(scr_entref_t entref)
     int Int; // r3
     gclient_s *client; // r11
     int weapFlags; // r10
-    unsigned __int16 v6; // [sp+84h] [+14h]
+    uint16_t v6; // [sp+84h] [+14h]
 
     v6 = entref.entnum;
     if (entref.classnum)
@@ -1514,7 +1514,7 @@ void __cdecl PlayerCmd_AllowJump(scr_entref_t entref)
     gclient_s *client; // r11
     int pm_flags; // r10
     unsigned int v6; // r10
-    unsigned __int16 v7; // [sp+84h] [+14h]
+    uint16_t v7; // [sp+84h] [+14h]
 
     v7 = entref.entnum;
     if (entref.classnum)
@@ -1556,7 +1556,7 @@ void __cdecl PlayerCmd_AllowSprint(scr_entref_t entref)
     gclient_s *client; // r11
     int pm_flags; // r10
     unsigned int v6; // r10
-    unsigned __int16 v7; // [sp+84h] [+14h]
+    uint16_t v7; // [sp+84h] [+14h]
 
     v7 = entref.entnum;
     if (entref.classnum)
@@ -1598,7 +1598,7 @@ void __cdecl PlayerCmd_AllowMelee(scr_entref_t entref)
     gclient_s *client; // r11
     int pm_flags; // r10
     unsigned int v6; // r10
-    unsigned __int16 v7; // [sp+84h] [+14h]
+    uint16_t v7; // [sp+84h] [+14h]
 
     v7 = entref.entnum;
     if (entref.classnum)
@@ -1638,7 +1638,7 @@ void __cdecl PlayerCmd_SetSpreadOverride(scr_entref_t entref)
     const char *v2; // r3
     int Int; // r3
     const char *v4; // r3
-    unsigned __int16 v5; // [sp+84h] [+14h]
+    uint16_t v5; // [sp+84h] [+14h]
 
     v5 = entref.entnum;
     if (entref.classnum)
@@ -1693,7 +1693,7 @@ void __cdecl PlayerCmd_ResetSpreadOverride(scr_entref_t entref)
 {
     gentity_s *v1; // r31
     const char *v2; // r3
-    unsigned __int16 v3; // [sp+84h] [+14h]
+    uint16_t v3; // [sp+84h] [+14h]
 
     v3 = entref.entnum;
     if (entref.classnum)
@@ -1725,7 +1725,7 @@ void __cdecl PlayerCmd_ResetSpreadOverride(scr_entref_t entref)
 
 void __cdecl PlayerCmd_ShowViewmodel(scr_entref_t entref)
 {
-    unsigned __int16 v1; // r30
+    uint16_t v1; // r30
     int v2; // r31
     const char *v3; // r3
 
@@ -1754,7 +1754,7 @@ void __cdecl PlayerCmd_ShowViewmodel(scr_entref_t entref)
 
 void __cdecl PlayerCmd_HideViewmodel(scr_entref_t entref)
 {
-    unsigned __int16 v1; // r29
+    uint16_t v1; // r29
     gentity_s *v2; // r31
     const char *v3; // r3
     playerState_s *p_ps; // r31
@@ -1799,7 +1799,7 @@ void __cdecl PlayerCmd_AllowStand(scr_entref_t entref)
     gclient_s *client; // r11
     int pm_flags; // r10
     unsigned int v6; // r10
-    unsigned __int16 v7; // [sp+84h] [+14h]
+    uint16_t v7; // [sp+84h] [+14h]
 
     v7 = entref.entnum;
     if (entref.classnum)
@@ -1841,7 +1841,7 @@ void __cdecl PlayerCmd_AllowCrouch(scr_entref_t entref)
     gclient_s *client; // r11
     int pm_flags; // r10
     unsigned int v6; // r10
-    unsigned __int16 v7; // [sp+84h] [+14h]
+    uint16_t v7; // [sp+84h] [+14h]
 
     v7 = entref.entnum;
     if (entref.classnum)
@@ -1883,7 +1883,7 @@ void __cdecl PlayerCmd_AllowProne(scr_entref_t entref)
     gclient_s *client; // r11
     int pm_flags; // r10
     unsigned int v6; // r10
-    unsigned __int16 v7; // [sp+84h] [+14h]
+    uint16_t v7; // [sp+84h] [+14h]
 
     v7 = entref.entnum;
     if (entref.classnum)
@@ -1925,7 +1925,7 @@ void __cdecl PlayerCmd_AllowLean(scr_entref_t entref)
     gclient_s *client; // r11
     int pm_flags; // r10
     unsigned int v6; // r10
-    unsigned __int16 v7; // [sp+84h] [+14h]
+    uint16_t v7; // [sp+84h] [+14h]
 
     v7 = entref.entnum;
     if (entref.classnum)
@@ -1961,7 +1961,7 @@ void __cdecl PlayerCmd_AllowLean(scr_entref_t entref)
 
 void __cdecl PlayerCmd_OpenMenu(scr_entref_t entref)
 {
-    unsigned __int16 v1; // r27
+    uint16_t v1; // r27
     gentity_s *v2; // r31
     const char *v3; // r3
     int v4; // r3
@@ -2012,7 +2012,7 @@ void __cdecl PlayerCmd_OpenMenu(scr_entref_t entref)
 
 void __cdecl PlayerCmd_OpenMenuNoMouse(scr_entref_t entref)
 {
-    unsigned __int16 v1; // r27
+    uint16_t v1; // r27
     gentity_s *v2; // r31
     const char *v3; // r3
     int v4; // r3
@@ -2063,7 +2063,7 @@ void __cdecl PlayerCmd_OpenMenuNoMouse(scr_entref_t entref)
 
 void __cdecl PlayerCmd_CloseMenu(scr_entref_t entref)
 {
-    unsigned __int16 v1; // r30
+    uint16_t v1; // r30
     int v2; // r31
     const char *v3; // r3
 
@@ -2094,7 +2094,7 @@ void __cdecl PlayerCmd_FreezeControls(scr_entref_t entref)
 {
     gentity_s *v1; // r31
     const char *v2; // r3
-    unsigned __int16 v3; // [sp+84h] [+14h]
+    uint16_t v3; // [sp+84h] [+14h]
 
     v3 = entref.entnum;
     if (entref.classnum)
@@ -2123,7 +2123,7 @@ void __cdecl PlayerCmd_FreezeControls(scr_entref_t entref)
 
 void __cdecl PlayerCmd_SetEQLerp(scr_entref_t entref)
 {
-    unsigned __int16 v1; // r30
+    uint16_t v1; // r30
     int v2; // r31
     const char *v3; // r3
     unsigned int NumParam; // r31
@@ -2232,7 +2232,7 @@ void __cdecl PlayerCmd_SetEQ(scr_entref_t entref)
 
 void __cdecl PlayerCmd_DeactivateEq(scr_entref_t entref)
 {
-    unsigned __int16 v1; // r29
+    uint16_t v1; // r29
     const char *v2; // r3
     unsigned int NumParam; // r30
     int Int; // r3
@@ -2296,7 +2296,7 @@ void __cdecl PlayerCmd_DeactivateEq(scr_entref_t entref)
 
 void __cdecl PlayerCmd_SetReverb(scr_entref_t entref)
 {
-    unsigned __int16 v1; // r29
+    uint16_t v1; // r29
     const char *v2; // r3
     float fadetime; // fp29
     float drylevel; // fp31
@@ -2364,7 +2364,7 @@ void __cdecl PlayerCmd_SetReverb(scr_entref_t entref)
 
 void __cdecl PlayerCmd_DeactivateReverb(scr_entref_t entref)
 {
-    unsigned __int16 v1; // r30
+    uint16_t v1; // r30
     int v2; // r31
     const char *v3; // r3
     double Float; // fp31
@@ -2416,7 +2416,7 @@ void __cdecl PlayerCmd_DeactivateReverb(scr_entref_t entref)
 
 void __cdecl PlayerCmd_SetChannelVolumes(scr_entref_t entref)
 {
-    unsigned __int16 v1; // r29
+    uint16_t v1; // r29
     const char *v2; // r3
     double Float; // fp31
     unsigned int NumParam; // r3
@@ -2482,7 +2482,7 @@ void __cdecl PlayerCmd_SetChannelVolumes(scr_entref_t entref)
 
 void __cdecl PlayerCmd_DeactivateChannelVolumes(scr_entref_t entref)
 {
-    unsigned __int16 v1; // r30
+    uint16_t v1; // r30
     int v2; // r31
     const char *v3; // r3
     double Float; // fp31
@@ -2541,7 +2541,7 @@ void __cdecl ScrCmd_IsLookingAt(scr_entref_t entref)
     gentity_s *v3; // r31
     int v4; // r3
     bool v5; // zf
-    unsigned __int16 v6; // [sp+84h] [+14h]
+    uint16_t v6; // [sp+84h] [+14h]
 
     v6 = entref.entnum;
     if (entref.classnum)
@@ -2577,9 +2577,9 @@ void __cdecl PlayerCmd_IsFiring(scr_entref_t entref)
     gentity_s *v1; // r29
     const char *v2; // r3
     int weaponstate; // r11
-    unsigned __int8 v4; // r11
+    uint8_t v4; // r11
     bool v5; // zf
-    unsigned __int16 v6; // [sp+94h] [+14h]
+    uint16_t v6; // [sp+94h] [+14h]
 
     v6 = entref.entnum;
     if (entref.classnum)
@@ -2623,9 +2623,9 @@ void __cdecl PlayerCmd_IsThrowingGrenade(scr_entref_t entref)
     gentity_s *v1; // r29
     const char *v2; // r3
     int weaponstate; // r11
-    unsigned __int8 v4; // r11
+    uint8_t v4; // r11
     bool v5; // zf
-    unsigned __int16 v6; // [sp+94h] [+14h]
+    uint16_t v6; // [sp+94h] [+14h]
 
     v6 = entref.entnum;
     if (entref.classnum)
@@ -2663,9 +2663,9 @@ void __cdecl PlayerCmd_IsMeleeing(scr_entref_t entref)
     gentity_s *v1; // r29
     const char *v2; // r3
     int weaponstate; // r11
-    unsigned __int8 v4; // r11
+    uint8_t v4; // r11
     bool v5; // zf
-    unsigned __int16 v6; // [sp+94h] [+14h]
+    uint16_t v6; // [sp+94h] [+14h]
 
     v6 = entref.entnum;
     if (entref.classnum)
@@ -2701,12 +2701,12 @@ void __cdecl PlayerCmd_IsMeleeing(scr_entref_t entref)
 
 void __cdecl ScrCmd_PlayLocalSound(scr_entref_t entref)
 {
-    unsigned __int16 v1; // r28
+    uint16_t v1; // r28
     gentity_s *v2; // r30
     const char *v3; // r3
     const char *String; // r31
     const char *v5; // r3
-    unsigned __int16 v6; // r31
+    uint16_t v6; // r31
     int Int; // r29
     unsigned int NumParam; // r3
     unsigned int ConstString; // r3
@@ -2769,7 +2769,7 @@ void __cdecl ScrCmd_PlayLocalSound(scr_entref_t entref)
 
 void __cdecl ScrCmd_StopLocalSound(scr_entref_t entref)
 {
-    unsigned __int16 v1; // r30
+    uint16_t v1; // r30
     int v2; // r31
     const char *v3; // r3
     const char *String; // r31
@@ -2814,7 +2814,7 @@ void __cdecl ScrCmd_SetAutoPickup(scr_entref_t entref)
 {
     gentity_s *v1; // r31
     const char *v2; // r3
-    unsigned __int16 v3; // [sp+84h] [+14h]
+    uint16_t v3; // [sp+84h] [+14h]
 
     v3 = entref.entnum;
     if (entref.classnum)
@@ -2850,7 +2850,7 @@ void __cdecl PlayerCmd_SetWeaponAmmoClip(scr_entref_t entref)
     int WeaponIndexForName; // r30
     int v6; // r29
     WeaponDef *WeaponDef; // r3
-    unsigned __int16 v8; // [sp+94h] [+14h]
+    uint16_t v8; // [sp+94h] [+14h]
 
     v8 = entref.entnum;
     if (entref.classnum)
@@ -2908,7 +2908,7 @@ void __cdecl PlayerCmd_SetWeaponAmmoStock(scr_entref_t entref)
     int iClipSize; // r11
     int v10; // r30
     int AmmoPlayerMax; // r11
-    unsigned __int16 v12; // [sp+94h] [+14h]
+    uint16_t v12; // [sp+94h] [+14h]
 
     v12 = entref.entnum;
     if (entref.classnum)
@@ -2973,7 +2973,7 @@ void __cdecl PlayerCmd_GetWeaponAmmoClip(scr_entref_t entref)
     const char *String; // r30
     int WeaponIndexForName; // r29
     int v5; // r3
-    unsigned __int16 v6; // [sp+84h] [+14h]
+    uint16_t v6; // [sp+84h] [+14h]
 
     v6 = entref.entnum;
     if (entref.classnum)
@@ -3011,7 +3011,7 @@ void __cdecl PlayerCmd_GetWeaponAmmoStock(scr_entref_t entref)
     const char *String; // r29
     int WeaponIndexForName; // r30
     int v5; // r10
-    unsigned __int16 v6; // [sp+84h] [+14h]
+    uint16_t v6; // [sp+84h] [+14h]
 
     v6 = entref.entnum;
     if (entref.classnum)
@@ -3053,7 +3053,7 @@ void __cdecl PlayerCmd_AnyAmmoForWeaponModes(scr_entref_t entref)
     int WeaponIndexForName; // r31
     int v5; // r29
     unsigned int altWeaponIndex; // r4
-    unsigned __int16 v7; // [sp+84h] [+14h]
+    uint16_t v7; // [sp+84h] [+14h]
 
     v7 = entref.entnum;
     if (entref.classnum)
@@ -3091,7 +3091,7 @@ void __cdecl PlayerCmd_EnableHealthShield(scr_entref_t entref)
 {
     gentity_s *v1; // r31
     const char *v2; // r3
-    unsigned __int16 v3; // [sp+84h] [+14h]
+    uint16_t v3; // [sp+84h] [+14h]
 
     v3 = entref.entnum;
     if (entref.classnum)
@@ -3120,7 +3120,7 @@ void __cdecl PlayerCmd_EnableHealthShield(scr_entref_t entref)
 
 void __cdecl PlayerCmd_SetClientDvar(scr_entref_t entref)
 {
-    unsigned __int16 v1; // r29
+    uint16_t v1; // r29
     const char *v2; // r3
     const char *String; // r30
     unsigned int NumParam; // r3
@@ -3173,7 +3173,7 @@ void __cdecl PlayerCmd_SetClientDvar(scr_entref_t entref)
 
 void __cdecl PlayerCmd_SetClientDvars(scr_entref_t entref)
 {
-    unsigned __int16 v1; // r27
+    uint16_t v1; // r27
     const char *v2; // r3
     unsigned int v3; // r31
     const char *String; // r30
@@ -3234,7 +3234,7 @@ void __cdecl PlayerCmd_BeginLocationSelection(scr_entref_t entref)
     double Float; // fp31
     long double v8; // fp2
     unsigned int v9; // r31
-    unsigned __int16 v10; // [sp+A4h] [+14h]
+    uint16_t v10; // [sp+A4h] [+14h]
 
     v10 = entref.entnum;
     if (entref.classnum)
@@ -3304,7 +3304,7 @@ void __cdecl PlayerCmd_EndLocationSelection(scr_entref_t entref)
 {
     gentity_s *v1; // r31
     const char *v2; // r3
-    unsigned __int16 v3; // [sp+94h] [+14h]
+    uint16_t v3; // [sp+94h] [+14h]
 
     v3 = entref.entnum;
     if (entref.classnum)
@@ -3338,7 +3338,7 @@ void __cdecl PlayerCmd_WeaponLockStart(scr_entref_t entref)
     gentity_s *v1; // r31
     const char *v2; // r3
     gentity_s *Entity; // r3
-    unsigned __int16 v4; // [sp+84h] [+14h]
+    uint16_t v4; // [sp+84h] [+14h]
 
     v4 = entref.entnum;
     if (entref.classnum)
@@ -3386,7 +3386,7 @@ void __cdecl PlayerCmd_WeaponLockFinalize(scr_entref_t entref)
     gclient_s *client; // r11
     int weapLockFlags; // r10
     int v7; // r10
-    unsigned __int16 v8; // [sp+84h] [+14h]
+    uint16_t v8; // [sp+84h] [+14h]
 
     v8 = entref.entnum;
     if (entref.classnum)
@@ -3435,7 +3435,7 @@ void __cdecl PlayerCmd_WeaponLockFree(scr_entref_t entref)
 {
     gentity_s *v1; // r31
     const char *v2; // r3
-    unsigned __int16 v3; // [sp+84h] [+14h]
+    uint16_t v3; // [sp+84h] [+14h]
 
     v3 = entref.entnum;
     if (entref.classnum)
@@ -3474,7 +3474,7 @@ void __cdecl PlayerCmd_WeaponLockTargetTooClose(scr_entref_t entref)
     gclient_s *client; // r11
     int weapLockFlags; // r10
     unsigned int v6; // r10
-    unsigned __int16 v7; // [sp+84h] [+14h]
+    uint16_t v7; // [sp+84h] [+14h]
 
     v7 = entref.entnum;
     if (entref.classnum)
@@ -3516,7 +3516,7 @@ void __cdecl PlayerCmd_WeaponLockNoClearance(scr_entref_t entref)
     gclient_s *client; // r11
     int weapLockFlags; // r10
     unsigned int v6; // r10
-    unsigned __int16 v7; // [sp+84h] [+14h]
+    uint16_t v7; // [sp+84h] [+14h]
 
     v7 = entref.entnum;
     if (entref.classnum)
@@ -3560,7 +3560,7 @@ void __cdecl PlayerCmd_SetActionSlot(scr_entref_t entref)
     const char *v6; // r31
     int WeaponIndexForName; // r30
     const char *v8; // r3
-    unsigned __int16 v9; // [sp+94h] [+14h]
+    uint16_t v9; // [sp+94h] [+14h]
 
     v9 = entref.entnum;
     if (entref.classnum)
@@ -3630,7 +3630,7 @@ void __cdecl PlayerCmd_DisableWeapons(scr_entref_t entref)
 {
     gentity_s *v1; // r31
     const char *v2; // r3
-    unsigned __int16 v3; // [sp+84h] [+14h]
+    uint16_t v3; // [sp+84h] [+14h]
 
     v3 = entref.entnum;
     if (entref.classnum)
@@ -3661,7 +3661,7 @@ void __cdecl PlayerCmd_EnableWeapons(scr_entref_t entref)
 {
     gentity_s *v1; // r31
     const char *v2; // r3
-    unsigned __int16 v3; // [sp+84h] [+14h]
+    uint16_t v3; // [sp+84h] [+14h]
 
     v3 = entref.entnum;
     if (entref.classnum)
@@ -3692,7 +3692,7 @@ void __cdecl PlayerCmd_NightVisionForceOff(scr_entref_t entref)
 {
     gentity_s *v1; // r31
     const char *v2; // r3
-    unsigned __int16 v3; // [sp+84h] [+14h]
+    uint16_t v3; // [sp+84h] [+14h]
 
     v3 = entref.entnum;
     if (entref.classnum)
@@ -3727,7 +3727,7 @@ void __cdecl PlayerCmd_GetWeaponsList(scr_entref_t entref)
     unsigned int i; // r31
     gclient_s *client; // r30
     WeaponDef *WeaponDef; // r3
-    unsigned __int16 v7; // [sp+A4h] [+14h]
+    uint16_t v7; // [sp+A4h] [+14h]
 
     v7 = entref.entnum;
     if (entref.classnum)
@@ -3775,7 +3775,7 @@ void __cdecl PlayerCmd_GetWeaponsListPrimaries(scr_entref_t entref)
     unsigned int i; // r31
     gclient_s *client; // r30
     WeaponDef *WeaponDef; // r3
-    unsigned __int16 v7; // [sp+A4h] [+14h]
+    uint16_t v7; // [sp+A4h] [+14h]
 
     v7 = entref.entnum;
     if (entref.classnum)
@@ -3822,7 +3822,7 @@ void __cdecl PlayerCmd_EnableInvulnerability(scr_entref_t entref)
 {
     gentity_s *v1; // r31
     const char *v2; // r3
-    unsigned __int16 v3; // [sp+84h] [+14h]
+    uint16_t v3; // [sp+84h] [+14h]
 
     v3 = entref.entnum;
     if (entref.classnum)
@@ -3853,7 +3853,7 @@ void __cdecl PlayerCmd_DisableInvulnerability(scr_entref_t entref)
 {
     gentity_s *v1; // r31
     const char *v2; // r3
-    unsigned __int16 v3; // [sp+84h] [+14h]
+    uint16_t v3; // [sp+84h] [+14h]
 
     v3 = entref.entnum;
     if (entref.classnum)
@@ -3889,7 +3889,7 @@ void __cdecl PlayerCmd_ForceViewmodelAnimation(scr_entref_t entref)
     const char *v5; // r31
     int v6; // r10
     const char *v7; // r3
-    unsigned __int16 v8; // [sp+84h] [+14h]
+    uint16_t v8; // [sp+84h] [+14h]
 
     v8 = entref.entnum;
     if (entref.classnum)
@@ -3949,7 +3949,7 @@ void __cdecl PlayerCmd_DisableTurretDismount(scr_entref_t entref)
 {
     gentity_s *v1; // r31
     const char *v2; // r3
-    unsigned __int16 v3; // [sp+84h] [+14h]
+    uint16_t v3; // [sp+84h] [+14h]
 
     v3 = entref.entnum;
     if (entref.classnum)
@@ -3980,7 +3980,7 @@ void __cdecl PlayerCmd_EnableTurretDismount(scr_entref_t entref)
 {
     gentity_s *v1; // r31
     const char *v2; // r3
-    unsigned __int16 v3; // [sp+84h] [+14h]
+    uint16_t v3; // [sp+84h] [+14h]
 
     v3 = entref.entnum;
     if (entref.classnum)
@@ -4009,7 +4009,7 @@ void __cdecl PlayerCmd_EnableTurretDismount(scr_entref_t entref)
 
 void __cdecl PlayerCmd_UploadScore(scr_entref_t entref)
 {
-    unsigned __int16 v1; // r30
+    uint16_t v1; // r30
     int v2; // r31
     const char *v3; // r3
     int Int; // r31
@@ -4051,7 +4051,7 @@ void __cdecl PlayerCmd_UploadScore(scr_entref_t entref)
 
 void __cdecl PlayerCmd_UploadTime(scr_entref_t entref)
 {
-    unsigned __int16 v1; // r30
+    uint16_t v1; // r30
     int v2; // r31
     const char *v3; // r3
     int Int; // r31
@@ -4209,7 +4209,7 @@ void(__cdecl *__cdecl Player_GetMethod(const char **pName))(scr_entref_t)
         v5 = *pName;
         do
         {
-            v6 = (unsigned __int8)*v5 - *(unsigned __int8 *)actionString;
+            v6 = (uint8_t)*v5 - *(uint8_t *)actionString;
             if (!*v5)
                 break;
             ++v5;
@@ -4226,14 +4226,14 @@ void(__cdecl *__cdecl Player_GetMethod(const char **pName))(scr_entref_t)
     return methods_0[v1].actionFunc;
 }
 
-void __cdecl G_AddCommandNotify(volatile unsigned __int16 notify)
+void __cdecl G_AddCommandNotify(volatile uint16_t notify)
 {
     int nesting; // r7
     int v3; // r29
     unsigned int v4; // r30
     const char *v5; // r3
     unsigned int String; // r7
-    volatile unsigned __int16 v7; // r28
+    volatile uint16_t v7; // r28
 
     if (!Sys_IsMainThread())
         MyAssertHandler("c:\\trees\\cod3\\cod3src\\src\\game\\g_client_script_cmd.cpp", 1012, 0, "%s", "Sys_IsMainThread()");
@@ -4258,32 +4258,32 @@ void __cdecl G_AddCommandNotify(volatile unsigned __int16 notify)
             MyAssertHandler("c:\\trees\\cod3\\cod3src\\src\\game\\g_client_script_cmd.cpp", 1022, 1, "inconceivable");
         //__lwsync();
     }
-    *(volatile unsigned __int16 *)((char *)s_cmdNotify.data + ((2 * s_cmdNotify.write) & 0x7E)) = notify;
-    if (v3 != (unsigned __int16)v3)
+    *(volatile uint16_t *)((char *)s_cmdNotify.data + ((2 * s_cmdNotify.write) & 0x7E)) = notify;
+    if (v3 != (uint16_t)v3)
         MyAssertHandler(
             "c:\\trees\\cod3\\cod3src\\src\\qcommon\\../universal/assertive.h",
             281,
             0,
             "i == static_cast< Type >( i )\n\t%i, %i",
             v3,
-            (unsigned __int16)v3);
+            (uint16_t)v3);
     v4 = 0;
-    for (*(volatile unsigned __int16 *)((char *)s_cmdNotify.data + ((2 * (s_cmdNotify.write + 1)) & 0x7E)) = v3;
+    for (*(volatile uint16_t *)((char *)s_cmdNotify.data + ((2 * (s_cmdNotify.write + 1)) & 0x7E)) = v3;
         v4 < v3;
         ++v4)
     {
         v5 = Cmd_Argv(v4);
         String = SL_GetString(v5, 0);
         v7 = String;
-        if (String != (unsigned __int16)String)
+        if (String != (uint16_t)String)
             MyAssertHandler(
                 "c:\\trees\\cod3\\cod3src\\src\\qcommon\\../universal/assertive.h",
                 281,
                 0,
                 "i == static_cast< Type >( i )\n\t%i, %i",
                 String,
-                (unsigned __int16)String);
-        *(volatile unsigned __int16 *)((char *)s_cmdNotify.data + ((2 * (s_cmdNotify.write + v4 + 2)) & 0x7E)) = v7;
+                (uint16_t)String);
+        *(volatile uint16_t *)((char *)s_cmdNotify.data + ((2 * (s_cmdNotify.write + v4 + 2)) & 0x7E)) = v7;
     }
     //__lwsync();
     s_cmdNotify.write += v3 + 2;
