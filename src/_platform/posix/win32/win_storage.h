@@ -1,0 +1,92 @@
+// win_storage.h -- the LiveStorage stats interface.
+//
+// Unchanged in shape: the engine writes player stats and challenge progress
+// through this. The file format (magic, nonce, 8192-byte blob, checksum) is
+// identical because it is what the game reads back, so existing saves keep
+// working. Only the storage location differs -- the POSIX build writes into the
+// app's private data directory instead of the user's Documents folder, which on
+// Android is the only writable location.
+
+#pragma once
+
+#include <cstdint>
+
+enum StatType : int32_t
+{
+    STAT_TYPE_PRIMARY = 0x1,
+    STAT_TYPE_SECONDARY = 0x2,
+    STAT_TYPE_EQUIPMENT = 0x4,
+    STAT_TYPE_WEAPON = 0x8,
+    STAT_TYPE_ABILITY = 0x10,
+    STAT_TYPE_GRENADE = 0x20,
+};
+
+struct StatsData // sizeof=0x2104
+{
+    char path[260];
+    uint8_t stats[8192];
+};
+
+struct StatsFile_s // sizeof=0x2114
+{
+    uint32_t hash[4];
+    StatsData statsData;
+};
+
+struct StatsFile // sizeof=0x211C
+{
+    uint8_t magic[4];
+    uint32_t nonce;
+    StatsFile_s body;
+};
+
+struct playerStatNetworkData // sizeof=0x2002
+{
+    uint8_t playerStats[8192];
+    bool statsFetched;
+    bool statWriteNeeded;
+};
+
+struct CaCItem // sizeof=0xC
+{
+    int itemIndex;
+    int minLevel;
+    StatType type;
+};
+
+void __cdecl LiveStorage_ValidateCaCStat(int controllerIndex, int index, int value);
+void __cdecl LiveStorage_ValidateSetStatCmd(int index, int value);
+void __cdecl LiveStorage_StatsInit(int controllerIndex);
+void __cdecl LiveStorage_TrySetStat(int controllerIndex, int index, uint32_t value);
+void __cdecl LiveStorage_TrySetStatRange(int controllerIndex, int first, int last, uint32_t value);
+void __cdecl LiveStorage_WeaponPerkChallengeReset(int controllerIndex);
+void __cdecl LiveStorage_UnlockClassAssault(int controllerIndex);
+void __cdecl LiveStorage_UnlockClassDemolitions(int controllerIndex);
+void __cdecl LiveStorage_UnlockClassHeavyGunner(int controllerIndex);
+void __cdecl LiveStorage_UnlockClassSniper(int controllerIndex);
+void __cdecl LiveStorage_UnlockClassSpecOps(int controllerIndex);
+void __cdecl LiveStorage_SetFromLocString(int controllerIndex, const char *dvarName, char *preLocalizedText);
+void __cdecl LiveStorage_ReadStats();
+void __cdecl LiveStorage_ReadStatsFromDir(char *directory);
+bool __cdecl LiveStorage_DecryptAndCheck(StatsFile *statsFile, const char *statsDir);
+void __cdecl LiveStorage_GetCryptKey(uint32_t nonce, uint8_t *outKey);
+int __cdecl LiveStorage_ChecksumGamerStats(uint8_t *buffer, int len);
+void LiveStorage_NoStatsFound();
+void __cdecl LiveStorage_WriteChecksumToBuffer(uint8_t *buffer, int len);
+bool __cdecl LiveStorage_ReadStatsFile(const char *qpath, uint8_t *buffer, uint32_t lenToRead);
+void __cdecl LiveStorage_HandleCorruptStats(char *filename);
+playerStatNetworkData *__cdecl LiveStorage_GetStatBuffer();
+bool __cdecl LiveStorage_DoWeHaveStats();
+void __cdecl LiveStorage_StatsWriteNeeded();
+void __cdecl LiveStorage_UploadStats();
+void __cdecl LiveStorage_Encrypt(StatsFile *statsFile);
+int __cdecl LiveStorage_GetStat(int __formal, int index);
+void __cdecl LiveStorage_SetStat(int __formal, int index, uint32_t value);
+void __cdecl LiveStorage_TrySetStatForCmd(int index, uint32_t value);
+void __cdecl LiveStorage_NewUser();
+void __cdecl LiveStorage_Init();
+void __cdecl LiveStorage_StatSetCmd();
+void __cdecl LiveStorage_StatGetCmd();
+void __cdecl LiveStorage_StatGetInDvarCmd();
+void __cdecl LiveStorage_UploadStatsCmd();
+void __cdecl LiveStorage_ReadStatsCmd();
