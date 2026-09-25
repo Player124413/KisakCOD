@@ -293,6 +293,11 @@ void __cdecl Sys_QueEvent(uint32_t time, sysEventType_t type, int value, int val
 void Sys_ShutdownEvents();
 void __cdecl Sys_LoadingKeepAlive();
 sysEvent_t *__cdecl Sys_GetEvent(sysEvent_t *result);
+
+// The event pump itself. Sys_GetEvent is a thin wrapper around this; the
+// split exists because Sys_LoadingKeepAlive drains the queue without the
+// wrapper's copy-out.
+sysEvent_t *__cdecl Win_GetEvent(sysEvent_t *result);
 void __cdecl Sys_Init();
 
 void Sys_In_Restart_f();

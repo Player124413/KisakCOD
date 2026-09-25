@@ -146,7 +146,9 @@ static inline int ioctlsocket(SOCKET s, long cmd, unsigned long *argp)
     return ioctl(s, (unsigned long)cmd, argp);
 }
 
-// closesocket() is close(); the engine's net code calls close() directly.
+// closesocket() is close(). Declared here rather than rewritten at the call
+// sites so the engine's net code reads the same on every platform.
+static inline int closesocket(SOCKET s) { return ::close(s); }
 
 #ifdef __cplusplus
 }  // extern "C"
